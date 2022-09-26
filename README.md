@@ -1,4 +1,4 @@
-- 👋 Hi, I’m Mitchell Petras a Junior Software Developer.
+- 👋 Hi, I’m Mitchell Petras a Software Developer.
 - 👀 I’m interested in web and mobile application development.
 - 🌱 I’m currently working with React.js, MongoDB, Node.js.
 - 📫 Reach me @ mpetras14@gmail.com
