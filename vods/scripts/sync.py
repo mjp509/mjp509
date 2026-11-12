@@ -29,13 +29,22 @@ def norm(s):
 def save_new_chats():
     helix = twitch()
     user = helix(f"users?login={CHANNEL}")[0]
-    vodlib.save(vodlib.DATA / "channel.json", {"name": user["display_name"], "avatar": user["profile_image_url"]})
+    vodlib.save(vodlib.DATA / "channel.json", {"name": user.get("display_name", CHANNEL), "avatar": user.get("profile_image_url", "")})
     live = helix(f"streams?user_id={user['id']}")
     live_since = live[0]["started_at"] if live else None
     known = {v["id"] for v in vodlib.load(vodlib.VODS, [])} | {p["id"] for p in vodlib.load(vodlib.PENDING, [])}
     stv = None
 
-    for v in reversed(helix(f"videos?user_id={user['id']}&type=archive&first=20")):
+    videos = helix(f"videos?user_id={user['id']}&type=archive&first=20")
+    tv = {v["id"]: v.get("view_count", 0) for v in videos}
+    for path in (vodlib.VODS, vodlib.PENDING):
+        items = vodlib.load(path, [])
+        for it in items:
+            it["twitch_views"] = tv.get(it["id"], it.get("twitch_views", 0))
+        if items:
+            vodlib.save(path, items)
+
+    for v in reversed(videos):
         if v["id"] in known or (live_since and v["created_at"] >= live_since):
             continue
         print(f"Saving chat for {v['id']}: {v['title']}")
@@ -49,6 +58,7 @@ def save_new_chats():
         if stv is None:
             stv = vodlib.seventv_emotes(user["id"])
         entry = vodlib.convert(raw, stv)
+        entry["twitch_views"] = v.get("view_count", 0)
         pending = vodlib.load(vodlib.PENDING, [])
         pending.append(entry)
         vodlib.save(vodlib.PENDING, pending)
@@ -79,6 +89,23 @@ def match_youtube():
             print(f"Waiting for YouTube upload: {p['title']}")
 
 
+def update_youtube_views():
+    vods = vodlib.load(vodlib.VODS, [])
+    ids = [v["youtube"] for v in vods if v.get("youtube")]
+    stats = {}
+    for i in range(0, len(ids), 50):
+        url = ("https://www.googleapis.com/youtube/v3/videos?part=statistics"
+               f"&id={','.join(ids[i:i + 50])}&key={os.environ['YOUTUBE_API_KEY']}")
+        for it in vodlib.get_json(url).get("items", []):
+            stats[it["id"]] = int(it.get("statistics", {}).get("viewCount", 0))
+    for v in vods:
+        if v.get("youtube") in stats:
+            v["yt_views"] = stats[v["youtube"]]
+    if vods:
+        vodlib.save(vodlib.VODS, vods)
+
+
 if __name__ == "__main__":
     save_new_chats()
     match_youtube()
+    update_youtube_views()

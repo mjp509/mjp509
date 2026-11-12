@@ -7,6 +7,7 @@
   --muted: #9a9aab;
   --accent: #a970ff;
   --radius: 10px;
+  --font-display: inherit;
 }
 * { box-sizing: border-box; }
 html, body { margin: 0; background: var(--bg); color: var(--text);
@@ -18,6 +19,7 @@ header { display: flex; align-items: center; gap: 16px; padding: 14px 20px;
 .logo { font-weight: 800; font-size: 20px; letter-spacing: -.02em; display: flex; align-items: center; gap: 10px; }
 .avatar { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 2px var(--accent); }
 .logo span { color: var(--accent); }
+.logo b, .card h3, .details h1, .live-head strong, .chat-head { font-family: var(--font-display); }
 header nav { margin-left: auto; display: flex; gap: 16px; color: var(--muted); }
 header nav a:hover { color: var(--text); }
 
@@ -40,6 +42,18 @@ main { max-width: 1400px; margin: 0 auto; padding: 20px; }
   border-radius: 8px; padding: 10px 12px; font: inherit; }
 .controls input { flex: 1; min-width: 200px; }
 .count { color: var(--muted); align-self: center; }
+.seg { display: flex; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 3px; }
+.seg button { background: none; border: 0; color: var(--muted); font: inherit; font-weight: 600; padding: 7px 14px; border-radius: 6px; cursor: pointer; }
+.seg button.active { background: var(--accent); color: #fff; }
+
+.shimmer { background: linear-gradient(90deg, var(--panel-2) 25%, #2f2f3b 50%, var(--panel-2) 75%) !important;
+  background-size: 200% 100% !important; animation: shimmer 1.3s linear infinite; }
+@keyframes shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+.sk-line { height: 14px; border-radius: 4px; margin: 4px 0 10px; }
+.sk-line.short { width: 55%; height: 12px; margin-bottom: 2px; }
+.skeleton { pointer-events: none; }
+.thumb img { opacity: 0; transition: opacity .3s ease; }
+.thumb img.loaded { opacity: 1; }
 
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 18px; }
 .card { display: block; border-radius: var(--radius); overflow: hidden; background: var(--panel);
