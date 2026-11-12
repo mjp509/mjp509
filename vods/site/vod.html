@@ -18,11 +18,17 @@
   <div class="watch">
     <div class="left">
       <div class="player"><div id="yt"></div></div>
+      <div class="activity" id="activity" hidden>
+        <svg id="act-svg" preserveAspectRatio="none"></svg>
+        <div class="act-head" id="act-head"></div>
+        <div class="act-tip" id="act-tip" hidden></div>
+      </div>
       <div class="details">
         <h1 id="title"></h1>
         <div class="meta" id="meta"></div>
         <p class="music-note">♪ Music is removed from VODs for copyright reasons.</p>
         <div class="chapters" id="chapters"></div>
+        <div class="moments" id="moments" hidden><h2>Top moments</h2><div class="chapters" id="moment-list"></div></div>
       </div>
     </div>
     <aside class="chat">

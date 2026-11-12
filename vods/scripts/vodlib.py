@@ -34,9 +34,9 @@ def youtube_id(value):
     sys.exit(f"Could not find a YouTube video ID in: {value!r}")
 
 
-def seventv_emotes(twitch_user_id):
+def seventv_emotes(twitch_user_id, include_global=True):
     emotes = {}
-    sources = ["https://7tv.io/v3/emote-sets/global"]
+    sources = ["https://7tv.io/v3/emote-sets/global"] if include_global else []
     if twitch_user_id:
         sources.append(f"https://7tv.io/v3/users/twitch/{twitch_user_id}")
     for url in sources:

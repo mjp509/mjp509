@@ -33,7 +33,7 @@ jobs:
           TWITCH_CLIENT_SECRET: ${{ secrets.TWITCH_CLIENT_SECRET }}
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
           YOUTUBE_CHANNEL_ID: ${{ secrets.YOUTUBE_CHANNEL_ID }}
-        run: python3 vods/scripts/sync.py
+        run: python3 vods/scripts/sync.py && python3 vods/scripts/stats.py
 
       - name: Commit
         run: |

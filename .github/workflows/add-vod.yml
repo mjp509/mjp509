@@ -51,7 +51,7 @@ jobs:
           YOUTUBE: ${{ inputs.youtube }}
           TITLE: ${{ inputs.title }}
           OFFSET: ${{ inputs.offset }}
-        run: python3 vods/scripts/add_vod.py --chat chat.json --youtube "$YOUTUBE" --title "$TITLE" --offset "${OFFSET:-0}"
+        run: python3 vods/scripts/add_vod.py --chat chat.json --youtube "$YOUTUBE" --title "$TITLE" --offset "${OFFSET:-0}" && python3 vods/scripts/stats.py
 
       - name: Commit
         run: |
