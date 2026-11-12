@@ -1,17 +1,21 @@
 # itsmotch VODs
 
-Static VOD site: YouTube player + synced Twitch chat replay.
+Static VOD site: YouTube player + synced Twitch chat replay (with Twitch and 7TV emotes).
 
 ## Setup (once)
 1. Merge this branch into `main`.
-2. Repo **Settings → Pages → Source: GitHub Actions**.
-3. Custom domain: **Settings → Pages → Custom domain**, then add the DNS records GitHub shows at your registrar.
+2. **Settings → Pages → Source: GitHub Actions**.
+3. **Settings → Secrets and variables → Actions → New repository secret**, add:
+   - `TWITCH_CLIENT_ID`, `TWITCH_CLIENT_SECRET`: register an app at dev.twitch.tv/console (redirect URL `http://localhost`, category Website Integration).
+   - `YOUTUBE_API_KEY`: console.cloud.google.com → new project → enable "YouTube Data API v3" → Credentials → API key.
+   - `YOUTUBE_CHANNEL_ID`: starts with `UC`, shown at youtube.com/account_advanced.
+4. Custom domain: **Settings → Pages → Custom domain**.
 
-## Add a VOD
-1. Twitch dashboard → Content → Video Producer → VOD → **Export** to YouTube (set to Unlisted).
-2. GitHub → **Actions → Add VOD → Run workflow**. Paste the Twitch VOD link and YouTube link.
-3. The site updates itself in about a minute.
+## After each stream
+Upload the VOD to YouTube as **Public** with the **same title** as on Twitch. That's it.
 
-Do this before Twitch deletes the VOD, or the chat is lost.
+Every 2 hours, **Sync VODs** saves the chat for new Twitch VODs and publishes each one once its YouTube upload appears.
 
-If chat is out of sync (e.g. the YouTube video was trimmed), rerun with an offset in seconds.
+## Manual
+- **Actions → Sync VODs → Run workflow**: sync now.
+- **Actions → Add VOD**: add any VOD by Twitch + YouTube link (works for unlisted videos, renamed titles, chat offset).

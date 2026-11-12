@@ -20,7 +20,7 @@ on:
 permissions:
   contents: write
 
-concurrency: add-vod
+concurrency: vod-data
 
 jobs:
   add:
@@ -57,6 +57,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add vods/site/data
+          git add vods/site/data; [ -f vods/pending.json ] && git add vods/pending.json
           git commit -m "Add VOD" || exit 0
           git push

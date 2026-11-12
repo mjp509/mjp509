@@ -1,5 +1,8 @@
 const MAX_LINES = 200;
-const EMOTE = id => `https://static-cdn.jtvnw.net/emoticons/v2/${id}/default/dark/1.0`;
+const EMOTE = {
+  t: id => `https://static-cdn.jtvnw.net/emoticons/v2/${id}/default/dark/1.0`,
+  "7": id => `https://cdn.7tv.app/emote/${id}/1x.webp`,
+};
 const FALLBACK_COLORS = ["#ff4a4a", "#4a9bff", "#3ad07a", "#ffb02e", "#c46bff", "#ff6bd1", "#2ee6d6", "#ff8a3d"];
 
 let player, chat = [], idx = 0, lastT = 0, offset = 0;
@@ -15,7 +18,12 @@ function colorFor(name, color) {
 
 function msgHtml([t, name, color, body]) {
   const parts = typeof body === "string" ? [body] : body;
-  const text = parts.map(p => Array.isArray(p) ? `<img src="${EMOTE(esc(p[0]))}" alt="">` : esc(p)).join("");
+  const text = parts.map(p => {
+    if (!Array.isArray(p)) return esc(p);
+    const [src, id, name = ""] = p.length === 1 ? ["t", p[0]] : p;
+    const url = (EMOTE[src] || EMOTE.t)(encodeURIComponent(id));
+    return `<img src="${url}" alt="${esc(name)}" title="${esc(name)}">`;
+  }).join("");
   return `<div class="msg"><span class="ts">${fmtTime(t)}</span><span class="name" style="color:${esc(colorFor(name, color))}">${esc(name)}</span>: ${text}</div>`;
 }
 
