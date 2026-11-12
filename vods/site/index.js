@@ -8,8 +8,35 @@ grid.innerHTML = Array.from({ length: 8 }, () => `
 const fmtViews = n => new Intl.NumberFormat(undefined, { notation: "compact" }).format(n) + " views";
 const views = v => (v.yt_views || 0) + (v.twitch_views || 0);
 
+const progressBar = id => {
+  const p = cwAll()[id];
+  return p ? `<div class="progress"><div style="width:${Math.min(100, (p.t / p.d) * 100)}%"></div></div>` : "";
+};
+
+function renderContinue(vods) {
+  const all = cwAll(), byId = Object.fromEntries(vods.map(v => [v.id, v]));
+  const list = Object.entries(all).filter(([id]) => byId[id]).sort((a, b) => b[1].at - a[1].at).slice(0, 8);
+  const section = document.getElementById("continue");
+  section.hidden = !list.length;
+  document.getElementById("continue-row").innerHTML = list.map(([id, p]) => { const v = byId[id]; return `
+    <a class="clip-card cw" href="v/${encodeURIComponent(id)}/">
+      <div class="thumb"><img loading="lazy" src="https://i.ytimg.com/vi/${esc(v.youtube)}/hqdefault.jpg" alt="" onload="this.classList.add('loaded')">
+        <button class="cw-x" type="button" data-id="${esc(id)}" aria-label="Remove">✕</button>
+        <span class="badge">${fmtTime(p.d - p.t)} left</span>${progressBar(id)}</div>
+      <div class="info"><h3>${esc(v.title)}</h3><div class="meta">${fmtDate(v.date)}</div></div>
+    </a>`; }).join("");
+}
+
+document.getElementById("continue-row").addEventListener("click", e => {
+  const x = e.target.closest(".cw-x"); if (!x) return;
+  e.preventDefault();
+  const all = cwAll(); delete all[x.dataset.id]; cwSave(all);
+  loadVods().then(renderContinue);
+});
+
 (async () => {
   const vods = await loadVods();
+  renderContinue(vods);
   const q = document.getElementById("q");
   const gameSel = document.getElementById("game");
   const count = document.getElementById("count");
@@ -35,7 +62,7 @@ const views = v => (v.yt_views || 0) + (v.twitch_views || 0);
           <img loading="lazy" src="https://i.ytimg.com/vi/${esc(v.youtube)}/hqdefault.jpg" alt=""
             onload="this.classList.add('loaded');this.parentNode.classList.remove('shimmer')"
             onerror="this.parentNode.classList.remove('shimmer')">
-          <span class="badge">${fmtTime(v.duration)}</span>
+          <span class="badge">${fmtTime(v.duration)}</span>${progressBar(v.id)}
         </div>
         <div class="info">
           <h3>${esc(v.title)}</h3>

@@ -148,11 +148,32 @@ const ready = new Promise(r => { window.onYouTubeIframeAPIReady = r; });
       if (e && e.name !== "AbortError") prompt("Copy this link:", link);
     }
   });
+  let ticks = 0;
   setInterval(() => {
-    if (player && player.getCurrentTime) shareBtn.textContent = `🔗 Share at ${fmtTime(player.getCurrentTime())}`;
+    if (!player || !player.getCurrentTime) return;
+    const t = player.getCurrentTime();
+    shareBtn.textContent = `🔗 Share at ${fmtTime(t)}`;
+    if (++ticks % 5 || (player.getPlayerState && player.getPlayerState() !== 1)) return;
+    const all = cwAll(), len = Math.max(60, (vod.duration || 0) - offset);
+    if (t > 30 && t < len - 120) all[vod.id] = { t: Math.floor(t), d: Math.floor(len), at: Date.now() };
+    else if (t >= len - 120) delete all[vod.id];
+    else return;
+    cwSave(all);
   }, 1000);
 
-  const start = parseInt(params.get("t"), 10) || 0;
+  const saved = cwAll()[vod.id];
+  const start = params.has("t") ? parseInt(params.get("t"), 10) || 0 : (saved ? saved.t : 0);
+  if (!params.has("t") && saved) {
+    const t = document.getElementById("toast");
+    t.innerHTML = `Resumed at ${fmtTime(saved.t)} <button type="button" id="restart">Start over</button>`;
+    t.classList.add("action"); t.hidden = false;
+    const hide = setTimeout(() => (t.hidden = true), 7000);
+    document.getElementById("restart").onclick = () => {
+      clearTimeout(hide); t.hidden = true;
+      const all = cwAll(); delete all[vod.id]; cwSave(all);
+      if (player && player.seekTo) player.seekTo(0, true);
+    };
+  }
   await ready;
   player = new YT.Player("yt", {
     videoId: vod.youtube,

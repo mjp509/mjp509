@@ -14,6 +14,13 @@ function esc(s) {
   return String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 }
 
+function cwAll() {
+  try { return JSON.parse(localStorage.getItem("cw") || "{}"); } catch { return {}; }
+}
+function cwSave(all) {
+  try { localStorage.setItem("cw", JSON.stringify(all)); } catch {}
+}
+
 async function loadVods() {
   const r = await fetch("data/vods.json", { cache: "no-cache" });
   return r.ok ? r.json() : [];
