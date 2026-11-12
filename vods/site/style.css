@@ -68,6 +68,22 @@ main { max-width: 1400px; margin: 0 auto; padding: 20px; }
 .board-head button { background: var(--panel-2); color: var(--text); border: 1px solid var(--line); border-radius: 8px;
   width: 32px; height: 32px; font-size: 18px; line-height: 1; cursor: pointer; }
 .board-head button:disabled { opacity: .3; cursor: default; }
+.board-body { display: grid; grid-template-columns: 3fr 1fr; gap: 10px; }
+.board-body:has(.eotm-wrap[hidden]) { grid-template-columns: 1fr; }
+.board-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 0 0 8px 2px; }
+.eotm-wrap, .board-body > div:first-child { display: flex; flex-direction: column; }
+.eotm-wrap[hidden] { display: none; }
+.board-body .podium { flex: 1; }
+.eotm { flex: 1; background: var(--panel-2); border-radius: 10px; padding: 12px 8px; text-align: center; box-shadow: inset 0 0 0 1px #a970ff66;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.eotm img { height: 44px; max-width: 100%; object-fit: contain; }
+.eotm .who { font-weight: 800; margin-top: 6px; overflow-wrap: anywhere; }
+.eotm .cnt { color: var(--muted); font-size: 13px; }
+@media (max-width: 640px) {
+  .board-body { grid-template-columns: 1fr; }
+  .eotm { flex-direction: row; gap: 12px; justify-content: flex-start; padding: 10px 14px; text-align: left; }
+  .eotm img { height: 36px; } .eotm .who { margin-top: 0; } .eotm .cnt { margin-left: auto; }
+}
 .podium { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 .place { background: var(--panel-2); border-radius: 10px; padding: 14px 8px; text-align: center; min-width: 0; }
 .place.p1 { order: 2; box-shadow: inset 0 0 0 1px #f5c84266; }

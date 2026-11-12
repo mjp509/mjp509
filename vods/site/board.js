@@ -16,6 +16,12 @@
         <div class="who" style="color:${esc(c.color || "var(--text)")}">${esc(c.name)}</div>
         <div class="cnt">${c.messages.toLocaleString()} messages</div>
       </div>`).join("") : `<p class="none">No chat yet this month.</p>`;
+    const e = m.emote, wrap = document.getElementById("eotm-wrap");
+    wrap.hidden = !e;
+    if (e) document.getElementById("eotm").innerHTML = `
+      <img src="https://cdn.7tv.app/emote/${encodeURIComponent(e.id)}/4x.webp" alt="${esc(e.name)}">
+      <div class="who">${esc(e.name)}</div>
+      <div class="cnt">${e.uses.toLocaleString()} uses</div>`;
     prev.disabled = i >= months.length - 1;
     next.disabled = i === 0;
   }

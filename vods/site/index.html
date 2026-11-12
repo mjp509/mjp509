@@ -35,10 +35,13 @@
     <section class="board" id="board" hidden>
       <div class="board-head">
         <button id="board-prev" aria-label="Previous month">‹</button>
-        <h2>Top chatters · <span id="board-month"></span></h2>
+        <h2 id="board-month"></h2>
         <button id="board-next" aria-label="Next month">›</button>
       </div>
-      <div class="podium" id="podium"></div>
+      <div class="board-body">
+        <div><div class="board-label">Top chatters</div><div class="podium" id="podium"></div></div>
+        <div class="eotm-wrap" id="eotm-wrap"><div class="board-label">Emote of the month</div><div class="eotm" id="eotm"></div></div>
+      </div>
     </section>
     <div class="controls">
       <input id="q" type="search" placeholder="Search streams…">

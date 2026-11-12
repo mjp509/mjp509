@@ -77,7 +77,7 @@ def main():
     seen, attendance, msg_count, last_seen = set(), Counter(), Counter(), {}
     per_stream, by_game, hour_tot, hour_n, emotes = [], defaultdict(lambda: [0.0, 0, set()]), Counter(), Counter(), Counter()
     present, all_moments = [], {}
-    monthly, display, colors = defaultdict(Counter), {}, {}
+    monthly, display, colors, monthly_emotes = defaultdict(Counter), {}, {}, defaultdict(Counter)
 
     for v in streams:
         path = vodlib.DATA / "chat" / f"{v['id']}.json"
@@ -102,9 +102,13 @@ def main():
             if color:
                 colors[lname] = color
             if not isinstance(body, str):
+                once = set()
                 for p in body:
                     if isinstance(p, list):
                         emotes[(p[0], p[1], p[2])] += 1
+                        if p[0] == "7" and p[1] not in once:
+                            once.add(p[1])
+                            monthly_emotes[month][(p[1], p[2])] += 1
         new = chatters - seen
         seen |= chatters
         for c in chatters:
@@ -164,10 +168,14 @@ def main():
         "moments": all_moments,
     }
     vodlib.save(vodlib.DATA / "stats.json", stats)
+    def emote_of(m):
+        top = monthly_emotes[m].most_common(1)
+        return {"id": top[0][0][0], "name": top[0][0][1], "uses": top[0][1]} if top else None
+
     vodlib.save(vodlib.DATA / "leaderboard.json", [
-        {"month": m, "top": [{"name": display[n], "color": colors.get(n, ""), "messages": c}
-                             for n, c in monthly[m].most_common(3)]}
-        for m in sorted(monthly, reverse=True)[:12]])
+        {"month": m, "emote": emote_of(m),
+         "top": [{"name": display[n], "color": colors.get(n, ""), "messages": c} for n, c in monthly[m].most_common(3)]}
+        for m in sorted(set(monthly) | set(monthly_emotes), reverse=True)[:12]])
     print(f"stats: {len(per_stream)} streams, {len(seen)} chatters")
 
 
