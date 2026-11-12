@@ -30,7 +30,7 @@ const views = v => (v.yt_views || 0) + (v.twitch_views || 0);
 
     count.textContent = `${list.length} stream${list.length === 1 ? "" : "s"}`;
     grid.innerHTML = list.length ? list.map(v => `
-      <a class="card" href="vod.html?id=${encodeURIComponent(v.id)}">
+      <a class="card" href="v/${encodeURIComponent(v.id)}/">
         <div class="thumb shimmer">
           <img loading="lazy" src="https://i.ytimg.com/vi/${esc(v.youtube)}/hqdefault.jpg" alt=""
             onload="this.classList.add('loaded');this.parentNode.classList.remove('shimmer')"

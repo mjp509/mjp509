@@ -28,7 +28,8 @@ def text_of(body):
     return toks
 
 
-def moments(chat, duration, n=10):
+def moments(chat, duration, skip_names=(), n=10):
+    chat = [c for c in chat if c[1].lower() not in BOTS and c[1].lower() not in skip_names]
     if len(chat) < 50:
         return []
     win, step, lead, gap, skip, local = 30, 10, 20, 120, 180, 60
@@ -131,7 +132,7 @@ def main():
                 hour_tot[h] += sum(1 for c in chat if h * 3600 <= c[0] < (h + 1) * 3600) / mins
                 hour_n[h] += 1
 
-        all_moments[v["id"]] = moments(chat, dur)
+        all_moments[v["id"]] = moments(chat, dur, {me})
 
     lapsed = []
     if len(present) >= 6:

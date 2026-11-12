@@ -24,6 +24,10 @@
       </div>
       <div class="live-embed" id="twitch-embed"></div>
     </section>
+    <section class="clips" id="clips" hidden>
+      <h2 id="clips-title">Top clips this month</h2>
+      <div class="clip-row" id="clip-row"></div>
+    </section>
     <section class="board" id="board" hidden>
       <div class="board-head">
         <button id="board-prev" aria-label="Previous month">‹</button>
@@ -43,11 +47,18 @@
     </div>
     <div class="grid" id="grid"></div>
   </main>
+  <div class="modal" id="clip-modal" hidden>
+    <div class="modal-box">
+      <button class="modal-close" id="clip-close" aria-label="Close">✕</button>
+      <div class="modal-frame" id="clip-frame"></div>
+    </div>
+  </div>
   <footer class="site-foot">♪ Music is removed from VODs for copyright reasons.</footer>
   <script src="common.js"></script>
   <script src="index.js"></script>
   <script src="https://embed.twitch.tv/embed/v1.js"></script>
   <script src="live.js"></script>
   <script src="board.js"></script>
+  <script src="clips.js"></script>
 </body>
 </html>

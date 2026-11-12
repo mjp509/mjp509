@@ -6,6 +6,7 @@ import re
 import subprocess
 import tempfile
 import urllib.parse
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 import vodlib
@@ -26,10 +27,21 @@ def norm(s):
     return re.sub(r"[^a-z0-9]", "", s.lower())
 
 
+def save_clips(helix, uid):
+    since = (datetime.now(timezone.utc) - timedelta(days=30)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    clips, period = helix(f"clips?broadcaster_id={uid}&first=20&started_at={since}"), "month"
+    if len(clips) < 4:
+        clips, period = helix(f"clips?broadcaster_id={uid}&first=20"), "all"
+    keep = ["id", "url", "title", "view_count", "created_at", "thumbnail_url", "duration", "creator_name"]
+    clips = sorted(clips, key=lambda c: -c.get("view_count", 0))[:12]
+    vodlib.save(vodlib.DATA / "clips.json", {"period": period, "clips": [{k: c.get(k) for k in keep} for c in clips]})
+
+
 def save_new_chats():
     helix = twitch()
     user = helix(f"users?login={CHANNEL}")[0]
     vodlib.save(vodlib.DATA / "channel.json", {"id": user["id"], "name": user.get("display_name", CHANNEL), "avatar": user.get("profile_image_url", "")})
+    save_clips(helix, user["id"])
     live = helix(f"streams?user_id={user['id']}")
     live_since = live[0]["started_at"] if live else None
     known = {v["id"] for v in vodlib.load(vodlib.VODS, [])} | {p["id"] for p in vodlib.load(vodlib.PENDING, [])}

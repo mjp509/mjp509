@@ -79,7 +79,7 @@ function tick() {
 }
 
 const params = new URLSearchParams(location.search);
-const vodId = params.get("id");
+const vodId = document.body.dataset.vod || params.get("id");
 const ready = new Promise(r => { window.onYouTubeIframeAPIReady = r; });
 
 (async () => {
@@ -128,6 +128,29 @@ const ready = new Promise(r => { window.onYouTubeIframeAPIReady = r; });
       drawActivity(await momentsP);
     })
     .catch(() => { status.textContent = "Chat unavailable"; });
+
+  const shareBtn = document.getElementById("share");
+  const toast = msg => { const t = document.getElementById("toast"); t.textContent = msg; t.hidden = false;
+    clearTimeout(toast.h); toast.h = setTimeout(() => (t.hidden = true), 2200); };
+  shareBtn.addEventListener("click", async () => {
+    const t = Math.floor(player && player.getCurrentTime ? player.getCurrentTime() : 0);
+    const url = new URL(`v/${encodeURIComponent(vod.id)}/`, document.baseURI);
+    if (t > 0) url.searchParams.set("t", t);
+    const link = url.toString();
+    try {
+      if (navigator.share && matchMedia("(pointer: coarse)").matches) {
+        await navigator.share({ title: vod.title, text: `${vod.title} @ ${fmtTime(t)}`, url: link });
+      } else {
+        await navigator.clipboard.writeText(link);
+        toast(`Link copied · starts at ${fmtTime(t)}`);
+      }
+    } catch (e) {
+      if (e && e.name !== "AbortError") prompt("Copy this link:", link);
+    }
+  });
+  setInterval(() => {
+    if (player && player.getCurrentTime) shareBtn.textContent = `🔗 Share at ${fmtTime(player.getCurrentTime())}`;
+  }, 1000);
 
   const start = parseInt(params.get("t"), 10) || 0;
   await ready;
