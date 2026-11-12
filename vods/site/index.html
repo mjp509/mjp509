@@ -24,6 +24,14 @@
       </div>
       <div class="live-embed" id="twitch-embed"></div>
     </section>
+    <section class="board" id="board" hidden>
+      <div class="board-head">
+        <button id="board-prev" aria-label="Previous month">‹</button>
+        <h2>Top chatters · <span id="board-month"></span></h2>
+        <button id="board-next" aria-label="Next month">›</button>
+      </div>
+      <div class="podium" id="podium"></div>
+    </section>
     <div class="controls">
       <input id="q" type="search" placeholder="Search streams…">
       <div class="seg" id="sort">
@@ -40,5 +48,6 @@
   <script src="index.js"></script>
   <script src="https://embed.twitch.tv/embed/v1.js"></script>
   <script src="live.js"></script>
+  <script src="board.js"></script>
 </body>
 </html>

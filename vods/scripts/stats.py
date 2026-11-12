@@ -75,6 +75,7 @@ def main():
     seen, attendance, msg_count, last_seen = set(), Counter(), Counter(), {}
     per_stream, by_game, hour_tot, hour_n, emotes = [], defaultdict(lambda: [0.0, 0, set()]), Counter(), Counter(), Counter()
     present, all_moments = [], {}
+    monthly, display, colors = defaultdict(Counter), {}, {}
 
     for v in streams:
         path = vodlib.DATA / "chat" / f"{v['id']}.json"
@@ -84,12 +85,17 @@ def main():
         dur = max(v.get("duration") or 0, int(chat[-1][0]) + 1 if chat else 0, 60)
 
         chatters = set()
-        for t, name, _, body in chat:
+        month = v["date"][:7]
+        for t, name, color, body in chat:
             lname = name.lower()
             if lname in BOTS or lname == me:
                 continue
             chatters.add(lname)
             msg_count[lname] += 1
+            monthly[month][lname] += 1
+            display[lname] = name
+            if color:
+                colors[lname] = color
             if not isinstance(body, str):
                 for p in body:
                     if isinstance(p, list):
@@ -153,6 +159,10 @@ def main():
         "moments": all_moments,
     }
     vodlib.save(vodlib.DATA / "stats.json", stats)
+    vodlib.save(vodlib.DATA / "leaderboard.json", [
+        {"month": m, "top": [{"name": display[n], "color": colors.get(n, ""), "messages": c}
+                             for n, c in monthly[m].most_common(3)]}
+        for m in sorted(monthly, reverse=True)[:12]])
     print(f"stats: {len(per_stream)} streams, {len(seen)} chatters")
 
 
