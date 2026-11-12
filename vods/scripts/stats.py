@@ -6,6 +6,7 @@ from collections import Counter, defaultdict
 
 import vodlib
 
+SPAM_GAP = 10
 BOTS = {"nightbot", "streamelements", "streamlabs", "moobot", "fossabot", "sery_bot", "wizebot",
         "botrixoficial", "soundalerts", "kofistreambot", "commanderroot", "streamstickers"}
 TAGS = {
@@ -86,13 +87,16 @@ def main():
 
         chatters = set()
         month = v["date"][:7]
+        last_counted = {}
         for t, name, color, body in chat:
             lname = name.lower()
             if lname in BOTS or lname == me:
                 continue
             chatters.add(lname)
             msg_count[lname] += 1
-            monthly[month][lname] += 1
+            if t - last_counted.get(lname, -SPAM_GAP) >= SPAM_GAP:
+                monthly[month][lname] += 1
+                last_counted[lname] = t
             display[lname] = name
             if color:
                 colors[lname] = color

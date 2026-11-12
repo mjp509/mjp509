@@ -21,6 +21,8 @@ Every 2 hours, **Sync VODs** saves the chat for new Twitch VODs and publishes ea
 - **Actions → Add VOD**: add any VOD by Twitch + YouTube link (works for unlisted videos, renamed titles, chat offset).
 
 ## Stats
+Leaderboard counts at most 1 message per 10s per chatter.
+
 Open `/stats.html` on your site (not linked anywhere, not indexed by search engines). Updates after every sync:
 clip finder, chat activity by game / hour / day / start time, new vs returning chatters, top chatters,
 regulars who stopped coming, emote usage, unused 7TV emotes.
