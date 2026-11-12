@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>itsmotch VODs</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <a class="logo" href="./">itsmotch <span>VODs</span></a>
+    <nav>
+      <a href="./">All VODs</a>
+      <a href="https://twitch.tv/itsmotch" target="_blank" rel="noopener">Twitch</a>
+    </nav>
+  </header>
+  <div class="watch">
+    <div class="left">
+      <div class="player"><div id="yt"></div></div>
+      <div class="details">
+        <h1 id="title"></h1>
+        <div class="meta" id="meta"></div>
+        <div class="chapters" id="chapters"></div>
+      </div>
+    </div>
+    <aside class="chat">
+      <div class="chat-head">Chat replay <span id="chat-status">Loading…</span></div>
+      <div class="chat-log" id="log"></div>
+    </aside>
+  </div>
+  <script src="common.js"></script>
+  <script src="vod.js"></script>
+  <script src="https://www.youtube.com/iframe_api"></script>
+</body>
+</html>

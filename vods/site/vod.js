@@ -1,0 +1,88 @@
+const MAX_LINES = 200;
+const EMOTE = id => `https://static-cdn.jtvnw.net/emoticons/v2/${id}/default/dark/1.0`;
+const FALLBACK_COLORS = ["#ff4a4a", "#4a9bff", "#3ad07a", "#ffb02e", "#c46bff", "#ff6bd1", "#2ee6d6", "#ff8a3d"];
+
+let player, chat = [], idx = 0, lastT = 0, offset = 0;
+const log = document.getElementById("log");
+const status = document.getElementById("chat-status");
+
+function colorFor(name, color) {
+  if (color) return color;
+  let h = 0;
+  for (const c of name) h = (h * 31 + c.charCodeAt(0)) | 0;
+  return FALLBACK_COLORS[Math.abs(h) % FALLBACK_COLORS.length];
+}
+
+function msgHtml([t, name, color, body]) {
+  const parts = typeof body === "string" ? [body] : body;
+  const text = parts.map(p => Array.isArray(p) ? `<img src="${EMOTE(esc(p[0]))}" alt="">` : esc(p)).join("");
+  return `<div class="msg"><span class="ts">${fmtTime(t)}</span><span class="name" style="color:${esc(colorFor(name, color))}">${esc(name)}</span>: ${text}</div>`;
+}
+
+function firstAfter(t) {
+  let lo = 0, hi = chat.length;
+  while (lo < hi) { const mid = (lo + hi) >> 1; chat[mid][0] <= t ? lo = mid + 1 : hi = mid; }
+  return lo;
+}
+
+function tick() {
+  if (!player || !player.getCurrentTime || !chat.length) return;
+  const t = player.getCurrentTime() + offset;
+  const atBottom = log.scrollHeight - log.scrollTop - log.clientHeight < 60;
+
+  if (t < lastT - 1 || t > lastT + 10) {
+    idx = firstAfter(t);
+    log.innerHTML = chat.slice(Math.max(0, idx - 50), idx).map(msgHtml).join("");
+  } else {
+    let html = "";
+    while (idx < chat.length && chat[idx][0] <= t) html += msgHtml(chat[idx++]);
+    if (html) log.insertAdjacentHTML("beforeend", html);
+  }
+  lastT = t;
+  while (log.childElementCount > MAX_LINES) log.firstElementChild.remove();
+  if (atBottom) log.scrollTop = log.scrollHeight;
+}
+
+const params = new URLSearchParams(location.search);
+const vodId = params.get("id");
+const ready = new Promise(r => { window.onYouTubeIframeAPIReady = r; });
+
+(async () => {
+  const vod = (await loadVods()).find(v => v.id === vodId);
+  if (!vod) {
+    document.getElementById("title").textContent = "VOD not found";
+    status.textContent = "";
+    return;
+  }
+  offset = vod.offset || 0;
+  document.title = `${vod.title} · itsmotch VODs`;
+  document.getElementById("title").textContent = vod.title;
+  document.getElementById("meta").textContent =
+    [fmtDate(vod.date), vod.game, fmtTime(vod.duration)].filter(Boolean).join(" · ");
+
+  const chapters = document.getElementById("chapters");
+  if ((vod.chapters || []).length > 1) {
+    chapters.innerHTML = vod.chapters.map(c =>
+      `<button data-t="${c.t}">${fmtTime(c.t)} · ${esc(c.game)}</button>`).join("");
+    chapters.addEventListener("click", e => {
+      const b = e.target.closest("button");
+      if (b && player) player.seekTo(Math.max(0, +b.dataset.t - offset), true);
+    });
+  }
+
+  fetch(`data/chat/${encodeURIComponent(vod.id)}.json`)
+    .then(r => r.ok ? r.json() : [])
+    .then(c => {
+      chat = c;
+      status.textContent = chat.length ? `${chat.length.toLocaleString()} messages` : "No chat saved";
+    })
+    .catch(() => { status.textContent = "Chat unavailable"; });
+
+  const start = parseInt(params.get("t"), 10) || 0;
+  await ready;
+  player = new YT.Player("yt", {
+    videoId: vod.youtube,
+    playerVars: { start, rel: 0, modestbranding: 1, playsinline: 1 },
+  });
+  setInterval(tick, 250);
+})();

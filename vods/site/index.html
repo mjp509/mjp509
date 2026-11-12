@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>itsmotch VODs</title>
+  <meta name="description" content="Every itsmotch stream, with chat replay.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <a class="logo" href="./">itsmotch <span>VODs</span></a>
+    <nav>
+      <a href="https://twitch.tv/itsmotch" target="_blank" rel="noopener">Twitch</a>
+    </nav>
+  </header>
+  <main>
+    <div class="controls">
+      <input id="q" type="search" placeholder="Search streams…">
+      <select id="game"><option value="">All games</option></select>
+      <span class="count" id="count"></span>
+    </div>
+    <div class="grid" id="grid"></div>
+  </main>
+  <script src="common.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>
