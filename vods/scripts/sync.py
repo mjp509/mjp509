@@ -29,6 +29,7 @@ def norm(s):
 def save_new_chats():
     helix = twitch()
     user = helix(f"users?login={CHANNEL}")[0]
+    vodlib.save(vodlib.DATA / "channel.json", {"name": user["display_name"], "avatar": user["profile_image_url"]})
     live = helix(f"streams?user_id={user['id']}")
     live_since = live[0]["started_at"] if live else None
     known = {v["id"] for v in vodlib.load(vodlib.VODS, [])} | {p["id"] for p in vodlib.load(vodlib.PENDING, [])}
