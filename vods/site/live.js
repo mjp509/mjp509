@@ -24,7 +24,7 @@
     });
     p.addEventListener(Twitch.Player.OFFLINE, () => {
       section.classList.remove("online"); section.classList.add("offline");
-      label.textContent = "itsmotch is offline · catch the VODs below";
+      label.textContent = document.querySelector("#grid .card:not(.skeleton)") ? "itsmotch is offline · catch the VODs below" : "itsmotch is offline";
     });
   });
 })();

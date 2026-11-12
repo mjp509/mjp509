@@ -85,8 +85,11 @@ const ready = new Promise(r => { window.onYouTubeIframeAPIReady = r; });
 (async () => {
   const vod = (await loadVods()).find(v => v.id === vodId);
   if (!vod) {
-    document.getElementById("title").textContent = "VOD not found";
-    status.textContent = "";
+    document.title = "VOD not found · itsmotch VODs";
+    document.querySelector(".watch").outerHTML = `<div class="not-found"><div class="empty-state">
+      <div class="empty-icon">🔍</div><h2>This VOD isn't available</h2>
+      <p>It may have been removed, or the link is wrong.</p>
+      <a class="btn" href="./">Browse all VODs</a></div></div>`;
     return;
   }
   offset = vod.offset || 0;
@@ -123,11 +126,12 @@ const ready = new Promise(r => { window.onYouTubeIframeAPIReady = r; });
     .then(r => r.ok ? r.json() : [])
     .then(async c => {
       chat = c;
+      log.classList.remove("loading");
       status.textContent = chat.length ? `${chat.length.toLocaleString()} messages` : "No chat saved";
       if (chat.length) duration = Math.max(duration, chat[chat.length - 1][0]);
       drawActivity(await momentsP);
     })
-    .catch(() => { status.textContent = "Chat unavailable"; });
+    .catch(() => { status.textContent = "Chat unavailable"; log.classList.remove("loading"); });
 
   const shareBtn = document.getElementById("share");
   const toast = msg => { const t = document.getElementById("toast"); t.textContent = msg; t.hidden = false;

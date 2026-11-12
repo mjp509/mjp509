@@ -26,8 +26,9 @@ function empty(el, msg = "Not enough data yet.") { el.outerHTML = `<p class="emp
 
 (async () => {
   const [s, vods] = await Promise.all([fetch("data/stats.json", { cache: "no-cache" }).then(r => r.ok ? r.json() : null), loadVods()]);
+  $("stats").classList.remove("is-loading");
   if (!s || !s.streams.length) {
-    $("stats").innerHTML = `<p class="empty">No stats yet. They appear after the first stream is saved.</p>`;
+    $("stats").innerHTML = `<div class="empty-state"><div class="empty-icon" style="font-size:40px">📊</div><h2>No stats yet</h2><p>Stats appear after your first stream is saved.</p></div>`;
     return;
   }
   const o = s.overview;

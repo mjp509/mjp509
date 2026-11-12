@@ -69,7 +69,10 @@ document.getElementById("continue-row").addEventListener("click", e => {
           <div class="meta">${[fmtDate(v.date), views(v) ? fmtViews(views(v)) : "", esc(v.game || "")].filter(Boolean).join(" · ")}</div>
         </div>
       </a>`).join("")
-      : `<p class="empty">${vods.length ? "No streams match." : "No VODs yet."}</p>`;
+      : vods.length ? `<p class="empty">No streams match.</p>`
+      : `<div class="empty-state"><div class="empty-icon">📺</div><h2>No VODs yet</h2>
+          <p>Past streams show up here after they end.</p>
+          <a class="btn" href="https://twitch.tv/itsmotch" target="_blank" rel="noopener">Follow on Twitch</a></div>`;
   }
 
   sortBtns.forEach(b => b.addEventListener("click", () => {
