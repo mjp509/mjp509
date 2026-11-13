@@ -76,37 +76,68 @@ def save_new_chats():
         vodlib.save(vodlib.PENDING, pending)
 
 
+def iso_seconds(d):
+    m = re.fullmatch(r"P(?:(\d+)D)?T?(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?", d or "")
+    if not m:
+        return 0
+    days, h, mi, sec = (int(x or 0) for x in m.groups())
+    return days * 86400 + h * 3600 + mi * 60 + sec
+
+
+def youtube_uploads():
+    """Recent uploads with title, publish time, length and privacy. Uses OAuth (sees unlisted) if set up."""
+    env = lambda k: os.environ.get(k, "").strip()
+    api = "https://www.googleapis.com/youtube/v3"
+    if env("YT_REFRESH_TOKEN"):
+        body = urllib.parse.urlencode({"client_id": env("YT_CLIENT_ID"), "client_secret": env("YT_CLIENT_SECRET"),
+                                       "refresh_token": env("YT_REFRESH_TOKEN"), "grant_type": "refresh_token"}).encode()
+        token = vodlib.get_json("https://oauth2.googleapis.com/token", data=body)["access_token"]
+        headers, auth = {"Authorization": f"Bearer {token}"}, ""
+        chans = vodlib.get_json(f"{api}/channels?part=contentDetails&mine=true", headers).get("items", [])
+        if not chans:
+            raise RuntimeError("signed-in Google account has no YouTube channel")
+        uploads = chans[0]["contentDetails"]["relatedPlaylists"]["uploads"]
+    else:
+        m = re.search(r"UC[A-Za-z0-9_-]{22}", env("YOUTUBE_CHANNEL_ID"))
+        if not m:
+            raise RuntimeError("YOUTUBE_CHANNEL_ID should be the ID starting with UC (youtube.com/account_advanced)")
+        headers, auth = {}, f"&key={env('YOUTUBE_API_KEY')}"
+        uploads = "UU" + m.group(0)[2:]
+    items = vodlib.get_json(f"{api}/playlistItems?part=contentDetails&maxResults=50&playlistId={uploads}{auth}",
+                            headers).get("items", [])
+    ids = [i["contentDetails"]["videoId"] for i in items]
+    if not ids:
+        return []
+    vids = vodlib.get_json(f"{api}/videos?part=snippet,contentDetails,status&id={','.join(ids)}{auth}",
+                           headers).get("items", [])
+    return [{"id": v["id"], "title": v["snippet"]["title"], "at": v["snippet"]["publishedAt"],
+             "dur": iso_seconds(v["contentDetails"].get("duration")), "privacy": v["status"]["privacyStatus"]}
+            for v in vids]
+
+
 def match_youtube():
     pending = sorted(vodlib.load(vodlib.PENDING, []), key=lambda p: p["date"])
     if not pending:
         return
-    key, channel = os.environ["YOUTUBE_API_KEY"].strip(), os.environ["YOUTUBE_CHANNEL_ID"].strip()
-    m = re.search(r"UC[A-Za-z0-9_-]{22}", channel)
-    if not m:
-        print(f"::warning::YOUTUBE_CHANNEL_ID should be the ID starting with UC (got {channel[:30]!r}). "
-              "Find it at youtube.com/account_advanced. Chat is saved; VODs publish once this is fixed.")
-        return
-    uploads = "UU" + m.group(0)[2:]
-    url = ("https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50"
-           f"&playlistId={uploads}&key={key}")
     try:
-        items = vodlib.get_json(url).get("items", [])
+        videos = youtube_uploads()
     except RuntimeError as e:
         hint = " (channel ID wrong, or the channel has no uploads yet)" if "HTTP 404" in str(e) else ""
         print(f"::warning::YouTube lookup failed{hint}: {e}. Chat is saved; VODs publish once YouTube works.")
         return
-    videos = sorted(({"id": i["snippet"]["resourceId"]["videoId"], "title": i["snippet"]["title"],
-                      "at": i["snippet"]["publishedAt"]} for i in items), key=lambda x: x["at"])
     used = {v["youtube"] for v in vodlib.load(vodlib.VODS, [])}
 
     for p in pending:
-        for yt in videos:
-            if yt["id"] not in used and norm(yt["title"]) == norm(p["title"]) and yt["at"] >= p["date"]:
-                used.add(yt["id"])
-                p["youtube"] = yt["id"]
-                vodlib.publish(p)
-                print(f"Published {p['id']} -> {yt['id']}")
-                break
+        cands = [v for v in videos if v["id"] not in used and v["privacy"] != "private" and v["at"] >= p["date"]]
+        pick = next((v for v in cands if norm(v["title"]) == norm(p["title"])), None)
+        if not pick and p.get("duration"):
+            close = [v for v in cands if abs(v["dur"] - p["duration"]) <= max(120, p["duration"] * 0.02)]
+            pick = min(close, key=lambda v: abs(v["dur"] - p["duration"]), default=None)
+        if pick:
+            used.add(pick["id"])
+            p["youtube"] = pick["id"]
+            vodlib.publish(p)
+            print(f"Published {p['id']} -> {pick['id']} ({pick['privacy']}, '{pick['title']}')")
         else:
             print(f"Waiting for YouTube upload: {p['title']}")
 

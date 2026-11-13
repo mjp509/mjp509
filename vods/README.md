@@ -20,6 +20,10 @@ Upload the VOD to YouTube as **Public** with the **same title** as on Twitch. Th
 
 Every 2 hours, **Sync VODs** saves the chat for new Twitch VODs and publishes each one once its YouTube upload appears.
 
+## Unlisted uploads (optional)
+Add secrets `YT_CLIENT_ID`, `YT_CLIENT_SECRET`, `YT_REFRESH_TOKEN` (Google OAuth, scope `youtube.readonly`, signed in as the channel owner).
+The sync then sees unlisted uploads and matches them by title or length, so no Add VOD step is needed.
+
 ## Manual
 - **Actions → Sync VODs → Run workflow**: sync now.
 - **Actions → Add VOD**: paste the YouTube link (unlisted is fine). Leave the Twitch link blank to attach it to your newest saved stream, or paste one to pick a specific VOD.
