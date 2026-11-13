@@ -64,6 +64,42 @@
       "date": "2026-11-13T01:31:00Z",
       "metrics": [
         {
+          "key": "avg_viewers",
+          "label": "Avg viewers",
+          "higher": true,
+          "value": 9.0,
+          "baseline": null,
+          "baseline_n": 0,
+          "delta_pct": null,
+          "place": 1,
+          "of": 1,
+          "best": false
+        },
+        {
+          "key": "peak_viewers",
+          "label": "Peak viewers",
+          "higher": true,
+          "value": 17,
+          "baseline": null,
+          "baseline_n": 0,
+          "delta_pct": null,
+          "place": 1,
+          "of": 1,
+          "best": false
+        },
+        {
+          "key": "followers_gained",
+          "label": "Followers gained",
+          "higher": true,
+          "value": 0,
+          "baseline": null,
+          "baseline_n": 0,
+          "delta_pct": null,
+          "place": 1,
+          "of": 1,
+          "best": false
+        },
+        {
           "key": "mpm",
           "label": "Chat msgs / min",
           "higher": true,
@@ -118,9 +154,9 @@
         "id": "2927241555",
         "date": "2026-11-13T01:31:00Z",
         "title": "🍔 gëek wën i want gëek all da timë 🍔 luh shmünk 🍔",
-        "avg_viewers": null,
-        "peak_viewers": null,
-        "followers_gained": null,
+        "avg_viewers": 9.0,
+        "peak_viewers": 17,
+        "followers_gained": 0,
         "subs_change": null,
         "cat_top_pct": null,
         "mpm": 2.5,
@@ -1362,7 +1398,12 @@
       "new": 18,
       "returning": 0,
       "hours": 3.2,
-      "return_rate": null
+      "return_rate": null,
+      "avg_viewers": 9.0,
+      "peak_viewers": 17,
+      "followers_gained": 0,
+      "viewer_hours": 28.8,
+      "manual": true
     }
   ],
   "games": [
@@ -1882,7 +1923,7 @@
         "words": [
           "chovy",
           "title",
-          "finally"
+          "mid"
         ]
       }
     ]
