@@ -209,11 +209,41 @@ def counts_history(idx):
     return {"current": now_n, "as_of": now_d, "history": pts, "d7": change(7), "d30": change(30)}
 
 
+def weekly(per_stream, present, fol, subs, moments, now=None):
+    """Last 7 days vs the 7 before, plus the week's biggest chat moment."""
+    now = now or datetime.now(timezone.utc)
+    who = {r["id"]: p for r, p in zip(per_stream, present)}
+    def window(a, b):
+        return [r for r in per_stream if now - timedelta(days=a) < ts(r["date"]) <= now - timedelta(days=b)]
+    def summary(rows):
+        v = [r["avg_viewers"] for r in rows if r.get("avg_viewers") is not None]
+        return {"streams": len(rows), "hours": round(sum(r["duration"] for r in rows) / 3600, 1),
+                "avg_viewers": round(statistics.mean(v), 1) if v else None,
+                "peak_viewers": max((r["peak_viewers"] for r in rows if r.get("peak_viewers") is not None), default=None),
+                "chatters": len(set().union(*(who.get(r["id"], set()) for r in rows))) if rows else 0,
+                "new_chatters": sum(r["new"] for r in rows), "messages": sum(r["messages"] for r in rows)}
+    this, last = window(7, 0), window(14, 7)
+    def change(series):
+        if not series:
+            return None
+        d7 = (now - timedelta(days=7)).strftime("%Y-%m-%d")
+        older = [p for p in series["history"] if p[0] <= d7]
+        return series["current"] - older[-1][1] if older else None
+    best = None
+    for r in this:
+        for m in (moments or {}).get(r["id"], []):
+            if not best or m["x"] > best["x"]:
+                best = {**m, "id": r["id"], "title": r["title"]}
+    return {"this": summary(this), "last": summary(last), "followers": change(fol), "subs": change(subs), "best": best,
+            "from": (now - timedelta(days=7)).strftime("%Y-%m-%d"), "to": now.strftime("%Y-%m-%d")}
+
+
 def build(per_stream, present, news, lapsed=(), moments=None):
     live, land = vodlib.load(LIVE, {"streams": {}}), vodlib.load(LAND, {"games": {}})
     live_by_id = link_live(per_stream, live)
     curves = enrich(per_stream, live_by_id)
     by_game, peers = category(live)
+    fol_hist, subs_hist = counts_history(1), counts_history(2)
     land_list = landscape(land)
     ret = retention(per_stream, present, news)
     try:
@@ -238,6 +268,7 @@ def build(per_stream, present, news, lapsed=(), moments=None):
         "category": by_game,
         "peers": peers,
         "landscape": land_list,
-        "followers": counts_history(1),
-        "subs": counts_history(2),
+        "followers": fol_hist,
+        "subs": subs_hist,
+        "weekly": weekly(per_stream, present, fol_hist, subs_hist, moments),
     }

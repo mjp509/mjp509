@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """Generate site/v/<id>/index.html (watch page with link-preview tags) for each VOD. Run at deploy."""
 import html
+import json
+import os
+from collections import Counter
 
 import vodlib
 
@@ -20,9 +23,14 @@ def fmt_date(iso):
         return ""
 
 
-def meta(title, desc, image):
+def iso_duration(sec):
+    h, rem = divmod(int(sec), 3600)
+    return f"PT{h}H{rem // 60}M{rem % 60}S"
+
+
+def meta(title, desc, image, page_title=None):
     e = lambda s: html.escape(s, quote=True)
-    return (f'<title>{e(title)}</title>\n'
+    return (f'<title>{e(page_title or title)}</title>\n'
             f'  <meta name="description" content="{e(desc)}">\n'
             f'  <meta property="og:type" content="video.other">\n'
             f'  <meta property="og:site_name" content="itsmotch VODs">\n'
@@ -65,25 +73,48 @@ def main():
     channel = vodlib.load(vodlib.DATA / "channel.json", {})
     if channel.get("avatar"):
         bake_avatar(channel["avatar"])
+    site = os.environ.get("SITE_URL", "").rstrip("/")
     template = (SITE / "vod.html").read_text(encoding="utf-8")
     vods = vodlib.load(vodlib.VODS, [])
     for v in vods:
-        desc = " · ".join(x for x in [fmt_date(v.get("date", "")), v.get("game", ""), fmt_dur(v.get("duration", 0)),
-                                      "Watch with chat replay"] if x)
+        game, date = v.get("game", ""), fmt_date(v.get("date", ""))
+        desc = " · ".join(x for x in [date, game, fmt_dur(v.get("duration", 0)), "Watch with chat replay"] if x)
+        long_desc = (f"{game + ' stream' if game else 'Stream'} by itsmotch{' on ' + date if date else ''} "
+                     f"({fmt_dur(v.get('duration', 0))}). Watch the full VOD with Twitch chat replay.")
+        thumb = f"https://i.ytimg.com/vi/{v['youtube']}/hqdefault.jpg"
+        url = f"{site}/v/{v['id']}/" if site else ""
+        ld = {"@context": "https://schema.org", "@type": "VideoObject", "name": v["title"], "description": long_desc,
+              "thumbnailUrl": [thumb], "uploadDate": v.get("date", ""), "duration": iso_duration(v.get("duration", 0)),
+              "embedUrl": f"https://www.youtube.com/embed/{v['youtube']}"}
+        if url:
+            ld["url"] = url
+        extra = (f'\n  <link rel="canonical" href="{html.escape(url, quote=True)}">' if url else "") + \
+                f'\n  <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False).replace("</", "<\\/")}</script>'
+        page_title = " · ".join(x for x in [v["title"], f"{game} VOD" if game else "VOD", "itsmotch"] if x)
         page = (template
                 .replace('<meta charset="utf-8">', '<meta charset="utf-8">\n  <base href="../../">', 1)
-                .replace("<title>itsmotch VODs</title>",
-                         meta(v["title"], desc, f"https://i.ytimg.com/vi/{v['youtube']}/hqdefault.jpg"), 1)
+                .replace("<title>itsmotch VODs</title>", meta(v["title"], desc, thumb, page_title) + extra, 1)
+                .replace('<meta name="robots" content="noindex">', "", 1)
                 .replace("<body>", f'<body data-vod="{html.escape(v["id"], quote=True)}">', 1))
+        page = page.replace('<meta name="description" content="Every itsmotch stream, with chat replay.">', "", 1)
         out = SITE / "v" / v["id"]
         out.mkdir(parents=True, exist_ok=True)
         (out / "index.html").write_text(page, encoding="utf-8")
+
+    games = [g for g, _ in Counter(v.get("game") for v in vods if v.get("game")).most_common(3)]
+    home_desc = "Every itsmotch Twitch stream with full chat replay" + (f": {', '.join(games)} and more." if games else ".")
+    if site:
+        urls = [(f"{site}/", vods[0]["date"][:10] if vods else "")] + [(f"{site}/v/{v['id']}/", v.get("date", "")[:10]) for v in vods]
+        (SITE / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+            + "".join(f"  <url><loc>{html.escape(u)}</loc>{f'<lastmod>{d}</lastmod>' if d else ''}</url>\n" for u, d in urls)
+            + "</urlset>\n", encoding="utf-8")
+        (SITE / "robots.txt").write_text(f"User-agent: *\nAllow: /\nDisallow: /stats.html\n\nSitemap: {site}/sitemap.xml\n", encoding="utf-8")
 
     if channel.get("avatar"):
         idx = SITE / "index.html"
         s = idx.read_text(encoding="utf-8")
         s = s.replace('<meta name="description" content="Every itsmotch stream, with chat replay.">',
-                      meta("itsmotch VODs", "Every itsmotch stream, with chat replay.", channel["avatar"])
+                      meta("itsmotch VODs", home_desc, channel["avatar"])
                       .replace("<title>itsmotch VODs</title>\n  ", "")
                       .replace('content="video.other"', 'content="website"')
                       .replace('twitter:card" content="summary_large_image', 'twitter:card" content="summary'), 1)
