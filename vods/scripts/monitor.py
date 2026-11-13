@@ -25,22 +25,30 @@ def parse(ts):
     return datetime.strptime(ts, FMT).replace(tzinfo=timezone.utc)
 
 
-def follower_count(uid):
-    """Total followers via the broadcaster's own Twitch token (scope moderator:read:followers). None if not set up."""
+def user_counts(uid):
+    """Followers and subscriber count via the broadcaster's own Twitch token. Empty dict if not set up."""
     refresh = os.environ.get("TWITCH_USER_REFRESH_TOKEN", "").strip()
     if not refresh:
-        return None
+        return {}
     cid, secret = os.environ["TWITCH_CLIENT_ID"].strip(), os.environ["TWITCH_CLIENT_SECRET"].strip()
+    out = {}
     try:
         body = urllib.parse.urlencode({"grant_type": "refresh_token", "refresh_token": refresh,
                                        "client_id": cid, "client_secret": secret}).encode()
         token = vodlib.get_json("https://id.twitch.tv/oauth2/token", data=body)["access_token"]
-        r = vodlib.get_json(f"https://api.twitch.tv/helix/channels/followers?broadcaster_id={uid}&first=1",
-                            {"Client-ID": cid, "Authorization": f"Bearer {token}"})
-        return int(r["total"])
     except Exception as e:
-        print(f"::warning::Follower count failed (redo the Twitch follower sign-in if this keeps happening): {e}")
-        return None
+        print(f"::warning::Twitch sign-in refresh failed (redo the Twitch sign-in if this keeps happening): {e}")
+        return out
+    h = {"Client-ID": cid, "Authorization": f"Bearer {token}"}
+    try:
+        out["followers"] = int(vodlib.get_json(f"https://api.twitch.tv/helix/channels/followers?broadcaster_id={uid}&first=1", h)["total"])
+    except Exception as e:
+        print(f"::warning::Follower count failed: {e}")
+    try:
+        out["subs"] = int(vodlib.get_json(f"https://api.twitch.tv/helix/subscriptions?broadcaster_id={uid}&first=1", h)["total"])
+    except Exception as e:
+        print(f"::warning::Sub count failed (the Twitch sign-in needs the channel:read:subscriptions permission): {e}")
+    return out
 
 
 def scan(helix, game_id, mine=None, me=None):
@@ -93,17 +101,18 @@ def main():
     ts = t.strftime(FMT)
     live = helix(f"streams?user_id={user['id']}")
 
-    fol = follower_count(user["id"])
-    if fol is not None and (live or t - parse(state.get("last_fol", "1970-01-01T00:00:00Z")) >= LAND_EVERY):
-        state["samples"].append({"ts": ts, "k": "fol", "n": fol})
+    counts = user_counts(user["id"])
+    fol, subs = counts.get("followers"), counts.get("subs")
+    if counts and (live or t - parse(state.get("last_fol", "1970-01-01T00:00:00Z")) >= LAND_EVERY):
+        state["samples"].append({"ts": ts, "k": "fol", "n": fol, "s": subs})
         state["last_fol"] = ts
-        print(f"Followers: {fol}")
+        print(f"Followers: {fol} | Subs: {subs}")
 
     if live:
         s = live[0]
         gid, mine = s.get("game_id"), s.get("viewer_count", 0)
         sample = {"ts": ts, "k": "live", "start": s["started_at"], "sid": s["id"], "v": mine,
-                  "gid": gid, "game": s.get("game_name", ""), "title": s.get("title", ""), "f": fol}
+                  "gid": gid, "game": s.get("game_name", ""), "title": s.get("title", ""), "f": fol, "sb": subs}
         if gid:
             state["games"][gid] = {"name": s.get("game_name", ""), "last": ts}
             sample["cat"] = scan(helix, gid, mine, user["login"].lower())

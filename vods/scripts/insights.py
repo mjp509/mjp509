@@ -32,6 +32,8 @@ def fold():
             st["samples"].append([s["ts"], s["v"], s["game"]])
             if s.get("f") is not None:
                 st.setdefault("followers", []).append([s["ts"], s["f"]])
+            if s.get("sb") is not None:
+                st.setdefault("subs", []).append([s["ts"], s["sb"]])
             c = s.get("cat")
             if c:
                 st["cat"].append([s["ts"], s["game"], c.get("rank"), c["channels"], c["viewers"], c["truncated"], c["median"]])
@@ -42,7 +44,7 @@ def fold():
         elif s["k"] == "fol":
             day = s["ts"][:10]
             if s["ts"] >= fol["days"].get(day, ["", 0])[0]:
-                fol["days"][day] = [s["ts"], s["n"]]
+                fol["days"][day] = [s["ts"], s.get("n"), s.get("s")]
         elif s["k"] == "land":
             g = land["games"].setdefault(s["gid"], {"name": s["game"], "b": [[0, 0, 0, 0] for _ in range(168)]})
             g["name"] = s["game"]

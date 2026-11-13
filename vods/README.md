@@ -34,7 +34,7 @@ and similar-size channels; while offline it samples your usual categories hourly
 Data is kept in the Actions cache and folded into `vods/insights/` by each sync. Twitch has no viewer history,
 so these stats start from the first stream after it's turned on.
 
-Follower tracking (optional): secret `TWITCH_USER_REFRESH_TOKEN`, a Twitch refresh token for the channel owner with scope `moderator:read:followers`.
+Follower + sub tracking (optional): secret `TWITCH_USER_REFRESH_TOKEN`, a Twitch refresh token for the channel owner with scopes `moderator:read:followers channel:read:subscriptions`.
 
 **Actions → Add past stream stats**: type in avg viewers, peak viewers and followers gained from Twitch's
 Stream Summary for streams the live monitor didn't record (blank stream = most recent). Live-monitor data takes priority.
