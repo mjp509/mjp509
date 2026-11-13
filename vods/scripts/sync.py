@@ -20,7 +20,11 @@ def twitch():
     q = urllib.parse.urlencode({"client_id": cid, "client_secret": secret, "grant_type": "client_credentials"})
     token = vodlib.get_json(f"https://id.twitch.tv/oauth2/token?{q}", data=b"")["access_token"]
     h = {"Client-ID": cid, "Authorization": f"Bearer {token}"}
-    return lambda path: vodlib.get_json(f"https://api.twitch.tv/helix/{path}", h)["data"]
+
+    def helix(path, full=False):
+        r = vodlib.get_json(f"https://api.twitch.tv/helix/{path}", h)
+        return r if full else r["data"]
+    return helix
 
 
 def norm(s):
@@ -169,6 +173,11 @@ def update_youtube_views():
 
 
 if __name__ == "__main__":
+    try:
+        import insights
+        insights.fold()
+    except Exception as e:
+        print(f"::warning::Couldn't fold live monitor data: {e}")
     save_new_chats()
     match_youtube()
     update_youtube_views()
