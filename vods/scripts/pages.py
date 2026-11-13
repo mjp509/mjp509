@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Generate site/v/<id>/index.html (watch page with link-preview tags) for each VOD. Run at deploy."""
 import html
-import os
 
 import vodlib
 
@@ -49,12 +48,12 @@ def main():
         out.mkdir(parents=True, exist_ok=True)
         (out / "index.html").write_text(page, encoding="utf-8")
 
-    site_url = os.environ.get("SITE_URL", "").rstrip("/")
-    if site_url:
+    channel = vodlib.load(vodlib.DATA / "channel.json", {})
+    if channel.get("avatar"):
         idx = SITE / "index.html"
         s = idx.read_text(encoding="utf-8")
         s = s.replace('<meta name="description" content="Every itsmotch stream, with chat replay.">',
-                      meta("itsmotch VODs", "Every itsmotch stream, with chat replay.", f"{site_url}/logo.png")
+                      meta("itsmotch VODs", "Every itsmotch stream, with chat replay.", channel["avatar"])
                       .replace("<title>itsmotch VODs</title>\n  ", "")
                       .replace('content="video.other"', 'content="website"')
                       .replace('twitter:card" content="summary_large_image', 'twitter:card" content="summary'), 1)
