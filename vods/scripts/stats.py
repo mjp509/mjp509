@@ -76,7 +76,7 @@ def main():
 
     seen, attendance, msg_count, last_seen = set(), Counter(), Counter(), {}
     per_stream, by_game, hour_tot, hour_n, emotes = [], defaultdict(lambda: [0.0, 0, set()]), Counter(), Counter(), Counter()
-    present, all_moments = [], {}
+    present, all_moments, news = [], {}, []
     monthly, display, colors, monthly_emotes = defaultdict(Counter), {}, {}, defaultdict(Counter)
     fav = defaultdict(lambda: defaultdict(Counter))
 
@@ -113,6 +113,7 @@ def main():
                             monthly_emotes[month][(p[1], p[2])] += 1
                         once.add((p[0], p[1]))
         new = chatters - seen
+        news.append(new)
         seen |= chatters
         for c in chatters:
             attendance[c] += 1
@@ -151,7 +152,15 @@ def main():
     stv_used = {k[2] for k in emotes if k[0] == "7"}
     stv_set = vodlib.seventv_emotes(channel.get("id"), include_global=False) if channel.get("id") else {}
 
+    try:
+        import analysis
+        extra = analysis.build(per_stream, present, news)
+    except Exception as e:
+        print(f"::warning::insights skipped: {e}")
+        extra = None
+
     stats = {
+        "insights": extra,
         "overview": {
             "streams": len(per_stream),
             "hours": round(sum(s["duration"] for s in per_stream) / 3600, 1),

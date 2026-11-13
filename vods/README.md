@@ -28,6 +28,12 @@ The sync then sees unlisted uploads and matches them by title or length, so no A
 - **Actions → Sync VODs → Run workflow**: sync now.
 - **Actions → Add VOD**: paste the YouTube link (unlisted is fine). Leave the Twitch link blank to attach it to your newest saved stream, or paste one to pick a specific VOD.
 
+## Live monitor
+**Live monitor** runs every 10 minutes. While you're live it records viewers, your rank among live channels in your category
+and similar-size channels; while offline it samples your usual categories hourly (best time to stream).
+Data is kept in the Actions cache and folded into `vods/insights/` by each sync. Twitch has no viewer history,
+so these stats start from the first stream after it's turned on.
+
 ## Stats
 Leaderboard counts at most 1 message per 10s per chatter.
 

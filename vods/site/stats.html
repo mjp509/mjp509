@@ -14,73 +14,117 @@
     <div class="logo"><a class="logo-ch" href="https://twitch.tv/itsmotch" target="_blank" rel="noopener" title="itsmotch on Twitch"><img class="avatar" id="avatar" alt=""><b>itsmotch</b></a> <a class="logo-home" href="./"><b><span>Stats</span></b></a></div>
     <nav><a href="./">All VODs</a></nav>
   </header>
+
+  <nav class="tabs" id="tabs" role="tablist">
+    <button data-tab="overview" class="active">Overview</button>
+    <button data-tab="trends">Trends</button>
+    <button data-tab="streams">Streams</button>
+    <button data-tab="category">Category</button>
+    <button data-tab="community">Community</button>
+    <button data-tab="clips">Clips</button>
+  </nav>
+
   <main id="stats" class="is-loading">
-    <div class="tiles" id="tiles"><div class="tile shimmer"></div><div class="tile shimmer"></div><div class="tile shimmer"></div><div class="tile shimmer"></div><div class="tile shimmer"></div></div>
+    <div class="notice" id="monitor-note" hidden></div>
 
-    <section class="panel" id="clips-panel">
-      <div class="panel-head">
-        <h2>Clip finder</h2>
-        <select id="clip-stream"></select>
-      </div>
-      <p class="hint">Moments where chat spiked. Each link starts 20s before the spike.</p>
-      <div id="clips"></div>
+    <!-- OVERVIEW -->
+    <section class="tab" data-tab="overview">
+      <section class="panel">
+        <div class="panel-head"><h2 id="report-title">Last stream</h2><span class="sub" id="report-date"></span></div>
+        <p class="hint">Compared with the average of your previous 10 streams. "Place" ranks it against every saved stream.</p>
+        <div class="report" id="report"><div class="tile shimmer"></div><div class="tile shimmer"></div><div class="tile shimmer"></div><div class="tile shimmer"></div></div>
+      </section>
+      <section class="panel">
+        <h2>All time</h2>
+        <div class="tiles" id="tiles"></div>
+      </section>
     </section>
 
-    <div class="cols">
+    <!-- TRENDS -->
+    <section class="tab" data-tab="trends" hidden>
       <section class="panel">
-        <h2>Chat activity by game</h2>
-        <p class="hint">Messages per minute while playing each game.</p>
-        <div id="games"></div>
+        <div class="panel-head">
+          <h2>Stream by stream</h2>
+          <div class="legend"><span><i class="sw ret"></i>Each stream</span><span><i class="sw line"></i>5-stream average</span></div>
+        </div>
+        <div class="seg seg-wrap" id="metric-seg"></div>
+        <p class="hint" id="metric-hint"></p>
+        <div class="chart" id="trend-chart"></div>
       </section>
-      <section class="panel">
-        <h2>Chat energy through a stream</h2>
-        <p class="hint">Average messages per minute in each hour of a stream.</p>
-        <div class="vbars" id="hours"></div>
-      </section>
-      <section class="panel">
-        <h2>Best days</h2>
-        <p class="hint">Average messages per minute by day you went live.</p>
-        <div class="vbars" id="days"></div>
-      </section>
-      <section class="panel">
-        <h2>Best start times</h2>
-        <p class="hint">Average messages per minute by start time (your local time).</p>
-        <div class="vbars" id="starts"></div>
-      </section>
-    </div>
-
-    <section class="panel">
-      <div class="panel-head">
-        <h2>New vs returning chatters</h2>
-        <div class="legend"><span><i class="sw ret"></i>Returning</span><span><i class="sw new"></i>New</span></div>
+      <div class="cols">
+        <section class="panel"><h2>Chat activity by game</h2><p class="hint">Messages per minute while playing each game.</p><div id="games"></div></section>
+        <section class="panel"><h2>Chat energy through a stream</h2><p class="hint">Average messages per minute in each hour of a stream.</p><div class="vbars" id="hours"></div></section>
+        <section class="panel"><h2>Best days</h2><p class="hint">Average messages per minute by day you went live.</p><div class="vbars" id="days"></div></section>
+        <section class="panel"><h2>Best start times</h2><p class="hint">Average messages per minute by start time (your local time).</p><div class="vbars" id="starts"></div></section>
       </div>
-      <p class="hint">Unique chatters per stream, last 20 streams. New = first time chatting in any saved stream.</p>
-      <div class="vbars stacked" id="community"></div>
     </section>
 
-    <div class="cols">
+    <!-- STREAMS -->
+    <section class="tab" data-tab="streams" hidden>
       <section class="panel">
-        <h2>Top chatters</h2>
-        <table class="tbl" id="top"></table>
+        <div class="panel-head"><h2>Stream breakdown</h2><select id="stream-pick"></select></div>
+        <div class="mini-tiles" id="stream-tiles"></div>
+        <h3>Viewers</h3>
+        <div class="chart short" id="curve-viewers"></div>
+        <h3>Chat messages per minute</h3>
+        <div class="chart short" id="curve-chat"></div>
+        <div id="rank-wrap"><h3>Rank in category <span class="sub">(lower is better)</span></h3><div class="chart short" id="curve-rank"></div></div>
       </section>
-      <section class="panel">
-        <h2>Regulars who stopped showing up</h2>
-        <p class="hint">Chatted in 3+ streams but none of the last 3.</p>
-        <table class="tbl" id="lapsed"></table>
-      </section>
-    </div>
+    </section>
 
-    <div class="cols">
+    <!-- CATEGORY -->
+    <section class="tab" data-tab="category" hidden>
       <section class="panel">
-        <h2>Most used emotes</h2>
-        <div class="emote-grid" id="emotes"></div>
+        <h2>How you rank by game</h2>
+        <p class="hint">While you're live, the site checks every live channel in your category. Rank is your position by viewers. Ranks deep in huge categories are approximate.</p>
+        <div id="cat-table"></div>
       </section>
       <section class="panel">
-        <h2>Unused 7TV emotes</h2>
-        <p class="hint">In your 7TV set but never used in saved chat. Candidates to swap out.</p>
-        <div class="chips" id="unused"></div>
+        <h2>Channels your size</h2>
+        <p class="hint">Channels in your category with a similar viewer count at the same time as you (about 0.65× to 1.5× your viewers).</p>
+        <div id="peers"></div>
       </section>
-    </div>
+      <section class="panel">
+        <div class="panel-head"><h2>Best time to stream</h2><select id="land-pick"></select></div>
+        <p class="hint" id="land-hint">Viewers per live channel in each hour (your local time), sampled hourly while you're offline. Brighter = more viewers to go around.</p>
+        <div id="land-best"></div>
+        <div class="heat" id="heat"></div>
+        <div class="heat-legend" id="heat-legend"></div>
+      </section>
+    </section>
+
+    <!-- COMMUNITY -->
+    <section class="tab" data-tab="community" hidden>
+      <div class="tiles" id="community-tiles"></div>
+      <section class="panel">
+        <div class="panel-head"><h2>New vs returning chatters</h2>
+          <div class="legend"><span><i class="sw ret"></i>Returning</span><span><i class="sw new"></i>New</span></div></div>
+        <p class="hint">Unique chatters per stream, last 20 streams. New = first time chatting in any saved stream.</p>
+        <div class="vbars stacked" id="community"></div>
+      </section>
+      <section class="panel">
+        <h2>Do new chatters come back?</h2>
+        <p class="hint">Of each stream's new chatters, the share who chatted again within 30 days.</p>
+        <div class="vbars" id="retention"></div>
+      </section>
+      <div class="cols">
+        <section class="panel"><h2>Top chatters</h2><table class="tbl" id="top"></table></section>
+        <section class="panel"><h2>Regulars who stopped showing up</h2><p class="hint">Chatted in 3+ streams but none of the last 3.</p><table class="tbl" id="lapsed"></table></section>
+      </div>
+      <div class="cols">
+        <section class="panel"><h2>Most used emotes</h2><div class="emote-grid" id="emotes"></div></section>
+        <section class="panel"><h2>Unused 7TV emotes</h2><p class="hint">In your 7TV set but never used in saved chat. Candidates to swap out.</p><div class="chips" id="unused"></div></section>
+      </div>
+    </section>
+
+    <!-- CLIPS -->
+    <section class="tab" data-tab="clips" hidden>
+      <section class="panel" id="clips-panel">
+        <div class="panel-head"><h2>Clip finder</h2><select id="clip-stream"></select></div>
+        <p class="hint">Moments where chat spiked. Each link starts 20s before the spike.</p>
+        <div id="clips"></div>
+      </section>
+    </section>
   </main>
   <div class="tip" id="tip" hidden></div>
   <script src="common.js"></script>
