@@ -93,10 +93,11 @@ def youtube_uploads():
                                        "refresh_token": env("YT_REFRESH_TOKEN"), "grant_type": "refresh_token"}).encode()
         token = vodlib.get_json("https://oauth2.googleapis.com/token", data=body)["access_token"]
         headers, auth = {"Authorization": f"Bearer {token}"}, ""
-        chans = vodlib.get_json(f"{api}/channels?part=contentDetails&mine=true", headers).get("items", [])
+        chans = vodlib.get_json(f"{api}/channels?part=snippet,contentDetails&mine=true", headers).get("items", [])
         if not chans:
             raise RuntimeError("signed-in Google account has no YouTube channel")
         uploads = chans[0]["contentDetails"]["relatedPlaylists"]["uploads"]
+        print(f"YouTube sign-in OK: channel '{chans[0]['snippet']['title']}'")
     else:
         m = re.search(r"UC[A-Za-z0-9_-]{22}", env("YOUTUBE_CHANNEL_ID"))
         if not m:
@@ -117,10 +118,14 @@ def youtube_uploads():
 
 def match_youtube():
     pending = sorted(vodlib.load(vodlib.PENDING, []), key=lambda p: p["date"])
-    if not pending:
+    signed_in = bool(os.environ.get("YT_REFRESH_TOKEN", "").strip())
+    if not pending and not signed_in:
         return
     try:
         videos = youtube_uploads()
+        if signed_in:
+            unlisted = sum(v["privacy"] == "unlisted" for v in videos)
+            print(f"YouTube: {len(videos)} recent uploads visible ({unlisted} unlisted)")
     except RuntimeError as e:
         hint = " (channel ID wrong, or the channel has no uploads yet)" if "HTTP 404" in str(e) else ""
         print(f"::warning::YouTube lookup failed{hint}: {e}. Chat is saved; VODs publish once YouTube works.")
