@@ -33,10 +33,32 @@ def meta(title, desc, image):
             f'  <meta name="theme-color" content="#a970ff">')
 
 
+def round_favicon(url):
+    try:
+        import io
+        import urllib.request
+        from PIL import Image, ImageDraw
+        with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "vod-site"}), timeout=30) as r:
+            img = Image.open(io.BytesIO(r.read())).convert("RGBA")
+        size, big = 128, 512
+        img = img.resize((big, big), Image.LANCZOS)
+        mask = Image.new("L", (big, big), 0)
+        ImageDraw.Draw(mask).ellipse((0, 0, big - 1, big - 1), fill=255)
+        img.putalpha(mask)
+        img.resize((size, size), Image.LANCZOS).save(SITE / "favicon.png")
+        return "favicon.png"
+    except Exception as e:
+        print(f"round favicon skipped: {e}")
+        return url
+
+
 def bake_avatar(avatar):
+    fav = round_favicon(avatar)
     for name in ("index.html", "vod.html", "stats.html"):
         f = SITE / name
-        f.write_text(f.read_text(encoding="utf-8").replace("https://unavatar.io/twitch/itsmotch", avatar), encoding="utf-8")
+        s = f.read_text(encoding="utf-8")
+        s = s.replace('id="favicon" href="https://unavatar.io/twitch/itsmotch"', f'id="favicon" href="{fav}"')
+        f.write_text(s.replace("https://unavatar.io/twitch/itsmotch", avatar), encoding="utf-8")
 
 
 def main():
