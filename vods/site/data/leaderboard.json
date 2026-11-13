@@ -10,17 +10,32 @@
       {
         "name": "NightWind02",
         "color": "#00FF7F",
-        "messages": 133
+        "messages": 133,
+        "emote": {
+          "src": "7",
+          "id": "01F61B1440000991F7SWQNMVX7",
+          "name": "KEKW"
+        }
       },
       {
         "name": "febasnotmilotic",
         "color": "",
-        "messages": 43
+        "messages": 43,
+        "emote": {
+          "src": "7",
+          "id": "01FWS83HG0000ASC1GQNZR38QV",
+          "name": "ong"
+        }
       },
       {
         "name": "EwYouStink",
         "color": "#0000FF",
-        "messages": 34
+        "messages": 34,
+        "emote": {
+          "src": "7",
+          "id": "01J96N7ERG0009MAMR2DZMJX8W",
+          "name": "KeepYourselfSafe"
+        }
       }
     ]
   }
