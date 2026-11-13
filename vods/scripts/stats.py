@@ -63,8 +63,8 @@ def moments(chat, duration, skip_names=(), n=10):
             toks.update(set(t.lower() for t in text_of(c[3])))
         scores = {tag: sum(toks[w] for w in words) for tag, words in TAGS.items()}
         tag = max(scores, key=scores.get)
-        ranked = sorted(toks.items(), key=lambda kv: (-kv[1], kv[0]))
-        top = [t for t, _ in ranked if len(t) > 1 and t not in STOP][:3]
+        ranked = [(t, c) for t, c in sorted(toks.items(), key=lambda kv: (-kv[1], kv[0])) if len(t) > 1 and t not in STOP]
+        top = [t for t, c in ranked if c >= 2][:3] or [t for t, _ in ranked[:1]]
         picked.append({"t": max(0, s - lead), "x": round(ratio, 1), "count": cnt,
                        "tag": tag if scores[tag] >= cnt * 0.15 else "spike", "words": top})
     return sorted(picked, key=lambda p: p["t"])
