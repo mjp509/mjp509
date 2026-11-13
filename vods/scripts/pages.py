@@ -54,7 +54,7 @@ def round_favicon(url):
 
 def bake_avatar(avatar):
     fav = round_favicon(avatar)
-    for name in ("index.html", "vod.html", "stats.html"):
+    for name in ("index.html", "vod.html", "stats.html", "privacy.html"):
         f = SITE / name
         s = f.read_text(encoding="utf-8")
         s = s.replace('id="favicon" href="https://unavatar.io/twitch/itsmotch"', f'id="favicon" href="{fav}"')
