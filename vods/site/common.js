@@ -52,5 +52,5 @@ function emoteLink(src, id, inner) {
   const img = document.getElementById("avatar");
   if (img) { img.onerror = () => img.remove(); img.src = avatar; }
   const fav = document.getElementById("favicon");
-  if (fav) fav.href = avatar;
+  if (fav && fav.getAttribute("href").includes("unavatar")) fav.href = avatar;
 })();
