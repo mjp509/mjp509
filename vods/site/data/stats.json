@@ -1477,7 +1477,42 @@
         "full": false
       }
     },
-    "subs": null
+    "subs": null,
+    "weekly": {
+      "this": {
+        "streams": 1,
+        "hours": 3.2,
+        "avg_viewers": 9.8,
+        "peak_viewers": 17,
+        "chatters": 18,
+        "new_chatters": 18,
+        "messages": 480
+      },
+      "last": {
+        "streams": 0,
+        "hours": 0.0,
+        "avg_viewers": null,
+        "peak_viewers": null,
+        "chatters": 0,
+        "new_chatters": 0,
+        "messages": 0
+      },
+      "followers": null,
+      "subs": null,
+      "best": {
+        "t": 9350,
+        "x": 8.0,
+        "count": 8,
+        "tag": "spike",
+        "words": [
+          "chovy"
+        ],
+        "id": "2927241555",
+        "title": "🍔 gëek wën i want gëek all da timë 🍔 luh shmünk 🍔"
+      },
+      "from": "2026-11-06",
+      "to": "2026-11-13"
+    }
   },
   "overview": {
     "streams": 1,
@@ -2023,11 +2058,107 @@
         "count": 8,
         "tag": "spike",
         "words": [
-          "chovy",
-          "get",
-          "laners"
+          "chovy"
         ]
       }
     ]
+  },
+  "greet": {
+    "title": "🍔 gëek wën i want gëek all da timë 🍔 luh shmünk 🍔",
+    "date": "2026-11-13T01:31:00Z",
+    "first_stream": true,
+    "first_time": [
+      {
+        "name": "NightWind02",
+        "color": "#00FF7F",
+        "messages": 207
+      },
+      {
+        "name": "febasnotmilotic",
+        "color": "",
+        "messages": 67
+      },
+      {
+        "name": "EwYouStink",
+        "color": "#0000FF",
+        "messages": 41
+      },
+      {
+        "name": "highflyer03",
+        "color": "#0000FF",
+        "messages": 28
+      },
+      {
+        "name": "smokemmo",
+        "color": "#2E8B57",
+        "messages": 24
+      },
+      {
+        "name": "cokeknife",
+        "color": "#FF0000",
+        "messages": 22
+      },
+      {
+        "name": "rDaniii",
+        "color": "#DAA520",
+        "messages": 15
+      },
+      {
+        "name": "zdammers03",
+        "color": "#5F9EA0",
+        "messages": 13
+      },
+      {
+        "name": "lilyzillasaurus",
+        "color": "#8A2BE2",
+        "messages": 9
+      },
+      {
+        "name": "buhomb",
+        "color": "#89AEFF",
+        "messages": 6
+      },
+      {
+        "name": "GymRerun",
+        "color": "#FF69B4",
+        "messages": 5
+      },
+      {
+        "name": "DrexsteinA",
+        "color": "#00FF7F",
+        "messages": 5
+      },
+      {
+        "name": "leonunez96",
+        "color": "",
+        "messages": 3
+      },
+      {
+        "name": "BreezyRS",
+        "color": "#00FF7F",
+        "messages": 3
+      },
+      {
+        "name": "HuntressClairice",
+        "color": "#FF69B4",
+        "messages": 3
+      },
+      {
+        "name": "Cabbage363",
+        "color": "#D2691E",
+        "messages": 2
+      },
+      {
+        "name": "magicalseed",
+        "color": "#FF0000",
+        "messages": 1
+      },
+      {
+        "name": "csixtythree04",
+        "color": "",
+        "messages": 1
+      }
+    ],
+    "back": []
   }
 }
