@@ -36,7 +36,7 @@ so these stats start from the first stream after it's turned on.
 
 Follower tracking (optional): secret `TWITCH_USER_REFRESH_TOKEN`, a Twitch refresh token for the channel owner with scope `moderator:read:followers`.
 
-**Actions → Add past stream stats**: type in avg viewers, peak viewers and followers gained from Twitch's
+**Actions → Add past stream stats**: type in every number from Twitch's
 Stream Summary for streams the live monitor didn't record (blank stream = most recent). Live-monitor data takes priority.
 
 ## Stats

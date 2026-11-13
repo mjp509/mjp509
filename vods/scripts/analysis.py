@@ -11,6 +11,9 @@ METRICS = [
     ("avg_viewers", "Avg viewers", True),
     ("peak_viewers", "Peak viewers", True),
     ("followers_gained", "Followers gained", True),
+    ("unique_viewers", "Unique viewers", True),
+    ("live_views", "Live views", True),
+    ("new_subs", "New subs", True),
     ("cat_top_pct", "Category rank (top %)", False),
     ("mpm", "Chat msgs / min", True),
     ("chatters", "Unique chatters", True),
@@ -61,8 +64,11 @@ def enrich(per_stream, live_by_id):
         r["hours"] = round(r["duration"] / 3600, 2)
         r["return_rate"] = round(100 * r["returning"] / r["chatters"], 1) if r["chatters"] and i > 0 else None
         link = live_by_id.get(r["id"])
+        man = manual.get(r["id"]) or {}
+        for k in ("unique_viewers", "twitch_chatters", "live_views", "new_subs"):  # Stream Summary only, never measured live
+            if man.get(k) is not None:
+                r[k] = man[k]
         if not link:
-            man = manual.get(r["id"])
             if man:
                 for k in ("avg_viewers", "peak_viewers", "followers_gained"):
                     if man.get(k) is not None:

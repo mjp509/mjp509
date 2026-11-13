@@ -7,13 +7,25 @@ on:
         description: Twitch VOD link or ID (blank = most recent saved stream)
         required: false
       avg:
-        description: Average viewers (from Twitch Stream Summary)
+        description: Average Viewers
         required: false
       peak:
-        description: Peak viewers
+        description: Max Viewers
+        required: false
+      unique_viewers:
+        description: Unique Viewers
+        required: false
+      chatters:
+        description: Unique Chatters
+        required: false
+      live_views:
+        description: Live Views
         required: false
       followers:
-        description: Followers gained
+        description: Followers (gained)
+        required: false
+      subs:
+        description: New Subscriptions
         required: false
 
 permissions:
@@ -33,8 +45,13 @@ jobs:
           AVG: ${{ inputs.avg }}
           PEAK: ${{ inputs.peak }}
           FOLLOWERS: ${{ inputs.followers }}
+          UNIQUE: ${{ inputs.unique_viewers }}
+          CHATTERS: ${{ inputs.chatters }}
+          LIVE_VIEWS: ${{ inputs.live_views }}
+          SUBS: ${{ inputs.subs }}
         run: |
-          python3 vods/scripts/add_manual.py --stream "$STREAM" --avg "$AVG" --peak "$PEAK" --followers "$FOLLOWERS"
+          python3 vods/scripts/add_manual.py --stream "$STREAM" --avg "$AVG" --peak "$PEAK" --followers "$FOLLOWERS" \
+            --unique-viewers "$UNIQUE" --chatters "$CHATTERS" --live-views "$LIVE_VIEWS" --subs "$SUBS"
           python3 vods/scripts/stats.py
 
       - name: Commit

@@ -6,6 +6,7 @@ const WEEK = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const EMOTE_URL = { t: id => `https://static-cdn.jtvnw.net/emoticons/v2/${id}/default/dark/2.0`, "7": id => `https://cdn.7tv.app/emote/${id}/2x.webp` };
 const NS = "http://www.w3.org/2000/svg";
 const VIEWER_KEYS = ["avg_viewers", "peak_viewers", "cat_top_pct", "followers_gained"];
+const SUMMARY_KEYS = ["unique_viewers", "live_views", "new_subs"];
 const ordinal = n => n + (["th", "st", "nd", "rd"][(n % 100 - 20) % 10] || ["th", "st", "nd", "rd"][n % 100] || "th");
 const hourLabel = h => `${(h % 12) || 12}${h < 12 ? "am" : "pm"}`;
 const shortDate = d => new Date(d).toLocaleDateString(undefined, { month: "numeric", day: "numeric" });
@@ -84,7 +85,8 @@ const empty = (el, msg) => { el.innerHTML = `<div class="chart-empty">${msg}</di
 function trendChart(el, rows, key, label) {
   const vals = rows.map(r => r[key]);
   if (!vals.some(v => v !== null && v !== undefined)) {
-    return empty(el, VIEWER_KEYS.includes(key) ? "No viewer data yet. It's recorded live from your next stream." : "Not enough data yet.");
+    return empty(el, SUMMARY_KEYS.includes(key) ? "Comes from Twitch's Stream Summary. Add it with Actions → Add past stream stats."
+      : VIEWER_KEYS.includes(key) ? "No viewer data yet. It's recorded live from your next stream." : "Not enough data yet.");
   }
   const f = frame(el), n = rows.length, max = niceMax(Math.max(...vals.filter(v => v != null)) * 1.05);
   const fmtAxis = key === "cat_top_pct" || key === "return_rate" ? v => Math.round(v) + "%" : v => (v < 10 && v % 1 ? v.toFixed(1) : num(Math.round(v)));
@@ -201,7 +203,8 @@ function emptyBlock(el, msg = "Not enough data yet.") { el.outerHTML = `<p class
     $("report").innerHTML = metrics.map(({ key, label, higher }) => {
       const m = rows[key];
       if (!m) {
-        const why = key === "followers_gained" && !ins.followers ? "Needs the Twitch follower sign-in" : VIEWER_KEYS.includes(key) ? "Recorded from your next stream" : "—";
+        const why = SUMMARY_KEYS.includes(key) ? "Add from Twitch Stream Summary (Actions → Add past stream stats)"
+          : key === "followers_gained" && !ins.followers ? "Needs the Twitch follower sign-in" : VIEWER_KEYS.includes(key) ? "Recorded from your next stream" : "—";
         return `<div class="rc missing"><span class="k">${esc(label)}</span><span class="v">${why}</span></div>`;
       }
       let delta = "";
@@ -225,7 +228,9 @@ function emptyBlock(el, msg = "Not enough data yet.") { el.outerHTML = `<p class
   const trends = ins.trends || [];
   let metric = "avg_viewers";
   if (!trends.some(t => t.avg_viewers != null)) metric = "chatters";
-  const HINTS = { followers_gained: "Followers gained between the start and end of each stream.", cat_top_pct: "Lower is better: top 5% beats top 40%.", return_rate: "Share of each stream's chatters who had chatted before.", hours: "How long each stream ran." };
+  const HINTS = { unique_viewers: "Different people who watched at least part of the stream (from Twitch's Stream Summary).",
+    live_views: "Total live views, counting people who opened the stream more than once (from Twitch's Stream Summary).",
+    new_subs: "New subscriptions during the stream (from Twitch's Stream Summary).", followers_gained: "Followers gained between the start and end of each stream.", cat_top_pct: "Lower is better: top 5% beats top 40%.", return_rate: "Share of each stream's chatters who had chatted before.", hours: "How long each stream ran." };
   const seg = $("metric-seg");
   seg.innerHTML = metrics.map(m => `<button data-k="${m.key}">${esc(m.label)}</button>`).join("");
   const drawTrend = () => {
@@ -277,7 +282,10 @@ function emptyBlock(el, msg = "Not enough data yet.") { el.outerHTML = `<p class
     $("stream-tiles").innerHTML = [
       [fmtMetric("avg_viewers", st.avg_viewers), "Avg viewers"], [fmtMetric("peak_viewers", st.peak_viewers), "Peak viewers"],
       [st.viewer_hours != null ? num(st.viewer_hours) : "—", "Hours watched"], [fmtMetric("followers_gained", st.followers_gained), "Followers gained"], [fmtMetric("cat_top_pct", st.cat_top_pct), "Category rank"],
-      [fmtMetric("mpm", st.mpm), "Msgs / min"], [num(st.chatters), "Chatters"], [num(st.new), "New chatters"], [fmtMetric("hours", st.hours), "Length"],
+      [st.unique_viewers != null ? num(st.unique_viewers) : "—", "Unique viewers"], [st.live_views != null ? num(st.live_views) : "—", "Live views"],
+      [st.new_subs != null ? num(st.new_subs) : "—", "New subs"],
+      [fmtMetric("mpm", st.mpm), "Msgs / min"], [num(st.chatters), "Chatters (saved chat)"],
+      ...(st.twitch_chatters != null ? [[num(st.twitch_chatters), "Chatters (Twitch count)"]] : []), [num(st.new), "New chatters"], [fmtMetric("hours", st.hours), "Length"],
     ].map(([v, k]) => `<div><b>${v}</b><span>${k}</span></div>`).join("");
     $("stream-manual").hidden = !st.manual;
     const v = byId[id], markers = ((v && v.chapters) || []).map(c => [c.t / 60, c.game]);
