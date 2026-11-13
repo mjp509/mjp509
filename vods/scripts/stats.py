@@ -167,7 +167,7 @@ def main():
         "top_chatters": [{"name": n, "messages": c, "streams": attendance[n]} for n, c in msg_count.most_common(20)],
         "lapsed": lapsed[:15],
         "emotes": [{"src": k[0], "id": k[1], "name": k[2], "count": c} for k, c in emotes.most_common(24)],
-        "unused_7tv": sorted(n for n in stv_set if n not in stv_used)[:60],
+        "unused_7tv": [{"name": n, "id": stv_set[n]} for n in sorted(n for n in stv_set if n not in stv_used)[:60]],
         "moments": all_moments,
     }
     vodlib.save(vodlib.DATA / "stats.json", stats)

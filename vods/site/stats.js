@@ -108,7 +108,7 @@ function empty(el, msg = "Not enough data yet.") { el.outerHTML = `<p class="emp
     : `<tr><td class="empty-note">${s.streams.length < 6 ? "Needs 6+ saved streams." : "Nobody — your regulars are sticking around."}</td></tr>`;
 
   $("emotes").innerHTML = s.emotes.length ? s.emotes.map(e => `<div class="emote">
-      <img src="${(EMOTE_URL[e.src] || EMOTE_URL.t)(encodeURIComponent(e.id))}" alt="" loading="lazy">
+      ${emoteLink(e.src, e.id, `<img src="${(EMOTE_URL[e.src] || EMOTE_URL.t)(encodeURIComponent(e.id))}" alt="" loading="lazy">`)}
       <b>${esc(e.name)}</b><span>${num(e.count)}</span></div>`).join("") : `<p class="empty-note">No emotes yet.</p>`;
-  $("unused").innerHTML = s.unused_7tv.length ? s.unused_7tv.map(n => `<span>${esc(n)}</span>`).join("") : `<p class="empty-note">None found.</p>`;
+  $("unused").innerHTML = s.unused_7tv.length ? s.unused_7tv.map(n => typeof n === "string" ? `<span>${esc(n)}</span>` : emoteLink("7", n.id, `<span>${esc(n.name)}</span>`)).join("") : `<p class="empty-note">None found.</p>`;
 })();
