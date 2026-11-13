@@ -34,6 +34,8 @@ and similar-size channels; while offline it samples your usual categories hourly
 Data is kept in the Actions cache and folded into `vods/insights/` by each sync. Twitch has no viewer history,
 so these stats start from the first stream after it's turned on.
 
+Follower tracking (optional): secret `TWITCH_USER_REFRESH_TOKEN`, a Twitch refresh token for the channel owner with scope `moderator:read:followers`.
+
 ## Stats
 Leaderboard counts at most 1 message per 10s per chatter.
 
