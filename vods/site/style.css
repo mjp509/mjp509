@@ -19,6 +19,9 @@ header { display: flex; align-items: center; gap: 16px; padding: 14px 20px;
 .logo { font-weight: 800; font-size: 20px; letter-spacing: -.02em; display: flex; align-items: center; gap: 10px; }
 .avatar { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 2px var(--accent); background: var(--panel-2); }
 .logo span { color: var(--accent); }
+.logo a { display: flex; align-items: center; gap: 10px; }
+.logo { gap: 6px; }
+.logo a:hover b { text-decoration: underline; text-underline-offset: 3px; }
 .logo b, .card h3, .details h1, .live-head strong, .chat-head { font-family: var(--font-display); }
 header nav { margin-left: auto; display: flex; gap: 16px; color: var(--muted); }
 header nav a:hover { color: var(--text); }
