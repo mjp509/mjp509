@@ -22,7 +22,7 @@ Every 2 hours, **Sync VODs** saves the chat for new Twitch VODs and publishes ea
 
 ## Manual
 - **Actions → Sync VODs → Run workflow**: sync now.
-- **Actions → Add VOD**: add any VOD by Twitch + YouTube link (works for unlisted videos, renamed titles, chat offset).
+- **Actions → Add VOD**: paste the YouTube link (unlisted is fine). Leave the Twitch link blank to attach it to your newest saved stream, or paste one to pick a specific VOD.
 
 ## Stats
 Leaderboard counts at most 1 message per 10s per chatter.

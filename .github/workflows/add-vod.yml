@@ -3,12 +3,12 @@ name: Add VOD
 on:
   workflow_dispatch:
     inputs:
-      twitch:
-        description: Twitch VOD link or ID
-        required: true
       youtube:
-        description: YouTube link or ID
+        description: YouTube link (unlisted is fine)
         required: true
+      twitch:
+        description: Twitch VOD link (optional, blank = newest saved stream)
+        required: false
       title:
         description: Title (optional, defaults to Twitch title)
         required: false
@@ -29,6 +29,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Get TwitchDownloaderCLI
+        if: inputs.twitch != ''
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -39,6 +40,7 @@ jobs:
           chmod +x tdl/TwitchDownloaderCLI
 
       - name: Download chat
+        if: inputs.twitch != ''
         env:
           TWITCH: ${{ inputs.twitch }}
         run: |
@@ -51,7 +53,10 @@ jobs:
           YOUTUBE: ${{ inputs.youtube }}
           TITLE: ${{ inputs.title }}
           OFFSET: ${{ inputs.offset }}
-        run: python3 vods/scripts/add_vod.py --chat chat.json --youtube "$YOUTUBE" --title "$TITLE" --offset "${OFFSET:-0}" && python3 vods/scripts/stats.py
+        run: |
+          chat=""; [ -f chat.json ] && chat="--chat chat.json"
+          python3 vods/scripts/add_vod.py $chat --youtube "$YOUTUBE" --title "$TITLE" --offset "${OFFSET:-0}"
+          python3 vods/scripts/stats.py
 
       - name: Commit
         run: |
