@@ -29,10 +29,6 @@ ap.add_argument("--stream", default="")
 ap.add_argument("--avg", default="")
 ap.add_argument("--peak", default="")
 ap.add_argument("--followers", default="")
-ap.add_argument("--unique-viewers", default="")
-ap.add_argument("--chatters", default="")
-ap.add_argument("--live-views", default="")
-ap.add_argument("--subs", default="")
 args = ap.parse_args()
 
 streams = sorted(vodlib.load(vodlib.VODS, []) + vodlib.load(vodlib.PENDING, []), key=lambda v: v.get("date", ""))
@@ -48,12 +44,10 @@ else:
     target = streams[-1]
 
 vals = {"avg_viewers": number(args.avg, "Average viewers", integer=False), "peak_viewers": number(args.peak, "Peak viewers"),
-        "followers_gained": number(args.followers, "Followers gained"),
-        "unique_viewers": number(args.unique_viewers, "Unique viewers"), "twitch_chatters": number(args.chatters, "Unique chatters"),
-        "live_views": number(args.live_views, "Live views"), "new_subs": number(args.subs, "New subscriptions")}
+        "followers_gained": number(args.followers, "Followers gained")}
 vals = {k: v for k, v in vals.items() if v is not None}
 if not vals:
-    sys.exit("Enter at least one number from the Stream Summary.")
+    sys.exit("Enter at least one number (average viewers, peak viewers or followers gained).")
 if "avg_viewers" in vals and "peak_viewers" in vals and vals["peak_viewers"] < vals["avg_viewers"]:
     sys.exit("Peak viewers can't be lower than average viewers. Check the numbers.")
 
