@@ -103,10 +103,11 @@ def main():
 
     counts = user_counts(user["id"])
     fol, subs = counts.get("followers"), counts.get("subs")
+    if counts:
+        print(f"Followers: {fol} | Subs: {subs}")
     if counts and (live or t - parse(state.get("last_fol", "1970-01-01T00:00:00Z")) >= LAND_EVERY):
         state["samples"].append({"ts": ts, "k": "fol", "n": fol, "s": subs})
         state["last_fol"] = ts
-        print(f"Followers: {fol} | Subs: {subs}")
 
     if live:
         s = live[0]
