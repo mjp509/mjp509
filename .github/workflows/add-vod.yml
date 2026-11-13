@@ -1,0 +1,62 @@
+name: Add VOD
+
+on:
+  workflow_dispatch:
+    inputs:
+      twitch:
+        description: Twitch VOD link or ID
+        required: true
+      youtube:
+        description: YouTube link or ID
+        required: true
+      title:
+        description: Title (optional, defaults to Twitch title)
+        required: false
+      offset:
+        description: Chat offset in seconds (optional)
+        required: false
+        default: "0"
+
+permissions:
+  contents: write
+
+concurrency: vod-data
+
+jobs:
+  add:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Get TwitchDownloaderCLI
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          url=$(gh api repos/lay295/TwitchDownloader/releases/latest \
+            --jq '.assets[] | select(.name | test("CLI.*Linux-x64")) | .browser_download_url')
+          curl -sL "$url" -o tdl.zip
+          unzip -o tdl.zip -d tdl
+          chmod +x tdl/TwitchDownloaderCLI
+
+      - name: Download chat
+        env:
+          TWITCH: ${{ inputs.twitch }}
+        run: |
+          id=$(echo "$TWITCH" | grep -oE '[0-9]{6,}' | tail -1)
+          [ -n "$id" ] || { echo "No Twitch VOD ID in input"; exit 1; }
+          ./tdl/TwitchDownloaderCLI chatdownload --id "$id" -o chat.json
+
+      - name: Add to site
+        env:
+          YOUTUBE: ${{ inputs.youtube }}
+          TITLE: ${{ inputs.title }}
+          OFFSET: ${{ inputs.offset }}
+        run: python3 vods/scripts/add_vod.py --chat chat.json --youtube "$YOUTUBE" --title "$TITLE" --offset "${OFFSET:-0}" && python3 vods/scripts/stats.py
+
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add vods/site/data; [ -f vods/pending.json ] && git add vods/pending.json
+          git commit -m "Add VOD" || exit 0
+          git push

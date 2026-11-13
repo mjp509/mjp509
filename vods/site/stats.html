@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Stream stats · itsmotch</title>
+  <link rel="icon" id="favicon" href="https://unavatar.io/twitch/itsmotch">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="stats.css">
+</head>
+<body>
+  <header>
+    <a class="logo" href="./"><img class="avatar" id="avatar" alt=""><b>itsmotch <span>Stats</span></b></a>
+    <nav><a href="./">All VODs</a></nav>
+  </header>
+  <main id="stats" class="is-loading">
+    <div class="tiles" id="tiles"><div class="tile shimmer"></div><div class="tile shimmer"></div><div class="tile shimmer"></div><div class="tile shimmer"></div><div class="tile shimmer"></div></div>
+
+    <section class="panel" id="clips-panel">
+      <div class="panel-head">
+        <h2>Clip finder</h2>
+        <select id="clip-stream"></select>
+      </div>
+      <p class="hint">Moments where chat spiked. Each link starts 20s before the spike.</p>
+      <div id="clips"></div>
+    </section>
+
+    <div class="cols">
+      <section class="panel">
+        <h2>Chat activity by game</h2>
+        <p class="hint">Messages per minute while playing each game.</p>
+        <div id="games"></div>
+      </section>
+      <section class="panel">
+        <h2>Chat energy through a stream</h2>
+        <p class="hint">Average messages per minute in each hour of a stream.</p>
+        <div class="vbars" id="hours"></div>
+      </section>
+      <section class="panel">
+        <h2>Best days</h2>
+        <p class="hint">Average messages per minute by day you went live.</p>
+        <div class="vbars" id="days"></div>
+      </section>
+      <section class="panel">
+        <h2>Best start times</h2>
+        <p class="hint">Average messages per minute by start time (your local time).</p>
+        <div class="vbars" id="starts"></div>
+      </section>
+    </div>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>New vs returning chatters</h2>
+        <div class="legend"><span><i class="sw ret"></i>Returning</span><span><i class="sw new"></i>New</span></div>
+      </div>
+      <p class="hint">Unique chatters per stream, last 20 streams. New = first time chatting in any saved stream.</p>
+      <div class="vbars stacked" id="community"></div>
+    </section>
+
+    <div class="cols">
+      <section class="panel">
+        <h2>Top chatters</h2>
+        <table class="tbl" id="top"></table>
+      </section>
+      <section class="panel">
+        <h2>Regulars who stopped showing up</h2>
+        <p class="hint">Chatted in 3+ streams but none of the last 3.</p>
+        <table class="tbl" id="lapsed"></table>
+      </section>
+    </div>
+
+    <div class="cols">
+      <section class="panel">
+        <h2>Most used emotes</h2>
+        <div class="emote-grid" id="emotes"></div>
+      </section>
+      <section class="panel">
+        <h2>Unused 7TV emotes</h2>
+        <p class="hint">In your 7TV set but never used in saved chat. Candidates to swap out.</p>
+        <div class="chips" id="unused"></div>
+      </section>
+    </div>
+  </main>
+  <div class="tip" id="tip" hidden></div>
+  <script src="common.js"></script>
+  <script src="stats.js"></script>
+</body>
+</html>
