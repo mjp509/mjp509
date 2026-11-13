@@ -63,7 +63,8 @@ def moments(chat, duration, skip_names=(), n=10):
             toks.update(set(t.lower() for t in text_of(c[3])))
         scores = {tag: sum(toks[w] for w in words) for tag, words in TAGS.items()}
         tag = max(scores, key=scores.get)
-        top = [t for t, _ in toks.most_common(15) if len(t) > 1 and t not in STOP][:3]
+        ranked = [(t, c) for t, c in sorted(toks.items(), key=lambda kv: (-kv[1], kv[0])) if len(t) > 1 and t not in STOP]
+        top = [t for t, c in ranked if c >= 2][:3] or [t for t, _ in ranked[:1]]
         picked.append({"t": max(0, s - lead), "x": round(ratio, 1), "count": cnt,
                        "tag": tag if scores[tag] >= cnt * 0.15 else "spike", "words": top})
     return sorted(picked, key=lambda p: p["t"])
@@ -88,6 +89,7 @@ def main():
         dur = max(v.get("duration") or 0, int(chat[-1][0]) + 1 if chat else 0, 60)
 
         chatters = set()
+        stream_counts = Counter()
         month = v["date"][:7]
         last_counted = {}
         for t, name, color, body in chat:
@@ -95,6 +97,7 @@ def main():
             if lname in BOTS or lname == me:
                 continue
             chatters.add(lname)
+            stream_counts[lname] += 1
             msg_count[lname] += 1
             if t - last_counted.get(lname, -SPAM_GAP) >= SPAM_GAP:
                 monthly[month][lname] += 1
@@ -142,6 +145,17 @@ def main():
 
         all_moments[v["id"]] = moments(chat, dur, {me})
 
+    greet = None
+    if present:
+        def who(n):
+            return {"name": display.get(n, n), "color": colors.get(n, ""), "messages": stream_counts.get(n, 0)}
+        last_set, earlier = present[-1], present[:-1]
+        back = [n for n in last_set if any(n in p for p in earlier[:-3]) and not any(n in p for p in earlier[-3:])] if len(earlier) > 3 else []
+        greet = {"title": streams[-1]["title"] if streams else "", "date": per_stream[-1]["date"] if per_stream else "",
+                 "first_stream": len(present) == 1,
+                 "first_time": sorted((who(n) for n in news[-1]), key=lambda x: -x["messages"])[:24],
+                 "back": sorted((who(n) for n in back), key=lambda x: -x["messages"])[:12]}
+
     lapsed = []
     if len(present) >= 6:
         recent = set().union(*present[-3:])
@@ -178,6 +192,7 @@ def main():
         "emotes": [{"src": k[0], "id": k[1], "name": k[2], "count": c} for k, c in emotes.most_common(24)],
         "unused_7tv": [{"name": n, "id": stv_set[n]} for n in sorted(n for n in stv_set if n not in stv_used)[:60]],
         "moments": all_moments,
+        "greet": greet,
     }
     vodlib.save(vodlib.DATA / "stats.json", stats)
     def fav_of(m, n):

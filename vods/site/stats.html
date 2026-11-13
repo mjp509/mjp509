@@ -29,6 +29,12 @@
 
     <!-- OVERVIEW -->
     <section class="tab" data-tab="overview">
+      <section class="panel" id="week-panel">
+        <div class="panel-head"><h2>This week</h2><button class="copy-btn" id="copy-recap" type="button">Copy recap</button></div>
+        <p class="hint" id="week-range"></p>
+        <div class="report" id="week"></div>
+        <div id="week-best"></div>
+      </section>
       <section class="panel" id="advice-panel">
         <div class="panel-head"><h2>What to try next</h2><span class="sub">Patterns Twitch's Stream Summary doesn't show you</span></div>
         <div class="advice" id="advice"></div>
@@ -111,6 +117,11 @@
 
     <!-- COMMUNITY -->
     <section class="tab" data-tab="community" hidden>
+      <section class="panel" id="greet-panel">
+        <div class="panel-head"><h2>Say hi next stream</h2><span class="sub" id="greet-sub"></span></div>
+        <p class="hint">Greeting people by name is the easiest way to turn first-timers into regulars.</p>
+        <div id="greet"></div>
+      </section>
       <div class="tiles" id="community-tiles"></div>
       <section class="panel">
         <div class="panel-head"><h2>New vs returning chatters</h2>

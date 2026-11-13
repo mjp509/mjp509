@@ -162,3 +162,16 @@
 .lk .bar i { display: block; height: 100%; background: var(--accent); border-radius: 3px; }
 .lk .n { color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; white-space: nowrap; text-align: right; }
 @media (max-width: 560px) { .lk { grid-template-columns: 1fr auto; } .lk .bar { grid-column: 1 / -1; grid-row: 2; } }
+
+/* clip buttons, weekly, greet */
+.clip { grid-template-columns: auto 1fr auto auto; }
+.clip-btn { font-size: 12px; font-weight: 700; color: var(--accent); border: 1px solid #a970ff66; border-radius: 6px; padding: 4px 8px; white-space: nowrap; }
+.clip-btn:hover { background: #a970ff22; }
+@media (max-width: 560px) { .clip { grid-template-columns: auto 1fr; } .clip .x, .clip-btn { justify-self: start; } }
+.copy-btn { background: var(--accent); color: #fff; border: 0; border-radius: 8px; padding: 7px 12px; font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; }
+.week-best { margin: 12px 0 0; font-size: 14px; line-height: 1.5; }
+.week-best a { color: var(--accent); font-weight: 700; }
+.greet-list { display: flex; flex-wrap: wrap; gap: 6px; }
+.greet-chip { background: var(--panel-2); border-radius: 999px; padding: 5px 10px; font-size: 14px; display: inline-flex; gap: 6px; align-items: baseline; }
+.greet-chip small { color: var(--muted); font-size: 11px; font-variant-numeric: tabular-nums; }
+#greet h3:first-child { margin-top: 4px; }

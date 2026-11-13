@@ -192,6 +192,60 @@ function emptyBlock(el, msg = "Not enough data yet.") { el.outerHTML = `<p class
     note.hidden = false;
   }
 
+  // ===== OVERVIEW: this week =====
+  const wk = ins.weekly;
+  if (wk) {
+    const t = wk.this, l = wk.last;
+    const d = (a, b, fmt = v => num(v)) => {
+      if (a == null || b == null || !l.streams) return `<span class="d flat">${l.streams ? "" : "No streams the week before"}</span>`;
+      const diff = a - b, flat = Math.abs(diff) < 1e-9;
+      return `<span class="d ${flat ? "flat" : diff > 0 ? "good" : "bad"}">${flat ? "≈ same as" : diff > 0 ? "▲ " + fmt(Math.abs(diff)) + " vs" : "▼ " + fmt(Math.abs(diff)) + " vs"} last week</span>`;
+    };
+    const signed = v => v == null ? "—" : (v > 0 ? "+" : "") + num(v);
+    const cards = [
+      ["Streams", num(t.streams), d(t.streams, l.streams)],
+      ["Hours live", (+t.hours).toFixed(1), d(t.hours, l.hours, v => v.toFixed(1))],
+      ["Avg viewers", t.avg_viewers != null ? (+t.avg_viewers).toFixed(1) : "—", d(t.avg_viewers, l.avg_viewers, v => v.toFixed(1))],
+      ["Peak viewers", t.peak_viewers != null ? num(t.peak_viewers) : "—", d(t.peak_viewers, l.peak_viewers)],
+      ["Followers", signed(wk.followers), `<span class="d flat">${wk.followers == null ? "Needs a few days of readings" : "this week"}</span>`],
+      ["Subs", signed(wk.subs), `<span class="d flat">${wk.subs == null ? "Needs a few days of readings" : "this week"}</span>`],
+      ["Chatters", num(t.chatters), d(t.chatters, l.chatters)],
+      ["New chatters", num(t.new_chatters), d(t.new_chatters, l.new_chatters)],
+    ];
+    $("week-range").textContent = `${fmtDate(wk.from + "T12:00:00")} – ${fmtDate(wk.to + "T12:00:00")}`;
+    $("week").innerHTML = t.streams ? cards.map(([k, v, delta]) => `<div class="rc"><span class="k">${k}</span><span class="v">${v}</span>${delta}</div>`).join("")
+      : `<p class="empty-note">No streams in the last 7 days.</p>`;
+    const b = wk.best;
+    $("week-best").innerHTML = b ? `<p class="week-best">🏆 <b>Moment of the week:</b> <a href="v/${encodeURIComponent(b.id)}/?t=${Math.max(0, Math.floor(b.t - ((byId[b.id] && byId[b.id].offset) || 0)))}">${fmtTime(b.t)}</a> in “${esc(b.title)}”, chat hit ${b.x}× normal (${esc(b.words.join(" · "))})</p>` : "";
+    $("copy-recap").hidden = !t.streams;
+    $("copy-recap").onclick = async () => {
+      const lines = [`📊 itsmotch weekly recap (${fmtDate(wk.from + "T12:00:00")} – ${fmtDate(wk.to + "T12:00:00")})`,
+        `🎮 ${t.streams} stream${t.streams === 1 ? "" : "s"} · ${(+t.hours).toFixed(1)}h live`,
+        t.avg_viewers != null ? `👀 ${(+t.avg_viewers).toFixed(1)} avg viewers · peak ${t.peak_viewers}` : null,
+        wk.followers != null ? `💜 ${signed(wk.followers)} followers${wk.subs != null ? ` · ${signed(wk.subs)} subs` : ""}` : null,
+        `💬 ${t.chatters} chatters (${t.new_chatters} new) · ${num(t.messages)} messages`,
+        b ? `🏆 Moment of the week: ${new URL(`v/${b.id}/?t=${Math.floor(b.t)}`, location.href).href}` : null,
+        `📺 VODs: ${new URL("./", location.href).href}`].filter(Boolean);
+      try { await navigator.clipboard.writeText(lines.join("\n")); $("copy-recap").textContent = "Copied ✓"; }
+      catch { prompt("Copy this recap:", lines.join("\n")); }
+      setTimeout(() => ($("copy-recap").textContent = "Copy recap"), 2000);
+    };
+  } else $("week-panel").hidden = true;
+
+  // ===== COMMUNITY: greet =====
+  const g = s.greet;
+  const chip = c => `<span class="greet-chip" title="${num(c.messages)} message${c.messages === 1 ? "" : "s"} last stream"><b style="color:${esc(c.color ? readable(c.color) : "var(--text)")}">${esc(c.name)}</b><small>${num(c.messages)}</small></span>`;
+  if (g) {
+    $("greet-sub").textContent = g.title ? `From “${g.title.slice(0, 50)}”` : "";
+    const groups = [];
+    if (g.first_time.length) groups.push([g.first_stream ? "Everyone who chatted (your first saved stream)" : "First-time chatters", g.first_time]);
+    if (g.back.length) groups.push(["Back after a break", g.back]);
+    if (s.lapsed.length) groups.push(["Regulars who went quiet", s.lapsed.map(x => ({ name: x.name, color: "", messages: 0 }))]);
+    $("greet").innerHTML = groups.length ? groups.map(([h, list]) => `<h3>${h} <span class="sub">(${list.length})</span></h3><div class="greet-list">${list.map(chip).join("")}</div>`).join("")
+      : `<p class="empty-note">Nobody new last stream.</p>`;
+    $("greet").querySelectorAll(".greet-list").forEach((el, i) => { if (groups[i] && groups[i][0].startsWith("Regulars")) el.querySelectorAll("small").forEach(x => x.remove()); });
+  } else $("greet-panel").hidden = true;
+
   // ===== OVERVIEW: insights =====
   const off = Math.round(-new Date().getTimezoneOffset() / 60);
   const localize = txt => esc(txt)
@@ -415,7 +469,11 @@ function emptyBlock(el, msg = "Not enough data yet.") { el.outerHTML = `<p class
       $("clips").innerHTML = s.moments[id].slice().sort((a, b) => b.x - a.x).map(m => {
         const t = Math.max(0, Math.floor(m.t - ((v && v.offset) || 0)));
         const time = v ? `<a class="time" href="v/${encodeURIComponent(id)}/?t=${t}">${fmtTime(m.t)}</a>` : `<span class="time">${fmtTime(m.t)}</span>`;
-        return `<div class="clip">${time}<div class="words"><span class="tag">${TAG_LABEL[m.tag] || m.tag}</span>${esc(m.words.join(" · "))}</div><span class="x">${m.x}× normal</span></div>`;
+        const tt = Math.max(0, Math.floor(m.t)), twitchT = `${Math.floor(tt / 3600)}h${Math.floor(tt % 3600 / 60)}m${tt % 60}s`;
+        return `<div class="clip">${time}<div class="words"><span class="tag">${TAG_LABEL[m.tag] || m.tag}</span>${esc(m.words.join(" · "))}</div>
+          <span class="x">${m.x}× normal</span>
+          <a class="clip-btn" href="https://www.twitch.tv/videos/${encodeURIComponent(id)}?t=${twitchT}" target="_blank" rel="noopener"
+            title="Opens your Twitch VOD at this moment. Use Twitch's Clip button there (works until Twitch deletes the VOD).">Clip on Twitch ↗</a></div>`;
       }).join("") + (v ? "" : `<p class="hint">Links work once this stream's YouTube upload is matched.</p>`);
     };
     sel.addEventListener("change", showClips);
