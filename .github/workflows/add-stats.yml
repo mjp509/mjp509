@@ -1,0 +1,46 @@
+name: Add past stream stats
+
+on:
+  workflow_dispatch:
+    inputs:
+      stream:
+        description: Twitch VOD link or ID (blank = most recent saved stream)
+        required: false
+      avg:
+        description: Average viewers (from Twitch Stream Summary)
+        required: false
+      peak:
+        description: Peak viewers
+        required: false
+      followers:
+        description: Followers gained
+        required: false
+
+permissions:
+  contents: write
+
+concurrency: vod-data
+
+jobs:
+  add:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Save stats
+        env:
+          STREAM: ${{ inputs.stream }}
+          AVG: ${{ inputs.avg }}
+          PEAK: ${{ inputs.peak }}
+          FOLLOWERS: ${{ inputs.followers }}
+        run: |
+          python3 vods/scripts/add_manual.py --stream "$STREAM" --avg "$AVG" --peak "$PEAK" --followers "$FOLLOWERS"
+          python3 vods/scripts/stats.py
+
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add vods/insights vods/site/data
+          git commit -m "Add past stream stats" || exit 0
+          git push

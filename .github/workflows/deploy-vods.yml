@@ -5,7 +5,7 @@ on:
     branches: [main]
     paths: ["vods/site/**"]
   workflow_run:
-    workflows: ["Add VOD", "Sync VODs"]
+    workflows: ["Add VOD", "Sync VODs", "Add past stream stats"]
     types: [completed]
     branches: [main]
   workflow_dispatch:

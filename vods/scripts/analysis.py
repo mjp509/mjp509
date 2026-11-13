@@ -3,7 +3,7 @@ import statistics
 from datetime import datetime, timedelta, timezone
 
 import vodlib
-from insights import FOL, LAND, LIVE
+from insights import DIR, FOL, LAND, LIVE
 
 FMT = "%Y-%m-%dT%H:%M:%SZ"
 # key, label, higher is better
@@ -56,11 +56,20 @@ def link_live(per_stream, live):
 
 def enrich(per_stream, live_by_id):
     curves = {}
+    manual = vodlib.load(DIR / "manual.json", {})
     for i, r in enumerate(per_stream):
         r["hours"] = round(r["duration"] / 3600, 2)
         r["return_rate"] = round(100 * r["returning"] / r["chatters"], 1) if r["chatters"] and i > 0 else None
         link = live_by_id.get(r["id"])
         if not link:
+            man = manual.get(r["id"])
+            if man:
+                for k in ("avg_viewers", "peak_viewers", "followers_gained"):
+                    if man.get(k) is not None:
+                        r[k] = man[k]
+                if r.get("avg_viewers") is not None:
+                    r["viewer_hours"] = round(r["avg_viewers"] * r["duration"] / 3600, 1)
+                r["manual"] = True
             continue
         start, st = link
         pts = sorted((ts(t), v) for t, v, _ in st["samples"])

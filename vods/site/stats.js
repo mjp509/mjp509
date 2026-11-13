@@ -279,9 +279,10 @@ function emptyBlock(el, msg = "Not enough data yet.") { el.outerHTML = `<p class
       [st.viewer_hours != null ? num(st.viewer_hours) : "—", "Hours watched"], [fmtMetric("followers_gained", st.followers_gained), "Followers gained"], [fmtMetric("cat_top_pct", st.cat_top_pct), "Category rank"],
       [fmtMetric("mpm", st.mpm), "Msgs / min"], [num(st.chatters), "Chatters"], [num(st.new), "New chatters"], [fmtMetric("hours", st.hours), "Length"],
     ].map(([v, k]) => `<div><b>${v}</b><span>${k}</span></div>`).join("");
+    $("stream-manual").hidden = !st.manual;
     const v = byId[id], markers = ((v && v.chapters) || []).map(c => [c.t / 60, c.game]);
     if (!curve || !timeChart($("curve-viewers"), curve.viewers, { xmax, markers,
-      tipFn: p => `<b>${fmtTime(p[0] * 60)}</b>${p[1]} viewers` })) empty($("curve-viewers"), "No viewer data for this stream. Tracking records streams from now on.");
+      tipFn: p => `<b>${fmtTime(p[0] * 60)}</b>${p[1]} viewers` })) empty($("curve-viewers"), st.manual ? "No viewer curve: this stream's numbers were entered by hand." : "No viewer data for this stream. Tracking records streams from now on. For older streams, use Actions → Add past stream stats.");
     const ranks = curve ? curve.rank.filter(r => r[1]) : [];
     $("rank-wrap").hidden = !ranks.length;
     if (ranks.length) timeChart($("curve-rank"), ranks.map(r => [r[0], r[1], r[2], r[3]]), { xmax, kind: "line", invert: true, markers,
