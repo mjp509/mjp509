@@ -36,7 +36,7 @@ const log = document.getElementById("log");
 const status = document.getElementById("chat-status");
 
 function colorFor(name, color) {
-  if (color) return color;
+  if (color) return readable(color);
   let h = 0;
   for (const c of name) h = (h * 31 + c.charCodeAt(0)) | 0;
   return FALLBACK_COLORS[Math.abs(h) % FALLBACK_COLORS.length];

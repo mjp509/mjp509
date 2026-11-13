@@ -26,14 +26,14 @@ async function loadVods() {
   return r.ok ? r.json() : [];
 }
 
-(async () => {
-  let avatar = "https://unavatar.io/twitch/itsmotch";
-  try {
-    const r = await fetch("data/channel.json", { cache: "no-cache" });
-    if (r.ok) avatar = (await r.json()).avatar || avatar;
-  } catch {}
-  const img = document.getElementById("avatar");
-  if (img) { img.onerror = () => img.remove(); img.src = avatar; }
-  const fav = document.getElementById("favicon");
-  if (fav) fav.href = avatar;
-})();
+
+function readable(color) {
+  const m = /^#?([0-9a-f]{6})$/i.exec(color || "");
+  if (!m) return color;
+  let [r, g, b] = [0, 2, 4].map(i => parseInt(m[1].slice(i, i + 2), 16));
+  const lum = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+  if (lum >= 0.5) return "#" + m[1];
+  const t = Math.min(1, (0.5 - lum) * 1.6 + 0.25);
+  [r, g, b] = [r, g, b].map(c => Math.round(c + (255 - c) * t));
+  return `rgb(${r},${g},${b})`;
+}

@@ -30,8 +30,11 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.workflow_run.head_branch || github.ref }}
+      - id: pages
+        uses: actions/configure-pages@v5
       - run: python3 vods/scripts/pages.py
-      - uses: actions/configure-pages@v5
+        env:
+          SITE_URL: ${{ steps.pages.outputs.base_url }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: vods/site
