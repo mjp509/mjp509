@@ -74,6 +74,8 @@ def main():
     if channel.get("avatar"):
         bake_avatar(channel["avatar"])
     site = os.environ.get("SITE_URL", "").rstrip("/")
+    if site.startswith("http://"):  # Pages reports http even with Enforce HTTPS on
+        site = "https://" + site[len("http://"):]
     template = (SITE / "vod.html").read_text(encoding="utf-8")
     vods = vodlib.load(vodlib.VODS, [])
     for v in vods:
