@@ -17,6 +17,8 @@ METRICS = [
     ("chatters", "Unique chatters", True),
     ("new", "New chatters", True),
     ("return_rate", "Returning chatters %", True),
+    ("engagement", "Chatters per viewer", True),
+    ("follow_rate", "Followers per 10h watched", True),
     ("hours", "Stream length (h)", None),
 ]
 
@@ -93,6 +95,11 @@ def enrich(per_stream, live_by_id):
             "viewers": [[round((t - start).total_seconds() / 60, 1), v] for t, v in pts],
             "rank": [[round((ts(c[0]) - start).total_seconds() / 60, 1), c[2], c[3], c[1]] for c in st["cat"]],
         }
+    for r in per_stream:  # ratios Twitch's Stream Summary doesn't show
+        if r.get("avg_viewers"):
+            r["engagement"] = round(r["chatters"] / r["avg_viewers"], 2)
+        if r.get("followers_gained") is not None and r.get("viewer_hours"):
+            r["follow_rate"] = round(10 * r["followers_gained"] / r["viewer_hours"], 2)
     return curves
 
 
@@ -202,11 +209,19 @@ def counts_history(idx):
     return {"current": now_n, "as_of": now_d, "history": pts, "d7": change(7), "d30": change(30)}
 
 
-def build(per_stream, present, news):
+def build(per_stream, present, news, lapsed=(), moments=None):
     live, land = vodlib.load(LIVE, {"streams": {}}), vodlib.load(LAND, {"games": {}})
     live_by_id = link_live(per_stream, live)
     curves = enrich(per_stream, live_by_id)
     by_game, peers = category(live)
+    land_list = landscape(land)
+    ret = retention(per_stream, present, news)
+    try:
+        import advice
+        tips = advice.build(per_stream, curves, live, by_game, peers, land_list, ret, list(lapsed), moments or {})
+    except Exception as e:
+        print(f"::warning::advice skipped: {e}")
+        tips = []
     starts = sorted(live.get("streams", {}))
     trend_keys = [k for k, _, _ in METRICS]
     return {
@@ -217,11 +232,12 @@ def build(per_stream, present, news):
         "trends": [{"id": r["id"], "date": r["date"], "title": r["title"], **{k: r.get(k) for k in trend_keys}}
                    for r in per_stream],
         "curves": curves,
-        "retention": retention(per_stream, present, news),
+        "retention": ret,
+        "advice": tips,
         "regulars_30d": regulars(per_stream, present),
         "category": by_game,
         "peers": peers,
-        "landscape": landscape(land),
+        "landscape": land_list,
         "followers": counts_history(1),
         "subs": counts_history(2),
     }
