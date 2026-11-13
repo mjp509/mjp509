@@ -14,15 +14,15 @@
     podium.innerHTML = m.top.length ? m.top.map((c, k) => `
       <div class="place p${k + 1}">
         <div class="rank">${RANK[k]}</div>
-        ${c.emote ? `<img class="fav" src="${(EMOTE[c.emote.src] || EMOTE.t)(encodeURIComponent(c.emote.id))}" alt="${esc(c.emote.name)}" title="Favorite emote: ${esc(c.emote.name)}">` : ""}
+        ${c.emote ? emoteLink(c.emote.src, c.emote.id, `<img class="fav" src="${(EMOTE[c.emote.src] || EMOTE.t)(encodeURIComponent(c.emote.id))}" alt="${esc(c.emote.name)}" title="Favorite emote: ${esc(c.emote.name)}">`) : ""}
         <div class="who" style="color:${esc(c.color ? readable(c.color) : "var(--text)")}">${esc(c.name)}</div>
         <div class="cnt">${c.messages.toLocaleString()} messages</div>
       </div>`).join("") : `<p class="none">No chat yet this month.</p>`;
     const e = m.emote, wrap = document.getElementById("eotm-wrap");
     wrap.hidden = !e;
     if (e) document.getElementById("eotm").innerHTML = `
-      <img src="https://cdn.7tv.app/emote/${encodeURIComponent(e.id)}/4x.webp" alt="${esc(e.name)}">
-      <div class="who">${esc(e.name)}</div>
+      ${emoteLink("7", e.id, `<img src="https://cdn.7tv.app/emote/${encodeURIComponent(e.id)}/4x.webp" alt="${esc(e.name)}" title="View on 7TV">`)}
+      <div class="who">${emoteLink("7", e.id, esc(e.name))}</div>
       <div class="cnt">${e.uses.toLocaleString()} uses</div>`;
     prev.disabled = i >= months.length - 1;
     next.disabled = i === 0;

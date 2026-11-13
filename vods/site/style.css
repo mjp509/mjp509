@@ -54,6 +54,9 @@ main { max-width: 1400px; margin: 0 auto; padding: 20px; }
 .toast.action { display: flex; align-items: center; gap: 12px; }
 .toast.action[hidden] { display: none; }
 .toast button { background: var(--panel-2); color: var(--text); border: 1px solid var(--line); border-radius: 6px; padding: 5px 10px; font: inherit; font-size: 13px; cursor: pointer; }
+a.emote-link { display: inline-block; border-radius: 6px; transition: transform .1s ease; }
+a.emote-link:hover { transform: scale(1.15); }
+.eotm .who a.emote-link:hover, .chips a.emote-link:hover { transform: none; text-decoration: underline; }
 .modal { position: fixed; inset: 0; z-index: 40; background: rgba(0,0,0,.8); display: grid; place-items: center; padding: 16px; }
 .modal[hidden] { display: none; }
 .modal-box { position: relative; width: min(1000px, 100%); }

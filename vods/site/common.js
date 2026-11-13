@@ -37,3 +37,8 @@ function readable(color) {
   [r, g, b] = [r, g, b].map(c => Math.round(c + (255 - c) * t));
   return `rgb(${r},${g},${b})`;
 }
+
+function emoteLink(src, id, inner) {
+  if (src !== "7" || !id) return inner;
+  return `<a class="emote-link" href="https://7tv.app/emotes/${encodeURIComponent(id)}" target="_blank" rel="noopener">${inner}</a>`;
+}

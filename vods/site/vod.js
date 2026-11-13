@@ -48,7 +48,7 @@ function msgHtml([t, name, color, body]) {
     if (!Array.isArray(p)) return esc(p);
     const [src, id, name = ""] = p.length === 1 ? ["t", p[0]] : p;
     const url = (EMOTE[src] || EMOTE.t)(encodeURIComponent(id));
-    return `<img src="${url}" alt="${esc(name)}" title="${esc(name)}">`;
+    return emoteLink(src, id, `<img src="${url}" alt="${esc(name)}" title="${esc(name)}">`);
   }).join("");
   return `<div class="msg"><span class="ts">${fmtTime(t)}</span><span class="name" style="color:${esc(colorFor(name, color))}">${esc(name)}</span>: ${text}</div>`;
 }
