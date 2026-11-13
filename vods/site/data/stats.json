@@ -4,7 +4,7 @@
       "live_streams": 0,
       "linked": 0,
       "since": null,
-      "folded_until": "2026-11-13T07:15:12Z"
+      "folded_until": "2026-11-13T07:30:58Z"
     },
     "metrics": [
       {
@@ -15,6 +15,16 @@
       {
         "key": "peak_viewers",
         "label": "Peak viewers",
+        "higher": true
+      },
+      {
+        "key": "followers_gained",
+        "label": "Followers gained",
+        "higher": true
+      },
+      {
+        "key": "subs_change",
+        "label": "Sub change",
         "higher": true
       },
       {
@@ -53,6 +63,42 @@
       "title": "🍔 gëek wën i want gëek all da timë 🍔 luh shmünk 🍔",
       "date": "2026-11-13T01:31:00Z",
       "metrics": [
+        {
+          "key": "avg_viewers",
+          "label": "Avg viewers",
+          "higher": true,
+          "value": 9.0,
+          "baseline": null,
+          "baseline_n": 0,
+          "delta_pct": null,
+          "place": 1,
+          "of": 1,
+          "best": false
+        },
+        {
+          "key": "peak_viewers",
+          "label": "Peak viewers",
+          "higher": true,
+          "value": 17,
+          "baseline": null,
+          "baseline_n": 0,
+          "delta_pct": null,
+          "place": 1,
+          "of": 1,
+          "best": false
+        },
+        {
+          "key": "followers_gained",
+          "label": "Followers gained",
+          "higher": true,
+          "value": 0,
+          "baseline": null,
+          "baseline_n": 0,
+          "delta_pct": null,
+          "place": 1,
+          "of": 1,
+          "best": false
+        },
         {
           "key": "mpm",
           "label": "Chat msgs / min",
@@ -108,8 +154,10 @@
         "id": "2927241555",
         "date": "2026-11-13T01:31:00Z",
         "title": "🍔 gëek wën i want gëek all da timë 🍔 luh shmünk 🍔",
-        "avg_viewers": null,
-        "peak_viewers": null,
+        "avg_viewers": 9.0,
+        "peak_viewers": 17,
+        "followers_gained": 0,
+        "subs_change": null,
         "cat_top_pct": null,
         "mpm": 2.5,
         "chatters": 18,
@@ -1308,7 +1356,28 @@
           ]
         ]
       }
-    ]
+    ],
+    "followers": {
+      "current": 284,
+      "as_of": "2026-11-13",
+      "history": [
+        [
+          "2026-11-13",
+          284
+        ]
+      ],
+      "d7": {
+        "gained": 0,
+        "since": "2026-11-13",
+        "full": false
+      },
+      "d30": {
+        "gained": 0,
+        "since": "2026-11-13",
+        "full": false
+      }
+    },
+    "subs": null
   },
   "overview": {
     "streams": 1,
@@ -1329,7 +1398,12 @@
       "new": 18,
       "returning": 0,
       "hours": 3.2,
-      "return_rate": null
+      "return_rate": null,
+      "avg_viewers": 9.0,
+      "peak_viewers": 17,
+      "followers_gained": 0,
+      "viewer_hours": 28.8,
+      "manual": true
     }
   ],
   "games": [
@@ -1848,8 +1922,8 @@
         "tag": "spike",
         "words": [
           "chovy",
-          "worlds",
-          "finally"
+          "title",
+          "mid"
         ]
       }
     ]
