@@ -154,7 +154,7 @@ def main():
 
     try:
         import analysis
-        extra = analysis.build(per_stream, present, news)
+        extra = analysis.build(per_stream, present, news, lapsed[:15], all_moments)
     except Exception as e:
         print(f"::warning::insights skipped: {e}")
         extra = None

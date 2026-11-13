@@ -15,7 +15,7 @@ function fmtMetric(key, v) {
   if (key === "cat_top_pct") return `Top ${v < 10 ? v.toFixed(1) : Math.round(v)}%`;
   if (key === "return_rate") return `${Math.round(v)}%`;
   if (key === "hours") return `${v.toFixed(1)}h`;
-  if (key === "avg_viewers" || key === "mpm") return (+v).toFixed(1);
+  if (key === "avg_viewers" || key === "mpm" || key === "engagement" || key === "follow_rate") return (+v).toFixed(1);
   if (key === "followers_gained" || key === "subs_change") return (v > 0 ? "+" : "") + num(Math.round(v));
   return num(Math.round(v));
 }
@@ -192,6 +192,25 @@ function emptyBlock(el, msg = "Not enough data yet.") { el.outerHTML = `<p class
     note.hidden = false;
   }
 
+  // ===== OVERVIEW: insights =====
+  const off = Math.round(-new Date().getTimezoneOffset() / 60);
+  const localize = txt => esc(txt)
+    .replace(/\[\[hour:(\d+)\]\]/g, (_, h) => hourLabel(((+h + off) % 24 + 24) % 24))
+    .replace(/\[\[slot:(\d+)\]\]/g, (_, n) => { const i = ((+n + off) % 168 + 168) % 168; return `${WEEK[Math.floor(i / 24)]} ${hourLabel(i % 24)}`; });
+  const adv = ins.advice || { tips: [], locked: [] };
+  $("advice").innerHTML = adv.tips.length ? adv.tips.map(t => `
+    <article class="tipcard">
+      <span class="tag">${esc(t.tag)}</span>
+      <h3>${localize(t.title)}</h3>
+      <p class="detail">${localize(t.detail)}</p>
+      <p class="todo"><b>Try:</b> ${localize(t.tip)}</p>
+      <div class="foot"><span>Based on ${esc(t.basis)}</span><a href="#${esc(t.tab)}">See the data →</a></div>
+    </article>`).join("")
+    : `<p class="empty-note">Insights appear as the site collects data from your streams. Each one needs a few streams to be sure it isn't a fluke.</p>`;
+  $("locked").innerHTML = adv.locked.length ? `<h3 class="locked-h">Unlocking as you stream</h3><div class="locked">${adv.locked.map(l => `
+    <div class="lk"><span>${esc(l.title)}</span><span class="bar"><i style="width:${Math.round(100 * l.have / l.need)}%"></i></span>
+      <span class="n">${num(l.have)}/${num(l.need)} ${esc(l.unit)}</span></div>`).join("")}</div>` : "";
+
   // ===== OVERVIEW =====
   const rep = ins.report;
   if (rep) {
@@ -228,7 +247,8 @@ function emptyBlock(el, msg = "Not enough data yet.") { el.outerHTML = `<p class
   const trends = ins.trends || [];
   let metric = "avg_viewers";
   if (!trends.some(t => t.avg_viewers != null)) metric = "chatters";
-  const HINTS = { subs_change: "Net change in your sub count between the start and end of each stream (new subs minus any that ended).", followers_gained: "Followers gained between the start and end of each stream.", cat_top_pct: "Lower is better: top 5% beats top 40%.", return_rate: "Share of each stream's chatters who had chatted before.", hours: "How long each stream ran." };
+  const HINTS = { engagement: "Different people who chatted, divided by your average viewers. Higher means more of your audience talks.",
+    follow_rate: "Followers gained for every 10 hours of watch time. Shows how well a stream turns viewers into followers.", subs_change: "Net change in your sub count between the start and end of each stream (new subs minus any that ended).", followers_gained: "Followers gained between the start and end of each stream.", cat_top_pct: "Lower is better: top 5% beats top 40%.", return_rate: "Share of each stream's chatters who had chatted before.", hours: "How long each stream ran." };
   const seg = $("metric-seg");
   seg.innerHTML = metrics.map(m => `<button data-k="${m.key}">${esc(m.label)}</button>`).join("");
   const drawTrend = () => {
