@@ -20,7 +20,7 @@ def get_json(url, headers=None, data=None):
     except urllib.error.HTTPError as e:
         host = urllib.parse.urlsplit(url).netloc
         body = e.read().decode("utf-8", "replace")[:300]
-        sys.exit(f"{host} refused the request (HTTP {e.code}): {body}")
+        raise RuntimeError(f"{host} refused the request (HTTP {e.code}): {body}") from None
 
 
 def load(path, default):

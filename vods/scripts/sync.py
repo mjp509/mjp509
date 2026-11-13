@@ -81,10 +81,20 @@ def match_youtube():
     if not pending:
         return
     key, channel = os.environ["YOUTUBE_API_KEY"].strip(), os.environ["YOUTUBE_CHANNEL_ID"].strip()
-    uploads = "UU" + channel[2:]
+    m = re.search(r"UC[A-Za-z0-9_-]{22}", channel)
+    if not m:
+        print(f"::warning::YOUTUBE_CHANNEL_ID should be the ID starting with UC (got {channel[:30]!r}). "
+              "Find it at youtube.com/account_advanced. Chat is saved; VODs publish once this is fixed.")
+        return
+    uploads = "UU" + m.group(0)[2:]
     url = ("https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50"
            f"&playlistId={uploads}&key={key}")
-    items = vodlib.get_json(url).get("items", [])
+    try:
+        items = vodlib.get_json(url).get("items", [])
+    except RuntimeError as e:
+        hint = " (channel ID wrong, or the channel has no uploads yet)" if "HTTP 404" in str(e) else ""
+        print(f"::warning::YouTube lookup failed{hint}: {e}. Chat is saved; VODs publish once YouTube works.")
+        return
     videos = sorted(({"id": i["snippet"]["resourceId"]["videoId"], "title": i["snippet"]["title"],
                       "at": i["snippet"]["publishedAt"]} for i in items), key=lambda x: x["at"])
     used = {v["youtube"] for v in vodlib.load(vodlib.VODS, [])}
@@ -108,7 +118,12 @@ def update_youtube_views():
     for i in range(0, len(ids), 50):
         url = ("https://www.googleapis.com/youtube/v3/videos?part=statistics"
                f"&id={','.join(ids[i:i + 50])}&key={os.environ['YOUTUBE_API_KEY'].strip()}")
-        for it in vodlib.get_json(url).get("items", []):
+        try:
+            found = vodlib.get_json(url).get("items", [])
+        except RuntimeError as e:
+            print(f"::warning::Couldn't refresh YouTube views: {e}")
+            return
+        for it in found:
             stats[it["id"]] = int(it.get("statistics", {}).get("viewCount", 0))
     for v in vods:
         if v.get("youtube") in stats:
