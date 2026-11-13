@@ -41,7 +41,8 @@ document.getElementById("continue-row").addEventListener("click", e => {
   const gameSel = document.getElementById("game");
   const count = document.getElementById("count");
   const sortBtns = document.querySelectorAll("#sort button");
-  let sort = "recent";
+  let sort = "recent", shown = 12;
+  const more = document.getElementById("more");
 
   const games = [...new Set(vods.flatMap(v => [v.game, ...(v.chapters || []).map(c => c.game)]).filter(Boolean))].sort();
   for (const g of games) gameSel.add(new Option(g, g));
@@ -55,7 +56,10 @@ document.getElementById("continue-row").addEventListener("click", e => {
     if (sort === "popular") list.sort((a, b) => views(b) - views(a) || (b.messages || 0) - (a.messages || 0));
     else list.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
 
-    count.textContent = `${list.length} stream${list.length === 1 ? "" : "s"}`;
+    more.hidden = list.length <= shown;
+    const total = list.length;
+    list.splice(shown);
+    count.textContent = `${total} stream${total === 1 ? "" : "s"}`;
     grid.innerHTML = list.length ? list.map(v => `
       <a class="card" href="v/${encodeURIComponent(v.id)}/">
         <div class="thumb shimmer">
@@ -80,7 +84,9 @@ document.getElementById("continue-row").addEventListener("click", e => {
     sortBtns.forEach(x => x.classList.toggle("active", x === b));
     render();
   }));
-  q.addEventListener("input", render);
-  gameSel.addEventListener("change", render);
+  const reset = () => { shown = 12; render(); };
+  q.addEventListener("input", reset);
+  gameSel.addEventListener("change", reset);
+  more.addEventListener("click", () => { shown += 12; render(); });
   render();
 })();
