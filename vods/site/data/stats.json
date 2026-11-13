@@ -4,7 +4,7 @@
       "live_streams": 0,
       "linked": 0,
       "since": null,
-      "folded_until": "2026-11-13T07:15:12Z"
+      "folded_until": "2026-11-13T07:30:58Z"
     },
     "metrics": [
       {
@@ -15,6 +15,16 @@
       {
         "key": "peak_viewers",
         "label": "Peak viewers",
+        "higher": true
+      },
+      {
+        "key": "followers_gained",
+        "label": "Followers gained",
+        "higher": true
+      },
+      {
+        "key": "subs_change",
+        "label": "Sub change",
         "higher": true
       },
       {
@@ -110,6 +120,8 @@
         "title": "🍔 gëek wën i want gëek all da timë 🍔 luh shmünk 🍔",
         "avg_viewers": null,
         "peak_viewers": null,
+        "followers_gained": null,
+        "subs_change": null,
         "cat_top_pct": null,
         "mpm": 2.5,
         "chatters": 18,
@@ -1308,7 +1320,28 @@
           ]
         ]
       }
-    ]
+    ],
+    "followers": {
+      "current": 284,
+      "as_of": "2026-11-13",
+      "history": [
+        [
+          "2026-11-13",
+          284
+        ]
+      ],
+      "d7": {
+        "gained": 0,
+        "since": "2026-11-13",
+        "full": false
+      },
+      "d30": {
+        "gained": 0,
+        "since": "2026-11-13",
+        "full": false
+      }
+    },
+    "subs": null
   },
   "overview": {
     "streams": 1,
@@ -1848,7 +1881,7 @@
         "tag": "spike",
         "words": [
           "chovy",
-          "worlds",
+          "title",
           "finally"
         ]
       }
