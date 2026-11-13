@@ -1,0 +1,303 @@
+{
+  "overview": {
+    "streams": 1,
+    "hours": 3.2,
+    "messages": 480,
+    "chatters": 18,
+    "mpm": 2.5
+  },
+  "streams": [
+    {
+      "id": "2927241555",
+      "title": "🍔 gëek wën i want gëek all da timë 🍔 luh shmünk 🍔",
+      "date": "2026-11-13T01:31:00Z",
+      "duration": 11510,
+      "messages": 480,
+      "mpm": 2.5,
+      "chatters": 18,
+      "new": 18,
+      "returning": 0
+    }
+  ],
+  "games": [
+    {
+      "game": "PokeMMO",
+      "hours": 3.2,
+      "messages": 480,
+      "streams": 1,
+      "mpm": 2.5
+    }
+  ],
+  "by_hour": [
+    {
+      "hour": 0,
+      "mpm": 1.55,
+      "streams": 1
+    },
+    {
+      "hour": 1,
+      "mpm": 2.45,
+      "streams": 1
+    },
+    {
+      "hour": 2,
+      "mpm": 3.18,
+      "streams": 1
+    }
+  ],
+  "top_chatters": [
+    {
+      "name": "nightwind02",
+      "messages": 207,
+      "streams": 1
+    },
+    {
+      "name": "febasnotmilotic",
+      "messages": 67,
+      "streams": 1
+    },
+    {
+      "name": "ewyoustink",
+      "messages": 41,
+      "streams": 1
+    },
+    {
+      "name": "highflyer03",
+      "messages": 28,
+      "streams": 1
+    },
+    {
+      "name": "smokemmo",
+      "messages": 24,
+      "streams": 1
+    },
+    {
+      "name": "cokeknife",
+      "messages": 22,
+      "streams": 1
+    },
+    {
+      "name": "rdaniii",
+      "messages": 15,
+      "streams": 1
+    },
+    {
+      "name": "zdammers03",
+      "messages": 13,
+      "streams": 1
+    },
+    {
+      "name": "lilyzillasaurus",
+      "messages": 9,
+      "streams": 1
+    },
+    {
+      "name": "buhomb",
+      "messages": 6,
+      "streams": 1
+    },
+    {
+      "name": "drexsteina",
+      "messages": 5,
+      "streams": 1
+    },
+    {
+      "name": "gymrerun",
+      "messages": 5,
+      "streams": 1
+    },
+    {
+      "name": "huntressclairice",
+      "messages": 3,
+      "streams": 1
+    },
+    {
+      "name": "leonunez96",
+      "messages": 3,
+      "streams": 1
+    },
+    {
+      "name": "breezyrs",
+      "messages": 3,
+      "streams": 1
+    },
+    {
+      "name": "cabbage363",
+      "messages": 2,
+      "streams": 1
+    },
+    {
+      "name": "magicalseed",
+      "messages": 1,
+      "streams": 1
+    },
+    {
+      "name": "csixtythree04",
+      "messages": 1,
+      "streams": 1
+    }
+  ],
+  "lapsed": [],
+  "emotes": [
+    {
+      "src": "7",
+      "id": "01FP8VKKG8000EJT2EVEY3JR0Q",
+      "name": "burger",
+      "count": 7
+    },
+    {
+      "src": "7",
+      "id": "01HMBMJPV0000D32KQCYBK4S1D",
+      "name": "aga",
+      "count": 6
+    },
+    {
+      "src": "7",
+      "id": "01F61B1440000991F7SWQNMVX7",
+      "name": "KEKW",
+      "count": 5
+    },
+    {
+      "src": "7",
+      "id": "01FWS83HG0000ASC1GQNZR38QV",
+      "name": "ong",
+      "count": 4
+    },
+    {
+      "src": "7",
+      "id": "01JJ0D0C2XWZ640NP4WJKB8MYX",
+      "name": "cooked",
+      "count": 4
+    },
+    {
+      "src": "7",
+      "id": "01J96N7ERG0009MAMR2DZMJX8W",
+      "name": "KeepYourselfSafe",
+      "count": 3
+    },
+    {
+      "src": "7",
+      "id": "01G1M77D4R0004YN3NKDRR9YKJ",
+      "name": "ok",
+      "count": 3
+    },
+    {
+      "src": "7",
+      "id": "01KBRTYG51TZFSJEG1YQNHBYTA",
+      "name": "peak",
+      "count": 3
+    },
+    {
+      "src": "7",
+      "id": "01HQ5S4MW80008FKJ26EWGDFW9",
+      "name": "oh",
+      "count": 3
+    },
+    {
+      "src": "7",
+      "id": "01G1N8W84800087QC0373CF714",
+      "name": "wtf",
+      "count": 3
+    },
+    {
+      "src": "7",
+      "id": "01GX9P3ZT0000F30TNHG4JCVDY",
+      "name": "fire",
+      "count": 3
+    },
+    {
+      "src": "7",
+      "id": "01H4R91D18000DJFJ3EESSP8NT",
+      "name": "motch",
+      "count": 3
+    },
+    {
+      "src": "t",
+      "id": "425618",
+      "name": "LUL",
+      "count": 2
+    },
+    {
+      "src": "7",
+      "id": "01K1Z1TGNZP1TYMNXKPJ9F7XQP",
+      "name": "agaburger",
+      "count": 2
+    },
+    {
+      "src": "7",
+      "id": "01GJMQHD7R000AQETVA6HTME88",
+      "name": "cheersmyfriends",
+      "count": 2
+    },
+    {
+      "src": "7",
+      "id": "01GPVSKM28000EENPRWMPTW9KY",
+      "name": "deal",
+      "count": 2
+    },
+    {
+      "src": "t",
+      "id": "1",
+      "name": ":)",
+      "count": 2
+    },
+    {
+      "src": "7",
+      "id": "01FZ975PV8000B4AWRZNMVNEXN",
+      "name": "LOL",
+      "count": 2
+    },
+    {
+      "src": "7",
+      "id": "01FJQVA3KR000BDMGTVBZVY677",
+      "name": "AlienPls3",
+      "count": 2
+    },
+    {
+      "src": "7",
+      "id": "01FS5ZCFG0000500DPPCXJWCP8",
+      "name": "o7",
+      "count": 2
+    },
+    {
+      "src": "7",
+      "id": "01KJ1K7SM3J0R0DM8HDRH5FKPQ",
+      "name": "agaFat",
+      "count": 2
+    },
+    {
+      "src": "7",
+      "id": "01GQFT1WF80002Q9KS8SKQMHHY",
+      "name": "buh",
+      "count": 1
+    },
+    {
+      "src": "7",
+      "id": "01FF3R5C30000FF5VVCKV49G6J",
+      "name": "xdd",
+      "count": 1
+    },
+    {
+      "src": "7",
+      "id": "01JSMQ8H7CR95FNN6ZYRE8T5BM",
+      "name": "agafat",
+      "count": 1
+    }
+  ],
+  "unused_7tv": [],
+  "moments": {
+    "2927241555": [
+      {
+        "t": 9350,
+        "x": 8.0,
+        "count": 8,
+        "tag": "spike",
+        "words": [
+          "chovy",
+          "get",
+          "finally"
+        ]
+      }
+    ]
+  }
+}
