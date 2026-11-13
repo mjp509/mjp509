@@ -1,6 +1,8 @@
 import json
 import re
 import sys
+import urllib.error
+import urllib.parse
 import urllib.request
 from pathlib import Path
 
@@ -12,8 +14,13 @@ PENDING = ROOT / "pending.json"
 
 def get_json(url, headers=None, data=None):
     req = urllib.request.Request(url, data=data, headers={"User-Agent": "vod-site", **(headers or {})})
-    with urllib.request.urlopen(req, timeout=30) as r:
-        return json.load(r)
+    try:
+        with urllib.request.urlopen(req, timeout=30) as r:
+            return json.load(r)
+    except urllib.error.HTTPError as e:
+        host = urllib.parse.urlsplit(url).netloc
+        body = e.read().decode("utf-8", "replace")[:300]
+        sys.exit(f"{host} refused the request (HTTP {e.code}): {body}")
 
 
 def load(path, default):

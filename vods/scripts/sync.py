@@ -16,7 +16,7 @@ TDL = os.environ.get("TDL", "TwitchDownloaderCLI")
 
 
 def twitch():
-    cid, secret = os.environ["TWITCH_CLIENT_ID"], os.environ["TWITCH_CLIENT_SECRET"]
+    cid, secret = os.environ["TWITCH_CLIENT_ID"].strip(), os.environ["TWITCH_CLIENT_SECRET"].strip()
     q = urllib.parse.urlencode({"client_id": cid, "client_secret": secret, "grant_type": "client_credentials"})
     token = vodlib.get_json(f"https://id.twitch.tv/oauth2/token?{q}", data=b"")["access_token"]
     h = {"Client-ID": cid, "Authorization": f"Bearer {token}"}
@@ -80,7 +80,7 @@ def match_youtube():
     pending = sorted(vodlib.load(vodlib.PENDING, []), key=lambda p: p["date"])
     if not pending:
         return
-    key, channel = os.environ["YOUTUBE_API_KEY"], os.environ["YOUTUBE_CHANNEL_ID"]
+    key, channel = os.environ["YOUTUBE_API_KEY"].strip(), os.environ["YOUTUBE_CHANNEL_ID"].strip()
     uploads = "UU" + channel[2:]
     url = ("https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50"
            f"&playlistId={uploads}&key={key}")
@@ -107,7 +107,7 @@ def update_youtube_views():
     stats = {}
     for i in range(0, len(ids), 50):
         url = ("https://www.googleapis.com/youtube/v3/videos?part=statistics"
-               f"&id={','.join(ids[i:i + 50])}&key={os.environ['YOUTUBE_API_KEY']}")
+               f"&id={','.join(ids[i:i + 50])}&key={os.environ['YOUTUBE_API_KEY'].strip()}")
         for it in vodlib.get_json(url).get("items", []):
             stats[it["id"]] = int(it.get("statistics", {}).get("viewCount", 0))
     for v in vods:
