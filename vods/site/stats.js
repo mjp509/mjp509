@@ -5,7 +5,7 @@ const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const WEEK = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const EMOTE_URL = { t: id => `https://static-cdn.jtvnw.net/emoticons/v2/${id}/default/dark/2.0`, "7": id => `https://cdn.7tv.app/emote/${id}/2x.webp` };
 const NS = "http://www.w3.org/2000/svg";
-const VIEWER_KEYS = ["avg_viewers", "peak_viewers", "cat_top_pct", "followers_gained"];
+const VIEWER_KEYS = ["avg_viewers", "peak_viewers", "cat_top_pct", "followers_gained", "subs_change"];
 const ordinal = n => n + (["th", "st", "nd", "rd"][(n % 100 - 20) % 10] || ["th", "st", "nd", "rd"][n % 100] || "th");
 const hourLabel = h => `${(h % 12) || 12}${h < 12 ? "am" : "pm"}`;
 const shortDate = d => new Date(d).toLocaleDateString(undefined, { month: "numeric", day: "numeric" });
@@ -16,7 +16,7 @@ function fmtMetric(key, v) {
   if (key === "return_rate") return `${Math.round(v)}%`;
   if (key === "hours") return `${v.toFixed(1)}h`;
   if (key === "avg_viewers" || key === "mpm") return (+v).toFixed(1);
-  if (key === "followers_gained") return (v > 0 ? "+" : "") + num(Math.round(v));
+  if (key === "followers_gained" || key === "subs_change") return (v > 0 ? "+" : "") + num(Math.round(v));
   return num(Math.round(v));
 }
 
@@ -201,7 +201,9 @@ function emptyBlock(el, msg = "Not enough data yet.") { el.outerHTML = `<p class
     $("report").innerHTML = metrics.map(({ key, label, higher }) => {
       const m = rows[key];
       if (!m) {
-        const why = key === "followers_gained" && !ins.followers ? "Needs the Twitch follower sign-in" : VIEWER_KEYS.includes(key) ? "Recorded from your next stream" : "—";
+        const why = key === "followers_gained" && !ins.followers ? "Needs the Twitch follower sign-in"
+          : key === "subs_change" && !ins.subs ? "Needs the Twitch sign-in with the subs permission"
+          : VIEWER_KEYS.includes(key) ? "Recorded from your next stream" : "—";
         return `<div class="rc missing"><span class="k">${esc(label)}</span><span class="v">${why}</span></div>`;
       }
       let delta = "";
@@ -215,9 +217,10 @@ function emptyBlock(el, msg = "Not enough data yet.") { el.outerHTML = `<p class
       return `<div class="rc"><span class="k">${esc(label)}</span><span class="v">${fmtMetric(key, m.value)}</span>${delta}${place}${best}</div>`;
     }).join("");
   }
-  const o = s.overview, fol = ins.followers;
+  const o = s.overview, fol = ins.followers, subs = ins.subs;
   const folTile = fol ? [[num(fol.current), `Followers<br><span class="chg">${fol.d30.gained >= 0 ? "+" : ""}${num(fol.d30.gained)} ${fol.d30.full ? "in 30 days" : "since " + shortDate(fol.d30.since + "T12:00:00")}</span>`]] : [];
-  $("tiles").innerHTML = [...folTile, [num(o.streams), "Streams saved"], [num(o.hours), "Hours streamed"], [num(o.messages), "Chat messages"],
+  const subTile = subs ? [[num(subs.current), `Subscribers<br><span class="chg">${subs.d30.gained >= 0 ? "+" : ""}${num(subs.d30.gained)} ${subs.d30.full ? "in 30 days" : "since " + shortDate(subs.d30.since + "T12:00:00")}</span>`]] : [];
+  $("tiles").innerHTML = [...folTile, ...subTile, [num(o.streams), "Streams saved"], [num(o.hours), "Hours streamed"], [num(o.messages), "Chat messages"],
     [num(o.chatters), "Unique chatters"], [o.mpm, "Avg messages / min"]]
     .map(([v, k]) => `<div class="tile"><div class="v">${v}</div><div class="k">${k}</div></div>`).join("");
 
@@ -225,7 +228,7 @@ function emptyBlock(el, msg = "Not enough data yet.") { el.outerHTML = `<p class
   const trends = ins.trends || [];
   let metric = "avg_viewers";
   if (!trends.some(t => t.avg_viewers != null)) metric = "chatters";
-  const HINTS = { followers_gained: "Followers gained between the start and end of each stream.", cat_top_pct: "Lower is better: top 5% beats top 40%.", return_rate: "Share of each stream's chatters who had chatted before.", hours: "How long each stream ran." };
+  const HINTS = { subs_change: "Net change in your sub count between the start and end of each stream (new subs minus any that ended).", followers_gained: "Followers gained between the start and end of each stream.", cat_top_pct: "Lower is better: top 5% beats top 40%.", return_rate: "Share of each stream's chatters who had chatted before.", hours: "How long each stream ran." };
   const seg = $("metric-seg");
   seg.innerHTML = metrics.map(m => `<button data-k="${m.key}">${esc(m.label)}</button>`).join("");
   const drawTrend = () => {
@@ -236,13 +239,17 @@ function emptyBlock(el, msg = "Not enough data yet.") { el.outerHTML = `<p class
   };
   seg.addEventListener("click", e => { const b = e.target.closest("button"); if (b) { metric = b.dataset.k; drawTrend(); } });
   onTab("trends", drawTrend);
-  onTab("trends", () => {
-    const el = $("fol-chart");
-    if (!fol) { $("fol-sub").textContent = ""; return empty(el, "Needs the Twitch follower sign-in. Once it's set up, your follower count is recorded hourly."); }
+  const countChart = (data, elId, subId, noun, needMsg) => {
+    const el = $(elId);
+    if (!data) { $(subId).textContent = ""; return empty(el, needMsg); }
     const chg = (c, d) => `${c.gained >= 0 ? "+" : ""}${num(c.gained)} ${c.full ? `in ${d} days` : "since " + shortDate(c.since + "T12:00:00")}`;
-    $("fol-sub").textContent = `${num(fol.current)} followers · ${chg(fol.d7, 7)}${fol.d30.full || fol.d7.full ? " · " + chg(fol.d30, 30) : ""}`;
-    if (!dateLine(el, fol.history, (p, prev) => `<b>${new Date(p[0] + "T12:00:00").toLocaleDateString()}</b>${num(p[1])} followers${prev ? `<br>${p[1] - prev[1] >= 0 ? "+" : ""}${p[1] - prev[1]} from the day before` : ""}`))
-      empty(el, "Collecting. The chart appears after a couple of days of follower readings.");
+    $(subId).textContent = `${num(data.current)} ${noun} · ${chg(data.d7, 7)}${data.d30.full || data.d7.full ? " · " + chg(data.d30, 30) : ""}`;
+    if (!dateLine(el, data.history, (p, prev) => `<b>${new Date(p[0] + "T12:00:00").toLocaleDateString()}</b>${num(p[1])} ${noun}${prev ? `<br>${p[1] - prev[1] >= 0 ? "+" : ""}${p[1] - prev[1]} from the day before` : ""}`))
+      empty(el, "Collecting. The chart appears after a couple of days of readings.");
+  };
+  onTab("trends", () => {
+    countChart(fol, "fol-chart", "fol-sub", "followers", "Needs the Twitch follower sign-in. Once it's set up, your follower count is recorded hourly.");
+    countChart(subs, "subs-chart", "subs-sub", "subs", "Needs the Twitch sign-in with the subscriptions permission. Once it's set up, your sub count is recorded hourly.");
   });
 
   let patternsDone = false;
@@ -276,7 +283,7 @@ function emptyBlock(el, msg = "Not enough data yet.") { el.outerHTML = `<p class
     const xmax = Math.max(1, st.duration / 60);
     $("stream-tiles").innerHTML = [
       [fmtMetric("avg_viewers", st.avg_viewers), "Avg viewers"], [fmtMetric("peak_viewers", st.peak_viewers), "Peak viewers"],
-      [st.viewer_hours != null ? num(st.viewer_hours) : "—", "Hours watched"], [fmtMetric("followers_gained", st.followers_gained), "Followers gained"], [fmtMetric("cat_top_pct", st.cat_top_pct), "Category rank"],
+      [st.viewer_hours != null ? num(st.viewer_hours) : "—", "Hours watched"], [fmtMetric("followers_gained", st.followers_gained), "Followers gained"], [fmtMetric("subs_change", st.subs_change), "Sub change"], [fmtMetric("cat_top_pct", st.cat_top_pct), "Category rank"],
       [fmtMetric("mpm", st.mpm), "Msgs / min"], [num(st.chatters), "Chatters"], [num(st.new), "New chatters"], [fmtMetric("hours", st.hours), "Length"],
     ].map(([v, k]) => `<div><b>${v}</b><span>${k}</span></div>`).join("");
     $("stream-manual").hidden = !st.manual;

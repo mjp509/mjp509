@@ -11,6 +11,7 @@ METRICS = [
     ("avg_viewers", "Avg viewers", True),
     ("peak_viewers", "Peak viewers", True),
     ("followers_gained", "Followers gained", True),
+    ("subs_change", "Sub change", True),
     ("cat_top_pct", "Category rank (top %)", False),
     ("mpm", "Chat msgs / min", True),
     ("chatters", "Unique chatters", True),
@@ -84,6 +85,9 @@ def enrich(per_stream, live_by_id):
         if fl:
             r["followers_end"] = fl[-1][1]
             r["followers_gained"] = fl[-1][1] - fl[0][1] if len(fl) > 1 else None
+        sb = sorted(st.get("subs", []))
+        if len(sb) > 1:
+            r["subs_change"] = sb[-1][1] - sb[0][1]
         curves[r["id"]] = {
             "followers": [[round((ts(t) - start).total_seconds() / 60, 1), n] for t, n in fl],
             "viewers": [[round((t - start).total_seconds() / 60, 1), v] for t, v in pts],
@@ -182,11 +186,12 @@ def landscape(land):
     return out
 
 
-def followers():
+def counts_history(idx):
+    """Daily series for followers (idx 1) or subs (idx 2) with 7/30-day change."""
     days = sorted(vodlib.load(FOL, {"days": {}})["days"].items())
-    if not days:
+    pts = [[d, v[idx]] for d, v in days if len(v) > idx and v[idx] is not None]
+    if not pts:
         return None
-    pts = [[d, n] for d, (_, n) in days]
     now_d, now_n = pts[-1]
 
     def change(days_back):
@@ -217,5 +222,6 @@ def build(per_stream, present, news):
         "category": by_game,
         "peers": peers,
         "landscape": landscape(land),
-        "followers": followers(),
+        "followers": counts_history(1),
+        "subs": counts_history(2),
     }
