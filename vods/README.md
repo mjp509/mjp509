@@ -9,7 +9,11 @@ Static VOD site: YouTube player + synced Twitch chat replay (with Twitch and 7TV
    - `TWITCH_CLIENT_ID`, `TWITCH_CLIENT_SECRET`: register an app at dev.twitch.tv/console (redirect URL `http://localhost`, category Website Integration).
    - `YOUTUBE_API_KEY`: console.cloud.google.com → new project → enable "YouTube Data API v3" → Credentials → API key.
    - `YOUTUBE_CHANNEL_ID`: starts with `UC`, shown at youtube.com/account_advanced.
-4. Custom domain: **Settings → Pages → Custom domain**.
+4. Custom domain: **Settings → Pages → Custom domain**, then at your registrar:
+   - Subdomain (e.g. `vods.itsmotch.com`): `CNAME vods → mjp509.github.io`
+   - Root domain (e.g. `itsmotch.com`): `A` records `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153` + `CNAME www → mjp509.github.io`
+   - On Cloudflare, set these records to **DNS only** (grey cloud).
+   - Once the check passes, tick **Enforce HTTPS**.
 
 ## After each stream
 Upload the VOD to YouTube as **Public** with the **same title** as on Twitch. That's it.
