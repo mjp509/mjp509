@@ -53,6 +53,16 @@
         "higher": true
       },
       {
+        "key": "engagement",
+        "label": "Chatters per viewer",
+        "higher": true
+      },
+      {
+        "key": "follow_rate",
+        "label": "Followers per 10h watched",
+        "higher": true
+      },
+      {
         "key": "hours",
         "label": "Stream length (h)",
         "higher": null
@@ -136,6 +146,30 @@
           "best": false
         },
         {
+          "key": "engagement",
+          "label": "Chatters per viewer",
+          "higher": true,
+          "value": 2.0,
+          "baseline": null,
+          "baseline_n": 0,
+          "delta_pct": null,
+          "place": 1,
+          "of": 1,
+          "best": false
+        },
+        {
+          "key": "follow_rate",
+          "label": "Followers per 10h watched",
+          "higher": true,
+          "value": 0.0,
+          "baseline": null,
+          "baseline_n": 0,
+          "delta_pct": null,
+          "place": 1,
+          "of": 1,
+          "best": false
+        },
+        {
           "key": "hours",
           "label": "Stream length (h)",
           "higher": null,
@@ -163,11 +197,77 @@
         "chatters": 18,
         "new": 18,
         "return_rate": null,
+        "engagement": 2.0,
+        "follow_rate": 0.0,
         "hours": 3.2
       }
     ],
     "curves": {},
     "retention": [],
+    "advice": {
+      "tips": [
+        {
+          "tag": "Clips",
+          "weight": 66,
+          "basis": "chat spikes in your last stream",
+          "title": "Your last stream has 1 clip-worthy moment",
+          "detail": "Biggest one at 2:35:50: chat hit 8.0× its normal pace.",
+          "tip": "Cut these into Shorts/TikToks. Clips are how most small streamers get discovered. All of them are in the Clips tab.",
+          "tab": "clips"
+        }
+      ],
+      "locked": [
+        {
+          "tag": "Growth",
+          "title": "Is your audience growing?",
+          "have": 1,
+          "need": 3,
+          "unit": "streams with viewer data"
+        },
+        {
+          "tag": "Length",
+          "title": "When viewers arrive and leave",
+          "have": 0,
+          "need": 3,
+          "unit": "streams recorded live"
+        },
+        {
+          "tag": "Timing",
+          "title": "Your best start time",
+          "have": 1,
+          "need": 4,
+          "unit": "streams with viewer data"
+        },
+        {
+          "tag": "Games",
+          "title": "Which game draws the biggest audience",
+          "have": 0,
+          "need": 2,
+          "unit": "streams in a 2nd game"
+        },
+        {
+          "tag": "Timing",
+          "title": "Least crowded hours in your category",
+          "have": 1,
+          "need": 40,
+          "unit": "hours of category samples"
+        },
+        {
+          "tag": "Community",
+          "title": "Do first-time chatters come back?",
+          "have": 0,
+          "need": 3,
+          "unit": "streams"
+        },
+        {
+          "tag": "Growth",
+          "title": "Which stream converted viewers to followers best",
+          "have": 1,
+          "need": 3,
+          "unit": "streams with follower data"
+        }
+      ]
+    },
     "regulars_30d": 0,
     "category": [],
     "peers": [],
@@ -1403,7 +1503,9 @@
       "peak_viewers": 17,
       "followers_gained": 0,
       "viewer_hours": 28.8,
-      "manual": true
+      "manual": true,
+      "engagement": 2.0,
+      "follow_rate": 0.0
     }
   ],
   "games": [
@@ -1922,7 +2024,7 @@
         "tag": "spike",
         "words": [
           "chovy",
-          "title",
+          "champ",
           "mid"
         ]
       }
