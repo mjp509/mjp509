@@ -25,6 +25,24 @@ def parse(ts):
     return datetime.strptime(ts, FMT).replace(tzinfo=timezone.utc)
 
 
+def follower_count(uid):
+    """Total followers via the broadcaster's own Twitch token (scope moderator:read:followers). None if not set up."""
+    refresh = os.environ.get("TWITCH_USER_REFRESH_TOKEN", "").strip()
+    if not refresh:
+        return None
+    cid, secret = os.environ["TWITCH_CLIENT_ID"].strip(), os.environ["TWITCH_CLIENT_SECRET"].strip()
+    try:
+        body = urllib.parse.urlencode({"grant_type": "refresh_token", "refresh_token": refresh,
+                                       "client_id": cid, "client_secret": secret}).encode()
+        token = vodlib.get_json("https://id.twitch.tv/oauth2/token", data=body)["access_token"]
+        r = vodlib.get_json(f"https://api.twitch.tv/helix/channels/followers?broadcaster_id={uid}&first=1",
+                            {"Client-ID": cid, "Authorization": f"Bearer {token}"})
+        return int(r["total"])
+    except Exception as e:
+        print(f"::warning::Follower count failed (redo the Twitch follower sign-in if this keeps happening): {e}")
+        return None
+
+
 def scan(helix, game_id, mine=None, me=None):
     """Live channels in a category (up to MAX_PAGES*100), sorted by viewers."""
     rows, cursor = [], None
@@ -75,11 +93,17 @@ def main():
     ts = t.strftime(FMT)
     live = helix(f"streams?user_id={user['id']}")
 
+    fol = follower_count(user["id"])
+    if fol is not None and (live or t - parse(state.get("last_fol", "1970-01-01T00:00:00Z")) >= LAND_EVERY):
+        state["samples"].append({"ts": ts, "k": "fol", "n": fol})
+        state["last_fol"] = ts
+        print(f"Followers: {fol}")
+
     if live:
         s = live[0]
         gid, mine = s.get("game_id"), s.get("viewer_count", 0)
         sample = {"ts": ts, "k": "live", "start": s["started_at"], "sid": s["id"], "v": mine,
-                  "gid": gid, "game": s.get("game_name", ""), "title": s.get("title", "")}
+                  "gid": gid, "game": s.get("game_name", ""), "title": s.get("title", ""), "f": fol}
         if gid:
             state["games"][gid] = {"name": s.get("game_name", ""), "last": ts}
             sample["cat"] = scan(helix, gid, mine, user["login"].lower())

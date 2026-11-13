@@ -3,13 +3,14 @@ import statistics
 from datetime import datetime, timedelta, timezone
 
 import vodlib
-from insights import LAND, LIVE
+from insights import FOL, LAND, LIVE
 
 FMT = "%Y-%m-%dT%H:%M:%SZ"
 # key, label, higher is better
 METRICS = [
     ("avg_viewers", "Avg viewers", True),
     ("peak_viewers", "Peak viewers", True),
+    ("followers_gained", "Followers gained", True),
     ("cat_top_pct", "Category rank (top %)", False),
     ("mpm", "Chat msgs / min", True),
     ("chatters", "Unique chatters", True),
@@ -70,7 +71,12 @@ def enrich(per_stream, live_by_id):
         r["cat_top_pct"] = round(median(pcts), 1) if pcts else None
         r["cat_rank"] = median([c[2] for c in st["cat"]])
         r["cat_channels"] = median([c[3] for c in st["cat"]])
+        fl = sorted(st.get("followers", []))
+        if fl:
+            r["followers_end"] = fl[-1][1]
+            r["followers_gained"] = fl[-1][1] - fl[0][1] if len(fl) > 1 else None
         curves[r["id"]] = {
+            "followers": [[round((ts(t) - start).total_seconds() / 60, 1), n] for t, n in fl],
             "viewers": [[round((t - start).total_seconds() / 60, 1), v] for t, v in pts],
             "rank": [[round((ts(c[0]) - start).total_seconds() / 60, 1), c[2], c[3], c[1]] for c in st["cat"]],
         }
@@ -167,6 +173,21 @@ def landscape(land):
     return out
 
 
+def followers():
+    days = sorted(vodlib.load(FOL, {"days": {}})["days"].items())
+    if not days:
+        return None
+    pts = [[d, n] for d, (_, n) in days]
+    now_d, now_n = pts[-1]
+
+    def change(days_back):
+        cutoff = (datetime.strptime(now_d, "%Y-%m-%d") - timedelta(days=days_back)).strftime("%Y-%m-%d")
+        older = [p for p in pts if p[0] <= cutoff]
+        base = older[-1] if older else pts[0]
+        return {"gained": now_n - base[1], "since": base[0], "full": bool(older)}
+    return {"current": now_n, "as_of": now_d, "history": pts, "d7": change(7), "d30": change(30)}
+
+
 def build(per_stream, present, news):
     live, land = vodlib.load(LIVE, {"streams": {}}), vodlib.load(LAND, {"games": {}})
     live_by_id = link_live(per_stream, live)
@@ -187,4 +208,5 @@ def build(per_stream, present, news):
         "category": by_game,
         "peers": peers,
         "landscape": landscape(land),
+        "followers": followers(),
     }

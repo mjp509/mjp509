@@ -5,7 +5,7 @@ const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const WEEK = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const EMOTE_URL = { t: id => `https://static-cdn.jtvnw.net/emoticons/v2/${id}/default/dark/2.0`, "7": id => `https://cdn.7tv.app/emote/${id}/2x.webp` };
 const NS = "http://www.w3.org/2000/svg";
-const VIEWER_KEYS = ["avg_viewers", "peak_viewers", "cat_top_pct"];
+const VIEWER_KEYS = ["avg_viewers", "peak_viewers", "cat_top_pct", "followers_gained"];
 const ordinal = n => n + (["th", "st", "nd", "rd"][(n % 100 - 20) % 10] || ["th", "st", "nd", "rd"][n % 100] || "th");
 const hourLabel = h => `${(h % 12) || 12}${h < 12 ? "am" : "pm"}`;
 const shortDate = d => new Date(d).toLocaleDateString(undefined, { month: "numeric", day: "numeric" });
@@ -16,6 +16,7 @@ function fmtMetric(key, v) {
   if (key === "return_rate") return `${Math.round(v)}%`;
   if (key === "hours") return `${v.toFixed(1)}h`;
   if (key === "avg_viewers" || key === "mpm") return (+v).toFixed(1);
+  if (key === "followers_gained") return (v > 0 ? "+" : "") + num(Math.round(v));
   return num(Math.round(v));
 }
 
@@ -43,8 +44,8 @@ function showTab(name) {
 }
 $("tabs").addEventListener("click", e => {
   const b = e.target.closest("button"); if (!b) return;
-  history.replaceState(null, "", "#" + b.dataset.tab);
-  showTab(b.dataset.tab);
+  if (location.hash.slice(1) === b.dataset.tab) showTab(b.dataset.tab);
+  else location.hash = b.dataset.tab;
 });
 let rz;
 addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(() => (renderers[current] || []).forEach(fn => fn()), 150); });
@@ -136,6 +137,29 @@ function timeChart(el, pts, { xmax, kind = "area", invert = false, markers = [],
   return true;
 }
 
+// value over calendar days (y axis not forced to zero, so small growth is visible)
+function dateLine(el, pts, fmtTip) {
+  if (pts.length < 2) return false;
+  const f = frame(el, { left: 48, bottom: 24 });
+  const t = pts.map(p => new Date(p[0] + "T12:00:00").getTime()), vals = pts.map(p => p[1]);
+  const vmin = Math.min(...vals), vmax = Math.max(...vals);
+  const step = Math.max(1, niceMax(Math.max(4, (vmax - vmin) * 1.2)) / 4);
+  const lo = Math.max(0, Math.floor(vmin / step) * step), hi = lo + step * Math.max(4, Math.ceil((vmax - lo) / step));
+  const x = v => f.x0 + (f.x1 - f.x0) * (v - t[0]) / ((t[t.length - 1] - t[0]) || 1), y = v => f.y1 - (f.y1 - f.y0) * (v - lo) / (hi - lo);
+  const g = svgEl("g", { class: "grid" }, f.svg), a = svgEl("g", { class: "axis" }, f.svg);
+  for (let i = 0; i <= 4; i++) { const v = lo + step * i; svgEl("line", { x1: f.x0, x2: f.x1, y1: y(v), y2: y(v) }, g); svgEl("text", { x: f.x0 - 6, y: y(v) + 4, "text-anchor": "end" }, a).textContent = num(v); }
+  const every = Math.ceil(pts.length / Math.max(1, Math.floor((f.x1 - f.x0) / 60)));
+  pts.forEach((p, i) => { if (i % every === 0 || i === pts.length - 1) svgEl("text", { x: x(t[i]), y: f.y1 + 16, "text-anchor": "middle" }, a).textContent = shortDate(p[0] + "T12:00:00"); });
+  svgEl("path", { class: "area", d: `M${x(t[0])},${f.y1} L${pts.map((p, i) => `${x(t[i])},${y(p[1])}`).join(" L")} L${x(t[t.length - 1])},${f.y1} Z` }, f.svg);
+  svgEl("path", { class: "rankline", d: "M" + pts.map((p, i) => `${x(t[i])},${y(p[1])}`).join(" L") }, f.svg);
+  pts.forEach((p, i) => {
+    svgEl("circle", { class: "dot", cx: x(t[i]), cy: y(p[1]), r: pts.length > 40 ? 2 : 3.5 }, f.svg);
+    const w = (f.x1 - f.x0) / pts.length;
+    svgEl("rect", { class: "hit", x: x(t[i]) - w / 2, y: f.y0, width: w, height: f.y1 - f.y0, "data-tip": fmtTip(p, pts[i - 1]) }, f.svg);
+  });
+  return true;
+}
+
 function vbars(el, items, { label, segs, tipFor }) {
   const max = Math.max(1e-9, ...items.map(i => segs(i).reduce((a, s) => a + s.v, 0)));
   el.innerHTML = items.map(i => `<div class="vcol" data-tip="${esc(tipFor(i))}">${segs(i).map(s =>
@@ -176,7 +200,10 @@ function emptyBlock(el, msg = "Not enough data yet.") { el.outerHTML = `<p class
     const rows = Object.fromEntries(rep.metrics.map(m => [m.key, m]));
     $("report").innerHTML = metrics.map(({ key, label, higher }) => {
       const m = rows[key];
-      if (!m) return `<div class="rc missing"><span class="k">${esc(label)}</span><span class="v">${VIEWER_KEYS.includes(key) ? "Recorded from your next stream" : "—"}</span></div>`;
+      if (!m) {
+        const why = key === "followers_gained" && !ins.followers ? "Needs the Twitch follower sign-in" : VIEWER_KEYS.includes(key) ? "Recorded from your next stream" : "—";
+        return `<div class="rc missing"><span class="k">${esc(label)}</span><span class="v">${why}</span></div>`;
+      }
       let delta = "";
       if (m.delta_pct !== null && m.baseline_n) {
         const up = m.delta_pct > 0, flat = Math.abs(m.delta_pct) < 2 || higher === null;
@@ -188,8 +215,9 @@ function emptyBlock(el, msg = "Not enough data yet.") { el.outerHTML = `<p class
       return `<div class="rc"><span class="k">${esc(label)}</span><span class="v">${fmtMetric(key, m.value)}</span>${delta}${place}${best}</div>`;
     }).join("");
   }
-  const o = s.overview;
-  $("tiles").innerHTML = [[num(o.streams), "Streams saved"], [num(o.hours), "Hours streamed"], [num(o.messages), "Chat messages"],
+  const o = s.overview, fol = ins.followers;
+  const folTile = fol ? [[num(fol.current), `Followers<br><span class="chg">${fol.d30.gained >= 0 ? "+" : ""}${num(fol.d30.gained)} ${fol.d30.full ? "in 30 days" : "since " + shortDate(fol.d30.since + "T12:00:00")}</span>`]] : [];
+  $("tiles").innerHTML = [...folTile, [num(o.streams), "Streams saved"], [num(o.hours), "Hours streamed"], [num(o.messages), "Chat messages"],
     [num(o.chatters), "Unique chatters"], [o.mpm, "Avg messages / min"]]
     .map(([v, k]) => `<div class="tile"><div class="v">${v}</div><div class="k">${k}</div></div>`).join("");
 
@@ -197,7 +225,7 @@ function emptyBlock(el, msg = "Not enough data yet.") { el.outerHTML = `<p class
   const trends = ins.trends || [];
   let metric = "avg_viewers";
   if (!trends.some(t => t.avg_viewers != null)) metric = "chatters";
-  const HINTS = { cat_top_pct: "Lower is better: top 5% beats top 40%.", return_rate: "Share of each stream's chatters who had chatted before.", hours: "How long each stream ran." };
+  const HINTS = { followers_gained: "Followers gained between the start and end of each stream.", cat_top_pct: "Lower is better: top 5% beats top 40%.", return_rate: "Share of each stream's chatters who had chatted before.", hours: "How long each stream ran." };
   const seg = $("metric-seg");
   seg.innerHTML = metrics.map(m => `<button data-k="${m.key}">${esc(m.label)}</button>`).join("");
   const drawTrend = () => {
@@ -208,6 +236,14 @@ function emptyBlock(el, msg = "Not enough data yet.") { el.outerHTML = `<p class
   };
   seg.addEventListener("click", e => { const b = e.target.closest("button"); if (b) { metric = b.dataset.k; drawTrend(); } });
   onTab("trends", drawTrend);
+  onTab("trends", () => {
+    const el = $("fol-chart");
+    if (!fol) { $("fol-sub").textContent = ""; return empty(el, "Needs the Twitch follower sign-in. Once it's set up, your follower count is recorded hourly."); }
+    const chg = (c, d) => `${c.gained >= 0 ? "+" : ""}${num(c.gained)} ${c.full ? `in ${d} days` : "since " + shortDate(c.since + "T12:00:00")}`;
+    $("fol-sub").textContent = `${num(fol.current)} followers · ${chg(fol.d7, 7)}${fol.d30.full || fol.d7.full ? " · " + chg(fol.d30, 30) : ""}`;
+    if (!dateLine(el, fol.history, (p, prev) => `<b>${new Date(p[0] + "T12:00:00").toLocaleDateString()}</b>${num(p[1])} followers${prev ? `<br>${p[1] - prev[1] >= 0 ? "+" : ""}${p[1] - prev[1]} from the day before` : ""}`))
+      empty(el, "Collecting. The chart appears after a couple of days of follower readings.");
+  });
 
   let patternsDone = false;
   onTab("trends", () => {
@@ -240,7 +276,7 @@ function emptyBlock(el, msg = "Not enough data yet.") { el.outerHTML = `<p class
     const xmax = Math.max(1, st.duration / 60);
     $("stream-tiles").innerHTML = [
       [fmtMetric("avg_viewers", st.avg_viewers), "Avg viewers"], [fmtMetric("peak_viewers", st.peak_viewers), "Peak viewers"],
-      [st.viewer_hours != null ? num(st.viewer_hours) : "—", "Hours watched"], [fmtMetric("cat_top_pct", st.cat_top_pct), "Category rank"],
+      [st.viewer_hours != null ? num(st.viewer_hours) : "—", "Hours watched"], [fmtMetric("followers_gained", st.followers_gained), "Followers gained"], [fmtMetric("cat_top_pct", st.cat_top_pct), "Category rank"],
       [fmtMetric("mpm", st.mpm), "Msgs / min"], [num(st.chatters), "Chatters"], [num(st.new), "New chatters"], [fmtMetric("hours", st.hours), "Length"],
     ].map(([v, k]) => `<div><b>${v}</b><span>${k}</span></div>`).join("");
     const v = byId[id], markers = ((v && v.chapters) || []).map(c => [c.t / 60, c.game]);
@@ -359,4 +395,5 @@ function emptyBlock(el, msg = "Not enough data yet.") { el.outerHTML = `<p class
   }
 
   showTab(location.hash.slice(1) || "overview");
+  addEventListener("hashchange", () => showTab(location.hash.slice(1) || "overview"));
 })();

@@ -8,7 +8,7 @@ import vodlib
 
 SRC = Path(os.environ.get("MONITOR_DIR", ".monitor")) / "monitor.json"
 DIR = vodlib.ROOT / "insights"
-LIVE, LAND = DIR / "live.json", DIR / "landscape.json"
+LIVE, LAND, FOL = DIR / "live.json", DIR / "landscape.json", DIR / "followers.json"
 
 
 def week_slot(ts):
@@ -23,12 +23,15 @@ def fold():
     samples = json.loads(SRC.read_text()).get("samples", [])
     live = vodlib.load(LIVE, {"folded_until": "", "streams": {}})
     land = vodlib.load(LAND, {"games": {}})
+    fol = vodlib.load(FOL, {"days": {}})
     new = [s for s in samples if s["ts"] > live["folded_until"]]
     for s in new:
         if s["k"] == "live":
             st = live["streams"].setdefault(s["start"], {"sid": s["sid"], "title": s["title"], "samples": [], "cat": [], "peers": {}})
             st["title"] = s["title"] or st["title"]
             st["samples"].append([s["ts"], s["v"], s["game"]])
+            if s.get("f") is not None:
+                st.setdefault("followers", []).append([s["ts"], s["f"]])
             c = s.get("cat")
             if c:
                 st["cat"].append([s["ts"], s["game"], c.get("rank"), c["channels"], c["viewers"], c["truncated"], c["median"]])
@@ -36,6 +39,10 @@ def fold():
                     p = st["peers"].setdefault(login, [0, 0])
                     p[0] += 1
                     p[1] += v
+        elif s["k"] == "fol":
+            day = s["ts"][:10]
+            if s["ts"] >= fol["days"].get(day, ["", 0])[0]:
+                fol["days"][day] = [s["ts"], s["n"]]
         elif s["k"] == "land":
             g = land["games"].setdefault(s["gid"], {"name": s["game"], "b": [[0, 0, 0, 0] for _ in range(168)]})
             g["name"] = s["game"]
@@ -49,4 +56,5 @@ def fold():
         DIR.mkdir(parents=True, exist_ok=True)
         vodlib.save(LIVE, live)
         vodlib.save(LAND, land)
+        vodlib.save(FOL, fol)
     print(f"insights: folded {len(new)} new samples ({sum(s['k'] == 'live' for s in new)} live)")
