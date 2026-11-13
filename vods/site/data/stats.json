@@ -2119,13 +2119,13 @@
         "messages": 6
       },
       {
-        "name": "DrexsteinA",
-        "color": "#00FF7F",
+        "name": "GymRerun",
+        "color": "#FF69B4",
         "messages": 5
       },
       {
-        "name": "GymRerun",
-        "color": "#FF69B4",
+        "name": "DrexsteinA",
+        "color": "#00FF7F",
         "messages": 5
       },
       {
@@ -2149,13 +2149,13 @@
         "messages": 2
       },
       {
-        "name": "magicalseed",
-        "color": "#FF0000",
+        "name": "csixtythree04",
+        "color": "",
         "messages": 1
       },
       {
-        "name": "csixtythree04",
-        "color": "",
+        "name": "magicalseed",
+        "color": "#FF0000",
         "messages": 1
       }
     ],
