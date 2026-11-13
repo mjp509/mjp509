@@ -33,7 +33,16 @@ def meta(title, desc, image):
             f'  <meta name="theme-color" content="#a970ff">')
 
 
+def bake_avatar(avatar):
+    for name in ("index.html", "vod.html", "stats.html"):
+        f = SITE / name
+        f.write_text(f.read_text(encoding="utf-8").replace("https://unavatar.io/twitch/itsmotch", avatar), encoding="utf-8")
+
+
 def main():
+    channel = vodlib.load(vodlib.DATA / "channel.json", {})
+    if channel.get("avatar"):
+        bake_avatar(channel["avatar"])
     template = (SITE / "vod.html").read_text(encoding="utf-8")
     vods = vodlib.load(vodlib.VODS, [])
     for v in vods:
@@ -48,7 +57,6 @@ def main():
         out.mkdir(parents=True, exist_ok=True)
         (out / "index.html").write_text(page, encoding="utf-8")
 
-    channel = vodlib.load(vodlib.DATA / "channel.json", {})
     if channel.get("avatar"):
         idx = SITE / "index.html"
         s = idx.read_text(encoding="utf-8")
