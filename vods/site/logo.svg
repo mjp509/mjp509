@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b98aff"/>
+      <stop offset="1" stop-color="#7a3df0"/>
+    </linearGradient>
+    <linearGradient id="bun" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffbe55"/>
+      <stop offset="1" stop-color="#e98a1e"/>
+    </linearGradient>
+  </defs>
+  <circle cx="256" cy="256" r="256" fill="url(#bg)"/>
+  <!-- top bun -->
+  <path d="M96 238c0-82 72-130 160-130s160 48 160 130c0 12-8 18-20 18H116c-12 0-20-6-20-18z" fill="url(#bun)"/>
+  <path d="M130 196c12-38 52-62 96-68" stroke="#fff" stroke-opacity=".35" stroke-width="14" stroke-linecap="round" fill="none"/>
+  <!-- sesame -->
+  <g fill="#fff6dd">
+    <ellipse cx="200" cy="170" rx="9" ry="5" transform="rotate(-25 200 170)"/>
+    <ellipse cx="256" cy="148" rx="9" ry="5"/>
+    <ellipse cx="312" cy="170" rx="9" ry="5" transform="rotate(25 312 170)"/>
+    <ellipse cx="228" cy="208" rx="9" ry="5" transform="rotate(15 228 208)"/>
+    <ellipse cx="290" cy="206" rx="9" ry="5" transform="rotate(-15 290 206)"/>
+    <ellipse cx="350" cy="214" rx="9" ry="5" transform="rotate(30 350 214)"/>
+    <ellipse cx="166" cy="216" rx="9" ry="5" transform="rotate(-30 166 216)"/>
+  </g>
+  <!-- lettuce -->
+  <path d="M90 262c14 0 18 16 33 16s19-16 33-16 18 16 33 16 19-16 33-16 18 16 34 16 18-16 33-16 19 16 33 16 18-16 33-16 19 16 33 16 18-16 30-16v20H90z" fill="#5fd068"/>
+  <!-- cheese -->
+  <path d="M100 282h312l-30 28-18-14-24 34-22-20H182l-22 22-22-30-18 12z" fill="#ffd93b"/>
+  <!-- patty -->
+  <rect x="98" y="294" width="316" height="52" rx="26" fill="#6b3a24"/>
+  <path d="M130 312h44M214 324h40M292 312h46M350 328h30" stroke="#8a5236" stroke-width="8" stroke-linecap="round"/>
+  <!-- bottom bun -->
+  <path d="M104 358h304c10 0 16 6 14 16-6 30-40 46-80 46H170c-40 0-74-16-80-46-2-10 4-16 14-16z" fill="url(#bun)"/>
+</svg>
