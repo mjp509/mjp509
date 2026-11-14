@@ -4,7 +4,7 @@
       "live_streams": 0,
       "linked": 0,
       "since": null,
-      "folded_until": "2026-11-13T07:30:58Z"
+      "folded_until": "2026-11-14T01:40:05Z"
     },
     "metrics": [
       {
@@ -248,7 +248,7 @@
         {
           "tag": "Timing",
           "title": "Least crowded hours in your category",
-          "have": 1,
+          "have": 4,
           "need": 40,
           "unit": "hours of category samples"
         },
@@ -275,8 +275,8 @@
       {
         "gid": "457975278",
         "game": "PokeMMO",
-        "slots_sampled": 1,
-        "samples": 1,
+        "slots_sampled": 4,
+        "samples": 4,
         "cells": [
           [
             0,
@@ -1056,11 +1056,11 @@
             0
           ],
           [
-            0,
-            0,
-            0,
-            0,
-            0
+            1,
+            16.0,
+            124,
+            7.75,
+            1.5
           ],
           [
             0,
@@ -1098,11 +1098,11 @@
             0
           ],
           [
-            0,
-            0,
-            0,
-            0,
-            0
+            1,
+            29.0,
+            430,
+            14.83,
+            3.0
           ],
           [
             0,
@@ -1126,11 +1126,11 @@
             0
           ],
           [
-            0,
-            0,
-            0,
-            0,
-            0
+            1,
+            14.0,
+            94,
+            6.71,
+            2.5
           ],
           [
             0,
@@ -1459,10 +1459,14 @@
     ],
     "followers": {
       "current": 284,
-      "as_of": "2026-11-13",
+      "as_of": "2026-11-14",
       "history": [
         [
           "2026-11-13",
+          284
+        ],
+        [
+          "2026-11-14",
           284
         ]
       ],
@@ -1477,7 +1481,30 @@
         "full": false
       }
     },
-    "subs": null,
+    "subs": {
+      "current": 2,
+      "as_of": "2026-11-14",
+      "history": [
+        [
+          "2026-11-13",
+          2
+        ],
+        [
+          "2026-11-14",
+          2
+        ]
+      ],
+      "d7": {
+        "gained": 0,
+        "since": "2026-11-13",
+        "full": false
+      },
+      "d30": {
+        "gained": 0,
+        "since": "2026-11-13",
+        "full": false
+      }
+    },
     "weekly": {
       "this": {
         "streams": 1,
@@ -1510,8 +1537,8 @@
         "id": "2927241555",
         "title": "🍔 gëek wën i want gëek all da timë 🍔 luh shmünk 🍔"
       },
-      "from": "2026-11-06",
-      "to": "2026-11-13"
+      "from": "2026-11-07",
+      "to": "2026-11-14"
     }
   },
   "overview": {
@@ -2119,18 +2146,18 @@
         "messages": 6
       },
       {
-        "name": "GymRerun",
-        "color": "#FF69B4",
-        "messages": 5
-      },
-      {
         "name": "DrexsteinA",
         "color": "#00FF7F",
         "messages": 5
       },
       {
-        "name": "leonunez96",
-        "color": "",
+        "name": "GymRerun",
+        "color": "#FF69B4",
+        "messages": 5
+      },
+      {
+        "name": "HuntressClairice",
+        "color": "#FF69B4",
         "messages": 3
       },
       {
@@ -2139,8 +2166,8 @@
         "messages": 3
       },
       {
-        "name": "HuntressClairice",
-        "color": "#FF69B4",
+        "name": "leonunez96",
+        "color": "",
         "messages": 3
       },
       {
