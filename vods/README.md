@@ -24,6 +24,15 @@ Every 2 hours, **Sync VODs** saves the chat for new Twitch VODs and publishes ea
 Add secrets `YT_CLIENT_ID`, `YT_CLIENT_SECRET`, `YT_REFRESH_TOKEN` (Google OAuth, scope `youtube.readonly`, signed in as the channel owner).
 The sync then sees unlisted uploads and matches them by title or length, so no Add VOD step is needed.
 
+## Auto upload to YouTube (optional)
+After each stream, **Upload to YouTube** downloads the Twitch VOD and uploads it to your channel as unlisted with the Twitch title,
+then the sync publishes it. Use OBS's Twitch VOD Track so the VOD has no music.
+1. Google Cloud → OAuth consent screen → **Publish app** (in testing, sign-ins expire after 7 days).
+2. Sign in again with scopes `youtube.upload youtube.readonly` and replace the `YT_REFRESH_TOKEN` secret.
+3. **Settings → Secrets and variables → Actions → Variables**: add `AUTO_UPLOAD` = `true`.
+4. Until Google audits the project (YouTube API Services audit form), uploads are locked to private:
+   set each one to Unlisted in YouTube Studio and the next sync publishes it.
+
 ## Manual
 - **Actions → Sync VODs → Run workflow**: sync now.
 - **Actions → Add VOD**: paste the YouTube link (unlisted is fine). Leave the Twitch link blank to attach it to your newest saved stream, or paste one to pick a specific VOD.

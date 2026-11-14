@@ -15,6 +15,7 @@ UPLOADS = vodlib.ROOT / "uploads.json"
 SITE = os.environ.get("SITE_URL", "https://vods.itsmotch.com").rstrip("/")
 TDL = os.environ.get("TDL", "TwitchDownloaderCLI")
 CHUNK = 64 * 1024 * 1024
+API = "https://www.googleapis.com"
 
 
 def todo():
@@ -31,7 +32,8 @@ def token():
 
 def request(method, url, headers, body=None):
     u = urllib.parse.urlsplit(url)
-    c = http.client.HTTPSConnection(u.netloc, timeout=300)
+    conn = http.client.HTTPConnection if u.scheme == "http" else http.client.HTTPSConnection  # http only in tests
+    c = conn(u.netloc, timeout=300)
     c.request(method, u.path + ("?" + u.query if u.query else ""), body=body, headers=headers)
     r = c.getresponse()
     return r.status, dict(r.getheaders()), r.read().decode("utf-8", "replace")
@@ -43,7 +45,7 @@ def start_session(tok, p):
     meta = {"snippet": {"title": title, "categoryId": "20",
                         "description": f"Twitch stream from {day}.\nWatch with chat replay: {SITE}/v/{p['id']}/"},
             "status": {"privacyStatus": "unlisted", "selfDeclaredMadeForKids": False}}
-    st, h, body = request("POST", "https://www.googleapis.com/upload/youtube/v3/videos?uploadType=resumable&part=snippet,status",
+    st, h, body = request("POST", f"{API}/upload/youtube/v3/videos?uploadType=resumable&part=snippet,status",
                           {"Authorization": f"Bearer {tok}", "Content-Type": "application/json; charset=UTF-8",
                            "X-Upload-Content-Type": "video/mp4"}, json.dumps(meta).encode())
     loc = {k.lower(): v for k, v in h.items()}.get("location")
