@@ -34,9 +34,51 @@ document.getElementById("continue-row").addEventListener("click", e => {
   loadVods().then(renderContinue);
 });
 
+const boxart = (art, g) => art[g] || `https://static-cdn.jtvnw.net/ttv-boxart/${encodeURIComponent(g)}-285x380.jpg`;
+const gamesOf = v => [...new Set([v.game, ...(v.chapters || []).map(c => c.game)].filter(Boolean))];
+
+function renderRecent(vods, art) {
+  const list = [...vods].sort((a, b) => (b.date || "").localeCompare(a.date || "")).slice(0, 3);
+  document.getElementById("recent").hidden = !list.length;
+  document.getElementById("recent-row").innerHTML = list.map(v => {
+    const n = Math.max(1, (v.chapters || []).length);
+    return `
+    <div class="rcard">
+      <a class="thumb" href="v/${encodeURIComponent(v.id)}/">
+        <img loading="lazy" src="https://i.ytimg.com/vi/${esc(v.youtube)}/hqdefault.jpg" alt="" onload="this.classList.add('loaded')">
+        <span class="badge left">${fmtDate(v.date)}</span><span class="badge">${fmtTime(v.duration)}</span>${progressBar(v.id)}
+      </a>
+      <div class="rinfo">
+        ${v.game ? `<img class="art" src="${esc(boxart(art, v.game))}" alt="${esc(v.game)}" title="${esc(v.game)}">` : ""}
+        <div class="rtext">
+          <a class="rtitle" href="v/${encodeURIComponent(v.id)}/" title="${esc(v.title)}">${esc(v.title)}</a>
+          <span class="chap">☰ Chapters <b>${n}</b></span>
+        </div>
+        <a class="watch-btn" href="v/${encodeURIComponent(v.id)}/">▷ Watch</a>
+      </div>
+    </div>`; }).join("");
+}
+
+function renderGames(vods, art, pick) {
+  const count = {};
+  for (const v of vods) for (const g of gamesOf(v)) count[g] = (count[g] || 0) + 1;
+  const list = Object.entries(count).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).slice(0, 6);
+  document.getElementById("games").hidden = !list.length;
+  const row = document.getElementById("games-row");
+  row.innerHTML = list.map(([g, n]) => `
+    <button class="gtile" type="button" data-game="${esc(g)}">
+      <img loading="lazy" src="${esc(boxart(art, g))}" alt="" onload="this.classList.add('loaded')">
+      <b>${esc(g)}</b><span>${n} VOD${n === 1 ? "" : "s"}</span>
+    </button>`).join("");
+  row.onclick = e => { const t = e.target.closest(".gtile"); if (t) pick(t.dataset.game); };
+}
+
 (async () => {
   const vods = await loadVods();
+  let art = {};
+  try { const r = await fetch("data/games.json", { cache: "no-cache" }); if (r.ok) art = await r.json(); } catch {}
   renderContinue(vods);
+  renderRecent(vods, art);
   const q = document.getElementById("q");
   const gameSel = document.getElementById("game");
   const count = document.getElementById("count");
@@ -88,5 +130,9 @@ document.getElementById("continue-row").addEventListener("click", e => {
   q.addEventListener("input", reset);
   gameSel.addEventListener("change", reset);
   more.addEventListener("click", () => { shown += 12; render(); });
+  renderGames(vods, art, g => {
+    gameSel.value = g; reset();
+    document.getElementById("all").scrollIntoView({ behavior: "smooth" });
+  });
   render();
 })();

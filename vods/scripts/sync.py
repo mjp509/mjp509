@@ -41,6 +41,19 @@ def save_clips(helix, uid):
     vodlib.save(vodlib.DATA / "clips.json", {"period": period, "clips": [{k: c.get(k) for k in keep} for c in clips]})
 
 
+def save_boxart(helix):
+    """Box art for every game in saved streams, for the Most played games row."""
+    names = sorted({c["game"] for v in vodlib.load(vodlib.VODS, []) + vodlib.load(vodlib.PENDING, [])
+                    for c in v.get("chapters", []) if c.get("game")} | {v["game"] for v in vodlib.load(vodlib.VODS, []) if v.get("game")})
+    art = {}
+    for i in range(0, len(names), 100):
+        q = "&".join("name=" + urllib.parse.quote(n) for n in names[i:i + 100])
+        for g in helix(f"games?{q}"):
+            art[g["name"]] = g["box_art_url"].replace("{width}x{height}", "285x380")
+    if art:
+        vodlib.save(vodlib.DATA / "games.json", art)
+
+
 def save_new_chats():
     helix = twitch()
     user = helix(f"users?login={CHANNEL}")[0]
@@ -51,6 +64,7 @@ def save_new_chats():
     known = {v["id"] for v in vodlib.load(vodlib.VODS, [])} | {p["id"] for p in vodlib.load(vodlib.PENDING, [])}
     stv = None
 
+    save_boxart(helix)
     videos = helix(f"videos?user_id={user['id']}&type=archive&first=20")
     tv = {v["id"]: v.get("view_count", 0) for v in videos}
     for path in (vodlib.VODS, vodlib.PENDING):
