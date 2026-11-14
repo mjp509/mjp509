@@ -1,0 +1,7 @@
+{
+  "days": ["Tue", "Thu", "Fri"],
+  "time": "19:00",
+  "utc_offset": -6,
+  "approx": true,
+  "note": "or once every blue moon </3"
+}
