@@ -71,7 +71,12 @@ function renderGames(vods, art, pick) {
 }
 
 (async () => {
-  const vods = await loadVods();
+  let vods;
+  try { vods = await loadVods(); } catch {
+    grid.innerHTML = `<div class="empty-state"><div class="empty-icon">📡</div><h2>Couldn't load the VODs</h2>
+      <p>Check your connection and try again.</p><a class="btn" href="./">Refresh</a></div>`;
+    return;
+  }
   let art = {};
   try { const r = await fetch("data/games.json", { cache: "no-cache" }); if (r.ok) art = await r.json(); } catch {}
   renderContinue(vods);

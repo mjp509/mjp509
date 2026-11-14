@@ -23,7 +23,9 @@
   <script>
     fetch("/data/channel.json").then(r => r.json()).then(c => {
       if (!c.avatar) return;
-      document.getElementById("avatar").src = c.avatar;
+      const img = document.getElementById("avatar");
+      img.onload = () => img.classList.add("spin");
+      img.src = c.avatar;
       document.getElementById("favicon").href = c.avatar;
     }).catch(() => document.getElementById("avatar").remove());
   </script>

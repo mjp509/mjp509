@@ -7,6 +7,9 @@
   <meta name="description" content="Every itsmotch stream, with chat replay.">
   <link rel="icon" id="favicon" href="https://unavatar.io/twitch/itsmotch">
   <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://i.ytimg.com">
+  <link rel="preconnect" href="https://static-cdn.jtvnw.net">
+  <link rel="preconnect" href="https://cdn.7tv.app">
 </head>
 <body>
   <header>
@@ -63,13 +66,13 @@
       <div class="clip-row" id="clip-row"></div>
     </section>
   </main>
-  <div class="modal" id="clip-modal" hidden>
+  <div class="modal" id="clip-modal" hidden role="dialog" aria-modal="true" aria-label="Clip">
     <div class="modal-box">
       <button class="modal-close" id="clip-close" aria-label="Close">✕</button>
       <div class="modal-frame" id="clip-frame"></div>
     </div>
   </div>
-  <footer class="site-foot">♪ Music is removed from VODs for copyright reasons ♪<br><a href="privacy.html">Privacy</a></footer>
+  <footer class="site-foot">♪ Music is removed from VODs for copyright reasons ♪<br><a href="https://twitch.tv/itsmotch" target="_blank" rel="noopener">Follow on Twitch</a> · <a href="privacy.html">Privacy</a></footer>
   <script src="common.js"></script>
   <script src="anim.js" defer></script>
   <script src="index.js"></script>

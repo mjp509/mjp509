@@ -111,7 +111,10 @@
 .chart-empty { height: 100%; display: grid; place-items: center; color: var(--muted); font-size: 14px; text-align: center; padding: 0 16px;
   border: 1px dashed var(--line); border-radius: 10px; }
 .sw.line { background: var(--avg); height: 3px; border-radius: 2px; }
-.seg-wrap { flex-wrap: wrap; margin: 10px 0 2px; width: fit-content; max-width: 100%; }
+.seg-wrap { flex-wrap: wrap; gap: 6px; padding: 6px; margin: 10px 0 2px; width: fit-content; max-width: 100%; }
+.seg-wrap button { background: var(--panel-2); padding: 6px 12px; }
+.seg-wrap button:hover { color: var(--text); }
+.seg-wrap button.active { background: var(--accent); color: #fff; }
 .mini-tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; margin-top: 12px; }
 .mini-tiles div { background: var(--panel-2); border-radius: 8px; padding: 8px 10px; }
 .mini-tiles b { display: block; font-size: 19px; font-variant-numeric: tabular-nums; }
