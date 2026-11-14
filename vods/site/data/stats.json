@@ -4,7 +4,7 @@
       "live_streams": 0,
       "linked": 0,
       "since": null,
-      "folded_until": "2026-11-14T14:58:56Z"
+      "folded_until": "2026-11-14T19:49:34Z"
     },
     "metrics": [
       {
@@ -248,7 +248,7 @@
         {
           "tag": "Timing",
           "title": "Least crowded hours in your category",
-          "have": 6,
+          "have": 7,
           "need": 40,
           "unit": "hours of category samples"
         },
@@ -275,8 +275,8 @@
       {
         "gid": "457975278",
         "game": "PokeMMO",
-        "slots_sampled": 6,
-        "samples": 6,
+        "slots_sampled": 7,
+        "samples": 7,
         "cells": [
           [
             0,
@@ -1252,11 +1252,11 @@
             0
           ],
           [
-            0,
-            0,
-            0,
-            0,
-            0
+            1,
+            7.0,
+            17,
+            2.43,
+            2.0
           ],
           [
             0,
