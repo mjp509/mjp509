@@ -276,3 +276,5 @@ header { view-transition-name: site-header; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .reveal { opacity: 1; transform: none; }
 }
+header .avatar.spin { animation: aga-spin 1s cubic-bezier(.3, .7, .3, 1); }
+@keyframes aga-spin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
