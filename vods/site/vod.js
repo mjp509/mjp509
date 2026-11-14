@@ -27,10 +27,16 @@ function drawActivity(moments) {
   box.addEventListener("pointermove", e => {
     const f = at(e), i = Math.min(bins - 1, Math.floor(f * bins));
     tipEl.hidden = false; tipEl.style.left = f * 100 + "%";
-    tipEl.textContent = `${fmtTime(f * duration)} · ${(counts[i] / (size / 60)).toFixed(1)} msgs/min`;
+    tipEl.textContent = `${fmtTime(f * duration)} · ${(counts[i] / (size / 60)).toFixed(1)} messages/min`;
   });
   box.addEventListener("pointerleave", () => { tipEl.hidden = true; });
   box.addEventListener("click", e => seekChat(at(e) * duration));
+  box.addEventListener("keydown", e => {
+    const step = { ArrowLeft: -30, ArrowRight: 30, PageDown: -300, PageUp: 300 }[e.key];
+    if (!step || !player || !player.getCurrentTime) return;
+    e.preventDefault();
+    seekChat(Math.max(0, Math.min(duration, player.getCurrentTime() + offset + step)));
+  });
 }
 const log = document.getElementById("log");
 const status = document.getElementById("chat-status");
@@ -73,7 +79,12 @@ function tick() {
     if (html) log.insertAdjacentHTML("beforeend", html);
   }
   lastT = t;
-  if (actHead && duration) actHead.style.left = Math.min(100, (t / duration) * 100) + "%";
+  if (actHead && duration) {
+    const pct = Math.min(100, (t / duration) * 100);
+    actHead.style.left = pct + "%";
+    actHead.parentNode.setAttribute("aria-valuenow", Math.round(pct));
+    actHead.parentNode.setAttribute("aria-valuetext", fmtTime(t));
+  }
   while (log.childElementCount > MAX_LINES) log.firstElementChild.remove();
   if (atBottom) log.scrollTop = log.scrollHeight;
 }
@@ -87,13 +98,13 @@ const ready = new Promise(r => { window.onYouTubeIframeAPIReady = r; });
   if (!vod) {
     document.title = "VOD not found · itsmotch VODs";
     document.querySelector(".watch").outerHTML = `<div class="not-found"><div class="empty-state">
-      <div class="empty-icon">🔍</div><h2>This VOD isn't available</h2>
+      <div class="empty-icon">🔍</div><h1>This VOD isn't available</h1>
       <p>It may have been removed, or the link is wrong.</p>
       <a class="btn" href="./">Browse all VODs</a></div></div>`;
     return;
   }
   offset = vod.offset || 0;
-  document.title = `${vod.title} · itsmotch VODs`;
+  if (!document.body.dataset.vod) document.title = `${vod.title} · itsmotch VODs`;
   document.getElementById("title").textContent = vod.title;
   document.getElementById("meta").textContent =
     [fmtDate(vod.date), vod.game, fmtTime(vod.duration)].filter(Boolean).join(" · ");

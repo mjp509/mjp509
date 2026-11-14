@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Page not found · itsmotch VODs</title>
+  <link rel="icon" id="favicon" href="https://unavatar.io/twitch/itsmotch">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <div class="logo"><a class="logo-ch" href="https://twitch.tv/itsmotch" target="_blank" rel="noopener" title="itsmotch on Twitch"><img class="avatar" id="avatar" alt=""><b>itsmotch</b></a> <a class="logo-home" href="/"><b><span>VODs</span></b></a></div>
+  </header>
+  <main class="not-found">
+    <div class="empty-state">
+      <div class="empty-icon">🍔</div>
+      <h1>This page doesn't exist</h1>
+      <p>The link might be old or mistyped.</p>
+      <a class="btn" href="/">Browse all VODs</a>
+    </div>
+  </main>
+  <script>
+    fetch("/data/channel.json").then(r => r.json()).then(c => {
+      if (!c.avatar) return;
+      document.getElementById("avatar").src = c.avatar;
+      document.getElementById("favicon").href = c.avatar;
+    }).catch(() => document.getElementById("avatar").remove());
+  </script>
+</body>
+</html>

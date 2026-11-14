@@ -17,7 +17,7 @@
   <div class="watch">
     <div class="left">
       <div class="player"><div id="yt"></div></div>
-      <div class="activity" id="activity" hidden>
+      <div class="activity" id="activity" hidden tabindex="0" role="slider" aria-label="Chat activity. Click or use arrow keys to jump through the stream" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
         <svg id="act-svg" preserveAspectRatio="none"></svg>
         <div class="act-head" id="act-head"></div>
         <div class="act-tip" id="act-tip" hidden></div>
@@ -25,6 +25,7 @@
       <div class="details">
         <h1 id="title"></h1>
         <div class="meta" id="meta"></div>
+        <p class="summary" id="summary"></p>
         <div class="actions"><button class="share" id="share" type="button">🔗 Share this moment</button></div>
         <p class="music-note">♪ Music is removed from VODs for copyright reasons ♪</p>
         <div class="chapters" id="chapters"></div>
