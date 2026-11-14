@@ -3,7 +3,7 @@ name: Deploy VOD site
 on:
   push:
     branches: [main]
-    paths: ["vods/site/**"]
+    paths: ["vods/site/**", "vods/scripts/pages.py", ".github/workflows/deploy-vods.yml"]
   workflow_run:
     workflows: ["Add VOD", "Sync VODs", "Add past stream stats"]
     types: [completed]
