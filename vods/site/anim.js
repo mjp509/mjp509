@@ -1,7 +1,7 @@
 // Fade/slide things in as they scroll into view, count up highscores. Skipped for reduced motion.
 (() => {
   if (matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
-  const SEL = ".card:not(.skeleton), .rcard, .gtile, .clip-card, .hs-list li, .panel-box, .hs, .panel, .details";
+  const SEL = ".card:not(.skeleton), .rcard, .sched, .gtile, .clip-card, .hs-list li, .panel-box, .hs, .panel, .details";
 
   const countUp = el => {
     const m = el.textContent.match(/^([\d,]+)(.*)$/); if (!m) return;
