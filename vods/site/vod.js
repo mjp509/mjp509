@@ -48,10 +48,16 @@ function colorFor(name, color) {
   return FALLBACK_COLORS[Math.abs(h) % FALLBACK_COLORS.length];
 }
 
+function linkify(text) {
+  return text
+    .replace(/\bhttps?:\/\/[^\s<]+[^\s<.,!?)'"]/g, u => `<a class="chat-link" href="${u}" target="_blank" rel="noopener nofollow ugc">${u}</a>`)
+    .replace(/(^|\s)(@[A-Za-z0-9_]{2,25})/g, '$1<span class="mention">$2</span>');
+}
+
 function msgHtml([t, name, color, body]) {
   const parts = typeof body === "string" ? [body] : body;
   const text = parts.map(p => {
-    if (!Array.isArray(p)) return esc(p);
+    if (!Array.isArray(p)) return linkify(esc(p));
     const [src, id, name = ""] = p.length === 1 ? ["t", p[0]] : p;
     const url = (EMOTE[src] || EMOTE.t)(encodeURIComponent(id));
     return emoteLink(src, id, `<img src="${url}" alt="${esc(name)}" title="${esc(name)}">`);
@@ -93,8 +99,24 @@ const params = new URLSearchParams(location.search);
 const vodId = document.body.dataset.vod || params.get("id");
 const ready = new Promise(r => { window.onYouTubeIframeAPIReady = r; });
 
+function renderMore(vods, vod) {
+  const others = vods.filter(v => v.id !== vod.id);
+  const same = others.filter(v => v.game && v.game === vod.game);
+  const pick = [...same, ...others.filter(v => !same.includes(v))]
+    .sort((a, b) => (b.game === vod.game) - (a.game === vod.game) || (b.date || "").localeCompare(a.date || "")).slice(0, 4);
+  if (!pick.length) return;
+  document.getElementById("more-row").innerHTML = pick.map(v => `
+    <a class="more-card" href="v/${encodeURIComponent(v.id)}/">
+      <div class="thumb"><img loading="lazy" src="https://i.ytimg.com/vi/${esc(v.youtube)}/mqdefault.jpg" alt="" onload="this.classList.add('loaded')"><span class="badge">${fmtTime(v.duration)}</span></div>
+      <div class="info"><h3>${esc(v.title)}</h3><div class="meta">${[fmtDate(v.date), esc(v.game || "")].filter(Boolean).join(" · ")}</div></div>
+    </a>`).join("");
+  document.getElementById("more-vods").hidden = false;
+}
+
 (async () => {
-  const vod = (await loadVods()).find(v => v.id === vodId);
+  let vods = [];
+  try { vods = await loadVods(); } catch {}
+  const vod = vods.find(v => v.id === vodId);
   if (!vod) {
     document.title = "VOD not found · itsmotch VODs";
     document.querySelector(".watch").outerHTML = `<div class="not-found"><div class="empty-state">
@@ -103,6 +125,7 @@ const ready = new Promise(r => { window.onYouTubeIframeAPIReady = r; });
       <a class="btn" href="./">Browse all VODs</a></div></div>`;
     return;
   }
+  renderMore(vods, vod);
   offset = vod.offset || 0;
   if (!document.body.dataset.vod) document.title = `${vod.title} · itsmotch VODs`;
   document.getElementById("title").textContent = vod.title;

@@ -14,12 +14,15 @@
     </button>`).join("");
   section.hidden = false;
 
-  const close = () => { modal.hidden = true; frame.innerHTML = ""; };
+  let opener = null;
+  const close = () => { modal.hidden = true; frame.innerHTML = ""; if (opener) opener.focus(); };
   section.addEventListener("click", e => {
     const b = e.target.closest(".clip-card"); if (!b) return;
     frame.innerHTML = `<iframe allowfullscreen allow="autoplay; fullscreen"
       src="https://clips.twitch.tv/embed?clip=${encodeURIComponent(b.dataset.id)}&parent=${encodeURIComponent(location.hostname)}&autoplay=true"></iframe>`;
     modal.hidden = false;
+    opener = b;
+    document.getElementById("clip-close").focus();
   });
   document.getElementById("clip-close").addEventListener("click", close);
   modal.addEventListener("click", e => { if (e.target === modal) close(); });
