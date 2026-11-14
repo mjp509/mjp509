@@ -95,6 +95,42 @@ function tick() {
   if (atBottom) log.scrollTop = log.scrollHeight;
 }
 
+function plain([, , , body]) {
+  return (typeof body === "string" ? [body] : body).map(p => Array.isArray(p) ? (p[2] || "") : p).join("");
+}
+
+function setupSearch() {
+  const box = document.getElementById("chat-search"), q = document.getElementById("cs-q");
+  const out = document.getElementById("cs-results"), count = document.getElementById("cs-count"), btn = document.getElementById("cs-toggle");
+  const index = chat.map(m => (m[1] + " " + plain(m)).toLowerCase());
+  const open = on => {
+    box.hidden = out.hidden = !on; log.hidden = on; btn.setAttribute("aria-expanded", on);
+    if (on) { q.focus(); run(); } else { q.value = ""; log.scrollTop = log.scrollHeight; }
+  };
+  const mark = (html, term) => term ? html.replace(new RegExp(`(${term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})(?![^<]*>)`, "gi"), "<mark>$1</mark>") : html;
+  let timer;
+  function run() {
+    const term = q.value.trim().toLowerCase();
+    if (!term) { out.innerHTML = `<p class="cs-hint">Type a word or a chatter's name to find when it was said. Click a result to jump there.</p>`; count.textContent = ""; return; }
+    const hits = [];
+    for (let i = 0; i < index.length && hits.length < 300; i++) if (index[i].includes(term)) hits.push(i);
+    count.textContent = hits.length >= 300 ? "300+ results" : `${hits.length} result${hits.length === 1 ? "" : "s"}`;
+    const safe = esc(term);
+    out.innerHTML = hits.length ? hits.map(i => `<button type="button" class="cs-hit" data-t="${chat[i][0]}">${mark(msgHtml(chat[i]), safe)}</button>`).join("")
+      : `<p class="cs-hint">Nobody said that in chat.</p>`;
+  }
+  btn.addEventListener("click", () => open(box.hidden));
+  q.addEventListener("input", () => { clearTimeout(timer); timer = setTimeout(run, 120); });
+  q.addEventListener("keydown", e => { if (e.key === "Escape") open(false); });
+  out.addEventListener("click", e => {
+    if (e.target.closest("a")) return;
+    const b = e.target.closest(".cs-hit"); if (!b) return;
+    seekChat(+b.dataset.t);
+    open(false);
+  });
+  btn.hidden = !chat.length;
+}
+
 const params = new URLSearchParams(location.search);
 const vodId = document.body.dataset.vod || params.get("id");
 const ready = new Promise(r => { window.onYouTubeIframeAPIReady = r; });
@@ -163,6 +199,7 @@ function renderMore(vods, vod) {
       log.classList.remove("loading");
       status.textContent = chat.length ? `${chat.length.toLocaleString()} messages` : "No chat saved";
       if (chat.length) duration = Math.max(duration, chat[chat.length - 1][0]);
+      setupSearch();
       drawActivity(await momentsP);
     })
     .catch(() => { status.textContent = "Chat unavailable"; log.classList.remove("loading"); });
