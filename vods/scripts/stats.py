@@ -206,7 +206,7 @@ def main():
     vodlib.save(vodlib.DATA / "leaderboard.json", [
         {"month": m, "emote": emote_of(m),
          "top": [{"name": display[n], "color": colors.get(n, ""), "messages": c, "emote": fav_of(m, n)}
-                 for n, c in monthly[m].most_common(3)]}
+                 for n, c in monthly[m].most_common(10)]}
         for m in sorted(set(monthly) | set(monthly_emotes), reverse=True)[:12]])
     print(f"stats: {len(per_stream)} streams, {len(seen)} chatters")
 

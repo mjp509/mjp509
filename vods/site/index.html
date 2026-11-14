@@ -25,6 +25,27 @@
       <h2>Continue watching</h2>
       <div class="clip-row" id="continue-row"></div>
     </section>
+    <section class="panel-box" id="recent" hidden>
+      <div class="box-head"><h2>Recent VODs</h2><a href="#all" class="see-all">See all →</a></div>
+      <div class="recent-row" id="recent-row"></div>
+    </section>
+    <section class="panel-box" id="games" hidden>
+      <div class="box-head"><h2>Most played games</h2></div>
+      <div class="games-row" id="games-row"></div>
+    </section>
+    <section class="hs" id="board" hidden>
+      <div class="hs-head">
+        <img class="hs-avatar" id="hs-avatar" alt="">
+        <div class="hs-title">
+          <h2>Highscores</h2>
+          <div class="hs-month"><button id="board-prev" aria-label="Previous month">‹</button><span id="board-month"></span><button id="board-next" aria-label="Next month">›</button></div>
+          <div class="hs-sub">Top chatters this month</div>
+        </div>
+        <div class="eotm" id="eotm-wrap" hidden><div class="board-label">Emote of the month</div><div id="eotm"></div></div>
+      </div>
+      <ol class="hs-list" id="podium"></ol>
+    </section>
+    <h2 class="all-title" id="all">All VODs</h2>
     <div class="controls">
       <input id="q" type="search" placeholder="Search streams…">
       <div class="seg" id="sort">
@@ -39,17 +60,6 @@
     <section class="clips" id="clips" hidden>
       <h2 id="clips-title">Top clips this month</h2>
       <div class="clip-row" id="clip-row"></div>
-    </section>
-    <section class="board" id="board" hidden>
-      <div class="board-head">
-        <button id="board-prev" aria-label="Previous month">‹</button>
-        <h2 id="board-month"></h2>
-        <button id="board-next" aria-label="Next month">›</button>
-      </div>
-      <div class="board-body">
-        <div><div class="board-label">Top chatters</div><div class="podium" id="podium"></div></div>
-        <div class="eotm-wrap" id="eotm-wrap"><div class="board-label">Emote of the month</div><div class="eotm" id="eotm"></div></div>
-      </div>
     </section>
   </main>
   <div class="modal" id="clip-modal" hidden>
