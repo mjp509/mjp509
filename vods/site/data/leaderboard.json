@@ -36,6 +36,76 @@
           "id": "01J96N7ERG0009MAMR2DZMJX8W",
           "name": "KeepYourselfSafe"
         }
+      },
+      {
+        "name": "highflyer03",
+        "color": "#0000FF",
+        "messages": 24,
+        "emote": {
+          "src": "t",
+          "id": "1",
+          "name": ":)"
+        }
+      },
+      {
+        "name": "smokemmo",
+        "color": "#2E8B57",
+        "messages": 21,
+        "emote": {
+          "src": "7",
+          "id": "01KJ1K7SM3J0R0DM8HDRH5FKPQ",
+          "name": "agaFat"
+        }
+      },
+      {
+        "name": "cokeknife",
+        "color": "#FF0000",
+        "messages": 19,
+        "emote": {
+          "src": "7",
+          "id": "01K1H21551TDJR6T24J6X1CWD6",
+          "name": "burger0"
+        }
+      },
+      {
+        "name": "zdammers03",
+        "color": "#5F9EA0",
+        "messages": 13,
+        "emote": {
+          "src": "7",
+          "id": "01FP8VKKG8000EJT2EVEY3JR0Q",
+          "name": "burger"
+        }
+      },
+      {
+        "name": "rDaniii",
+        "color": "#DAA520",
+        "messages": 11,
+        "emote": {
+          "src": "7",
+          "id": "01KZZ0P5200816262RQ6FTKMAA",
+          "name": "hihihi"
+        }
+      },
+      {
+        "name": "lilyzillasaurus",
+        "color": "#8A2BE2",
+        "messages": 9,
+        "emote": {
+          "src": "7",
+          "id": "01H4R91D18000DJFJ3EESSP8NT",
+          "name": "motch"
+        }
+      },
+      {
+        "name": "DrexsteinA",
+        "color": "#00FF7F",
+        "messages": 5,
+        "emote": {
+          "src": "t",
+          "id": "425618",
+          "name": "LUL"
+        }
       }
     ]
   }

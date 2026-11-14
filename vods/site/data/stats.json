@@ -2146,19 +2146,14 @@
         "messages": 6
       },
       {
-        "name": "DrexsteinA",
-        "color": "#00FF7F",
-        "messages": 5
-      },
-      {
         "name": "GymRerun",
         "color": "#FF69B4",
         "messages": 5
       },
       {
-        "name": "HuntressClairice",
-        "color": "#FF69B4",
-        "messages": 3
+        "name": "DrexsteinA",
+        "color": "#00FF7F",
+        "messages": 5
       },
       {
         "name": "BreezyRS",
@@ -2168,6 +2163,11 @@
       {
         "name": "leonunez96",
         "color": "",
+        "messages": 3
+      },
+      {
+        "name": "HuntressClairice",
+        "color": "#FF69B4",
         "messages": 3
       },
       {
