@@ -113,7 +113,7 @@ def main():
         idx = SITE / "index.html"
         s = idx.read_text(encoding="utf-8")
         e = lambda t: html.escape(t, quote=True)
-        desc = "watch all of itsmotchs vods with chat replay 🍔"
+        desc = "watch all of itsmotchs vods with chat replay"
         s = s.replace('<meta name="description" content="Every itsmotch stream, with chat replay.">',
                       f'<meta name="description" content="{e(desc)}">\n'
                       f'  <meta property="og:type" content="website">\n'
