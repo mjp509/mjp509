@@ -247,3 +247,28 @@ a.emote-link:hover { transform: scale(1.15); }
   .watch .left > .details { max-height: none; overflow: visible; }
   .chat { border-left: 0; border-top: 1px solid var(--line); height: 60vh; }
 }
+
+/* Animations */
+.reveal { opacity: 0; transform: translateY(14px); }
+.reveal.in { opacity: 1; transform: none;
+  transition: opacity .45s ease var(--d, 0ms), transform .5s cubic-bezier(.2, .7, .2, 1) var(--d, 0ms); }
+.rcard { transition: transform .15s ease, box-shadow .15s ease; }
+.rcard:hover { transform: translateY(-3px); box-shadow: 0 0 0 2px var(--accent), 0 10px 24px #0007; }
+.card:hover { box-shadow: 0 0 0 2px var(--accent), 0 10px 24px #0007; }
+.clip-card { transition: transform .15s ease, box-shadow .15s ease; }
+.clip-card:hover { transform: translateY(-2px); }
+.card:active, .rcard:active, .clip-card:active, .gtile:active { transform: scale(.98); }
+.watch-btn, .more, .share, .btn, .seg button, .hs-month button, .copy-btn { transition: transform .12s ease, background-color .15s ease, color .15s ease, filter .15s ease; }
+.watch-btn:active, .more:active, .share:active, .btn:active, .seg button:active, .hs-month button:active { transform: scale(.95); }
+.hs-list li { transition: background-color .15s ease; }
+.live.online { animation: pop-in .4s cubic-bezier(.2, .7, .2, 1); }
+@keyframes pop-in { from { opacity: 0; transform: translateY(-8px); } }
+
+@view-transition { navigation: auto; }
+header { view-transition-name: site-header; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: .22s; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .reveal { opacity: 1; transform: none; }
+}
