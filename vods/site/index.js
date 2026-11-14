@@ -40,9 +40,7 @@ const gamesOf = v => [...new Set([v.game, ...(v.chapters || []).map(c => c.game)
 function renderRecent(vods, art) {
   const list = [...vods].sort((a, b) => (b.date || "").localeCompare(a.date || "")).slice(0, 3);
   document.getElementById("recent").hidden = !list.length;
-  document.getElementById("recent-row").innerHTML = list.map(v => {
-    const n = Math.max(1, (v.chapters || []).length);
-    return `
+  document.getElementById("recent-row").innerHTML = list.map(v => `
     <div class="rcard">
       <a class="thumb" href="v/${encodeURIComponent(v.id)}/">
         <img loading="lazy" src="https://i.ytimg.com/vi/${esc(v.youtube)}/hqdefault.jpg" alt="" onload="this.classList.add('loaded')">
@@ -52,11 +50,10 @@ function renderRecent(vods, art) {
         ${v.game ? `<img class="art" src="${esc(boxart(art, v.game))}" alt="${esc(v.game)}" title="${esc(v.game)}">` : ""}
         <div class="rtext">
           <a class="rtitle" href="v/${encodeURIComponent(v.id)}/" title="${esc(v.title)}">${esc(v.title)}</a>
-          <span class="chap">☰ Chapters <b>${n}</b></span>
         </div>
         <a class="watch-btn" href="v/${encodeURIComponent(v.id)}/">▷ Watch</a>
       </div>
-    </div>`; }).join("");
+    </div>`).join("");
 }
 
 function renderGames(vods, art, pick) {
