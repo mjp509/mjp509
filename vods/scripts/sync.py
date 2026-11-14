@@ -135,15 +135,10 @@ def match_youtube():
         print(f"::warning::YouTube lookup failed{hint}: {e}. Chat is saved; VODs publish once YouTube works.")
         return
     used = {v["youtube"] for v in vodlib.load(vodlib.VODS, [])}
-    auto = vodlib.load(vodlib.ROOT / "uploads.json", {})  # streams the auto-uploader put on YouTube
 
     for p in pending:
         cands = [v for v in videos if v["id"] not in used and v["privacy"] != "private" and v["at"] >= p["date"]]
-        pick = next((v for v in cands if v["id"] == auto.get(p["id"])), None)
-        if p["id"] in auto and not pick:
-            print(f"Waiting for auto-upload {auto[p['id']]} to be unlisted/public: {p['title']}")
-            continue
-        pick = pick or next((v for v in cands if norm(v["title"]) == norm(p["title"])), None)
+        pick = next((v for v in cands if norm(v["title"]) == norm(p["title"])), None)
         if not pick and p.get("duration"):
             close = [v for v in cands if abs(v["dur"] - p["duration"]) <= max(120, p["duration"] * 0.02)]
             pick = min(close, key=lambda v: abs(v["dur"] - p["duration"]), default=None)
