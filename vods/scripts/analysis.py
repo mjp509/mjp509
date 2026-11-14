@@ -13,7 +13,7 @@ METRICS = [
     ("followers_gained", "Followers gained", True),
     ("subs_change", "Sub change", True),
     ("cat_top_pct", "Category rank (top %)", False),
-    ("mpm", "Chat msgs / min", True),
+    ("mpm", "Messages / min", True),
     ("chatters", "Unique chatters", True),
     ("new", "New chatters", True),
     ("return_rate", "Returning chatters %", True),

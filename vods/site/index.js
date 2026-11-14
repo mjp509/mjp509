@@ -98,7 +98,7 @@ function renderGames(vods, art, pick) {
     more.hidden = list.length <= shown;
     const total = list.length;
     list.splice(shown);
-    count.textContent = `${total} stream${total === 1 ? "" : "s"}`;
+    count.textContent = `${total} VOD${total === 1 ? "" : "s"}`;
     grid.innerHTML = list.length ? list.map(v => `
       <a class="card" href="v/${encodeURIComponent(v.id)}/">
         <div class="thumb shimmer">
@@ -112,7 +112,7 @@ function renderGames(vods, art, pick) {
           <div class="meta">${[fmtDate(v.date), views(v) ? fmtViews(views(v)) : "", esc(v.game || "")].filter(Boolean).join(" · ")}</div>
         </div>
       </a>`).join("")
-      : vods.length ? `<p class="empty">No streams match.</p>`
+      : vods.length ? `<p class="empty">No VODs match.</p>`
       : `<div class="empty-state"><div class="empty-icon">📺</div><h2>No VODs yet</h2>
           <p>Past streams show up here after they end.</p>
           <a class="btn" href="https://twitch.tv/itsmotch" target="_blank" rel="noopener">Follow on Twitch</a></div>`;

@@ -29,7 +29,7 @@ async function loadVods() {
 
 function readable(color) {
   const m = /^#?([0-9a-f]{6})$/i.exec(color || "");
-  if (!m) return color;
+  if (!m) return "var(--text)";
   let [r, g, b] = [0, 2, 4].map(i => parseInt(m[1].slice(i, i + 2), 16));
   const lum = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
   if (lum >= 0.5) return "#" + m[1];

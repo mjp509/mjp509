@@ -331,21 +331,21 @@ function emptyBlock(el, msg = "Not enough data yet.") { el.outerHTML = `<p class
     if (patternsDone) return; patternsDone = true;
     $("games").innerHTML = s.games.length ? (() => {
       const max = Math.max(...s.games.map(g => g.mpm));
-      return s.games.map(g => `<div class="hbar" data-tip="${esc(`<b>${esc(g.game)}</b>${g.mpm} msgs/min · ${g.hours}h · ${g.streams} streams`)}">
+      return s.games.map(g => `<div class="hbar" data-tip="${esc(`<b>${esc(g.game)}</b>${g.mpm} messages/min · ${g.hours}h · ${g.streams} streams`)}">
         <span class="lbl">${esc(g.game)}</span><div class="track"><div class="fill" style="width:${(g.mpm / max) * 100}%"></div></div>
         <span class="val">${g.mpm}/min<small>${g.hours}h</small></span></div>`).join("");
     })() : `<p class="empty-note">Not enough data yet.</p>`;
-    if (s.by_hour.length) vbars($("hours"), s.by_hour, { label: h => `${h.hour + 1}h`, segs: h => [{ v: h.mpm }], tipFor: h => `<b>Hour ${h.hour + 1}</b>${h.mpm} msgs/min · ${h.streams} streams` });
+    if (s.by_hour.length) vbars($("hours"), s.by_hour, { label: h => `${h.hour + 1}h`, segs: h => [{ v: h.mpm }], tipFor: h => `<b>Hour ${h.hour + 1}</b>${h.mpm} messages/min · ${h.streams} streams` });
     else emptyBlock($("hours"));
     const agg = keyFn => { const m = new Map(); for (const st of s.streams) { const k = keyFn(new Date(st.date)); const a = m.get(k) || { msgs: 0, mins: 0, n: 0 }; a.msgs += st.messages; a.mins += st.duration / 60; a.n++; m.set(k, a); } return m; };
     const days = agg(d => d.getDay());
     vbars($("days"), [1, 2, 3, 4, 5, 6, 0].map(d => ({ d, ...(days.get(d) || { msgs: 0, mins: 1, n: 0 }) })), {
       label: x => DAYS[x.d], segs: x => [{ v: x.msgs / x.mins }],
-      tipFor: x => `<b>${DAYS[x.d]}</b>${x.n ? (x.msgs / x.mins).toFixed(1) + " msgs/min · " + x.n + " streams" : "No streams"}` });
+      tipFor: x => `<b>${DAYS[x.d]}</b>${x.n ? (x.msgs / x.mins).toFixed(1) + " messages/min · " + x.n + " streams" : "No streams"}` });
     const starts = agg(d => d.getHours()), hrs = [...starts.keys()].sort((a, b) => a - b);
     vbars($("starts"), hrs.map(h => ({ h, ...starts.get(h) })), {
       label: x => hourLabel(x.h), segs: x => [{ v: x.msgs / x.mins }],
-      tipFor: x => `<b>${hourLabel(x.h)} starts</b>${(x.msgs / x.mins).toFixed(1)} msgs/min · ${x.n} streams` });
+      tipFor: x => `<b>${hourLabel(x.h)} starts</b>${(x.msgs / x.mins).toFixed(1)} messages/min · ${x.n} streams` });
   });
 
   // ===== STREAMS =====
@@ -374,7 +374,7 @@ function emptyBlock(el, msg = "Not enough data yet.") { el.outerHTML = `<p class
     chat.forEach(c => { const i = Math.floor(c[0] / 60 / bin); if (i < bins.length) bins[i]++; });
     if (!timeChart($("curve-chat"), bins.map((n, i) => [i * bin, n / bin]), { xmax, kind: "bars", markers,
       fmtY: v => (v < 10 && v % 1 ? v.toFixed(1) : num(Math.round(v))),
-      tipFn: p => `<b>${fmtTime(p[0] * 60)}–${fmtTime((p[0] + bin) * 60)}</b>${p[1].toFixed(1)} msgs/min` })) empty($("curve-chat"), "No chat saved for this stream.");
+      tipFn: p => `<b>${fmtTime(p[0] * 60)}–${fmtTime((p[0] + bin) * 60)}</b>${p[1].toFixed(1)} messages/min` })) empty($("curve-chat"), "No chat saved for this stream.");
   };
   pick.addEventListener("change", drawStream);
   onTab("streams", drawStream);
