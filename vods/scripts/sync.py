@@ -41,6 +41,21 @@ def save_clips(helix, uid):
     vodlib.save(vodlib.DATA / "clips.json", {"period": period, "clips": [{k: c.get(k) for k in keep} for c in clips]})
 
 
+def save_schedule(helix, uid):
+    """Upcoming streams from the channel's Twitch schedule, for the homepage."""
+    try:
+        r = helix(f"schedule?broadcaster_id={uid}&first=14", full=True)["data"]
+    except RuntimeError as e:  # 404 when no schedule is set up on Twitch
+        print(f"Schedule: none on Twitch ({str(e)[:80]})")
+        r = {}
+    segs = [{"start": s["start_time"], "end": s.get("end_time"), "title": s.get("title") or "",
+             "game": (s.get("category") or {}).get("name", ""), "canceled": bool(s.get("canceled_until"))}
+            for s in r.get("segments") or []]
+    vac = r.get("vacation") or None
+    vodlib.save(vodlib.DATA / "schedule.json", {"segments": segs, "vacation": vac and {"start": vac["start_time"], "end": vac["end_time"]}})
+    print(f"Schedule: {len(segs)} upcoming")
+
+
 def save_boxart(helix):
     """Box art for every game in saved streams, for the Most played games row."""
     names = sorted({c["game"] for v in vodlib.load(vodlib.VODS, []) + vodlib.load(vodlib.PENDING, [])
@@ -65,6 +80,7 @@ def save_new_chats():
     stv = None
 
     save_boxart(helix)
+    save_schedule(helix, user["id"])
     videos = helix(f"videos?user_id={user['id']}&type=archive&first=20")
     tv = {v["id"]: v.get("view_count", 0) for v in videos}
     for path in (vodlib.VODS, vodlib.PENDING):

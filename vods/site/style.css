@@ -306,3 +306,15 @@ header .avatar.spin { animation: aga-spin 1s cubic-bezier(.3, .7, .3, 1); }
 .cs-hit:hover { background: var(--panel-2); }
 .cs-hit mark { background: #a970ff59; color: inherit; border-radius: 3px; padding: 0 1px; }
 .cs-hint { color: var(--muted); font-size: 13px; padding: 10px 12px; margin: 0; }
+.sched-next { color: var(--accent); font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.sched-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+.sched { background: var(--panel-2); border-radius: 8px; padding: 10px 12px; min-width: 0; border: 1px solid transparent; }
+.sched.on { border-color: #eb0400; box-shadow: 0 0 0 3px rgba(235,4,0,.15); }
+.sched.off { opacity: .5; }
+.sched.off .sg { text-decoration: line-through; }
+.sched .sd { font-weight: 800; }
+.sched .sdate { color: var(--muted); font-size: 12px; }
+.sched .st { margin-top: 6px; font-size: 13px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.sched .sg { color: var(--muted); font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sched-note { color: var(--muted); font-size: 12px; margin: 10px 0 0; }
+.sched-note[hidden] { display: none; }
