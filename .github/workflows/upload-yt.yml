@@ -1,0 +1,73 @@
+name: Upload to YouTube
+
+on:
+  workflow_run:
+    workflows: [Sync VODs]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency: yt-upload
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    steps:
+      - name: Check secrets
+        id: check
+        env:
+          ON: ${{ vars.AUTO_UPLOAD }}
+          T: ${{ secrets.YT_REFRESH_TOKEN }}
+        run: |
+          if [ "$ON" = "true" ] && [ -n "$T" ]; then echo "ok=1" >> "$GITHUB_OUTPUT"; else echo "::notice::Auto upload is off (variable AUTO_UPLOAD)"; fi
+
+      - uses: actions/checkout@v4
+        if: steps.check.outputs.ok
+        with:
+          ref: main
+
+      - name: Anything to upload?
+        id: todo
+        if: steps.check.outputs.ok
+        run: echo "go=$(python3 vods/scripts/upload_yt.py --check)" >> "$GITHUB_OUTPUT"
+
+      - name: Free disk space
+        if: steps.todo.outputs.go == 'yes'
+        run: sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL && df -h .
+
+      - name: Get TwitchDownloaderCLI
+        if: steps.todo.outputs.go == 'yes'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          url=$(gh api repos/lay295/TwitchDownloader/releases/latest \
+            --jq '.assets[] | select(.name | test("CLI.*Linux-x64")) | .browser_download_url')
+          curl -sL "$url" -o tdl.zip
+          unzip -o tdl.zip -d tdl
+          chmod +x tdl/TwitchDownloaderCLI
+          which ffmpeg || sudo apt-get install -y ffmpeg
+
+      - name: Upload
+        if: steps.todo.outputs.go == 'yes'
+        env:
+          TDL: ${{ github.workspace }}/tdl/TwitchDownloaderCLI
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+        run: python3 vods/scripts/upload_yt.py
+
+      - name: Save and publish
+        if: steps.todo.outputs.go == 'yes'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add vods/uploads.json
+          git commit -m "Upload to YouTube"
+          for i in 1 2 3; do git pull --rebase -q && git push && break; sleep 5; done
+          gh workflow run sync-vods.yml --ref main
