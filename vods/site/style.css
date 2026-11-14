@@ -291,3 +291,18 @@ header .avatar.spin { animation: aga-spin 1s cubic-bezier(.3, .7, .3, 1); }
 .more-card .info { padding: 8px 10px 10px; }
 .more-card h3 { font-size: 13px; margin: 0 0 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .more-card .meta { color: var(--muted); font-size: 12px; }
+
+.chat-head-r { display: flex; align-items: center; gap: 8px; }
+.cs-toggle { background: none; border: 1px solid var(--line); border-radius: 6px; width: 28px; height: 26px; cursor: pointer; font-size: 13px; line-height: 1; padding: 0; }
+.cs-toggle:hover, .cs-toggle[aria-expanded="true"] { border-color: var(--accent); background: #a970ff26; }
+.cs-toggle[hidden] { display: none; }
+.chat-search { padding: 8px 10px; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 8px; }
+.chat-search[hidden], .cs-results[hidden], .chat-log[hidden] { display: none; }
+.chat-search input { flex: 1; min-width: 0; background: var(--panel-2); color: var(--text); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; font: inherit; font-size: 14px; }
+.chat-search input:focus { outline: none; border-color: var(--accent); }
+.cs-count { color: var(--muted); font-size: 12px; white-space: nowrap; }
+.cs-results { flex: 1; overflow-y: auto; padding: 6px 4px; font-size: 13.5px; }
+.cs-hit { display: block; width: 100%; text-align: left; background: none; border: 0; color: inherit; font: inherit; padding: 0; border-radius: 6px; cursor: pointer; }
+.cs-hit:hover { background: var(--panel-2); }
+.cs-hit mark { background: #a970ff59; color: inherit; border-radius: 3px; padding: 0 1px; }
+.cs-hint { color: var(--muted); font-size: 13px; padding: 10px 12px; margin: 0; }

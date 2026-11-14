@@ -38,7 +38,12 @@
       </div>
     </div>
     <aside class="chat">
-      <div class="chat-head">Chat replay <span id="chat-status">Loading…</span></div>
+      <div class="chat-head">Chat replay <span class="chat-head-r"><span id="chat-status">Loading…</span><button class="cs-toggle" id="cs-toggle" type="button" aria-label="Search chat" aria-expanded="false" title="Search chat">🔍</button></span></div>
+      <div class="chat-search" id="chat-search" hidden>
+        <input id="cs-q" type="search" placeholder="Search chat or a name…" autocomplete="off" aria-label="Search chat">
+        <div class="cs-count" id="cs-count" aria-live="polite"></div>
+      </div>
+      <div class="cs-results" id="cs-results" hidden></div>
       <div class="chat-log loading" id="log"></div>
     </aside>
   </div>
