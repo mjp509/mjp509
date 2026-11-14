@@ -3,7 +3,6 @@
 import html
 import json
 import os
-from collections import Counter
 
 import vodlib
 
@@ -103,8 +102,6 @@ def main():
         out.mkdir(parents=True, exist_ok=True)
         (out / "index.html").write_text(page, encoding="utf-8")
 
-    games = [g for g, _ in Counter(v.get("game") for v in vods if v.get("game")).most_common(3)]
-    home_desc = "Every itsmotch Twitch stream with full chat replay" + (f": {', '.join(games)} and more." if games else ".")
     if site:
         urls = [(f"{site}/", vods[0]["date"][:10] if vods else "")] + [(f"{site}/v/{v['id']}/", v.get("date", "")[:10]) for v in vods]
         (SITE / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
@@ -115,11 +112,15 @@ def main():
     if channel.get("avatar"):
         idx = SITE / "index.html"
         s = idx.read_text(encoding="utf-8")
+        e = lambda t: html.escape(t, quote=True)
+        desc = "watch all of itsmotchs vods with chat replay 🍔"
         s = s.replace('<meta name="description" content="Every itsmotch stream, with chat replay.">',
-                      meta("itsmotch VODs", home_desc, channel["avatar"])
-                      .replace("<title>itsmotch VODs</title>\n  ", "")
-                      .replace('content="video.other"', 'content="website"')
-                      .replace('twitter:card" content="summary_large_image', 'twitter:card" content="summary'), 1)
+                      f'<meta name="description" content="{e(desc)}">\n'
+                      f'  <meta property="og:type" content="website">\n'
+                      f'  <meta property="og:title" content="itsmotch">\n'
+                      f'  <meta property="og:description" content="{e(desc)}">\n'
+                      f'  <meta property="og:image" content="{e(channel["avatar"])}">\n'
+                      f'  <meta name="twitter:card" content="summary_large_image">', 1)
         idx.write_text(s, encoding="utf-8")
     print(f"pages: {len(vods)} VOD pages")
 
