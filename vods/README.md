@@ -51,6 +51,6 @@ Stream Summary for streams the live monitor didn't record (blank stream = most r
 ## Stats
 Leaderboard counts at most 1 message per 10s per chatter.
 
-Open `/stats.html` on your site (not linked anywhere, not indexed by search engines). Updates after every sync:
+Open `/stats.html` on your site (not linked anywhere; a noindex tag keeps it out of search results). Updates after every sync:
 clip finder, chat activity by game / hour / day / start time, new vs returning chatters, top chatters,
 regulars who stopped coming, emote usage, unused 7TV emotes.
