@@ -15,7 +15,7 @@
       <li class="r${k + 1}">
         <span class="n">${k + 1}</span>
         <span class="em">${c.emote ? emoteLink(c.emote.src, c.emote.id, `<img src="${(EMOTE[c.emote.src] || EMOTE.t)(encodeURIComponent(c.emote.id))}" alt="${esc(c.emote.name)}" title="Favorite emote: ${esc(c.emote.name)}">`) : ""}</span>
-        <span class="who"><b style="color:${esc(c.color ? readable(c.color) : "var(--text)")}">${esc(c.name)}</b>${c.emote ? `<small>Favorite emote: ${esc(c.emote.name)}</small>` : ""}</span>
+        <span class="who">${profileLink(c.name, `<b style="color:${esc(c.color ? readable(c.color) : "var(--text)")}">${esc(c.name)}</b>`)}${c.emote ? `<small>Favorite emote: ${esc(c.emote.name)}</small>` : ""}</span>
         <span class="cnt">${c.messages.toLocaleString()} messages</span>
       </li>`).join("") : `<li class="none">No chat yet this month.</li>`;
     const e = m.emote, wrap = document.getElementById("eotm-wrap");

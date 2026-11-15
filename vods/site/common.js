@@ -38,6 +38,9 @@ function readable(color) {
   return `rgb(${r},${g},${b})`;
 }
 
+function gameSlug(g) { return String(g).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "game"; }
+function profileLink(name, html) { return `<a class="chatter" href="profile.html?u=${encodeURIComponent(String(name).toLowerCase())}">${html}</a>`; }
+
 function track(name, params) {
   try { if (window.gtag) gtag("event", name, params || {}); } catch {}
 }

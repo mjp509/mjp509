@@ -62,7 +62,7 @@ function msgHtml([t, name, color, body]) {
     const url = (EMOTE[src] || EMOTE.t)(encodeURIComponent(id));
     return emoteLink(src, id, `<img src="${url}" alt="${esc(name)}" title="${esc(name)}">`);
   }).join("");
-  return `<div class="msg"><span class="ts">${fmtTime(t)}</span><span class="name" style="color:${esc(colorFor(name, color))}">${esc(name)}</span>: ${text}</div>`;
+  return `<div class="msg"><span class="ts">${fmtTime(t)}</span><a class="name" href="profile.html?u=${encodeURIComponent(name.toLowerCase())}" target="_blank" rel="noopener" style="color:${esc(colorFor(name, color))}">${esc(name)}</a>: ${text}</div>`;
 }
 
 function firstAfter(t) {

@@ -14,6 +14,39 @@ def fmt_dur(s):
     return f"{h}h {m}m" if h else f"{m}m"
 
 
+def slug(name):
+    import re
+    return re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-") or "game"
+
+
+def game_pages(vods, site):
+    """site/game/<slug>/index.html for every game played, so each game has its own indexable page."""
+    template = (SITE / "game.html").read_text(encoding="utf-8")
+    games = {}
+    for v in vods:
+        for g in {v.get("game")} | {c.get("game") for c in v.get("chapters", [])}:
+            if g:
+                games.setdefault(g, []).append(v)
+    e = lambda t: html.escape(str(t), quote=True)
+    for g, vs in games.items():
+        url = f"{site}/game/{slug(g)}/" if site else ""
+        hours = sum(v.get("duration", 0) for v in vs) / 3600
+        desc = (f"Every {g} stream by itsmotch with full Twitch chat replay. {len(vs)} VOD{'s' if len(vs) != 1 else ''}, "
+                f"{hours:.0f} hours" + (", plus the shiny log." if g == "PokeMMO" else "."))
+        head = (f"<title>{e(g)} VODs · itsmotch</title>\n  <meta name=\"description\" content=\"{e(desc)}\">\n"
+                f"  <meta property=\"og:title\" content=\"{e(g)} VODs · itsmotch\">\n  <meta property=\"og:description\" content=\"{e(desc)}\">"
+                + (f"\n  <link rel=\"canonical\" href=\"{e(url)}\">" if url else ""))
+        page = (template.replace('<meta charset="utf-8">', '<meta charset="utf-8">\n  <base href="../../">', 1)
+                .replace("<title>Game VODs · itsmotch</title>", head, 1)
+                .replace('  <meta name="robots" content="noindex">\n', "", 1)
+                .replace('<h1 class="page-title" id="game-title"></h1>', f'<h1 class="page-title" id="game-title">{e(g)} VODs</h1>', 1)
+                .replace("<body>", f'<body data-game="{e(g)}">', 1))
+        out = SITE / "game" / slug(g)
+        out.mkdir(parents=True, exist_ok=True)
+        (out / "index.html").write_text(page, encoding="utf-8")
+    return sorted(games, key=lambda g: -len(games[g]))
+
+
 def fmt_time(s):
     h, rem = divmod(int(s), 3600)
     return f"{h}:{rem // 60:02d}:{rem % 60:02d}" if h else f"{rem // 60}:{rem % 60:02d}"
@@ -88,7 +121,8 @@ def add_tracking():
         print("GSC_VERIFY doesn't look like a Search Console token; skipped")
     if not head:
         return
-    pages = [SITE / n for n in ("index.html", "vod.html", "stats.html", "privacy.html", "404.html")] + list((SITE / "v").glob("*/index.html"))
+    pages = ([SITE / n for n in ("index.html", "vod.html", "stats.html", "privacy.html", "404.html", "profile.html", "shinies.html")]
+             + list((SITE / "v").glob("*/index.html")) + list((SITE / "game").glob("*/index.html")))
     for f in pages:
         if f.exists():
             s = f.read_text(encoding="utf-8")
@@ -98,7 +132,7 @@ def add_tracking():
 
 def bake_avatar(avatar):
     fav = round_favicon(avatar)
-    for name in ("index.html", "vod.html", "stats.html", "privacy.html"):
+    for name in ("index.html", "vod.html", "stats.html", "privacy.html", "game.html", "profile.html", "shinies.html"):
         f = SITE / name
         s = f.read_text(encoding="utf-8")
         s = s.replace('id="favicon" href="https://unavatar.io/twitch/itsmotch"', f'id="favicon" href="{fav}"')
@@ -173,6 +207,7 @@ def main():
         out.mkdir(parents=True, exist_ok=True)
         (out / "index.html").write_text(page, encoding="utf-8")
 
+    games = game_pages(vods, site)
     if site:
         def entry(v):
             x = html.escape
@@ -188,7 +223,9 @@ def main():
         home_mod = f"<lastmod>{vods[0].get('date', '')[:10]}</lastmod>" if vods and vods[0].get("date") else ""
         (SITE / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n'
             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">\n'
-            f"  <url><loc>{site}/</loc>{home_mod}</url>\n" + "".join(entry(v) for v in vods) + "</urlset>\n", encoding="utf-8")
+            f"  <url><loc>{site}/</loc>{home_mod}</url>\n  <url><loc>{site}/shinies.html</loc></url>\n"
+            + "".join(f"  <url><loc>{html.escape(site + '/game/' + slug(g) + '/')}</loc></url>\n" for g in games)
+            + "".join(entry(v) for v in vods) + "</urlset>\n", encoding="utf-8")
         (SITE / "robots.txt").write_text(f"User-agent: *\nAllow: /\n\nSitemap: {site}/sitemap.xml\n", encoding="utf-8")
 
     if channel.get("avatar"):

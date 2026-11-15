@@ -41,6 +41,42 @@ def save_clips(helix, uid):
     vodlib.save(vodlib.DATA / "clips.json", {"period": period, "clips": [{k: c.get(k) for k in keep} for c in clips]})
 
 
+def save_shinies():
+    """Shiny showcase from shinyboard.net (public profile), for the shiny log."""
+    user = os.environ.get("SHINYBOARD_USER", "").strip() or "Mitchell"
+    if not user:
+        return
+    import html as htmllib
+    import urllib.request
+    try:
+        req = urllib.request.Request(f"https://shinyboard.net/users/{urllib.parse.quote(user)}?tab=showcase",
+                                     headers={"User-Agent": "Mozilla/5.0 (vod-site shiny log)"})
+        with urllib.request.urlopen(req, timeout=30) as r:
+            page = r.read().decode("utf-8", "replace")
+        m = re.search(r'<script type="application/json" id="sb-showcase-data">(.*?)</script>', page, re.S)
+        raw = json.loads(m.group(1)) if m else []
+    except Exception as e:
+        print(f"::warning::Couldn't read shinyboard: {e}")
+        return
+    keep = []
+    for s in raw:
+        sprite = (s.get("sprite") or {}).get("src", "")
+        keep.append({
+            "name": htmllib.unescape(s.get("pokemonDisplayName") or s.get("pokemonName") or "?"),
+            "species": htmllib.unescape(s.get("pokemonSpeciesName") or ""),
+            "nick": htmllib.unescape(s.get("nickname") or ""),
+            "sprite": sprite if sprite.startswith("https://shinyboard.net/") else "",
+            "date": s.get("caughtAt") or "", "ts": s.get("timestamp") or 0,
+            "enc": s.get("encounterCount") or 0, "method": s.get("method") or "",
+            "loc": htmllib.unescape(s.get("location") or ""), "ivs": s.get("ivSpread") or [],
+            "nature": s.get("natureName") or "", "alpha": bool(s.get("isAlpha")), "secret": bool(s.get("isSecret")),
+            "fav": bool(s.get("isFavourite")), "yt": s.get("reactionYoutubeUrl") or "",
+        })
+    keep.sort(key=lambda s: -(s["ts"] or 0))
+    vodlib.save(vodlib.DATA / "shinies.json", {"user": user, "url": f"https://shinyboard.net/users/{urllib.parse.quote(user)}?tab=showcase", "shinies": keep})
+    print(f"Shinies: {len(keep)} from shinyboard")
+
+
 def save_schedule(helix, uid):
     """Upcoming streams from the channel's Twitch schedule, for the homepage."""
     try:
@@ -214,5 +250,6 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"::warning::Couldn't fold live monitor data: {e}")
     save_new_chats()
+    save_shinies()
     match_youtube()
     update_youtube_views()

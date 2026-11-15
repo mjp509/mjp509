@@ -318,3 +318,17 @@ header .avatar.spin { animation: aga-spin 1s cubic-bezier(.3, .7, .3, 1); }
 .sched .sg { color: var(--muted); font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .sched-note { color: var(--muted); font-size: 12px; margin: 10px 0 0; }
 .sched-note[hidden] { display: none; }
+.recap { background: var(--panel); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: var(--radius); padding: 12px 16px; margin-bottom: 22px; }
+.recap-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; color: var(--accent); margin-bottom: 6px; }
+.recap-body { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; }
+.recap-main { min-width: 0; flex: 1 1 260px; }
+.recap-title { font-weight: 800; font-size: 16px; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+a.recap-title:hover { text-decoration: underline; text-underline-offset: 3px; }
+.recap-meta, .hint-sm { color: var(--muted); font-size: 13px; }
+.recap-facts, .recap-moments { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.rchip { background: var(--panel-2); border-radius: 999px; padding: 4px 10px; font-size: 13px; }
+.rmoment { background: #a970ff26; color: var(--text); border: 1px solid #a970ff55; border-radius: 999px; padding: 4px 10px; font-size: 13px; font-weight: 600; }
+a.rmoment:hover { border-color: var(--accent); }
+.recap-moments .hint-sm { margin-right: 2px; }
+.msg a.name:hover { text-decoration: underline; text-underline-offset: 2px; }
+a.gtile { display: block; }
