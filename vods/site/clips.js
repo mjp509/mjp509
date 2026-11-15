@@ -22,6 +22,7 @@
       src="https://clips.twitch.tv/embed?clip=${encodeURIComponent(b.dataset.id)}&parent=${encodeURIComponent(location.hostname)}&autoplay=true"></iframe>`;
     modal.hidden = false;
     opener = b;
+    track("clip_open", { item_id: b.dataset.id });
     document.getElementById("clip-close").focus();
   });
   document.getElementById("clip-close").addEventListener("click", close);

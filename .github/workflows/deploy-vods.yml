@@ -35,6 +35,8 @@ jobs:
       - run: pip install --quiet pillow && python3 vods/scripts/pages.py
         env:
           SITE_URL: ${{ steps.pages.outputs.base_url }}
+          GA_ID: ${{ vars.GA_ID }}
+          GSC_VERIFY: ${{ vars.GSC_VERIFY }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: vods/site

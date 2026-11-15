@@ -65,6 +65,33 @@ def round_favicon(url):
         return url
 
 
+def add_tracking():
+    """Google Analytics (repo variable GA_ID) and Search Console verification (GSC_VERIFY), when set."""
+    import re
+    ga = os.environ.get("GA_ID", "").strip()
+    gsc = os.environ.get("GSC_VERIFY", "").strip()
+    gsc = re.sub(r'.*content="([^"]+)".*', r"\1", gsc)  # accept the whole <meta> tag too
+    head = ""
+    if re.fullmatch(r"G-[A-Z0-9]{4,16}", ga):
+        head += (f'  <script async src="https://www.googletagmanager.com/gtag/js?id={ga}"></script>\n'
+                 f"  <script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments)}}"
+                 f"gtag('js',new Date());gtag('config','{ga}');</script>\n")
+    elif ga:
+        print(f"GA_ID '{ga}' doesn't look like a G-XXXXXXX measurement ID; skipped")
+    if re.fullmatch(r"[A-Za-z0-9_-]{20,100}", gsc):
+        head += f'  <meta name="google-site-verification" content="{gsc}">\n'
+    elif gsc:
+        print("GSC_VERIFY doesn't look like a Search Console token; skipped")
+    if not head:
+        return
+    pages = [SITE / n for n in ("index.html", "vod.html", "stats.html", "privacy.html", "404.html")] + list((SITE / "v").glob("*/index.html"))
+    for f in pages:
+        if f.exists():
+            s = f.read_text(encoding="utf-8")
+            if "googletagmanager" not in s and "google-site-verification" not in s:
+                f.write_text(s.replace("</head>", head + "</head>", 1), encoding="utf-8")
+
+
 def bake_avatar(avatar):
     fav = round_favicon(avatar)
     for name in ("index.html", "vod.html", "stats.html", "privacy.html"):
@@ -183,6 +210,7 @@ def main():
                           f'  <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False).replace("</", "<\\/")}</script>\n'
                           '  <link rel="stylesheet" href="style.css">', 1)
         idx.write_text(s, encoding="utf-8")
+    add_tracking()
     print(f"pages: {len(vods)} VOD pages")
 
 
