@@ -4,7 +4,7 @@
       "live_streams": 0,
       "linked": 0,
       "since": null,
-      "folded_until": "2026-11-15T02:56:38Z"
+      "folded_until": "2026-11-15T10:24:29Z"
     },
     "metrics": [
       {
@@ -248,7 +248,7 @@
         {
           "tag": "Timing",
           "title": "Least crowded hours in your category",
-          "have": 9,
+          "have": 10,
           "need": 40,
           "unit": "hours of category samples"
         },
@@ -275,8 +275,8 @@
       {
         "gid": "457975278",
         "game": "PokeMMO",
-        "slots_sampled": 9,
-        "samples": 9,
+        "slots_sampled": 10,
+        "samples": 10,
         "cells": [
           [
             0,
@@ -1357,11 +1357,11 @@
             0
           ],
           [
-            0,
-            0,
-            0,
-            0,
-            0
+            1,
+            7.0,
+            47,
+            6.71,
+            3.0
           ],
           [
             0,
@@ -2154,13 +2154,13 @@
         "messages": 6
       },
       {
-        "name": "DrexsteinA",
-        "color": "#00FF7F",
+        "name": "GymRerun",
+        "color": "#FF69B4",
         "messages": 5
       },
       {
-        "name": "GymRerun",
-        "color": "#FF69B4",
+        "name": "DrexsteinA",
+        "color": "#00FF7F",
         "messages": 5
       },
       {
@@ -2169,13 +2169,13 @@
         "messages": 3
       },
       {
-        "name": "BreezyRS",
-        "color": "#00FF7F",
+        "name": "HuntressClairice",
+        "color": "#FF69B4",
         "messages": 3
       },
       {
-        "name": "HuntressClairice",
-        "color": "#FF69B4",
+        "name": "BreezyRS",
+        "color": "#00FF7F",
         "messages": 3
       },
       {
@@ -2184,13 +2184,13 @@
         "messages": 2
       },
       {
-        "name": "csixtythree04",
-        "color": "",
+        "name": "magicalseed",
+        "color": "#FF0000",
         "messages": 1
       },
       {
-        "name": "magicalseed",
-        "color": "#FF0000",
+        "name": "csixtythree04",
+        "color": "",
         "messages": 1
       }
     ],
