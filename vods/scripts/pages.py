@@ -185,7 +185,7 @@ def main():
         (SITE / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n'
             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">\n'
             f"  <url><loc>{site}/</loc>{home_mod}</url>\n" + "".join(entry(v) for v in vods) + "</urlset>\n", encoding="utf-8")
-        (SITE / "robots.txt").write_text(f"User-agent: *\nAllow: /\nDisallow: /stats.html\n\nSitemap: {site}/sitemap.xml\n", encoding="utf-8")
+        (SITE / "robots.txt").write_text(f"User-agent: *\nAllow: /\n\nSitemap: {site}/sitemap.xml\n", encoding="utf-8")
 
     if channel.get("avatar"):
         idx = SITE / "index.html"
