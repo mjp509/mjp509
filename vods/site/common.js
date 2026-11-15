@@ -38,6 +38,10 @@ function readable(color) {
   return `rgb(${r},${g},${b})`;
 }
 
+function track(name, params) {
+  try { if (window.gtag) gtag("event", name, params || {}); } catch {}
+}
+
 function emoteLink(src, id, inner) {
   if (src !== "7" || !id) return inner;
   return `<a class="emote-link" href="https://7tv.app/emotes/${encodeURIComponent(id)}" target="_blank" rel="noopener">${inner}</a>`;

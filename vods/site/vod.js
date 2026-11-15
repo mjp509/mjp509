@@ -126,6 +126,7 @@ function setupSearch() {
     if (e.target.closest("a")) return;
     const b = e.target.closest(".cs-hit"); if (!b) return;
     seekChat(+b.dataset.t);
+    track("chat_search_jump", { search_term: q.value.trim() });
     open(false);
   });
   btn.hidden = !chat.length;
@@ -208,6 +209,7 @@ function renderMore(vods, vod) {
   const toast = msg => { const t = document.getElementById("toast"); t.textContent = msg; t.hidden = false;
     clearTimeout(toast.h); toast.h = setTimeout(() => (t.hidden = true), 2200); };
   shareBtn.addEventListener("click", async () => {
+    track("share", { content_type: "vod", item_id: vod.id });
     const t = Math.floor(player && player.getCurrentTime ? player.getCurrentTime() : 0);
     const url = new URL(`v/${encodeURIComponent(vod.id)}/`, document.baseURI);
     if (t > 0) url.searchParams.set("t", t);
