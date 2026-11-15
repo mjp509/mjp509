@@ -54,3 +54,9 @@ Leaderboard counts at most 1 message per 10s per chatter.
 Open `/stats.html` on your site (not linked anywhere; a noindex tag keeps it out of search results). Updates after every sync:
 clip finder, chat activity by game / hour / day / start time, new vs returning chatters, top chatters,
 regulars who stopped coming, emote usage, unused 7TV emotes.
+
+## Community
+- **Shiny log** (`/shinies.html`): imported from the public shinyboard.net showcase on every sync (repo variable `SHINYBOARD_USER`, default `Mitchell`).
+- **Game pages** (`/game/<game>/`): every game streamed gets its own page; PokeMMO's includes the shiny log.
+- **Chatter profiles** (`/profile.html?u=name`): messages, streams, streaks, favorite emote, first message and badges, rebuilt from chat on every sync.
+- **Last time on itsmotch**: recap of the latest stream at the top of the homepage.

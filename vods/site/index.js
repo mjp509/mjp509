@@ -63,11 +63,11 @@ function renderGames(vods, art, pick) {
   document.getElementById("games").hidden = !list.length;
   const row = document.getElementById("games-row");
   row.innerHTML = list.map(([g, n]) => `
-    <button class="gtile" type="button" data-game="${esc(g)}">
+    <a class="gtile" href="game/${gameSlug(g)}/" data-game="${esc(g)}">
       <img loading="lazy" src="${esc(boxart(art, g))}" alt="" onload="this.classList.add('loaded')">
       <b>${esc(g)}</b><span>${n} VOD${n === 1 ? "" : "s"}</span>
-    </button>`).join("");
-  row.onclick = e => { const t = e.target.closest(".gtile"); if (t) { track("game_filter", { game: t.dataset.game }); pick(t.dataset.game); } };
+    </a>`).join("");
+  row.onclick = e => { const t = e.target.closest(".gtile"); if (t) track("game_page", { game: t.dataset.game }); };
 }
 
 (async () => {

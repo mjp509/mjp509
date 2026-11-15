@@ -3,3 +3,4 @@ __pycache__/
 vods/site/favicon.png
 vods/site/sitemap.xml
 vods/site/robots.txt
+vods/site/game/

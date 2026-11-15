@@ -3,6 +3,7 @@
 import json
 import re
 from collections import Counter, defaultdict
+from datetime import datetime, timedelta
 
 import vodlib
 
@@ -80,6 +81,9 @@ def main():
     present, all_moments, news = [], {}, []
     monthly, display, colors, monthly_emotes = defaultdict(Counter), {}, {}, defaultdict(Counter)
     fav = defaultdict(lambda: defaultdict(Counter))
+    prof = defaultdict(lambda: {"streams": [], "emotes": Counter(), "first": None, "night": False, "bluemoon": False})
+    weekly = vodlib.load(vodlib.DATA / "weekly.json", {})
+    sched_days, off_h = set(weekly.get("days") or []), weekly.get("utc_offset", -6)
 
     for v in streams:
         path = vodlib.DATA / "chat" / f"{v['id']}.json"
@@ -90,6 +94,8 @@ def main():
 
         chatters = set()
         stream_counts = Counter()
+        start = datetime.fromisoformat(v["date"].replace("Z", "+00:00")) + timedelta(hours=off_h)
+        off_sched = bool(sched_days) and start.strftime("%a") not in sched_days
         month = v["date"][:7]
         last_counted = {}
         for t, name, color, body in chat:
@@ -98,6 +104,13 @@ def main():
                 continue
             chatters.add(lname)
             stream_counts[lname] += 1
+            pr = prof[lname]
+            if pr["first"] is None:
+                pr["first"] = {"vod": v["id"], "date": v["date"], "t": int(t), "text": " ".join(text_of(body))[:200]}
+            if (start + timedelta(seconds=t)).hour < 5:
+                pr["night"] = True
+            if off_sched:
+                pr["bluemoon"] = True
             msg_count[lname] += 1
             if t - last_counted.get(lname, -SPAM_GAP) >= SPAM_GAP:
                 monthly[month][lname] += 1
@@ -110,6 +123,7 @@ def main():
                 for p in body:
                     if isinstance(p, list):
                         emotes[(p[0], p[1], p[2])] += 1
+                        prof[lname]["emotes"][(p[0], p[1], p[2])] += 1
                         if (p[0], p[1]) not in once:
                             fav[month][lname][(p[0], p[1], p[2])] += 1
                         if p[0] == "7" and (p[0], p[1]) not in once:
@@ -119,6 +133,7 @@ def main():
         news.append(new)
         seen |= chatters
         for c in chatters:
+            prof[c]["streams"].append((len(present), v["id"], stream_counts[c]))
             attendance[c] += 1
             last_seen[c] = v["date"]
         present.append(chatters)
@@ -208,6 +223,11 @@ def main():
          "top": [{"name": display[n], "color": colors.get(n, ""), "messages": c, "emote": fav_of(m, n)}
                  for n, c in monthly[m].most_common(10)]}
         for m in sorted(set(monthly) | set(monthly_emotes), reverse=True)[:12]])
+    try:
+        import community
+        community.build(prof, present, display, colors, msg_count, monthly, per_stream, all_moments, streams)
+    except Exception as e:
+        print(f"::warning::community data skipped: {e}")
     print(f"stats: {len(per_stream)} streams, {len(seen)} chatters")
 
 
