@@ -72,12 +72,16 @@ def add_tracking():
     gsc = os.environ.get("GSC_VERIFY", "").strip()
     gsc = re.sub(r'.*content="([^"]+)".*', r"\1", gsc)  # accept the whole <meta> tag too
     head = ""
-    if re.fullmatch(r"G-[A-Z0-9]{4,16}", ga):
+    if re.fullmatch(r"GTM-[A-Z0-9]{4,16}", ga):  # newer Google tag container, as shown in Google's setup page
+        head += (f'  <script async src="https://www.googletagmanager.com/gtm.js?id={ga}"></script>\n'
+                 "  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}"
+                 "gtag('js',new Date());</script>\n")
+    elif re.fullmatch(r"G-[A-Z0-9]{4,16}", ga):
         head += (f'  <script async src="https://www.googletagmanager.com/gtag/js?id={ga}"></script>\n'
                  f"  <script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments)}}"
                  f"gtag('js',new Date());gtag('config','{ga}');</script>\n")
     elif ga:
-        print(f"GA_ID '{ga}' doesn't look like a G-XXXXXXX measurement ID; skipped")
+        print(f"GA_ID '{ga}' doesn't look like a G-XXXXXXX or GTM-XXXXXXX ID; skipped")
     if re.fullmatch(r"[A-Za-z0-9_-]{20,100}", gsc):
         head += f'  <meta name="google-site-verification" content="{gsc}">\n'
     elif gsc:
@@ -89,7 +93,7 @@ def add_tracking():
         if f.exists():
             s = f.read_text(encoding="utf-8")
             if "googletagmanager" not in s and "google-site-verification" not in s:
-                f.write_text(s.replace("</head>", head + "</head>", 1), encoding="utf-8")
+                f.write_text(s.replace("<head>\n", "<head>\n" + head, 1) if "<head>\n" in s else s.replace("</head>", head + "</head>", 1), encoding="utf-8")
 
 
 def bake_avatar(avatar):
