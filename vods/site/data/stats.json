@@ -4,7 +4,7 @@
       "live_streams": 0,
       "linked": 0,
       "since": null,
-      "folded_until": "2026-11-14T08:00:20Z"
+      "folded_until": "2026-11-15T02:56:38Z"
     },
     "metrics": [
       {
@@ -248,7 +248,7 @@
         {
           "tag": "Timing",
           "title": "Least crowded hours in your category",
-          "have": 5,
+          "have": 9,
           "need": 40,
           "unit": "hours of category samples"
         },
@@ -275,8 +275,8 @@
       {
         "gid": "457975278",
         "game": "PokeMMO",
-        "slots_sampled": 5,
-        "samples": 5,
+        "slots_sampled": 9,
+        "samples": 9,
         "cells": [
           [
             0,
@@ -1217,11 +1217,11 @@
             0
           ],
           [
-            0,
-            0,
-            0,
-            0,
-            0
+            1,
+            8.0,
+            65,
+            8.12,
+            3.5
           ],
           [
             0,
@@ -1252,11 +1252,11 @@
             0
           ],
           [
-            0,
-            0,
-            0,
-            0,
-            0
+            1,
+            7.0,
+            17,
+            2.43,
+            2.0
           ],
           [
             0,
@@ -1280,11 +1280,11 @@
             0
           ],
           [
-            0,
-            0,
-            0,
-            0,
-            0
+            1,
+            18.0,
+            107,
+            5.94,
+            3.5
           ],
           [
             0,
@@ -1301,11 +1301,11 @@
             0
           ],
           [
-            0,
-            0,
-            0,
-            0,
-            0
+            1,
+            17.0,
+            55,
+            3.24,
+            3.0
           ],
           [
             0,
@@ -1459,7 +1459,7 @@
     ],
     "followers": {
       "current": 284,
-      "as_of": "2026-11-14",
+      "as_of": "2026-11-15",
       "history": [
         [
           "2026-11-13",
@@ -1467,6 +1467,10 @@
         ],
         [
           "2026-11-14",
+          284
+        ],
+        [
+          "2026-11-15",
           284
         ]
       ],
@@ -1483,7 +1487,7 @@
     },
     "subs": {
       "current": 2,
-      "as_of": "2026-11-14",
+      "as_of": "2026-11-15",
       "history": [
         [
           "2026-11-13",
@@ -1491,6 +1495,10 @@
         ],
         [
           "2026-11-14",
+          2
+        ],
+        [
+          "2026-11-15",
           2
         ]
       ],
@@ -1537,8 +1545,8 @@
         "id": "2927241555",
         "title": "🍔 gëek wën i want gëek all da timë 🍔 luh shmünk 🍔"
       },
-      "from": "2026-11-07",
-      "to": "2026-11-14"
+      "from": "2026-11-08",
+      "to": "2026-11-15"
     }
   },
   "overview": {
@@ -2146,13 +2154,13 @@
         "messages": 6
       },
       {
-        "name": "GymRerun",
-        "color": "#FF69B4",
+        "name": "DrexsteinA",
+        "color": "#00FF7F",
         "messages": 5
       },
       {
-        "name": "DrexsteinA",
-        "color": "#00FF7F",
+        "name": "GymRerun",
+        "color": "#FF69B4",
         "messages": 5
       },
       {
@@ -2176,13 +2184,13 @@
         "messages": 2
       },
       {
-        "name": "magicalseed",
-        "color": "#FF0000",
+        "name": "csixtythree04",
+        "color": "",
         "messages": 1
       },
       {
-        "name": "csixtythree04",
-        "color": "",
+        "name": "magicalseed",
+        "color": "#FF0000",
         "messages": 1
       }
     ],
