@@ -4,7 +4,7 @@
       "live_streams": 0,
       "linked": 0,
       "since": null,
-      "folded_until": "2026-11-15T17:19:52Z"
+      "folded_until": "2026-11-16T01:31:29Z"
     },
     "metrics": [
       {
@@ -248,7 +248,7 @@
         {
           "tag": "Timing",
           "title": "Least crowded hours in your category",
-          "have": 11,
+          "have": 13,
           "need": 40,
           "unit": "hours of category samples"
         },
@@ -275,8 +275,8 @@
       {
         "gid": "457975278",
         "game": "PokeMMO",
-        "slots_sampled": 11,
-        "samples": 11,
+        "slots_sampled": 13,
+        "samples": 13,
         "cells": [
           [
             0,
@@ -286,11 +286,11 @@
             0
           ],
           [
-            0,
-            0,
-            0,
-            0,
-            0
+            1,
+            15.0,
+            82,
+            5.47,
+            3.0
           ],
           [
             0,
@@ -1434,11 +1434,11 @@
             0
           ],
           [
-            0,
-            0,
-            0,
-            0,
-            0
+            1,
+            17.0,
+            93,
+            5.47,
+            2.0
           ],
           [
             0,
@@ -1459,7 +1459,7 @@
     ],
     "followers": {
       "current": 284,
-      "as_of": "2026-11-15",
+      "as_of": "2026-11-16",
       "history": [
         [
           "2026-11-13",
@@ -1471,6 +1471,10 @@
         ],
         [
           "2026-11-15",
+          284
+        ],
+        [
+          "2026-11-16",
           284
         ]
       ],
@@ -1487,7 +1491,7 @@
     },
     "subs": {
       "current": 2,
-      "as_of": "2026-11-15",
+      "as_of": "2026-11-16",
       "history": [
         [
           "2026-11-13",
@@ -1499,6 +1503,10 @@
         ],
         [
           "2026-11-15",
+          2
+        ],
+        [
+          "2026-11-16",
           2
         ]
       ],
@@ -1545,8 +1553,8 @@
         "id": "2927241555",
         "title": "🍔 gëek wën i want gëek all da timë 🍔 luh shmünk 🍔"
       },
-      "from": "2026-11-08",
-      "to": "2026-11-15"
+      "from": "2026-11-09",
+      "to": "2026-11-16"
     }
   },
   "overview": {
@@ -2154,14 +2162,19 @@
         "messages": 6
       },
       {
+        "name": "DrexsteinA",
+        "color": "#00FF7F",
+        "messages": 5
+      },
+      {
         "name": "GymRerun",
         "color": "#FF69B4",
         "messages": 5
       },
       {
-        "name": "DrexsteinA",
-        "color": "#00FF7F",
-        "messages": 5
+        "name": "leonunez96",
+        "color": "",
+        "messages": 3
       },
       {
         "name": "HuntressClairice",
@@ -2171,11 +2184,6 @@
       {
         "name": "BreezyRS",
         "color": "#00FF7F",
-        "messages": 3
-      },
-      {
-        "name": "leonunez96",
-        "color": "",
         "messages": 3
       },
       {
