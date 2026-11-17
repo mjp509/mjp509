@@ -4,7 +4,7 @@
       "live_streams": 0,
       "linked": 0,
       "since": null,
-      "folded_until": "2026-11-16T18:52:33Z"
+      "folded_until": "2026-11-17T02:15:20Z"
     },
     "metrics": [
       {
@@ -248,7 +248,7 @@
         {
           "tag": "Timing",
           "title": "Least crowded hours in your category",
-          "have": 15,
+          "have": 16,
           "need": 40,
           "unit": "hours of category samples"
         },
@@ -275,8 +275,8 @@
       {
         "gid": "457975278",
         "game": "PokeMMO",
-        "slots_sampled": 15,
-        "samples": 15,
+        "slots_sampled": 16,
+        "samples": 16,
         "cells": [
           [
             0,
@@ -461,11 +461,11 @@
             0
           ],
           [
-            0,
-            0,
-            0,
-            0,
-            0
+            1,
+            15.0,
+            103,
+            6.87,
+            6.0
           ],
           [
             0,
@@ -1459,7 +1459,7 @@
     ],
     "followers": {
       "current": 284,
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "history": [
         [
           "2026-11-13",
@@ -1475,6 +1475,10 @@
         ],
         [
           "2026-11-16",
+          284
+        ],
+        [
+          "2026-11-17",
           284
         ]
       ],
@@ -1491,7 +1495,7 @@
     },
     "subs": {
       "current": 2,
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "history": [
         [
           "2026-11-13",
@@ -1507,6 +1511,10 @@
         ],
         [
           "2026-11-16",
+          2
+        ],
+        [
+          "2026-11-17",
           2
         ]
       ],
@@ -1553,8 +1561,8 @@
         "id": "2927241555",
         "title": "🍔 gëek wën i want gëek all da timë 🍔 luh shmünk 🍔"
       },
-      "from": "2026-11-09",
-      "to": "2026-11-16"
+      "from": "2026-11-10",
+      "to": "2026-11-17"
     }
   },
   "overview": {
@@ -2162,23 +2170,23 @@
         "messages": 6
       },
       {
-        "name": "DrexsteinA",
-        "color": "#00FF7F",
-        "messages": 5
-      },
-      {
         "name": "GymRerun",
         "color": "#FF69B4",
         "messages": 5
       },
       {
-        "name": "leonunez96",
-        "color": "",
-        "messages": 3
+        "name": "DrexsteinA",
+        "color": "#00FF7F",
+        "messages": 5
       },
       {
         "name": "HuntressClairice",
         "color": "#FF69B4",
+        "messages": 3
+      },
+      {
+        "name": "leonunez96",
+        "color": "",
         "messages": 3
       },
       {
@@ -2192,13 +2200,13 @@
         "messages": 2
       },
       {
-        "name": "csixtythree04",
-        "color": "",
+        "name": "magicalseed",
+        "color": "#FF0000",
         "messages": 1
       },
       {
-        "name": "magicalseed",
-        "color": "#FF0000",
+        "name": "csixtythree04",
+        "color": "",
         "messages": 1
       }
     ],
