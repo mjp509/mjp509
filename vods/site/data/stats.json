@@ -4,7 +4,7 @@
       "live_streams": 0,
       "linked": 0,
       "since": null,
-      "folded_until": "2026-11-17T02:15:20Z"
+      "folded_until": "2026-11-17T10:47:25Z"
     },
     "metrics": [
       {
@@ -248,7 +248,7 @@
         {
           "tag": "Timing",
           "title": "Least crowded hours in your category",
-          "have": 16,
+          "have": 17,
           "need": 40,
           "unit": "hours of category samples"
         },
@@ -275,8 +275,8 @@
       {
         "gid": "457975278",
         "game": "PokeMMO",
-        "slots_sampled": 16,
-        "samples": 16,
+        "slots_sampled": 17,
+        "samples": 17,
         "cells": [
           [
             0,
@@ -517,11 +517,11 @@
             0
           ],
           [
-            0,
-            0,
-            0,
-            0,
-            0
+            1,
+            7.0,
+            42,
+            6.0,
+            3.0
           ],
           [
             0,
@@ -2170,14 +2170,19 @@
         "messages": 6
       },
       {
+        "name": "DrexsteinA",
+        "color": "#00FF7F",
+        "messages": 5
+      },
+      {
         "name": "GymRerun",
         "color": "#FF69B4",
         "messages": 5
       },
       {
-        "name": "DrexsteinA",
+        "name": "BreezyRS",
         "color": "#00FF7F",
-        "messages": 5
+        "messages": 3
       },
       {
         "name": "HuntressClairice",
@@ -2187,11 +2192,6 @@
       {
         "name": "leonunez96",
         "color": "",
-        "messages": 3
-      },
-      {
-        "name": "BreezyRS",
-        "color": "#00FF7F",
         "messages": 3
       },
       {
