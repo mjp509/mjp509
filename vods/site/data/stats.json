@@ -4,7 +4,7 @@
       "live_streams": 0,
       "linked": 0,
       "since": null,
-      "folded_until": "2026-11-17T19:26:55Z"
+      "folded_until": "2026-11-18T01:46:23Z"
     },
     "metrics": [
       {
@@ -248,7 +248,7 @@
         {
           "tag": "Timing",
           "title": "Least crowded hours in your category",
-          "have": 18,
+          "have": 19,
           "need": 40,
           "unit": "hours of category samples"
         },
@@ -275,8 +275,8 @@
       {
         "gid": "457975278",
         "game": "PokeMMO",
-        "slots_sampled": 18,
-        "samples": 18,
+        "slots_sampled": 19,
+        "samples": 19,
         "cells": [
           [
             0,
@@ -622,11 +622,11 @@
             0
           ],
           [
-            0,
-            0,
-            0,
-            0,
-            0
+            1,
+            17.0,
+            83,
+            4.88,
+            3.0
           ],
           [
             0,
@@ -1459,7 +1459,7 @@
     ],
     "followers": {
       "current": 284,
-      "as_of": "2026-11-17",
+      "as_of": "2026-11-18",
       "history": [
         [
           "2026-11-13",
@@ -1479,6 +1479,10 @@
         ],
         [
           "2026-11-17",
+          284
+        ],
+        [
+          "2026-11-18",
           284
         ]
       ],
@@ -1495,7 +1499,7 @@
     },
     "subs": {
       "current": 2,
-      "as_of": "2026-11-17",
+      "as_of": "2026-11-18",
       "history": [
         [
           "2026-11-13",
@@ -1515,6 +1519,10 @@
         ],
         [
           "2026-11-17",
+          2
+        ],
+        [
+          "2026-11-18",
           2
         ]
       ],
@@ -1561,8 +1569,8 @@
         "id": "2927241555",
         "title": "🍔 gëek wën i want gëek all da timë 🍔 luh shmünk 🍔"
       },
-      "from": "2026-11-10",
-      "to": "2026-11-17"
+      "from": "2026-11-11",
+      "to": "2026-11-18"
     }
   },
   "overview": {
