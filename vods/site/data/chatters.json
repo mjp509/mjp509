@@ -1,12 +1,12 @@
 {
-  "streams": 1,
+  "streams": 2,
   "badges": [
     {
       "id": "og",
       "emoji": "🌱",
       "name": "Day one",
       "how": "Chatted in the very first saved stream",
-      "pct": 100
+      "pct": 69
     },
     {
       "id": "regular",
@@ -48,7 +48,7 @@
       "emoji": "🗣️",
       "name": "Chatterbox",
       "how": "Sent 100 messages",
-      "pct": 6
+      "pct": 4
     },
     {
       "id": "novelist",
@@ -69,7 +69,7 @@
       "emoji": "🏆",
       "name": "Podium",
       "how": "Finished top 3 in a monthly highscore",
-      "pct": 17
+      "pct": 12
     },
     {
       "id": "bluemoon",
@@ -83,7 +83,7 @@
       "emoji": "🦉",
       "name": "Night owl",
       "how": "Chatted past midnight",
-      "pct": 0
+      "pct": 27
     }
   ],
   "users": {
@@ -92,7 +92,7 @@
       "c": "#00FF7F",
       "m": 5,
       "s": 1,
-      "streak": 1,
+      "streak": 0,
       "best": 1,
       "e": 5,
       "fav": {
@@ -120,11 +120,11 @@
     "ewyoustink": {
       "n": "EwYouStink",
       "c": "#0000FF",
-      "m": 41,
-      "s": 1,
-      "streak": 1,
-      "best": 1,
-      "e": 16,
+      "m": 51,
+      "s": 2,
+      "streak": 2,
+      "best": 2,
+      "e": 23,
       "fav": {
         "src": "7",
         "id": "01J96N7ERG0009MAMR2DZMJX8W",
@@ -136,8 +136,12 @@
         "t": 796,
         "text": "EwYouStink subscribed at Tier 1. They've subscribed for 19 months, currently on a 19 month streak! aga"
       },
-      "last": "2927241555",
+      "last": "2934630921",
       "recent": [
+        [
+          "2934630921",
+          10
+        ],
         [
           "2927241555",
           41
@@ -145,7 +149,8 @@
       ],
       "b": [
         "og",
-        "podium"
+        "podium",
+        "nightowl"
       ]
     },
     "magicalseed": {
@@ -153,7 +158,7 @@
       "c": "#FF0000",
       "m": 1,
       "s": 1,
-      "streak": 1,
+      "streak": 0,
       "best": 1,
       "e": 0,
       "fav": null,
@@ -179,7 +184,7 @@
       "c": "#2E8B57",
       "m": 24,
       "s": 1,
-      "streak": 1,
+      "streak": 0,
       "best": 1,
       "e": 5,
       "fav": {
@@ -209,7 +214,7 @@
       "c": "#89AEFF",
       "m": 6,
       "s": 1,
-      "streak": 1,
+      "streak": 0,
       "best": 1,
       "e": 1,
       "fav": {
@@ -239,7 +244,7 @@
       "c": "#FF0000",
       "m": 22,
       "s": 1,
-      "streak": 1,
+      "streak": 0,
       "best": 1,
       "e": 6,
       "fav": {
@@ -269,7 +274,7 @@
       "c": "#5F9EA0",
       "m": 13,
       "s": 1,
-      "streak": 1,
+      "streak": 0,
       "best": 1,
       "e": 5,
       "fav": {
@@ -299,7 +304,7 @@
       "c": "",
       "m": 1,
       "s": 1,
-      "streak": 1,
+      "streak": 0,
       "best": 1,
       "e": 2,
       "fav": {
@@ -327,11 +332,11 @@
     "nightwind02": {
       "n": "NightWind02",
       "c": "#00FF7F",
-      "m": 207,
-      "s": 1,
-      "streak": 1,
-      "best": 1,
-      "e": 35,
+      "m": 250,
+      "s": 2,
+      "streak": 2,
+      "best": 2,
+      "e": 43,
       "fav": {
         "src": "7",
         "id": "01F61B1440000991F7SWQNMVX7",
@@ -343,8 +348,12 @@
         "t": 5485,
         "text": "i dont see no posters up"
       },
-      "last": "2927241555",
+      "last": "2934630921",
       "recent": [
+        [
+          "2934630921",
+          43
+        ],
         [
           "2927241555",
           207
@@ -353,7 +362,8 @@
       "b": [
         "og",
         "chatterbox",
-        "podium"
+        "podium",
+        "nightowl"
       ]
     },
     "huntressclairice": {
@@ -361,7 +371,7 @@
       "c": "#FF69B4",
       "m": 3,
       "s": 1,
-      "streak": 1,
+      "streak": 0,
       "best": 1,
       "e": 1,
       "fav": {
@@ -391,7 +401,7 @@
       "c": "",
       "m": 67,
       "s": 1,
-      "streak": 1,
+      "streak": 0,
       "best": 1,
       "e": 12,
       "fav": {
@@ -422,7 +432,7 @@
       "c": "",
       "m": 3,
       "s": 1,
-      "streak": 1,
+      "streak": 0,
       "best": 1,
       "e": 0,
       "fav": null,
@@ -448,7 +458,7 @@
       "c": "#0000FF",
       "m": 28,
       "s": 1,
-      "streak": 1,
+      "streak": 0,
       "best": 1,
       "e": 4,
       "fav": {
@@ -478,7 +488,7 @@
       "c": "#8A2BE2",
       "m": 9,
       "s": 1,
-      "streak": 1,
+      "streak": 0,
       "best": 1,
       "e": 3,
       "fav": {
@@ -508,7 +518,7 @@
       "c": "#00FF7F",
       "m": 3,
       "s": 1,
-      "streak": 1,
+      "streak": 0,
       "best": 1,
       "e": 1,
       "fav": {
@@ -538,7 +548,7 @@
       "c": "#FF69B4",
       "m": 5,
       "s": 1,
-      "streak": 1,
+      "streak": 0,
       "best": 1,
       "e": 2,
       "fav": {
@@ -568,7 +578,7 @@
       "c": "#DAA520",
       "m": 15,
       "s": 1,
-      "streak": 1,
+      "streak": 0,
       "best": 1,
       "e": 3,
       "fav": {
@@ -598,7 +608,7 @@
       "c": "#D2691E",
       "m": 2,
       "s": 1,
-      "streak": 1,
+      "streak": 0,
       "best": 1,
       "e": 0,
       "fav": null,
@@ -617,6 +627,240 @@
       ],
       "b": [
         "og"
+      ]
+    },
+    "treelon720": {
+      "n": "treelon720",
+      "c": "",
+      "m": 15,
+      "s": 1,
+      "streak": 1,
+      "best": 1,
+      "e": 7,
+      "fav": {
+        "src": "7",
+        "id": "01H0AJTA28000DCQNTXCHQKJPM",
+        "name": "mitchell"
+      },
+      "first": {
+        "vod": "2934630921",
+        "date": "2026-11-20T04:50:33Z",
+        "t": 597,
+        "text": "mitchell mitchell mitchell"
+      },
+      "last": "2934630921",
+      "recent": [
+        [
+          "2934630921",
+          15
+        ]
+      ],
+      "b": []
+    },
+    "toraikazuchi": {
+      "n": "ToraiKazuchi",
+      "c": "",
+      "m": 1,
+      "s": 1,
+      "streak": 1,
+      "best": 1,
+      "e": 1,
+      "fav": {
+        "src": "7",
+        "id": "01F5VW2TKR0003RCV2Z6JBHCST",
+        "name": "catKISS"
+      },
+      "first": {
+        "vod": "2934630921",
+        "date": "2026-11-20T04:50:33Z",
+        "t": 651,
+        "text": "catKISS"
+      },
+      "last": "2934630921",
+      "recent": [
+        [
+          "2934630921",
+          1
+        ]
+      ],
+      "b": []
+    },
+    "apparentlyaustin": {
+      "n": "ApparentlyAustin",
+      "c": "#2AE700",
+      "m": 8,
+      "s": 1,
+      "streak": 1,
+      "best": 1,
+      "e": 4,
+      "fav": {
+        "src": "7",
+        "id": "01K80Z6FEW6ZG9JCXJTS8A5603",
+        "name": "67"
+      },
+      "first": {
+        "vod": "2934630921",
+        "date": "2026-11-20T04:50:33Z",
+        "t": 1189,
+        "text": "676 roselia"
+      },
+      "last": "2934630921",
+      "recent": [
+        [
+          "2934630921",
+          8
+        ]
+      ],
+      "b": [
+        "nightowl"
+      ]
+    },
+    "piinguh": {
+      "n": "piinguh",
+      "c": "#8A2BE2",
+      "m": 54,
+      "s": 1,
+      "streak": 1,
+      "best": 1,
+      "e": 11,
+      "fav": {
+        "src": "7",
+        "id": "01FZ975PV8000B4AWRZNMVNEXN",
+        "name": "LOL"
+      },
+      "first": {
+        "vod": "2934630921",
+        "date": "2026-11-20T04:50:33Z",
+        "t": 1571,
+        "text": "well well well"
+      },
+      "last": "2934630921",
+      "recent": [
+        [
+          "2934630921",
+          54
+        ]
+      ],
+      "b": [
+        "nightowl"
+      ]
+    },
+    "austin_cliff306": {
+      "n": "Austin_Cliff306",
+      "c": "#0000FF",
+      "m": 11,
+      "s": 1,
+      "streak": 1,
+      "best": 1,
+      "e": 1,
+      "fav": {
+        "src": "7",
+        "id": "01F5PCRCE0000BAN36SW3MYWMV",
+        "name": "lol"
+      },
+      "first": {
+        "vod": "2934630921",
+        "date": "2026-11-20T04:50:33Z",
+        "t": 1799,
+        "text": "Trader lol jk. Hope your doing good"
+      },
+      "last": "2934630921",
+      "recent": [
+        [
+          "2934630921",
+          11
+        ]
+      ],
+      "b": []
+    },
+    "ezrammo": {
+      "n": "EzraMMO",
+      "c": "#DAA520",
+      "m": 15,
+      "s": 1,
+      "streak": 1,
+      "best": 1,
+      "e": 6,
+      "fav": {
+        "src": "7",
+        "id": "01K9Q2MVVKV84RQYQY87BQVPC5",
+        "name": "BURGER"
+      },
+      "first": {
+        "vod": "2934630921",
+        "date": "2026-11-20T04:50:33Z",
+        "t": 4440,
+        "text": "WHATS GOOD GOAT"
+      },
+      "last": "2934630921",
+      "recent": [
+        [
+          "2934630921",
+          15
+        ]
+      ],
+      "b": [
+        "nightowl"
+      ]
+    },
+    "deeb_777": {
+      "n": "deeb_777",
+      "c": "#FF0000",
+      "m": 18,
+      "s": 1,
+      "streak": 1,
+      "best": 1,
+      "e": 5,
+      "fav": {
+        "src": "7",
+        "id": "01J13GJNX80003YPW34K535WHS",
+        "name": "agaCheck"
+      },
+      "first": {
+        "vod": "2934630921",
+        "date": "2026-11-20T04:50:33Z",
+        "t": 4802,
+        "text": "agaCheck"
+      },
+      "last": "2934630921",
+      "recent": [
+        [
+          "2934630921",
+          18
+        ]
+      ],
+      "b": [
+        "nightowl"
+      ]
+    },
+    "thebmann0": {
+      "n": "thebmann0",
+      "c": "",
+      "m": 11,
+      "s": 1,
+      "streak": 1,
+      "best": 1,
+      "e": 2,
+      "fav": {
+        "src": "7",
+        "id": "01H4R91D18000DJFJ3EESSP8NT",
+        "name": "motch"
+      },
+      "first": {
+        "vod": "2934630921",
+        "date": "2026-11-20T04:50:33Z",
+        "t": 4981,
+        "text": "wheres the cam i was promised"
+      },
+      "last": "2934630921",
+      "recent": [
+        [
+          "2934630921",
+          11
+        ]
+      ],
+      "b": [
+        "nightowl"
       ]
     }
   }

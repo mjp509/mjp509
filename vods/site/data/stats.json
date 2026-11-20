@@ -69,99 +69,51 @@
       }
     ],
     "report": {
-      "id": "2927241555",
-      "title": "🍔 gëek wën i want gëek all da timë 🍔 luh shmünk 🍔",
-      "date": "2026-11-13T01:31:00Z",
+      "id": "2934630921",
+      "title": "🍔 super short lowkey late night shunting stream (i cannot sleep) 🍔",
+      "date": "2026-11-20T04:50:33Z",
       "metrics": [
-        {
-          "key": "avg_viewers",
-          "label": "Avg viewers",
-          "higher": true,
-          "value": 9.8,
-          "baseline": null,
-          "baseline_n": 0,
-          "delta_pct": null,
-          "place": 1,
-          "of": 1,
-          "best": false
-        },
-        {
-          "key": "peak_viewers",
-          "label": "Peak viewers",
-          "higher": true,
-          "value": 17,
-          "baseline": null,
-          "baseline_n": 0,
-          "delta_pct": null,
-          "place": 1,
-          "of": 1,
-          "best": false
-        },
-        {
-          "key": "followers_gained",
-          "label": "Followers gained",
-          "higher": true,
-          "value": 0,
-          "baseline": null,
-          "baseline_n": 0,
-          "delta_pct": null,
-          "place": 1,
-          "of": 1,
-          "best": false
-        },
         {
           "key": "mpm",
           "label": "Messages / min",
           "higher": true,
-          "value": 2.5,
-          "baseline": null,
-          "baseline_n": 0,
-          "delta_pct": null,
-          "place": 1,
-          "of": 1,
+          "value": 1.76,
+          "baseline": 2.5,
+          "baseline_n": 1,
+          "delta_pct": -29.6,
+          "place": 2,
+          "of": 2,
           "best": false
         },
         {
           "key": "chatters",
           "label": "Unique chatters",
           "higher": true,
-          "value": 18,
-          "baseline": null,
-          "baseline_n": 0,
-          "delta_pct": null,
-          "place": 1,
-          "of": 1,
+          "value": 10,
+          "baseline": 18,
+          "baseline_n": 1,
+          "delta_pct": -44.4,
+          "place": 2,
+          "of": 2,
           "best": false
         },
         {
           "key": "new",
           "label": "New chatters",
           "higher": true,
-          "value": 18,
-          "baseline": null,
-          "baseline_n": 0,
-          "delta_pct": null,
-          "place": 1,
-          "of": 1,
+          "value": 8,
+          "baseline": 18,
+          "baseline_n": 1,
+          "delta_pct": -55.6,
+          "place": 2,
+          "of": 2,
           "best": false
         },
         {
-          "key": "engagement",
-          "label": "Chatters per viewer",
+          "key": "return_rate",
+          "label": "Returning chatters %",
           "higher": true,
-          "value": 1.84,
-          "baseline": null,
-          "baseline_n": 0,
-          "delta_pct": null,
-          "place": 1,
-          "of": 1,
-          "best": false
-        },
-        {
-          "key": "follow_rate",
-          "label": "Followers per 10h watched",
-          "higher": true,
-          "value": 0.0,
+          "value": 20.0,
           "baseline": null,
           "baseline_n": 0,
           "delta_pct": null,
@@ -173,12 +125,12 @@
           "key": "hours",
           "label": "Stream length (h)",
           "higher": null,
-          "value": 3.2,
-          "baseline": null,
-          "baseline_n": 0,
-          "delta_pct": null,
-          "place": 1,
-          "of": 1,
+          "value": 2.05,
+          "baseline": 3.2,
+          "baseline_n": 1,
+          "delta_pct": -35.9,
+          "place": 2,
+          "of": 2,
           "best": false
         }
       ]
@@ -200,10 +152,35 @@
         "engagement": 1.84,
         "follow_rate": 0.0,
         "hours": 3.2
+      },
+      {
+        "id": "2934630921",
+        "date": "2026-11-20T04:50:33Z",
+        "title": "🍔 super short lowkey late night shunting stream (i cannot sleep) 🍔",
+        "avg_viewers": null,
+        "peak_viewers": null,
+        "followers_gained": null,
+        "subs_change": null,
+        "cat_top_pct": null,
+        "mpm": 1.76,
+        "chatters": 10,
+        "new": 8,
+        "return_rate": 20.0,
+        "engagement": null,
+        "follow_rate": null,
+        "hours": 2.05
       }
     ],
     "curves": {},
-    "retention": [],
+    "retention": [
+      {
+        "id": "2927241555",
+        "date": "2026-11-13T01:31:00Z",
+        "new": 18,
+        "came_back": 2,
+        "rate": 11.1
+      }
+    ],
     "advice": {
       "tips": [
         {
@@ -211,7 +188,7 @@
           "weight": 66,
           "basis": "chat spikes in your last stream",
           "title": "Your last stream has 1 clip-worthy moment",
-          "detail": "Biggest one at 2:35:50: chat hit 8.0× its normal pace.",
+          "detail": "Biggest one at 1:13:20: chat hit 9.0× its normal pace.",
           "tip": "Cut these into Shorts/TikToks. Clips are how most small streamers get discovered. All of them are in the Clips tab.",
           "tab": "clips"
         }
@@ -255,7 +232,7 @@
         {
           "tag": "Community",
           "title": "Do first-time chatters come back?",
-          "have": 0,
+          "have": 1,
           "need": 3,
           "unit": "streams"
         },
@@ -1547,13 +1524,13 @@
     },
     "weekly": {
       "this": {
-        "streams": 0,
-        "hours": 0.0,
+        "streams": 1,
+        "hours": 2.1,
         "avg_viewers": null,
         "peak_viewers": null,
-        "chatters": 0,
-        "new_chatters": 0,
-        "messages": 0
+        "chatters": 10,
+        "new_chatters": 8,
+        "messages": 217
       },
       "last": {
         "streams": 1,
@@ -1566,17 +1543,27 @@
       },
       "followers": 0,
       "subs": 0,
-      "best": null,
+      "best": {
+        "t": 4400,
+        "x": 9.0,
+        "count": 9,
+        "tag": "spike",
+        "words": [
+          "im"
+        ],
+        "id": "2934630921",
+        "title": "🍔 super short lowkey late night shunting stream (i cannot sleep) 🍔"
+      },
       "from": "2026-11-13",
       "to": "2026-11-20"
     }
   },
   "overview": {
-    "streams": 1,
-    "hours": 3.2,
-    "messages": 480,
-    "chatters": 18,
-    "mpm": 2.5
+    "streams": 2,
+    "hours": 5.3,
+    "messages": 697,
+    "chatters": 26,
+    "mpm": 2.21
   },
   "streams": [
     {
@@ -1598,27 +1585,40 @@
       "manual": true,
       "engagement": 1.84,
       "follow_rate": 0.0
+    },
+    {
+      "id": "2934630921",
+      "title": "🍔 super short lowkey late night shunting stream (i cannot sleep) 🍔",
+      "date": "2026-11-20T04:50:33Z",
+      "duration": 7393,
+      "messages": 217,
+      "mpm": 1.76,
+      "chatters": 10,
+      "new": 8,
+      "returning": 2,
+      "hours": 2.05,
+      "return_rate": 20.0
     }
   ],
   "games": [
     {
       "game": "PokeMMO",
-      "hours": 3.2,
-      "messages": 480,
-      "streams": 1,
-      "mpm": 2.5
+      "hours": 5.3,
+      "messages": 697,
+      "streams": 2,
+      "mpm": 2.21
     }
   ],
   "by_hour": [
     {
       "hour": 0,
-      "mpm": 1.55,
-      "streams": 1
+      "mpm": 1.45,
+      "streams": 2
     },
     {
       "hour": 1,
-      "mpm": 2.45,
-      "streams": 1
+      "mpm": 2.25,
+      "streams": 2
     },
     {
       "hour": 2,
@@ -1629,8 +1629,8 @@
   "top_chatters": [
     {
       "name": "nightwind02",
-      "messages": 207,
-      "streams": 1
+      "messages": 250,
+      "streams": 2
     },
     {
       "name": "febasnotmilotic",
@@ -1638,9 +1638,14 @@
       "streams": 1
     },
     {
-      "name": "ewyoustink",
-      "messages": 41,
+      "name": "piinguh",
+      "messages": 54,
       "streams": 1
+    },
+    {
+      "name": "ewyoustink",
+      "messages": 51,
+      "streams": 2
     },
     {
       "name": "highflyer03",
@@ -1658,7 +1663,22 @@
       "streams": 1
     },
     {
+      "name": "deeb_777",
+      "messages": 18,
+      "streams": 1
+    },
+    {
       "name": "rdaniii",
+      "messages": 15,
+      "streams": 1
+    },
+    {
+      "name": "treelon720",
+      "messages": 15,
+      "streams": 1
+    },
+    {
+      "name": "ezrammo",
       "messages": 15,
       "streams": 1
     },
@@ -1668,8 +1688,23 @@
       "streams": 1
     },
     {
+      "name": "austin_cliff306",
+      "messages": 11,
+      "streams": 1
+    },
+    {
+      "name": "thebmann0",
+      "messages": 11,
+      "streams": 1
+    },
+    {
       "name": "lilyzillasaurus",
       "messages": 9,
+      "streams": 1
+    },
+    {
+      "name": "apparentlyaustin",
+      "messages": 8,
       "streams": 1
     },
     {
@@ -1691,35 +1726,16 @@
       "name": "huntressclairice",
       "messages": 3,
       "streams": 1
-    },
-    {
-      "name": "leonunez96",
-      "messages": 3,
-      "streams": 1
-    },
-    {
-      "name": "breezyrs",
-      "messages": 3,
-      "streams": 1
-    },
-    {
-      "name": "cabbage363",
-      "messages": 2,
-      "streams": 1
-    },
-    {
-      "name": "magicalseed",
-      "messages": 1,
-      "streams": 1
-    },
-    {
-      "name": "csixtythree04",
-      "messages": 1,
-      "streams": 1
     }
   ],
   "lapsed": [],
   "emotes": [
+    {
+      "src": "7",
+      "id": "01HMBMJPV0000D32KQCYBK4S1D",
+      "name": "aga",
+      "count": 7
+    },
     {
       "src": "7",
       "id": "01FP8VKKG8000EJT2EVEY3JR0Q",
@@ -1728,15 +1744,45 @@
     },
     {
       "src": "7",
-      "id": "01HMBMJPV0000D32KQCYBK4S1D",
-      "name": "aga",
+      "id": "01F61B1440000991F7SWQNMVX7",
+      "name": "KEKW",
       "count": 6
     },
     {
       "src": "7",
-      "id": "01F61B1440000991F7SWQNMVX7",
-      "name": "KEKW",
+      "id": "01FZ975PV8000B4AWRZNMVNEXN",
+      "name": "LOL",
+      "count": 6
+    },
+    {
+      "src": "7",
+      "id": "01G1N8W84800087QC0373CF714",
+      "name": "wtf",
       "count": 5
+    },
+    {
+      "src": "7",
+      "id": "01H4R91D18000DJFJ3EESSP8NT",
+      "name": "motch",
+      "count": 5
+    },
+    {
+      "src": "7",
+      "id": "01JV61YVT3SWGS7JVR08YVN4TJ",
+      "name": "work",
+      "count": 5
+    },
+    {
+      "src": "7",
+      "id": "01G1M77D4R0004YN3NKDRR9YKJ",
+      "name": "ok",
+      "count": 4
+    },
+    {
+      "src": "7",
+      "id": "01GX9P3ZT0000F30TNHG4JCVDY",
+      "name": "fire",
+      "count": 4
     },
     {
       "src": "7",
@@ -1752,14 +1798,14 @@
     },
     {
       "src": "7",
-      "id": "01J96N7ERG0009MAMR2DZMJX8W",
-      "name": "KeepYourselfSafe",
-      "count": 3
+      "id": "01FS5ZCFG0000500DPPCXJWCP8",
+      "name": "o7",
+      "count": 4
     },
     {
       "src": "7",
-      "id": "01G1M77D4R0004YN3NKDRR9YKJ",
-      "name": "ok",
+      "id": "01J96N7ERG0009MAMR2DZMJX8W",
+      "name": "KeepYourselfSafe",
       "count": 3
     },
     {
@@ -1776,21 +1822,33 @@
     },
     {
       "src": "7",
-      "id": "01G1N8W84800087QC0373CF714",
-      "name": "wtf",
+      "id": "01KZZ0P5200816262RQ6FTKMAA",
+      "name": "hihihi",
       "count": 3
     },
     {
       "src": "7",
-      "id": "01GX9P3ZT0000F30TNHG4JCVDY",
-      "name": "fire",
+      "id": "01H0AJTA28000DCQNTXCHQKJPM",
+      "name": "mitchell",
       "count": 3
     },
     {
       "src": "7",
-      "id": "01H4R91D18000DJFJ3EESSP8NT",
-      "name": "motch",
+      "id": "01K80Z6FEW6ZG9JCXJTS8A5603",
+      "name": "67",
       "count": 3
+    },
+    {
+      "src": "7",
+      "id": "01GQFT1WF80002Q9KS8SKQMHHY",
+      "name": "buh",
+      "count": 2
+    },
+    {
+      "src": "7",
+      "id": "01JSMQ8H7CR95FNN6ZYRE8T5BM",
+      "name": "agafat",
+      "count": 2
     },
     {
       "src": "t",
@@ -1806,63 +1864,15 @@
     },
     {
       "src": "7",
-      "id": "01GJMQHD7R000AQETVA6HTME88",
-      "name": "cheersmyfriends",
+      "id": "01M01EGMB443VRN2SN9HQ3AGZY",
+      "name": "catlick",
       "count": 2
     },
     {
       "src": "7",
-      "id": "01GPVSKM28000EENPRWMPTW9KY",
-      "name": "deal",
+      "id": "01JR9K9P2PEVZ4P78498QWPZEW",
+      "name": "L",
       "count": 2
-    },
-    {
-      "src": "t",
-      "id": "1",
-      "name": ":)",
-      "count": 2
-    },
-    {
-      "src": "7",
-      "id": "01FZ975PV8000B4AWRZNMVNEXN",
-      "name": "LOL",
-      "count": 2
-    },
-    {
-      "src": "7",
-      "id": "01FJQVA3KR000BDMGTVBZVY677",
-      "name": "AlienPls3",
-      "count": 2
-    },
-    {
-      "src": "7",
-      "id": "01FS5ZCFG0000500DPPCXJWCP8",
-      "name": "o7",
-      "count": 2
-    },
-    {
-      "src": "7",
-      "id": "01KJ1K7SM3J0R0DM8HDRH5FKPQ",
-      "name": "agaFat",
-      "count": 2
-    },
-    {
-      "src": "7",
-      "id": "01GQFT1WF80002Q9KS8SKQMHHY",
-      "name": "buh",
-      "count": 1
-    },
-    {
-      "src": "7",
-      "id": "01FF3R5C30000FF5VVCKV49G6J",
-      "name": "xdd",
-      "count": 1
-    },
-    {
-      "src": "7",
-      "id": "01JSMQ8H7CR95FNN6ZYRE8T5BM",
-      "name": "agafat",
-      "count": 1
     }
   ],
   "unused_7tv": [
@@ -1897,10 +1907,6 @@
     {
       "name": "5ft2",
       "id": "01HW1YRJA000081V200YKST1MT"
-    },
-    {
-      "name": "67",
-      "id": "01K80Z6FEW6ZG9JCXJTS8A5603"
     },
     {
       "name": ":))",
@@ -2015,10 +2021,6 @@
       "id": "01KZ7WVRMHRZ2W0MN2J74KKRX9"
     },
     {
-      "name": "BLABBERING",
-      "id": "01H0H06SD00002NYEYSRYFTGXC"
-    },
-    {
       "name": "BLANKIES",
       "id": "01F63S8FHG000C5JJ7RZAXN6F1"
     },
@@ -2029,10 +2031,6 @@
     {
       "name": "BOOM",
       "id": "01HHDQ31R00007Y31277X9P9A4"
-    },
-    {
-      "name": "BURGER",
-      "id": "01K9Q2MVVKV84RQYQY87BQVPC5"
     },
     {
       "name": "Baileinsano2",
@@ -2061,10 +2059,6 @@
     {
       "name": "CINEMA",
       "id": "01JP971M5491QPKPZK9Z70ZVJ0"
-    },
-    {
-      "name": "CLEAN",
-      "id": "01F6N2WHKG000AR0YATR3ZV5X4"
     },
     {
       "name": "COOKED",
@@ -2105,6 +2099,22 @@
     {
       "name": "ClickNow",
       "id": "01M1KYMGHYC9689SHDYC57CKXF"
+    },
+    {
+      "name": "Clueless",
+      "id": "01F6T8NM9R0007M5BTFWSP1YSJ"
+    },
+    {
+      "name": "CokeShakey",
+      "id": "01H99VBR2R00010437TC9XTG5J"
+    },
+    {
+      "name": "Concerned",
+      "id": "01G55AX00R000B2BBGEQH5KW8K"
+    },
+    {
+      "name": "Crazy",
+      "id": "01J5J919GR000C7EVR3PVWBK23"
     }
   ],
   "moments": {
@@ -2118,100 +2128,61 @@
           "chovy"
         ]
       }
+    ],
+    "2934630921": [
+      {
+        "t": 4400,
+        "x": 9.0,
+        "count": 9,
+        "tag": "spike",
+        "words": [
+          "im"
+        ]
+      }
     ]
   },
   "greet": {
-    "title": "🍔 gëek wën i want gëek all da timë 🍔 luh shmünk 🍔",
-    "date": "2026-11-13T01:31:00Z",
-    "first_stream": true,
+    "title": "🍔 super short lowkey late night shunting stream (i cannot sleep) 🍔",
+    "date": "2026-11-20T04:50:33Z",
+    "first_stream": false,
     "first_time": [
       {
-        "name": "NightWind02",
-        "color": "#00FF7F",
-        "messages": 207
+        "name": "piinguh",
+        "color": "#8A2BE2",
+        "messages": 54
       },
       {
-        "name": "febasnotmilotic",
-        "color": "",
-        "messages": 67
-      },
-      {
-        "name": "EwYouStink",
-        "color": "#0000FF",
-        "messages": 41
-      },
-      {
-        "name": "highflyer03",
-        "color": "#0000FF",
-        "messages": 28
-      },
-      {
-        "name": "smokemmo",
-        "color": "#2E8B57",
-        "messages": 24
-      },
-      {
-        "name": "cokeknife",
+        "name": "deeb_777",
         "color": "#FF0000",
-        "messages": 22
+        "messages": 18
       },
       {
-        "name": "rDaniii",
+        "name": "treelon720",
+        "color": "",
+        "messages": 15
+      },
+      {
+        "name": "EzraMMO",
         "color": "#DAA520",
         "messages": 15
       },
       {
-        "name": "zdammers03",
-        "color": "#5F9EA0",
-        "messages": 13
+        "name": "Austin_Cliff306",
+        "color": "#0000FF",
+        "messages": 11
       },
       {
-        "name": "lilyzillasaurus",
-        "color": "#8A2BE2",
-        "messages": 9
-      },
-      {
-        "name": "buhomb",
-        "color": "#89AEFF",
-        "messages": 6
-      },
-      {
-        "name": "GymRerun",
-        "color": "#FF69B4",
-        "messages": 5
-      },
-      {
-        "name": "DrexsteinA",
-        "color": "#00FF7F",
-        "messages": 5
-      },
-      {
-        "name": "BreezyRS",
-        "color": "#00FF7F",
-        "messages": 3
-      },
-      {
-        "name": "HuntressClairice",
-        "color": "#FF69B4",
-        "messages": 3
-      },
-      {
-        "name": "leonunez96",
+        "name": "thebmann0",
         "color": "",
-        "messages": 3
+        "messages": 11
       },
       {
-        "name": "Cabbage363",
-        "color": "#D2691E",
-        "messages": 2
+        "name": "ApparentlyAustin",
+        "color": "#2AE700",
+        "messages": 8
       },
       {
-        "name": "magicalseed",
-        "color": "#FF0000",
-        "messages": 1
-      },
-      {
-        "name": "csixtythree04",
+        "name": "ToraiKazuchi",
         "color": "",
         "messages": 1
       }

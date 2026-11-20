@@ -2,15 +2,15 @@
   {
     "month": "2026-11",
     "emote": {
-      "id": "01FP8VKKG8000EJT2EVEY3JR0Q",
-      "name": "burger",
+      "id": "01HMBMJPV0000D32KQCYBK4S1D",
+      "name": "aga",
       "uses": 7
     },
     "top": [
       {
         "name": "NightWind02",
         "color": "#00FF7F",
-        "messages": 133,
+        "messages": 163,
         "emote": {
           "src": "7",
           "id": "01F61B1440000991F7SWQNMVX7",
@@ -30,11 +30,21 @@
       {
         "name": "EwYouStink",
         "color": "#0000FF",
-        "messages": 34,
+        "messages": 42,
         "emote": {
           "src": "7",
           "id": "01J96N7ERG0009MAMR2DZMJX8W",
           "name": "KeepYourselfSafe"
+        }
+      },
+      {
+        "name": "piinguh",
+        "color": "#8A2BE2",
+        "messages": 39,
+        "emote": {
+          "src": "7",
+          "id": "01FZ975PV8000B4AWRZNMVNEXN",
+          "name": "LOL"
         }
       },
       {
@@ -68,6 +78,16 @@
         }
       },
       {
+        "name": "deeb_777",
+        "color": "#FF0000",
+        "messages": 18,
+        "emote": {
+          "src": "7",
+          "id": "01J13GJNX80003YPW34K535WHS",
+          "name": "agaCheck"
+        }
+      },
+      {
         "name": "zdammers03",
         "color": "#5F9EA0",
         "messages": 13,
@@ -85,26 +105,6 @@
           "src": "7",
           "id": "01KZZ0P5200816262RQ6FTKMAA",
           "name": "hihihi"
-        }
-      },
-      {
-        "name": "lilyzillasaurus",
-        "color": "#8A2BE2",
-        "messages": 9,
-        "emote": {
-          "src": "7",
-          "id": "01H4R91D18000DJFJ3EESSP8NT",
-          "name": "motch"
-        }
-      },
-      {
-        "name": "DrexsteinA",
-        "color": "#00FF7F",
-        "messages": 5,
-        "emote": {
-          "src": "t",
-          "id": "425618",
-          "name": "LUL"
         }
       }
     ]
