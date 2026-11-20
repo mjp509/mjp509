@@ -1,7 +1,559 @@
 {
   "rsn": "Motchers",
+  "links": {
+    "overview": "https://templeosrs.com/player/overview.php?player=motchers",
+    "log": "https://templeosrs.com/player/collection-log.php?player=motchers",
+    "stat": "https://templeosrs.com/player/stats.php?player=motchers&skill="
+  },
   "url": "https://templeosrs.com/player/collection-log.php?player=motchers",
+  "mode": "Main",
+  "updated": 1795163664,
+  "combat": 123.85,
+  "total_level": 2080,
+  "total_xp": 161539184,
+  "rank": 407800,
+  "ehp": 324.72,
+  "ehb": 98.28,
+  "skills": [
+    {
+      "name": "Attack",
+      "level": 99,
+      "xp": 14821626,
+      "rank": 275484,
+      "ehp": 0
+    },
+    {
+      "name": "Hitpoints",
+      "level": 99,
+      "xp": 23442284,
+      "rank": 384760,
+      "ehp": 0.12
+    },
+    {
+      "name": "Mining",
+      "level": 85,
+      "xp": 3384054,
+      "rank": 569495,
+      "ehp": 35.6
+    },
+    {
+      "name": "Strength",
+      "level": 99,
+      "xp": 17858504,
+      "rank": 323829,
+      "ehp": 0
+    },
+    {
+      "name": "Agility",
+      "level": 77,
+      "xp": 1478219,
+      "rank": 738962,
+      "ehp": 29.48
+    },
+    {
+      "name": "Smithing",
+      "level": 80,
+      "xp": 1990757,
+      "rank": 667128,
+      "ehp": 4.79
+    },
+    {
+      "name": "Defence",
+      "level": 99,
+      "xp": 14940356,
+      "rank": 212965,
+      "ehp": 18.04
+    },
+    {
+      "name": "Herblore",
+      "level": 72,
+      "xp": 917788,
+      "rank": 942494,
+      "ehp": 3.49
+    },
+    {
+      "name": "Fishing",
+      "level": 80,
+      "xp": 2047495,
+      "rank": 828291,
+      "ehp": 17.24
+    },
+    {
+      "name": "Ranged",
+      "level": 99,
+      "xp": 16834728,
+      "rank": 447946,
+      "ehp": 12.71
+    },
+    {
+      "name": "Thieving",
+      "level": 80,
+      "xp": 2012697,
+      "rank": 641630,
+      "ehp": 10.85
+    },
+    {
+      "name": "Cooking",
+      "level": 99,
+      "xp": 13181741,
+      "rank": 269885,
+      "ehp": 14.74
+    },
+    {
+      "name": "Prayer",
+      "level": 80,
+      "xp": 2014949,
+      "rank": 700423,
+      "ehp": 1.01
+    },
+    {
+      "name": "Crafting",
+      "level": 80,
+      "xp": 2076866,
+      "rank": 760673,
+      "ehp": 4.47
+    },
+    {
+      "name": "Firemaking",
+      "level": 80,
+      "xp": 1990692,
+      "rank": 1159901,
+      "ehp": 4.0
+    },
+    {
+      "name": "Magic",
+      "level": 99,
+      "xp": 13469741,
+      "rank": 489069,
+      "ehp": 0.07
+    },
+    {
+      "name": "Fletching",
+      "level": 80,
+      "xp": 2032956,
+      "rank": 890491,
+      "ehp": 0.01
+    },
+    {
+      "name": "Woodcutting",
+      "level": 87,
+      "xp": 4060238,
+      "rank": 569751,
+      "ehp": 21.75
+    },
+    {
+      "name": "Runecraft",
+      "level": 74,
+      "xp": 1108335,
+      "rank": 598087,
+      "ehp": 26.33
+    },
+    {
+      "name": "Slayer",
+      "level": 91,
+      "xp": 5912752,
+      "rank": 550689,
+      "ehp": 81.99
+    },
+    {
+      "name": "Farming",
+      "level": 93,
+      "xp": 7787168,
+      "rank": 491478,
+      "ehp": 5.75
+    },
+    {
+      "name": "Hunter",
+      "level": 82,
+      "xp": 2498109,
+      "rank": 516836,
+      "ehp": 7.55
+    },
+    {
+      "name": "Construction",
+      "level": 83,
+      "xp": 2845471,
+      "rank": 548226,
+      "ehp": 3.43
+    },
+    {
+      "name": "Sailing",
+      "level": 83,
+      "xp": 2831658,
+      "rank": 226953,
+      "ehp": 21.31
+    }
+  ],
+  "bosses": [
+    {
+      "name": "Vorkath",
+      "kc": 660,
+      "rank": 0,
+      "ehb": 19.41,
+      "icon": 21992
+    },
+    {
+      "name": "Kraken",
+      "kc": 449,
+      "rank": 0,
+      "ehb": 4.49,
+      "icon": 12655
+    },
+    {
+      "name": "Zulrah",
+      "kc": 400,
+      "rank": 0,
+      "ehb": 8.7,
+      "icon": 12921
+    },
+    {
+      "name": "Abyssal Sire",
+      "kc": 371,
+      "rank": 0,
+      "ehb": 7.42,
+      "icon": 13262
+    },
+    {
+      "name": "The Royal Titans",
+      "kc": 280,
+      "rank": 0,
+      "ehb": 5.09,
+      "icon": 30622
+    },
+    {
+      "name": "Callisto",
+      "kc": 266,
+      "rank": 0,
+      "ehb": 1.87,
+      "icon": 13178
+    },
+    {
+      "name": "General Graardor",
+      "kc": 250,
+      "rank": 0,
+      "ehb": 4.31,
+      "icon": 12650
+    },
+    {
+      "name": "Kril Tsutsaroth",
+      "kc": 231,
+      "rank": 0,
+      "ehb": 3.55,
+      "icon": 12652
+    },
+    {
+      "name": "Grotesque Guardians",
+      "kc": 218,
+      "rank": 0,
+      "ehb": 5.89,
+      "icon": 21748
+    },
+    {
+      "name": "Dagannoth Rex",
+      "kc": 188,
+      "rank": 0,
+      "ehb": 1.79,
+      "icon": 12644
+    },
+    {
+      "name": "Barrows Chests",
+      "kc": 177,
+      "rank": 0,
+      "ehb": 0,
+      "icon": 4732
+    },
+    {
+      "name": "Dagannoth Supreme",
+      "kc": 156,
+      "rank": 0,
+      "ehb": 1.49,
+      "icon": 12644
+    },
+    {
+      "name": "Dagannoth Prime",
+      "kc": 152,
+      "rank": 0,
+      "ehb": 1.45,
+      "icon": 12644
+    },
+    {
+      "name": "Calvarion",
+      "kc": 122,
+      "rank": 0,
+      "ehb": 2.22,
+      "icon": 13179
+    },
+    {
+      "name": "Giant Mole",
+      "kc": 110,
+      "rank": 0,
+      "ehb": 0.88,
+      "icon": 12646
+    },
+    {
+      "name": "Sarachnis",
+      "kc": 100,
+      "rank": 0,
+      "ehb": 0.91,
+      "icon": 23495
+    },
+    {
+      "name": "Hespori",
+      "kc": 58,
+      "rank": 0,
+      "ehb": 0,
+      "icon": 22994
+    },
+    {
+      "name": "Crazy Archaeologist",
+      "kc": 54,
+      "rank": 0,
+      "ehb": 0,
+      "icon": 11929
+    },
+    {
+      "name": "Lunar Chests",
+      "kc": 53,
+      "rank": 0,
+      "ehb": 2.94,
+      "icon": 29004
+    },
+    {
+      "name": "King Black Dragon",
+      "kc": 31,
+      "rank": 0,
+      "ehb": 0.24,
+      "icon": 12653
+    },
+    {
+      "name": "Spindel",
+      "kc": 30,
+      "rank": 0,
+      "ehb": 0.55,
+      "icon": 13177
+    },
+    {
+      "name": "The Corrupted Gauntlet",
+      "kc": 29,
+      "rank": 0,
+      "ehb": 4.03,
+      "icon": 23757
+    },
+    {
+      "name": "Chaos Fanatic",
+      "kc": 25,
+      "rank": 0,
+      "ehb": 0.25,
+      "icon": 11995
+    },
+    {
+      "name": "Hueycoatl",
+      "kc": 25,
+      "rank": 0,
+      "ehb": 2.78,
+      "icon": 30152
+    },
+    {
+      "name": "Commander Zilyana",
+      "kc": 21,
+      "rank": 0,
+      "ehb": 0.35,
+      "icon": 12651
+    },
+    {
+      "name": "Skotizo",
+      "kc": 19,
+      "rank": 0,
+      "ehb": 0.42,
+      "icon": 21273
+    },
+    {
+      "name": "The Gauntlet",
+      "kc": 18,
+      "rank": 0,
+      "ehb": 1.8,
+      "icon": 23757
+    },
+    {
+      "name": "Scurrius",
+      "kc": 11,
+      "rank": 0,
+      "ehb": 0.16,
+      "icon": 28801
+    },
+    {
+      "name": "Bryophyta",
+      "kc": 8,
+      "rank": 0,
+      "ehb": 0,
+      "icon": 22372
+    },
+    {
+      "name": "Phantom Muspah",
+      "kc": 8,
+      "rank": 0,
+      "ehb": 0.27,
+      "icon": 27590
+    },
+    {
+      "name": "Corporeal Beast",
+      "kc": 2,
+      "rank": 0,
+      "ehb": 0.03,
+      "icon": 12816
+    },
+    {
+      "name": "Kalphite Queen",
+      "kc": 1,
+      "rank": 0,
+      "ehb": 0.02,
+      "icon": 12647
+    },
+    {
+      "name": "KreeArra",
+      "kc": 1,
+      "rank": 0,
+      "ehb": 0.03,
+      "icon": 12649
+    },
+    {
+      "name": "TzTok-Jad",
+      "kc": 1,
+      "rank": 0,
+      "ehb": 0.4,
+      "icon": 13225
+    }
+  ],
+  "raids": [
+    {
+      "name": "Tombs of Amascut",
+      "kc": 44,
+      "rank": 0,
+      "ehb": 11.89,
+      "icon": 27352
+    },
+    {
+      "name": "Tombs of Amascut Expert",
+      "kc": 8,
+      "rank": 0,
+      "ehb": 2.67,
+      "icon": 27352
+    }
+  ],
+  "skilling_bosses": [
+    {
+      "name": "Wintertodt",
+      "kc": 103,
+      "rank": 0,
+      "ehb": 0,
+      "icon": 20693
+    },
+    {
+      "name": "Tempoross",
+      "kc": 21,
+      "rank": 0,
+      "ehb": 0,
+      "icon": 25602
+    },
+    {
+      "name": "Rift",
+      "kc": 53,
+      "rank": 0,
+      "ehb": 0,
+      "icon": 26901
+    }
+  ],
+  "clues": {
+    "all": 79,
+    "tiers": [
+      {
+        "name": "Beginner",
+        "count": 4,
+        "icon": 23182
+      },
+      {
+        "name": "Easy",
+        "count": 20,
+        "icon": 2677
+      },
+      {
+        "name": "Medium",
+        "count": 19,
+        "icon": 2801
+      },
+      {
+        "name": "Hard",
+        "count": 32,
+        "icon": 2722
+      },
+      {
+        "name": "Elite",
+        "count": 4,
+        "icon": 12073
+      },
+      {
+        "name": "Master",
+        "count": 0,
+        "icon": 19835
+      }
+    ]
+  },
+  "minigames": [
+    {
+      "name": "LMS",
+      "score": 570,
+      "rank": 0
+    },
+    {
+      "name": "PvP Arena",
+      "score": 2500,
+      "rank": 0
+    }
+  ],
   "done": 333,
   "total": 1734,
+  "cats_done": 13,
+  "cats_total": 125,
+  "ehc": 401.6,
+  "tabs": {
+    "bosses": [
+      77,
+      339
+    ],
+    "raids": [
+      10,
+      84
+    ],
+    "clues": [
+      40,
+      611
+    ],
+    "minigames": [
+      42,
+      261
+    ],
+    "other": [
+      180,
+      470
+    ]
+  },
+  "pets": {
+    "have": [
+      13262,
+      12655,
+      21273,
+      27352,
+      30622
+    ],
+    "total": 72
+  },
+  "gains": {
+    "since": "2026-10-20 08:58:37",
+    "xp": 0,
+    "ehp": 0,
+    "ehb": 0,
+    "skills": [],
+    "bosses": []
+  },
   "items": []
 }
