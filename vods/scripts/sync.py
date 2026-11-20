@@ -77,6 +77,26 @@ def save_shinies():
     print(f"Shinies: {len(keep)} from shinyboard")
 
 
+def save_osrs():
+    """25 most recent OSRS collection log items from TempleOSRS (repo variable OSRS_RSN)."""
+    rsn = os.environ.get("OSRS_RSN", "").strip()
+    if not rsn:
+        return
+    url = "https://templeosrs.com/api/collection-log/player_recent_items.php?" + urllib.parse.urlencode({"player": rsn, "count": 25})
+    try:
+        r = vodlib.get_json(url, {"User-Agent": "Mozilla/5.0 (vod-site collection log)"})
+    except RuntimeError as e:
+        print(f"::warning::Couldn't read TempleOSRS: {e}")
+        return
+    if "error" in r:
+        print(f"::warning::TempleOSRS: {r['error'].get('Message', r['error'])}")
+        return
+    items = [{"id": i.get("id"), "name": i.get("name", ""), "unix": i.get("date_unix") or 0, "notable": bool(i.get("notable_item"))}
+             for i in r.get("data") or []]
+    vodlib.save(vodlib.DATA / "osrs.json", {"rsn": rsn, "url": "https://templeosrs.com/player/collection-log.php?" + urllib.parse.urlencode({"player": rsn}), "items": items[:25]})
+    print(f"OSRS: {len(items)} recent collection log items")
+
+
 def save_schedule(helix, uid):
     """Upcoming streams from the channel's Twitch schedule, for the homepage."""
     try:
@@ -251,5 +271,6 @@ if __name__ == "__main__":
         print(f"::warning::Couldn't fold live monitor data: {e}")
     save_new_chats()
     save_shinies()
+    save_osrs()
     match_youtube()
     update_youtube_views()

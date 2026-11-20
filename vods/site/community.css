@@ -72,3 +72,5 @@ a.chatter:hover { text-decoration: underline; text-underline-offset: 3px; }
 .game-hero { display: flex; align-items: center; gap: 18px; margin-bottom: 22px; }
 .game-art { width: 96px; height: 128px; object-fit: cover; border-radius: 8px; box-shadow: 0 8px 24px #0008; background: var(--panel-2); flex: none; }
 .game-hero .hint { margin: 0; }
+.iv small { font-size: 10px; color: var(--text); font-variant-numeric: tabular-nums; line-height: 1.1; }
+.iv.max small { color: #f5c842; font-weight: 700; }
