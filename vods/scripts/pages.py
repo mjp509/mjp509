@@ -121,7 +121,7 @@ def add_tracking():
         print("GSC_VERIFY doesn't look like a Search Console token; skipped")
     if not head:
         return
-    pages = ([SITE / n for n in ("index.html", "vod.html", "stats.html", "privacy.html", "404.html", "profile.html", "shinies.html")]
+    pages = ([SITE / n for n in ("index.html", "vod.html", "stats.html", "privacy.html", "404.html", "profile.html", "shinies.html", "osrs.html")]
              + list((SITE / "v").glob("*/index.html")) + list((SITE / "game").glob("*/index.html")))
     for f in pages:
         if f.exists():
@@ -132,7 +132,7 @@ def add_tracking():
 
 def bake_avatar(avatar):
     fav = round_favicon(avatar)
-    for name in ("index.html", "vod.html", "stats.html", "privacy.html", "game.html", "profile.html", "shinies.html"):
+    for name in ("index.html", "vod.html", "stats.html", "privacy.html", "game.html", "profile.html", "shinies.html", "osrs.html"):
         f = SITE / name
         s = f.read_text(encoding="utf-8")
         s = s.replace('id="favicon" href="https://unavatar.io/twitch/itsmotch"', f'id="favicon" href="{fav}"')
@@ -223,7 +223,7 @@ def main():
         home_mod = f"<lastmod>{vods[0].get('date', '')[:10]}</lastmod>" if vods and vods[0].get("date") else ""
         (SITE / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n'
             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">\n'
-            f"  <url><loc>{site}/</loc>{home_mod}</url>\n  <url><loc>{site}/shinies.html</loc></url>\n"
+            f"  <url><loc>{site}/</loc>{home_mod}</url>\n  <url><loc>{site}/shinies.html</loc></url>\n  <url><loc>{site}/osrs.html</loc></url>\n"
             + "".join(f"  <url><loc>{html.escape(site + '/game/' + slug(g) + '/')}</loc></url>\n" for g in games)
             + "".join(entry(v) for v in vods) + "</urlset>\n", encoding="utf-8")
         (SITE / "robots.txt").write_text(f"User-agent: *\nAllow: /\n\nSitemap: {site}/sitemap.xml\n", encoding="utf-8")

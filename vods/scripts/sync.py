@@ -78,30 +78,11 @@ def save_shinies():
 
 
 def save_osrs():
-    """25 most recent OSRS collection log items from TempleOSRS (repo variable OSRS_RSN)."""
-    rsn = os.environ.get("OSRS_RSN", "").strip()
-    if not rsn:
-        return
-    api, ua = "https://templeosrs.com/api/collection-log/", {"User-Agent": "Mozilla/5.0 (vod-site collection log)"}
     try:
-        log = vodlib.get_json(api + "player_collection_log.php?" + urllib.parse.urlencode({"player": rsn}), ua)
-        recent = vodlib.get_json(api + "player_recent_items.php?" + urllib.parse.urlencode({"player": rsn, "count": 25}), ua)
-    except RuntimeError as e:
-        print(f"::warning::Couldn't read TempleOSRS: {e}")
-        return
-    if "error" in log:  # log not uploaded yet
-        print(f"::warning::TempleOSRS: {log['error'].get('Message', log['error'])}")
-        return
-    d = log.get("data") or {}
-    # 403 here just means no new drops since the first upload
-    items = [{"id": i.get("id"), "name": i.get("name", ""), "unix": i.get("date_unix") or 0, "notable": bool(i.get("notable_item"))}
-             for i in (recent.get("data") or [] if "error" not in recent else [])]
-    vodlib.save(vodlib.DATA / "osrs.json", {
-        "rsn": d.get("player_name_with_capitalization") or rsn,
-        "url": "https://templeosrs.com/player/collection-log.php?" + urllib.parse.urlencode({"player": rsn}),
-        "done": d.get("total_collections_finished"), "total": d.get("total_collections_available"),
-        "items": items[:25]})
-    print(f"OSRS: {d.get('total_collections_finished')}/{d.get('total_collections_available')} logged, {len(items)} recent items")
+        import osrs
+        osrs.build()
+    except Exception as e:
+        print(f"::warning::OSRS overview skipped: {e}")
 
 
 def save_schedule(helix, uid):

@@ -8,6 +8,7 @@
   <link rel="icon" id="favicon" href="https://unavatar.io/twitch/itsmotch">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="community.css">
+  <link rel="stylesheet" href="osrs.css">
   <link rel="preconnect" href="https://i.ytimg.com">
   <link rel="preconnect" href="https://static-cdn.jtvnw.net">
   <link rel="preconnect" href="https://cdn.7tv.app">
@@ -15,7 +16,7 @@
 <body>
   <header>
     <div class="logo"><a class="logo-ch" href="https://twitch.tv/itsmotch" target="_blank" rel="noopener" title="itsmotch on Twitch"><img class="avatar" id="avatar" alt=""><b>itsmotch</b></a> <a class="logo-home" href="./"><b><span>VODs</span></b></a></div>
-    <nav><a href="shinies.html">Shinies</a><a href="profile.html">Chatters</a></nav>
+    <nav><a href="shinies.html">Shinies</a><a href="osrs.html">OSRS</a><a href="profile.html">Chatters</a></nav>
   </header>
   <main>
     <h1 class="sr-only">itsmotch Twitch VODs with chat replay</h1>
@@ -53,8 +54,10 @@
       <div class="shiny-row" id="shiny-row"></div>
     </section>
     <section class="panel-box" id="osrs" hidden>
-      <div class="box-head"><h2>OSRS Recent Collections</h2><a class="see-all" id="osrs-all" target="_blank" rel="noopener">Full log ↗</a></div>
+      <div class="box-head"><h2 id="osrs-title">OSRS</h2><a class="see-all" href="osrs.html">Full stats →</a></div>
+      <div class="home-osrs" id="osrs-tiles"></div>
       <div class="clog-progress" id="osrs-progress"></div>
+      <div class="home-sub" id="osrs-sub">Recent collections</div>
       <div class="clog-row" id="osrs-row"></div>
     </section>
     <section class="hs" id="board" hidden>
@@ -102,6 +105,7 @@
   <script src="clips.js"></script>
   <script src="schedule.js"></script>
   <script src="shinies.js"></script>
+  <script src="osrs.js"></script>
   <script src="home-extra.js"></script>
 </body>
 </html>

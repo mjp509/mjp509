@@ -32,22 +32,27 @@
     }
   }
 
-  let o = null;
-  try { const res = await fetch("data/osrs.json", { cache: "no-cache" }); if (res.ok) o = await res.json(); } catch {}
-  if (o && ((o.items || []).length || o.total)) {
-    const ago = u => { const d = (Date.now() / 1000 - u) / 86400; return d < 1 ? "today" : d < 2 ? "yesterday" : d < 30 ? `${Math.floor(d)}d ago` : new Date(u * 1000).toLocaleDateString(undefined, { month: "short", day: "numeric" }); };
-    document.getElementById("osrs-row").innerHTML = o.items.map(i => `
-      <a class="clog${i.notable ? " notable" : ""}" href="https://oldschool.runescape.wiki/w/Special:Lookup?type=item&amp;id=${encodeURIComponent(i.id)}&amp;name=${encodeURIComponent(i.name)}" target="_blank" rel="noopener" title="${esc(i.name)}${i.notable ? " · notable" : ""}">
-        <span class="clog-icon"><img loading="lazy" src="https://static.runelite.net/cache/item/icon/${encodeURIComponent(i.id)}.png" alt="" data-wiki="https://oldschool.runescape.wiki/images/${encodeURIComponent(String(i.name).replace(/ /g, "_"))}.png" onerror="if(this.dataset.wiki){this.src=this.dataset.wiki;this.dataset.wiki=''}else{this.remove()}"></span>
-        <b>${esc(i.name)}</b><small>${ago(i.unix)}</small>
-      </a>`).join("");
-    if (!o.items.length) document.getElementById("osrs-row").innerHTML = `<p class="clog-empty">New collection log drops show up here as ${esc(o.rsn)} gets them.</p>`;
+  const o = typeof loadOsrs === "function" ? await loadOsrs() : null;
+  if (o && (o.skills || o.total)) {
+    const L = o.links || { overview: o.url, log: o.url };
+    document.getElementById("osrs-title").textContent = `OSRS · ${o.rsn}`;
+    const t = (icon, v, l, href) => `<a class="o-tile" href="${href}" target="_blank" rel="noopener">${icon ? `<img src="${WIKI_IMG(icon)}" alt="">` : ""}<b>${v}</b><span>${l}</span></a>`;
+    if (o.skills) document.getElementById("osrs-tiles").innerHTML =
+      t("Combat_icon.png", o.combat.toFixed(2), "Combat", L.overview) + t("Stats_icon.png", num(o.total_level), "Total level", L.overview) +
+      t("", compact(o.total_xp), "Total XP", L.overview) + t("", o.ehb, "EHB", L.overview);
     if (o.total) {
-      const pct = (100 * o.done / o.total);
-      document.getElementById("osrs-progress").innerHTML = `<div class="clog-prog-text"><b>${o.done.toLocaleString()}</b> / ${o.total.toLocaleString()} collected <span>${pct.toFixed(1)}%</span></div>
-        <div class="clog-bar"><i style="width:${Math.min(100, pct)}%"></i></div>`;
+      const pct = 100 * o.done / o.total;
+      document.getElementById("osrs-progress").innerHTML = `<a href="${L.log}" target="_blank" rel="noopener" class="clog-prog-link"><div class="clog-prog-text"><b>${num(o.done)}</b> / ${num(o.total)} collection log <span>${pct.toFixed(1)}%</span></div>
+        <div class="clog-bar"><i style="width:${Math.min(100, pct)}%"></i></div></a>`;
     }
-    const all = document.getElementById("osrs-all"); all.href = o.url;
+    const row = document.getElementById("osrs-row");
+    if ((o.items || []).length) row.innerHTML = clogItems(o.items.slice(0, 12));
+    else if ((o.bosses || []).length) {
+      document.getElementById("osrs-sub").textContent = "Top bosses";
+      row.className = "home-bosses";
+      row.innerHTML = o.bosses.slice(0, 8).map(b => `<a class="o-boss" href="${L.stat + encodeURIComponent(b.name)}" target="_blank" rel="noopener" title="${esc(b.name)} · ${num(b.kc)} kills">
+        <span class="o-bicon">${b.icon ? itemImg(b.icon, b.name) : ""}</span><span class="o-bname">${esc(b.name.replace(/^The /, ""))}</span><b>${num(b.kc)}</b></a>`).join("");
+    } else document.getElementById("osrs-sub").hidden = true;
     document.getElementById("osrs").hidden = false;
   }
 })();
