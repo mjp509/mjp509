@@ -37,7 +37,7 @@
   if (o && (o.items || []).length) {
     const ago = u => { const d = (Date.now() / 1000 - u) / 86400; return d < 1 ? "today" : d < 2 ? "yesterday" : d < 30 ? `${Math.floor(d)}d ago` : new Date(u * 1000).toLocaleDateString(undefined, { month: "short", day: "numeric" }); };
     document.getElementById("osrs-row").innerHTML = o.items.map(i => `
-      <a class="clog${i.notable ? " notable" : ""}" href="https://oldschool.runescape.wiki/w/${encodeURIComponent(String(i.name).replace(/ /g, "_"))}" target="_blank" rel="noopener" title="${esc(i.name)}${i.notable ? " · notable" : ""}">
+      <a class="clog${i.notable ? " notable" : ""}" href="https://oldschool.runescape.wiki/w/Special:Lookup?type=item&amp;id=${encodeURIComponent(i.id)}&amp;name=${encodeURIComponent(i.name)}" target="_blank" rel="noopener" title="${esc(i.name)}${i.notable ? " · notable" : ""}">
         <span class="clog-icon"><img loading="lazy" src="https://static.runelite.net/cache/item/icon/${encodeURIComponent(i.id)}.png" alt="" data-wiki="https://oldschool.runescape.wiki/images/${encodeURIComponent(String(i.name).replace(/ /g, "_"))}.png" onerror="if(this.dataset.wiki){this.src=this.dataset.wiki;this.dataset.wiki=''}else{this.remove()}"></span>
         <b>${esc(i.name)}</b><small>${ago(i.unix)}</small>
       </a>`).join("");
