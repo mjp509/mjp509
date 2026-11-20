@@ -4,7 +4,7 @@
       "live_streams": 0,
       "linked": 0,
       "since": null,
-      "folded_until": "2026-11-19T16:47:41Z"
+      "folded_until": "2026-11-19T23:16:16Z"
     },
     "metrics": [
       {
@@ -248,7 +248,7 @@
         {
           "tag": "Timing",
           "title": "Least crowded hours in your category",
-          "have": 24,
+          "have": 25,
           "need": 40,
           "unit": "hours of category samples"
         },
@@ -275,8 +275,8 @@
       {
         "gid": "457975278",
         "game": "PokeMMO",
-        "slots_sampled": 24,
-        "samples": 24,
+        "slots_sampled": 25,
+        "samples": 25,
         "cells": [
           [
             0,
@@ -944,11 +944,11 @@
             0
           ],
           [
-            0,
-            0,
-            0,
-            0,
-            0
+            1,
+            15.0,
+            48,
+            3.2,
+            2.0
           ],
           [
             0,
@@ -1547,15 +1547,6 @@
     },
     "weekly": {
       "this": {
-        "streams": 1,
-        "hours": 3.2,
-        "avg_viewers": 9.8,
-        "peak_viewers": 17,
-        "chatters": 18,
-        "new_chatters": 18,
-        "messages": 480
-      },
-      "last": {
         "streams": 0,
         "hours": 0.0,
         "avg_viewers": null,
@@ -1564,21 +1555,20 @@
         "new_chatters": 0,
         "messages": 0
       },
-      "followers": null,
-      "subs": null,
-      "best": {
-        "t": 9350,
-        "x": 8.0,
-        "count": 8,
-        "tag": "spike",
-        "words": [
-          "chovy"
-        ],
-        "id": "2927241555",
-        "title": "🍔 gëek wën i want gëek all da timë 🍔 luh shmünk 🍔"
+      "last": {
+        "streams": 1,
+        "hours": 3.2,
+        "avg_viewers": 9.8,
+        "peak_viewers": 17,
+        "chatters": 18,
+        "new_chatters": 18,
+        "messages": 480
       },
-      "from": "2026-11-12",
-      "to": "2026-11-19"
+      "followers": 0,
+      "subs": 0,
+      "best": null,
+      "from": "2026-11-13",
+      "to": "2026-11-20"
     }
   },
   "overview": {
@@ -2196,8 +2186,8 @@
         "messages": 5
       },
       {
-        "name": "leonunez96",
-        "color": "",
+        "name": "BreezyRS",
+        "color": "#00FF7F",
         "messages": 3
       },
       {
@@ -2206,8 +2196,8 @@
         "messages": 3
       },
       {
-        "name": "BreezyRS",
-        "color": "#00FF7F",
+        "name": "leonunez96",
+        "color": "",
         "messages": 3
       },
       {
