@@ -7,7 +7,7 @@ const localDay = iso => { const d = new Date(iso); return `${d.getFullYear()}-${
 function shinyCard(s, vodByDay, compact) {
   const v = vodByDay && vodByDay[s.date];
   const ivs = (s.ivs || []).length === 6 ? `<div class="ivs" title="IVs ${s.ivs.join("/")}">${s.ivs.map((n, i) =>
-    `<span class="iv${n === 31 ? " max" : ""}" title="${IV_LABELS[i]} ${n}"><i style="--h:${Math.round(n / 31 * 100)}%"></i><b>${IV_LABELS[i]}</b></span>`).join("")}</div>` : "";
+    `<span class="iv${n === 31 ? " max" : ""}" title="${IV_LABELS[i]} ${n}"><i style="--h:${Math.round(n / 31 * 100)}%"></i><b>${IV_LABELS[i]}</b><small>${n}</small></span>`).join("")}</div>` : "";
   const tags = [s.fav && `<span class="stag fav" title="Favourite">★</span>`, s.alpha && `<span class="stag">Alpha</span>`, s.secret && `<span class="stag">Secret</span>`].filter(Boolean).join("");
   if (compact) return `<a class="shiny mini" href="shinies.html" title="${esc(s.name)}${s.nick ? ` “${esc(s.nick)}”` : ""} · ${s.enc.toLocaleString()} encounters">
     ${s.sprite ? `<img loading="lazy" src="${esc(s.sprite)}" alt="${esc(s.name)}">` : ""}<b>${esc(s.species || s.name)}</b><small>${s.enc.toLocaleString()} enc</small></a>`;
@@ -45,6 +45,8 @@ async function loadShinies() {
     tile(list.length, "shinies") + tile(total.toLocaleString(), "total encounters") +
     tile(encs.length ? Math.round(total / encs.length).toLocaleString() : "—", "avg per shiny") +
     tile(list.filter(s => s.alpha).length, "alphas") +
+    tile(list.filter(s => s.method === "egg").length, "eggs") +
+    tile(list.filter(s => s.method === "fishing").length, "fishing") +
     tile(lucky ? `${esc(lucky.species || lucky.name)}` : "—", `luckiest · ${lucky ? lucky.enc.toLocaleString() : ""} enc`) +
     tile(longest ? `${esc(longest.species || longest.name)}` : "—", `longest hunt · ${longest ? longest.enc.toLocaleString() : ""} enc`);
   document.getElementById("shiny-sub").textContent = `Every shiny caught in PokeMMO. ${list.length} and counting.`;
