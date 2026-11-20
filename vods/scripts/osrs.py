@@ -62,7 +62,7 @@ def build():
     except (RuntimeError, LookupError) as e:
         print(f"::warning::TempleOSRS stats: {e}")
         return
-    name = info.get("player_name_with_capitalization") or info.get("Username") or rsn
+    name = rsn  # exactly as entered (in-game capitalization); TempleOSRS capitalizes the first letter
     q = urllib.parse.quote(rsn)
     base = "https://templeosrs.com/player/"
     links = {"overview": f"{base}overview.php?player={q}", "log": f"{base}collection-log.php?player={q}",
