@@ -4,7 +4,7 @@
       "live_streams": 0,
       "linked": 0,
       "since": null,
-      "folded_until": "2026-11-19T23:16:16Z"
+      "folded_until": "2026-11-20T04:01:41Z"
     },
     "metrics": [
       {
@@ -225,7 +225,7 @@
         {
           "tag": "Timing",
           "title": "Least crowded hours in your category",
-          "have": 25,
+          "have": 26,
           "need": 40,
           "unit": "hours of category samples"
         },
@@ -252,8 +252,8 @@
       {
         "gid": "457975278",
         "game": "PokeMMO",
-        "slots_sampled": 25,
-        "samples": 25,
+        "slots_sampled": 26,
+        "samples": 26,
         "cells": [
           [
             0,
@@ -956,11 +956,11 @@
             0
           ],
           [
-            0,
-            0,
-            0,
-            0,
-            0
+            1,
+            15.0,
+            63,
+            4.2,
+            3.0
           ],
           [
             0,
@@ -1436,7 +1436,7 @@
     ],
     "followers": {
       "current": 284,
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "history": [
         [
           "2026-11-13",
@@ -1465,12 +1465,16 @@
         [
           "2026-11-19",
           284
+        ],
+        [
+          "2026-11-20",
+          284
         ]
       ],
       "d7": {
         "gained": 0,
         "since": "2026-11-13",
-        "full": false
+        "full": true
       },
       "d30": {
         "gained": 0,
@@ -1480,7 +1484,7 @@
     },
     "subs": {
       "current": 2,
-      "as_of": "2026-11-19",
+      "as_of": "2026-11-20",
       "history": [
         [
           "2026-11-13",
@@ -1509,12 +1513,16 @@
         [
           "2026-11-19",
           2
+        ],
+        [
+          "2026-11-20",
+          2
         ]
       ],
       "d7": {
         "gained": 0,
         "since": "2026-11-13",
-        "full": false
+        "full": true
       },
       "d30": {
         "gained": 0,
@@ -2157,13 +2165,13 @@
         "messages": 18
       },
       {
-        "name": "treelon720",
-        "color": "",
+        "name": "EzraMMO",
+        "color": "#DAA520",
         "messages": 15
       },
       {
-        "name": "EzraMMO",
-        "color": "#DAA520",
+        "name": "treelon720",
+        "color": "",
         "messages": 15
       },
       {
