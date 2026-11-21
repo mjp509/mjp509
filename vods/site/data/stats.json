@@ -4,7 +4,7 @@
       "live_streams": 0,
       "linked": 0,
       "since": null,
-      "folded_until": "2026-11-20T20:46:08Z"
+      "folded_until": "2026-11-21T01:47:32Z"
     },
     "metrics": [
       {
@@ -253,7 +253,7 @@
         "gid": "457975278",
         "game": "PokeMMO",
         "slots_sampled": 28,
-        "samples": 28,
+        "samples": 29,
         "cells": [
           [
             0,
@@ -1103,11 +1103,11 @@
             0
           ],
           [
-            1,
-            14.0,
-            94,
-            6.71,
-            2.5
+            2,
+            14.5,
+            79,
+            5.45,
+            2.8
           ],
           [
             0,
@@ -1436,7 +1436,7 @@
     ],
     "followers": {
       "current": 283,
-      "as_of": "2026-11-20",
+      "as_of": "2026-11-21",
       "history": [
         [
           "2026-11-13",
@@ -1469,11 +1469,15 @@
         [
           "2026-11-20",
           283
+        ],
+        [
+          "2026-11-21",
+          283
         ]
       ],
       "d7": {
         "gained": -1,
-        "since": "2026-11-13",
+        "since": "2026-11-14",
         "full": true
       },
       "d30": {
@@ -1484,7 +1488,7 @@
     },
     "subs": {
       "current": 4,
-      "as_of": "2026-11-20",
+      "as_of": "2026-11-21",
       "history": [
         [
           "2026-11-13",
@@ -1517,11 +1521,15 @@
         [
           "2026-11-20",
           4
+        ],
+        [
+          "2026-11-21",
+          4
         ]
       ],
       "d7": {
         "gained": 2,
-        "since": "2026-11-13",
+        "since": "2026-11-14",
         "full": true
       },
       "d30": {
@@ -1562,8 +1570,8 @@
         "id": "2934630921",
         "title": "🍔 super short lowkey late night shunting stream (i cannot sleep) 🍔"
       },
-      "from": "2026-11-13",
-      "to": "2026-11-20"
+      "from": "2026-11-14",
+      "to": "2026-11-21"
     }
   },
   "overview": {
@@ -2175,13 +2183,13 @@
         "messages": 15
       },
       {
-        "name": "thebmann0",
-        "color": "",
+        "name": "Austin_Cliff306",
+        "color": "#0000FF",
         "messages": 11
       },
       {
-        "name": "Austin_Cliff306",
-        "color": "#0000FF",
+        "name": "thebmann0",
+        "color": "",
         "messages": 11
       },
       {
