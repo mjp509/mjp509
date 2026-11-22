@@ -4,7 +4,7 @@
       "live_streams": 0,
       "linked": 0,
       "since": null,
-      "folded_until": "2026-11-22T09:13:31Z"
+      "folded_until": "2026-11-22T17:12:19Z"
     },
     "metrics": [
       {
@@ -253,7 +253,7 @@
         "gid": "457975278",
         "game": "PokeMMO",
         "slots_sampled": 32,
-        "samples": 34,
+        "samples": 35,
         "cells": [
           [
             0,
@@ -1383,11 +1383,11 @@
             0
           ],
           [
-            1,
-            10.0,
-            95,
-            9.5,
-            3.5
+            2,
+            9.0,
+            64,
+            7.06,
+            3.0
           ],
           [
             0,
@@ -2181,23 +2181,23 @@
         "messages": 18
       },
       {
-        "name": "treelon720",
-        "color": "",
-        "messages": 15
-      },
-      {
         "name": "EzraMMO",
         "color": "#DAA520",
         "messages": 15
       },
       {
-        "name": "thebmann0",
+        "name": "treelon720",
         "color": "",
-        "messages": 11
+        "messages": 15
       },
       {
         "name": "Austin_Cliff306",
         "color": "#0000FF",
+        "messages": 11
+      },
+      {
+        "name": "thebmann0",
+        "color": "",
         "messages": 11
       },
       {
