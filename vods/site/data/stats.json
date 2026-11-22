@@ -4,7 +4,7 @@
       "live_streams": 0,
       "linked": 0,
       "since": null,
-      "folded_until": "2026-11-21T16:33:03Z"
+      "folded_until": "2026-11-22T01:51:28Z"
     },
     "metrics": [
       {
@@ -225,7 +225,7 @@
         {
           "tag": "Timing",
           "title": "Least crowded hours in your category",
-          "have": 29,
+          "have": 31,
           "need": 40,
           "unit": "hours of category samples"
         },
@@ -252,8 +252,8 @@
       {
         "gid": "457975278",
         "game": "PokeMMO",
-        "slots_sampled": 29,
-        "samples": 31,
+        "slots_sampled": 31,
+        "samples": 33,
         "cells": [
           [
             0,
@@ -1243,11 +1243,11 @@
             0
           ],
           [
-            0,
-            0,
-            0,
-            0,
-            0
+            1,
+            14.0,
+            88,
+            6.29,
+            3.0
           ],
           [
             0,
@@ -1271,11 +1271,11 @@
             0
           ],
           [
-            0,
-            0,
-            0,
-            0,
-            0
+            1,
+            20.0,
+            53,
+            2.65,
+            2.0
           ],
           [
             1,
@@ -1436,7 +1436,7 @@
     ],
     "followers": {
       "current": 283,
-      "as_of": "2026-11-21",
+      "as_of": "2026-11-22",
       "history": [
         [
           "2026-11-13",
@@ -1473,11 +1473,15 @@
         [
           "2026-11-21",
           283
+        ],
+        [
+          "2026-11-22",
+          283
         ]
       ],
       "d7": {
         "gained": -1,
-        "since": "2026-11-14",
+        "since": "2026-11-15",
         "full": true
       },
       "d30": {
@@ -1488,7 +1492,7 @@
     },
     "subs": {
       "current": 4,
-      "as_of": "2026-11-21",
+      "as_of": "2026-11-22",
       "history": [
         [
           "2026-11-13",
@@ -1525,11 +1529,15 @@
         [
           "2026-11-21",
           4
+        ],
+        [
+          "2026-11-22",
+          4
         ]
       ],
       "d7": {
         "gained": 2,
-        "since": "2026-11-14",
+        "since": "2026-11-15",
         "full": true
       },
       "d30": {
@@ -1570,8 +1578,8 @@
         "id": "2934630921",
         "title": "🍔 super short lowkey late night shunting stream (i cannot sleep) 🍔"
       },
-      "from": "2026-11-14",
-      "to": "2026-11-21"
+      "from": "2026-11-15",
+      "to": "2026-11-22"
     }
   },
   "overview": {
