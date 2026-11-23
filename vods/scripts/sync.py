@@ -113,6 +113,28 @@ def save_boxart(helix):
         vodlib.save(vodlib.DATA / "games.json", art)
 
 
+def save_avatars(helix):
+    """Twitch profile pictures for everyone who has chatted (data/avatars.json, login -> image URL)."""
+    path = vodlib.DATA / "avatars.json"
+    known = vodlib.load(path, {})
+    names = set()
+    for f in (vodlib.DATA / "chat").glob("*.json"):
+        for m in json.loads(f.read_text(encoding="utf-8")):
+            n = str(m[1]).lower()
+            if re.fullmatch(r"[a-z0-9_]{1,25}", n):  # display name == login; others can't be looked up by name
+                names.add(n)
+    names = sorted(names)
+    try:
+        for i in range(0, len(names), 100):
+            for u in helix("users?" + "&".join("login=" + n for n in names[i:i + 100])):
+                if u.get("profile_image_url"):
+                    known[u["login"]] = u["profile_image_url"]
+    except RuntimeError as e:
+        print(f"::warning::Couldn't fetch chatter avatars: {e}")
+    vodlib.save(path, known)
+    print(f"Avatars: {len(known)} chatters")
+
+
 def save_new_chats():
     helix = twitch()
     user = helix(f"users?login={CHANNEL}")[0]
@@ -152,6 +174,7 @@ def save_new_chats():
         pending = vodlib.load(vodlib.PENDING, [])
         pending.append(entry)
         vodlib.save(vodlib.PENDING, pending)
+    save_avatars(helix)
 
 
 def iso_seconds(d):
