@@ -74,3 +74,10 @@ a.chatter:hover { text-decoration: underline; text-underline-offset: 3px; }
 .game-hero .hint { margin: 0; }
 .iv small { font-size: 10px; color: var(--text); font-variant-numeric: tabular-nums; line-height: 1.1; }
 .iv.max small { color: #f5c842; font-weight: 700; }
+.prof-pic { border-radius: 50%; object-fit: cover; background: var(--panel-2); flex: none; }
+.prof-avatar { width: 64px; height: 64px; box-shadow: 0 0 0 3px var(--panel), 0 0 0 5px var(--accent); }
+.prof-dot.prof-avatar { font-size: 26px; }
+.who-chip { flex-direction: row; align-items: center; gap: 10px; }
+.who-txt { display: flex; flex-direction: column; min-width: 0; }
+.who-pic { width: 34px; height: 34px; font-size: 15px; }
+.prof-dot.who-pic { display: grid; place-items: center; border-radius: 50%; font-weight: 800; color: #111; flex: none; }

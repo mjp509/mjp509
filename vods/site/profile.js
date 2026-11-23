@@ -1,11 +1,14 @@
 (async () => {
   const EMOTE = { t: id => `https://static-cdn.jtvnw.net/emoticons/v2/${id}/default/dark/3.0`, "7": id => `https://cdn.7tv.app/emote/${id}/4x.webp` };
   const box = document.getElementById("profile");
-  let data, vods = [];
+  let data, vods = [], pics = {};
   try {
-    const [c, v] = await Promise.all([fetch("data/chatters.json", { cache: "no-cache" }), loadVods()]);
-    data = c.ok ? await c.json() : null; vods = v;
+    const [c, v, a] = await Promise.all([fetch("data/chatters.json", { cache: "no-cache" }), loadVods(),
+      fetch("data/avatars.json", { cache: "no-cache" }).then(r => r.ok ? r.json() : {}).catch(() => ({}))]);
+    data = c.ok ? await c.json() : null; vods = v; pics = a || {};
   } catch {}
+  // Twitch serves 70x70 / 150x150 / 300x300 versions of each profile picture
+  const pic = (key, size) => pics[key] ? pics[key].replace(/-\d+x\d+\./, `-${size}x${size}.`) : "";
   if (!data) { box.innerHTML = `<div class="empty-state"><div class="empty-icon">📡</div><h2>Couldn't load profiles</h2><a class="btn" href="profile.html">Try again</a></div>`; return; }
 
   const users = data.users, keys = Object.keys(users).sort((a, b) => users[b].m - users[a].m);
@@ -21,10 +24,16 @@
   const u = users[key];
   const byId = Object.fromEntries(vods.map(v => [v.id, v]));
   const nameStyle = c => `color:${esc(c ? readable(c) : "var(--text)")}`;
+  // Profile picture, falling back to a coloured initial if there isn't one (or it fails to load)
+  const avatar = (key, u, size, cls) => {
+    const dot = `<span class="${cls} prof-dot" style="background:${esc(u.c ? readable(u.c) : "var(--accent)")}">${esc((u.n[0] || "?").toUpperCase())}</span>`;
+    const src = pic(key, size);
+    return src ? `<img class="${cls} prof-pic" src="${esc(src)}" alt="" loading="lazy" onerror="this.outerHTML=this.dataset.fb" data-fb="${esc(dot)}">` : dot;
+  };
 
   if (!u) {
     box.innerHTML = `<h1 class="prof-title">Chatters</h1><p class="hint">${keys.length} people have chatted across ${data.streams} saved stream${data.streams === 1 ? "" : "s"}. Pick someone:</p>
-      <div class="who-grid">${keys.slice(0, 60).map(k => `<a class="who-chip" href="profile.html?u=${encodeURIComponent(k)}"><b style="${nameStyle(users[k].c)}">${esc(users[k].n)}</b><small>${users[k].m.toLocaleString()} msgs · ${users[k].b.length} badges</small></a>`).join("")}</div>`;
+      <div class="who-grid">${keys.slice(0, 60).map(k => `<a class="who-chip" href="profile.html?u=${encodeURIComponent(k)}">${avatar(k, users[k], 70, "who-pic")}<span class="who-txt"><b style="${nameStyle(users[k].c)}">${esc(users[k].n)}</b><small>${users[k].m.toLocaleString()} msgs · ${users[k].b.length} badges</small></span></a>`).join("")}</div>`;
     return;
   }
 
@@ -38,7 +47,7 @@
   box.innerHTML = `
     <section class="prof-card">
       <div class="prof-head">
-        <div class="prof-dot" style="background:${esc(u.c ? readable(u.c) : "var(--accent)")}">${esc(u.n[0] || "?").toUpperCase()}</div>
+        ${avatar(key, u, 150, "prof-avatar")}
         <div><h1 class="prof-name" style="${nameStyle(u.c)}">${esc(u.n)}</h1>
           <div class="hint">${u.b.length} of ${data.badges.length} badges${u.streak >= 2 ? ` · 🔥 ${u.streak}-stream streak` : ""}</div></div>
       </div>
