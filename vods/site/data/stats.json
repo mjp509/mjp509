@@ -4,7 +4,7 @@
       "live_streams": 0,
       "linked": 0,
       "since": null,
-      "folded_until": "2026-11-23T03:00:29Z"
+      "folded_until": "2026-11-23T12:18:33Z"
     },
     "metrics": [
       {
@@ -239,7 +239,7 @@
         {
           "tag": "Timing",
           "title": "Least crowded hours in your category",
-          "have": 34,
+          "have": 35,
           "need": 40,
           "unit": "hours of category samples"
         },
@@ -266,8 +266,8 @@
       {
         "gid": "457975278",
         "game": "PokeMMO",
-        "slots_sampled": 34,
-        "samples": 37,
+        "slots_sampled": 35,
+        "samples": 38,
         "cells": [
           [
             0,
@@ -354,11 +354,11 @@
             0
           ],
           [
-            0,
-            0,
-            0,
-            0,
-            0
+            1,
+            4.0,
+            20,
+            5.0,
+            5.5
           ],
           [
             0,
@@ -2227,23 +2227,23 @@
         "messages": 5
       },
       {
-        "name": "ArcherKaiDono",
-        "color": "#008000",
-        "messages": 4
-      },
-      {
         "name": "Ryukotsukii",
         "color": "#8A2BE2",
         "messages": 4
       },
       {
-        "name": "Bloom2D_",
-        "color": "#8A2BE2",
-        "messages": 2
+        "name": "ArcherKaiDono",
+        "color": "#008000",
+        "messages": 4
       },
       {
         "name": "YaBoiDiablo",
         "color": "",
+        "messages": 2
+      },
+      {
+        "name": "Bloom2D_",
+        "color": "#8A2BE2",
         "messages": 2
       },
       {
