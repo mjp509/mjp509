@@ -351,3 +351,25 @@ a.gtile { display: block; }
 .clog-empty { grid-column: 1 / -1; color: var(--muted); font-size: 13px; margin: 0; }
 .clog-prog-link { display: block; }
 .clog-prog-link:hover .clog-bar { box-shadow: 0 0 0 1px var(--accent); }
+
+/* Site nav: emoji + label, emoji-only pills on phones */
+.logo { white-space: nowrap; min-width: 0; }
+header nav.site-nav { margin-left: auto; display: flex; align-items: center; gap: 4px; flex: none; }
+.site-nav a { display: inline-flex; align-items: center; gap: 6px; padding: 7px 11px; border-radius: 999px; color: var(--muted); white-space: nowrap;
+  font-weight: 600; font-size: 14px; transition: background-color .15s ease, color .15s ease; }
+.site-nav a:hover { background: var(--panel-2); color: var(--text); }
+.site-nav a.on { background: #a970ff26; color: var(--text); box-shadow: inset 0 0 0 1px #a970ff66; }
+.site-nav .ni { font-size: 16px; line-height: 1; }
+@media (max-width: 700px) {
+  header { padding: 10px 14px; gap: 10px; }
+  .site-nav .nt { display: none; }
+  .site-nav a { width: 38px; height: 38px; padding: 0; justify-content: center; background: var(--panel-2); }
+  .site-nav .ni { font-size: 18px; }
+}
+@media (max-width: 480px) {
+  .logo { font-size: 17px; }
+  .avatar { width: 30px; height: 30px; }
+  .site-nav { gap: 3px; }
+  .site-nav a { width: 36px; height: 36px; }
+}
+@media (max-width: 370px) { .logo-home { display: none; } }
