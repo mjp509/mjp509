@@ -376,3 +376,6 @@ header nav.site-nav { margin-left: auto; display: flex; align-items: center; gap
 /* Sideways-scrolling rows: fade in only (a vertical slide would overflow the row) */
 .clip-row .reveal { transform: none; }
 .clip-row .clip-card:hover, .clip-row .clip-card:active { transform: none; }
+.homage { display: inline-block; margin-top: 4px; font-size: 12px; letter-spacing: .01em; }
+.site-foot .homage a { color: #4ade80; font-weight: 700; text-decoration: none; }
+.site-foot .homage a:hover { text-decoration: underline; text-underline-offset: 3px; }
