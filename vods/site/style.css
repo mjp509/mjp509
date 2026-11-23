@@ -60,7 +60,7 @@ main { max-width: 1400px; margin: 0 auto; padding: 20px; }
 .clips { margin-bottom: 22px; }
 .clips h2 { font-family: var(--font-display); font-size: 16px; margin: 0 0 10px; }
 .clip-row { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(220px, 260px); gap: 12px;
-  overflow-x: auto; scroll-snap-type: x mandatory; padding: 3px 3px 8px; margin: -3px -3px 0; scroll-padding: 3px; }
+  overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; padding: 3px 3px 8px; margin: -3px -3px 0; scroll-padding: 3px; }
 .clip-card { scroll-snap-align: start; background: var(--panel); border: 0; border-radius: var(--radius); overflow: hidden;
   padding: 0; text-align: left; color: inherit; font: inherit; cursor: pointer; }
 .clip-card:hover { box-shadow: 0 0 0 2px var(--accent); }
@@ -373,3 +373,6 @@ header nav.site-nav { margin-left: auto; display: flex; align-items: center; gap
   .site-nav a { width: 36px; height: 36px; }
 }
 @media (max-width: 370px) { .logo-home { display: none; } }
+/* Sideways-scrolling rows: fade in only (a vertical slide would overflow the row) */
+.clip-row .reveal { transform: none; }
+.clip-row .clip-card:hover, .clip-row .clip-card:active { transform: none; }
