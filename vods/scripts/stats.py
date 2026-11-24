@@ -210,6 +210,7 @@ def main():
         "greet": greet,
     }
     vodlib.save(vodlib.DATA / "stats.json", stats)
+    vodlib.save(vodlib.DATA / "moments.json", all_moments)  # public copy for VOD pages (stats.json can be login-protected)
     def fav_of(m, n):
         top = fav[m][n].most_common(1)
         return {"src": top[0][0][0], "id": top[0][0][1], "name": top[0][0][2]} if top else None
