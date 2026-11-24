@@ -94,7 +94,7 @@ if __name__ == "__main__":
     loc = start_session(tok, p)  # fails fast on a bad token before the big download
     out = Path("vod.mp4")
     subprocess.run([TDL, "videodownload", "--id", p["id"], "-q", "1080p60", "-o", str(out),
-                    "--ffmpeg-path", "ffmpeg", "--threads", "10", "--temp-path", "."], check=True)
+                    "--ffmpeg-path", "ffmpeg", "--threads", "10", "--temp-path", "."], check=True, env=vodlib.tool_env())
     print(f"Downloaded {out.stat().st_size / 1e9:.1f} GB")
     video = upload(loc, out)
     privacy = video.get("status", {}).get("privacyStatus")

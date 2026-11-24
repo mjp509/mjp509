@@ -28,14 +28,25 @@ def game_pages(vods, site):
             if g:
                 games.setdefault(g, []).append(v)
     e = lambda t: html.escape(str(t), quote=True)
+    art = vodlib.load(vodlib.DATA / "games.json", {})
     for g, vs in games.items():
         url = f"{site}/game/{slug(g)}/" if site else ""
+        img = art.get(g) or f"https://static-cdn.jtvnw.net/ttv-boxart/{g.replace(' ', '%20')}-285x380.jpg"
         hours = sum(v.get("duration", 0) for v in vs) / 3600
         desc = (f"Every {g} stream by itsmotch with full Twitch chat replay. {len(vs)} VOD{'s' if len(vs) != 1 else ''}, "
                 f"{hours:.0f} hours" + (", plus the shiny log." if g == "PokeMMO" else "."))
         head = (f"<title>{e(g)} VODs · itsmotch</title>\n  <meta name=\"description\" content=\"{e(desc)}\">\n"
                 f"  <meta property=\"og:title\" content=\"{e(g)} VODs · itsmotch\">\n  <meta property=\"og:description\" content=\"{e(desc)}\">"
-                + (f"\n  <link rel=\"canonical\" href=\"{e(url)}\">" if url else ""))
+                + f"\n  <meta property=\"og:type\" content=\"website\">\n  <meta property=\"og:image\" content=\"{e(img)}\">"
+                + "\n  <meta name=\"twitter:card\" content=\"summary\">"
+                + (f"\n  <link rel=\"canonical\" href=\"{e(url)}\">\n  <meta property=\"og:url\" content=\"{e(url)}\">" if url else ""))
+        if url:
+            ld = {"@context": "https://schema.org", "@type": "CollectionPage", "name": f"{g} VODs · itsmotch", "url": url, "description": desc,
+                  "image": img, "about": {"@type": "VideoGame", "name": g},
+                  "mainEntity": {"@type": "ItemList", "itemListElement": [
+                      {"@type": "ListItem", "position": i + 1, "url": f"{site}/v/{v['id']}/", "name": v["title"]}
+                      for i, v in enumerate(sorted(vs, key=lambda v: v.get("date", ""), reverse=True)[:30])]}}
+            head += f'\n  <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False).replace("</", "<\\/")}</script>'
         page = (template.replace('<meta charset="utf-8">', '<meta charset="utf-8">\n  <base href="../../">', 1)
                 .replace("<title>Game VODs · itsmotch</title>", head, 1)
                 .replace('  <meta name="robots" content="noindex">\n', "", 1)
@@ -130,6 +141,29 @@ def add_tracking():
                 f.write_text(s.replace("<head>\n", "<head>\n" + head, 1) if "<head>\n" in s else s.replace("</head>", head + "</head>", 1), encoding="utf-8")
 
 
+def page_meta(site, image):
+    """Canonical link and link-preview tags for the hand-written pages that are in the sitemap."""
+    if not site:
+        return
+    e = lambda t: html.escape(str(t), quote=True)
+    pages = {"shinies.html": ("Shiny log · itsmotch", "Every PokeMMO shiny itsmotch has caught: encounters, method, route, nature and IVs, linked to the stream VOD."),
+             "osrs.html": ("OSRS stats · itsmotch", "itsmotch's Old School RuneScape account: skills, boss kill counts, raids, clues, pets and collection log progress."),
+             "privacy.html": ("Privacy · itsmotch VODs", "What itsmotch VODs collects (Google Analytics visit counts) and what stays in your browser.")}
+    for name, (title, desc) in pages.items():
+        f = SITE / name
+        s = f.read_text(encoding="utf-8")
+        if 'rel="canonical"' in s:
+            continue
+        url = f"{site}/{name}"
+        tags = (f'\n  <link rel="canonical" href="{e(url)}">\n  <meta property="og:type" content="website">'
+                f'\n  <meta property="og:url" content="{e(url)}">\n  <meta property="og:title" content="{e(title)}">'
+                f'\n  <meta property="og:description" content="{e(desc)}">\n  <meta property="og:image" content="{e(image)}">'
+                f'\n  <meta name="twitter:card" content="summary">')
+        if '<meta name="description"' not in s:
+            tags = f'\n  <meta name="description" content="{e(desc)}">' + tags
+        f.write_text(s.replace("</title>", "</title>" + tags, 1), encoding="utf-8")
+
+
 def bake_site_avatar():
     """Use the site's own avatar (site/img/avatar.gif, else avatar.webp) for the header logo instead of the Twitch picture."""
     pick = next((f"img/{n}" for n in ("avatar.gif", "avatar.webp", "avatar.png") if (SITE / "img" / n).exists()), None)
@@ -160,6 +194,7 @@ def main():
     site = os.environ.get("SITE_URL", "").rstrip("/")
     if site.startswith("http://"):  # Pages reports http even with Enforce HTTPS on
         site = "https://" + site[len("http://"):]
+    page_meta(site, channel.get("avatar") or (f"{site}/img/avatar.webp" if site else ""))
     template = (SITE / "vod.html").read_text(encoding="utf-8")
     vods = vodlib.load(vodlib.VODS, [])
     moments = vodlib.load(vodlib.DATA / "stats.json", {}).get("moments", {})
@@ -246,9 +281,11 @@ def main():
         idx = SITE / "index.html"
         s = idx.read_text(encoding="utf-8")
         e = lambda t: html.escape(t, quote=True)
-        desc = "watch all of itsmotchs vods with chat replay"
+        desc = "watch all of itsmotchs vods with chat replay"  # Discord card text (og:description)
+        seo = ("Watch every itsmotch Twitch stream with full chat replay: PokeMMO shiny hunts, OSRS and more, "
+               "plus clips, chat highscores, the shiny log and the schedule.")
         s = s.replace('<meta name="description" content="Every itsmotch stream, with chat replay.">',
-                      f'<meta name="description" content="{e(desc)}">\n'
+                      f'<meta name="description" content="{e(seo)}">\n'
                       f'  <meta property="og:type" content="website">\n'
                       f'  <meta property="og:title" content="itsmotch">\n'
                       f'  <meta property="og:description" content="{e(desc)}">\n'

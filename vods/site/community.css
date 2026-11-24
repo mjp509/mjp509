@@ -81,3 +81,5 @@ a.chatter:hover { text-decoration: underline; text-underline-offset: 3px; }
 .who-txt { display: flex; flex-direction: column; min-width: 0; }
 .who-pic { width: 34px; height: 34px; font-size: 15px; }
 .prof-dot.who-pic { display: grid; place-items: center; border-radius: 50%; font-weight: 800; color: #111; flex: none; }
+.iv b { font-size: 11px; }
+.iv small { font-size: 11px; }

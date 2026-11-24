@@ -138,3 +138,10 @@ def publish(entry):
     pending = [p for p in load(PENDING, []) if p["id"] != entry["id"]]
     if PENDING.exists() or pending:
         save(PENDING, pending)
+
+
+def tool_env():
+    """Environment for third-party binaries (TwitchDownloaderCLI): everything except our keys and tokens."""
+    import os
+    secret = ("SECRET", "TOKEN", "KEY", "CLIENT_ID", "PASSWORD")
+    return {k: v for k, v in os.environ.items() if not any(w in k.upper() for w in secret)}
