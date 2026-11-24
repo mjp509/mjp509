@@ -162,7 +162,7 @@ def save_new_chats():
         print(f"Saving chat for {v['id']}: {v['title']}")
         with tempfile.TemporaryDirectory() as tmp:
             out = Path(tmp) / "chat.json"
-            subprocess.run([TDL, "chatdownload", "--id", v["id"], "-o", str(out)], check=True)
+            subprocess.run([TDL, "chatdownload", "--id", v["id"], "-o", str(out)], check=True, env=vodlib.tool_env())
             raw = json.loads(out.read_text(encoding="utf-8"))
         raw.setdefault("streamer", {}).setdefault("id", user["id"])
         raw.setdefault("video", {}).setdefault("title", v["title"])

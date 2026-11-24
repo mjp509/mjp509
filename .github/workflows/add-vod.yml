@@ -27,6 +27,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false  # keep the push token away from third-party tools run below
 
       - name: Get TwitchDownloaderCLI
         if: inputs.twitch != ''
@@ -59,9 +61,12 @@ jobs:
           python3 vods/scripts/stats.py
 
       - name: Commit
+        env:
+          PUSH_TOKEN: ${{ github.token }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add vods/site/data; [ -f vods/pending.json ] && git add vods/pending.json
           git commit -m "Add VOD" || exit 0
+          git remote set-url origin "https://x-access-token:${PUSH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           git push
