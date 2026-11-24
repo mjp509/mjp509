@@ -39,6 +39,12 @@ function drawActivity(moments) {
   });
 }
 const log = document.getElementById("log");
+// Clicking (or pressing Enter on) a chat timestamp jumps the video to that moment
+log.addEventListener("click", e => { const ts = e.target.closest(".ts"); if (ts) seekChat(+ts.dataset.t); });
+log.addEventListener("keydown", e => {
+  const ts = e.target.closest(".ts");
+  if (ts && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); seekChat(+ts.dataset.t); }
+});
 const status = document.getElementById("chat-status");
 
 function colorFor(name, color) {
@@ -62,7 +68,7 @@ function msgHtml([t, name, color, body]) {
     const url = (EMOTE[src] || EMOTE.t)(encodeURIComponent(id));
     return emoteLink(src, id, `<img src="${url}" alt="${esc(name)}" title="${esc(name)}">`);
   }).join("");
-  return `<div class="msg"><span class="ts">${fmtTime(t)}</span><a class="name" href="profile.html?u=${encodeURIComponent(name.toLowerCase())}" target="_blank" rel="noopener" style="color:${esc(colorFor(name, color))}">${esc(name)}</a>: ${text}</div>`;
+  return `<div class="msg"><span class="ts" role="button" tabindex="0" data-t="${t}" title="Jump to ${fmtTime(t)}">${fmtTime(t)}</span><a class="name" href="profile.html?u=${encodeURIComponent(name.toLowerCase())}" target="_blank" rel="noopener" style="color:${esc(colorFor(name, color))}">${esc(name)}</a>: ${text}</div>`;
 }
 
 function firstAfter(t) {
