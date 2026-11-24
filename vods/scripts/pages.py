@@ -130,6 +130,19 @@ def add_tracking():
                 f.write_text(s.replace("<head>\n", "<head>\n" + head, 1) if "<head>\n" in s else s.replace("</head>", head + "</head>", 1), encoding="utf-8")
 
 
+def bake_site_avatar():
+    """Use the site's own avatar (site/img/avatar.gif, else avatar.webp) for the header logo instead of the Twitch picture."""
+    pick = next((f"img/{n}" for n in ("avatar.gif", "avatar.webp", "avatar.png") if (SITE / "img" / n).exists()), None)
+    if not pick:
+        return
+    tag = '<img class="avatar" id="avatar" alt="">'
+    for name in ("index.html", "vod.html", "stats.html", "privacy.html", "game.html", "profile.html", "shinies.html", "osrs.html", "404.html"):
+        f = SITE / name
+        s = f.read_text(encoding="utf-8")
+        src = "/" + pick if name == "404.html" else pick  # 404 is served at any path
+        f.write_text(s.replace(tag, f'<img class="avatar" id="avatar" alt="itsmotch" src="{src}" data-fixed>', 1), encoding="utf-8")
+
+
 def bake_avatar(avatar):
     fav = round_favicon(avatar)
     for name in ("index.html", "vod.html", "stats.html", "privacy.html", "game.html", "profile.html", "shinies.html", "osrs.html"):
@@ -143,6 +156,7 @@ def main():
     channel = vodlib.load(vodlib.DATA / "channel.json", {})
     if channel.get("avatar"):
         bake_avatar(channel["avatar"])
+    bake_site_avatar()
     site = os.environ.get("SITE_URL", "").rstrip("/")
     if site.startswith("http://"):  # Pages reports http even with Enforce HTTPS on
         site = "https://" + site[len("http://"):]

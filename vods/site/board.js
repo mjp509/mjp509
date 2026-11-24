@@ -5,7 +5,9 @@
   const board = document.getElementById("board"), list = document.getElementById("podium");
   const label = document.getElementById("board-month"), prev = document.getElementById("board-prev"), next = document.getElementById("board-next");
   const EMOTE = { t: id => `https://static-cdn.jtvnw.net/emoticons/v2/${id}/default/dark/3.0`, "7": id => `https://cdn.7tv.app/emote/${id}/4x.webp` };
-  fetch("data/channel.json").then(r => r.json()).then(c => { if (c.avatar) document.getElementById("hs-avatar").src = c.avatar; }).catch(() => {});
+  const own = document.querySelector("#avatar[data-fixed]");
+  if (own) document.getElementById("hs-avatar").src = own.getAttribute("src");
+  else fetch("data/channel.json").then(r => r.json()).then(c => { if (c.avatar) document.getElementById("hs-avatar").src = c.avatar; }).catch(() => {});
   let i = 0;
 
   function show() {

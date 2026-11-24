@@ -57,7 +57,11 @@ function emoteLink(src, id, inner) {
     if (r.ok) avatar = (await r.json()).avatar || avatar;
   } catch {}
   const img = document.getElementById("avatar");
-  if (img) { img.onerror = () => img.remove(); img.onload = () => img.classList.add("spin"); img.src = avatar; }
+  if (img && img.hasAttribute("data-fixed")) {  // site's own avatar, baked in at deploy
+    const spin = () => img.classList.add("spin");
+    if (img.complete && img.naturalWidth) spin(); else img.onload = spin;
+    img.onerror = () => { img.onerror = () => img.remove(); img.src = avatar; };
+  } else if (img) { img.onerror = () => img.remove(); img.onload = () => img.classList.add("spin"); img.src = avatar; }
   const fav = document.getElementById("favicon");
   if (fav && fav.getAttribute("href").includes("unavatar")) fav.href = avatar;
 })();

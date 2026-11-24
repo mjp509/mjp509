@@ -61,3 +61,4 @@ regulars who stopped coming, emote usage, unused 7TV emotes.
 - **Chatter profiles** (`/profile.html?u=name`): messages, streams, streaks, favorite emote, first message and badges, rebuilt from chat on every sync.
 - **Last time on itsmotch**: recap of the latest stream at the top of the homepage.
 - **OSRS Recent Collections**: 25 latest collection log items from TempleOSRS (repo variable `OSRS_RSN`; sync your log with the TempleOSRS RuneLite plugin).
+- **Site avatar**: `vods/site/img/avatar.gif` (or `avatar.webp`) replaces the Twitch picture in the header logo and Highscores. A GIF wins if both exist.
