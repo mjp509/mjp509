@@ -240,7 +240,8 @@ a.emote-link:hover { transform: scale(1.15); }
 .msg { padding: 3px 10px; word-wrap: break-word; }
 .msg .name { font-weight: 700; }
 .msg img { height: 22px; vertical-align: middle; margin: -4px 1px; }
-.msg .ts { color: var(--muted); font-size: 11px; margin-right: 6px; font-variant-numeric: tabular-nums; }
+.msg .ts { color: var(--muted); font-size: 11px; margin-right: 6px; font-variant-numeric: tabular-nums; cursor: pointer; border-radius: 4px; padding: 1px 3px; margin-left: -3px; }
+#log .msg .ts:hover, #log .msg .ts:focus-visible { color: var(--accent); background: #a970ff1f; text-decoration: underline; text-underline-offset: 2px; }
 
 @media (max-width: 900px) {
   header { padding: 12px 16px; }
