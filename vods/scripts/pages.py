@@ -197,7 +197,7 @@ def main():
     page_meta(site, channel.get("avatar") or (f"{site}/img/avatar.webp" if site else ""))
     template = (SITE / "vod.html").read_text(encoding="utf-8")
     vods = vodlib.load(vodlib.VODS, [])
-    moments = vodlib.load(vodlib.DATA / "stats.json", {}).get("moments", {})
+    moments = vodlib.load(vodlib.DATA / "moments.json", None) or vodlib.load(vodlib.DATA / "stats.json", {}).get("moments", {})
     e = lambda t: html.escape(str(t), quote=True)
     person = {"@type": "Person", "name": "itsmotch", "url": "https://www.twitch.tv/itsmotch"}
     for v in vods:

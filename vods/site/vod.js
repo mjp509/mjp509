@@ -186,8 +186,8 @@ function renderMore(vods, vod) {
   }
 
   duration = vod.duration || 0;
-  const momentsP = fetch("data/stats.json", { cache: "no-cache" })
-    .then(r => r.ok ? r.json() : {}).then(s => (s.moments || {})[vod.id] || []).catch(() => []);
+  const momentsP = fetch("data/moments.json", { cache: "no-cache" })
+    .then(r => r.ok ? r.json() : {}).then(m => m[vod.id] || []).catch(() => []);
   momentsP.then(ms => {
     if (!ms.length) return;
     const top = ms.slice().sort((a, b) => b.x - a.x).slice(0, 6).sort((a, b) => a.t - b.t);
