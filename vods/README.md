@@ -62,3 +62,8 @@ regulars who stopped coming, emote usage, unused 7TV emotes.
 - **Last time on itsmotch**: recap of the latest stream at the top of the homepage.
 - **OSRS Recent Collections**: 25 latest collection log items from TempleOSRS (repo variable `OSRS_RSN`; sync your log with the TempleOSRS RuneLite plugin).
 - **Site avatar**: `vods/site/img/avatar.gif` (or `avatar.webp`) replaces the Twitch picture in the header logo and Highscores. A GIF wins if both exist.
+
+## Reliable live monitoring (Cloudflare Worker)
+GitHub runs scheduled workflows hours late, so the Live monitor can miss whole streams. Once a monitor run sees you live it
+keeps sampling every 2 minutes and re-launches itself until you go offline, but something has to start it promptly:
+`vods/cloudflare/monitor-ping.js` is a Cloudflare Worker that starts it every 10 minutes (setup steps in the file header).
