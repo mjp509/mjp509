@@ -14,6 +14,7 @@ import vodlib
 STATE = Path(os.environ.get("MONITOR_DIR", ".monitor")) / "monitor.json"
 MAX_PAGES = int(os.environ.get("MONITOR_MAX_PAGES", "30"))
 KEEP_DAYS, MAX_GAMES, LAND_EVERY = 14, 4, timedelta(minutes=55)
+LIVE_EVERY = 120  # seconds between samples while live
 FMT = "%Y-%m-%dT%H:%M:%SZ"
 
 
@@ -90,13 +91,8 @@ def seed_games(helix, state):
         state["games"].setdefault(g["id"], {"name": g["name"], "last": "1970-01-01T00:00:00Z"})
 
 
-def main():
-    STATE.parent.mkdir(parents=True, exist_ok=True)
-    state = json.loads(STATE.read_text()) if STATE.exists() else {}
-    state.setdefault("samples", [])
-    state.setdefault("games", {})
-    helix = sync.twitch()
-    user = helix(f"users?login={sync.CHANNEL}")[0]
+def tick(helix, user, state):
+    """One check: a live sample while live, otherwise the hourly offline sampling. Returns True if live."""
     t = now()
     ts = t.strftime(FMT)
     live = helix(f"streams?user_id={user['id']}")
@@ -135,6 +131,35 @@ def main():
     cutoff = (t - timedelta(days=KEEP_DAYS)).strftime(FMT)
     state["samples"] = [x for x in state["samples"] if x["ts"] >= cutoff]
     STATE.write_text(json.dumps(state, separators=(",", ":")))
+    return bool(live)
+
+
+def main():
+    """Check once; while live, keep sampling every LIVE_EVERY seconds for up to --loop minutes.
+    If still live at the end, leave a marker so the workflow re-launches itself (GitHub's own
+    schedule runs hours late, so it can't be relied on to catch a stream)."""
+    import sys
+    import time
+    loop = float(sys.argv[sys.argv.index("--loop") + 1]) if "--loop" in sys.argv else 0
+    STATE.parent.mkdir(parents=True, exist_ok=True)
+    marker = STATE.parent / "still_live"
+    marker.unlink(missing_ok=True)
+    state = json.loads(STATE.read_text()) if STATE.exists() else {}
+    state.setdefault("samples", [])
+    state.setdefault("games", {})
+    helix = sync.twitch()
+    user = helix(f"users?login={sync.CHANNEL}")[0]
+    end = time.time() + loop * 60
+    live = tick(helix, user, state)
+    while live and time.time() + LIVE_EVERY < end:
+        time.sleep(LIVE_EVERY)
+        try:
+            live = tick(helix, user, state)
+        except RuntimeError as e:  # a hiccup from Twitch shouldn't end the recording
+            print(f"::warning::Twitch request failed, retrying next tick: {e}")
+    if live and loop:
+        marker.write_text(now().strftime(FMT))
+        print("Still live: asking for another monitor run")
 
 
 if __name__ == "__main__":

@@ -7,13 +7,14 @@ on:
 
 permissions:
   contents: read
+  actions: write  # lets a run start the next one while the stream is still live
 
 concurrency: monitor
 
 jobs:
   monitor:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 60
     steps:
       - name: Check secrets
         id: check
@@ -39,10 +40,16 @@ jobs:
           TWITCH_CLIENT_ID: ${{ secrets.TWITCH_CLIENT_ID }}
           TWITCH_CLIENT_SECRET: ${{ secrets.TWITCH_CLIENT_SECRET }}
           TWITCH_USER_REFRESH_TOKEN: ${{ secrets.TWITCH_USER_REFRESH_TOKEN }}
-        run: python3 vods/scripts/monitor.py
+        run: python3 vods/scripts/monitor.py --loop 50
 
       - uses: actions/cache/save@v4
-        if: steps.check.outputs.ok
+        if: always() && steps.check.outputs.ok
         with:
           path: .monitor
           key: monitor-${{ github.run_id }}-${{ github.run_attempt }}
+
+      - name: Keep watching while live
+        if: steps.check.outputs.ok && hashFiles('.monitor/still_live') != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run monitor.yml --ref main
