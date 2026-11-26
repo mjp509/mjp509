@@ -4,7 +4,7 @@
       "live_streams": 1,
       "linked": 1,
       "since": "2026-11-26T01:32:40Z",
-      "folded_until": "2026-11-26T04:30:03Z"
+      "folded_until": "2026-11-26T14:14:15Z"
     },
     "metrics": [
       {
@@ -390,8 +390,8 @@
       {
         "gid": "457975278",
         "game": "PokeMMO",
-        "slots_sampled": 43,
-        "samples": 46,
+        "slots_sampled": 44,
+        "samples": 47,
         "cells": [
           [
             0,
@@ -996,11 +996,11 @@
             0
           ],
           [
-            0,
-            0,
-            0,
-            0,
-            0
+            1,
+            2.0,
+            6,
+            3.0,
+            3.0
           ],
           [
             0,
@@ -1573,7 +1573,7 @@
       }
     ],
     "followers": {
-      "current": 284,
+      "current": 285,
       "as_of": "2026-11-26",
       "history": [
         [
@@ -1630,16 +1630,16 @@
         ],
         [
           "2026-11-26",
-          284
+          285
         ]
       ],
       "d7": {
-        "gained": 0,
+        "gained": 1,
         "since": "2026-11-19",
         "full": true
       },
       "d30": {
-        "gained": 0,
+        "gained": 1,
         "since": "2026-11-13",
         "full": false
       }
@@ -1735,7 +1735,7 @@
         "new_chatters": 18,
         "messages": 480
       },
-      "followers": 0,
+      "followers": 1,
       "subs": 3,
       "best": {
         "t": 4400,
