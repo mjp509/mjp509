@@ -1,19 +1,19 @@
 {
-  "streams": 3,
+  "streams": 4,
   "badges": [
     {
       "id": "og",
       "emoji": "🌱",
       "name": "Day one",
       "how": "Chatted in the very first saved stream",
-      "pct": 51
+      "pct": 45
     },
     {
       "id": "regular",
       "emoji": "🍔",
       "name": "Regular",
       "how": "Chatted in 3 streams",
-      "pct": 3
+      "pct": 8
     },
     {
       "id": "loyal",
@@ -34,7 +34,7 @@
       "emoji": "🔥",
       "name": "On a roll",
       "how": "Chatted in 3 streams in a row",
-      "pct": 3
+      "pct": 5
     },
     {
       "id": "streak5",
@@ -48,7 +48,7 @@
       "emoji": "🗣️",
       "name": "Chatterbox",
       "how": "Sent 100 messages",
-      "pct": 6
+      "pct": 8
     },
     {
       "id": "novelist",
@@ -62,28 +62,28 @@
       "emoji": "😂",
       "name": "Emote enjoyer",
       "how": "Used 50 emotes",
-      "pct": 0
+      "pct": 5
     },
     {
       "id": "podium",
       "emoji": "🏆",
       "name": "Podium",
       "how": "Finished top 3 in a monthly highscore",
-      "pct": 9
+      "pct": 8
     },
     {
       "id": "bluemoon",
       "emoji": "🌙",
       "name": "Blue moon",
       "how": "Caught an off-schedule stream",
-      "pct": 40
+      "pct": 62
     },
     {
       "id": "nightowl",
       "emoji": "🦉",
       "name": "Night owl",
       "how": "Chatted past midnight",
-      "pct": 20
+      "pct": 18
     }
   ],
   "users": {
@@ -92,7 +92,7 @@
       "c": "#00FF7F",
       "m": 41,
       "s": 2,
-      "streak": 1,
+      "streak": 0,
       "best": 1,
       "e": 20,
       "fav": {
@@ -125,11 +125,11 @@
     "ewyoustink": {
       "n": "EwYouStink",
       "c": "#0000FF",
-      "m": 91,
-      "s": 3,
-      "streak": 3,
-      "best": 3,
-      "e": 41,
+      "m": 145,
+      "s": 4,
+      "streak": 4,
+      "best": 4,
+      "e": 69,
       "fav": {
         "src": "7",
         "id": "01J96N7ERG0009MAMR2DZMJX8W",
@@ -141,8 +141,12 @@
         "t": 796,
         "text": "EwYouStink subscribed at Tier 1. They've subscribed for 19 months, currently on a 19 month streak! aga"
       },
-      "last": "2938044275",
+      "last": "2940922425",
       "recent": [
+        [
+          "2940922425",
+          54
+        ],
         [
           "2938044275",
           40
@@ -160,6 +164,8 @@
         "og",
         "regular",
         "streak3",
+        "chatterbox",
+        "emotes",
         "podium",
         "bluemoon",
         "nightowl"
@@ -170,7 +176,7 @@
       "c": "#FF0000",
       "m": 2,
       "s": 2,
-      "streak": 1,
+      "streak": 0,
       "best": 1,
       "e": 0,
       "fav": null,
@@ -199,11 +205,11 @@
     "smokemmo": {
       "n": "smokemmo",
       "c": "#2E8B57",
-      "m": 24,
-      "s": 1,
-      "streak": 0,
+      "m": 26,
+      "s": 2,
+      "streak": 1,
       "best": 1,
-      "e": 5,
+      "e": 6,
       "fav": {
         "src": "7",
         "id": "01KJ1K7SM3J0R0DM8HDRH5FKPQ",
@@ -215,15 +221,20 @@
         "t": 1076,
         "text": "itsmot17GlorpAga"
       },
-      "last": "2927241555",
+      "last": "2940922425",
       "recent": [
+        [
+          "2940922425",
+          2
+        ],
         [
           "2927241555",
           24
         ]
       ],
       "b": [
-        "og"
+        "og",
+        "bluemoon"
       ]
     },
     "buhomb": {
@@ -289,11 +300,11 @@
     "zdammers03": {
       "n": "zdammers03",
       "c": "#5F9EA0",
-      "m": 13,
-      "s": 1,
-      "streak": 0,
+      "m": 18,
+      "s": 2,
+      "streak": 1,
       "best": 1,
-      "e": 5,
+      "e": 6,
       "fav": {
         "src": "7",
         "id": "01FP8VKKG8000EJT2EVEY3JR0Q",
@@ -305,15 +316,20 @@
         "t": 4297,
         "text": "ur the reason faia doesnt have her pc anymore"
       },
-      "last": "2927241555",
+      "last": "2940922425",
       "recent": [
+        [
+          "2940922425",
+          5
+        ],
         [
           "2927241555",
           13
         ]
       ],
       "b": [
-        "og"
+        "og",
+        "bluemoon"
       ]
     },
     "csixtythree04": {
@@ -349,11 +365,11 @@
     "nightwind02": {
       "n": "NightWind02",
       "c": "#00FF7F",
-      "m": 250,
-      "s": 2,
-      "streak": 0,
+      "m": 267,
+      "s": 3,
+      "streak": 1,
       "best": 2,
-      "e": 43,
+      "e": 46,
       "fav": {
         "src": "7",
         "id": "01F61B1440000991F7SWQNMVX7",
@@ -365,8 +381,12 @@
         "t": 5485,
         "text": "i dont see no posters up"
       },
-      "last": "2934630921",
+      "last": "2940922425",
       "recent": [
+        [
+          "2940922425",
+          17
+        ],
         [
           "2934630921",
           43
@@ -378,8 +398,10 @@
       ],
       "b": [
         "og",
+        "regular",
         "chatterbox",
         "podium",
+        "bluemoon",
         "nightowl"
       ]
     },
@@ -592,15 +614,15 @@
     "rdaniii": {
       "n": "rDaniii",
       "c": "#DAA520",
-      "m": 15,
-      "s": 1,
-      "streak": 0,
+      "m": 43,
+      "s": 2,
+      "streak": 1,
       "best": 1,
-      "e": 3,
+      "e": 10,
       "fav": {
         "src": "7",
-        "id": "01KZZ0P5200816262RQ6FTKMAA",
-        "name": "hihihi"
+        "id": "01GX6M9TRR000DJJ63WGMEA4Z8",
+        "name": "hi"
       },
       "first": {
         "vod": "2927241555",
@@ -608,15 +630,20 @@
         "t": 10394,
         "text": "hihihi"
       },
-      "last": "2927241555",
+      "last": "2940922425",
       "recent": [
+        [
+          "2940922425",
+          28
+        ],
         [
           "2927241555",
           15
         ]
       ],
       "b": [
-        "og"
+        "og",
+        "bluemoon"
       ]
     },
     "cabbage363": {
@@ -676,11 +703,11 @@
     "toraikazuchi": {
       "n": "ToraiKazuchi",
       "c": "",
-      "m": 1,
-      "s": 1,
-      "streak": 0,
+      "m": 7,
+      "s": 2,
+      "streak": 1,
       "best": 1,
-      "e": 1,
+      "e": 2,
       "fav": {
         "src": "7",
         "id": "01F5VW2TKR0003RCV2Z6JBHCST",
@@ -692,21 +719,27 @@
         "t": 651,
         "text": "catKISS"
       },
-      "last": "2934630921",
+      "last": "2940922425",
       "recent": [
+        [
+          "2940922425",
+          6
+        ],
         [
           "2934630921",
           1
         ]
       ],
-      "b": []
+      "b": [
+        "bluemoon"
+      ]
     },
     "apparentlyaustin": {
       "n": "ApparentlyAustin",
       "c": "#2AE700",
       "m": 18,
       "s": 2,
-      "streak": 2,
+      "streak": 0,
       "best": 2,
       "e": 12,
       "fav": {
@@ -739,11 +772,11 @@
     "piinguh": {
       "n": "piinguh",
       "c": "#8A2BE2",
-      "m": 117,
-      "s": 2,
-      "streak": 2,
-      "best": 2,
-      "e": 30,
+      "m": 196,
+      "s": 3,
+      "streak": 3,
+      "best": 3,
+      "e": 55,
       "fav": {
         "src": "7",
         "id": "01FZ975PV8000B4AWRZNMVNEXN",
@@ -755,8 +788,12 @@
         "t": 1571,
         "text": "well well well"
       },
-      "last": "2938044275",
+      "last": "2940922425",
       "recent": [
+        [
+          "2940922425",
+          79
+        ],
         [
           "2938044275",
           63
@@ -767,7 +804,10 @@
         ]
       ],
       "b": [
+        "regular",
+        "streak3",
         "chatterbox",
+        "emotes",
         "podium",
         "bluemoon",
         "nightowl"
@@ -834,9 +874,9 @@
     "deeb_777": {
       "n": "deeb_777",
       "c": "#FF0000",
-      "m": 18,
-      "s": 1,
-      "streak": 0,
+      "m": 21,
+      "s": 2,
+      "streak": 1,
       "best": 1,
       "e": 5,
       "fav": {
@@ -850,14 +890,19 @@
         "t": 4802,
         "text": "agaCheck"
       },
-      "last": "2934630921",
+      "last": "2940922425",
       "recent": [
+        [
+          "2940922425",
+          3
+        ],
         [
           "2934630921",
           18
         ]
       ],
       "b": [
+        "bluemoon",
         "nightowl"
       ]
     },
@@ -896,7 +941,7 @@
       "c": "#8A2BE2",
       "m": 2,
       "s": 1,
-      "streak": 1,
+      "streak": 0,
       "best": 1,
       "e": 1,
       "fav": {
@@ -926,7 +971,7 @@
       "c": "",
       "m": 57,
       "s": 1,
-      "streak": 1,
+      "streak": 0,
       "best": 1,
       "e": 15,
       "fav": {
@@ -956,7 +1001,7 @@
       "c": "#FF69B4",
       "m": 23,
       "s": 1,
-      "streak": 1,
+      "streak": 0,
       "best": 1,
       "e": 5,
       "fav": {
@@ -984,10 +1029,10 @@
     "levyticus215": {
       "n": "levyticus215",
       "c": "#1E90FF",
-      "m": 5,
-      "s": 1,
-      "streak": 1,
-      "best": 1,
+      "m": 6,
+      "s": 2,
+      "streak": 2,
+      "best": 2,
       "e": 0,
       "fav": null,
       "first": {
@@ -996,8 +1041,12 @@
         "t": 2311,
         "text": "@DrexsteinA The story line is good in GTA 4 and 5 it suffers from ludonarrative dissonance it's called when it's trying to tell a story but the story and gameplay clash"
       },
-      "last": "2938044275",
+      "last": "2940922425",
       "recent": [
+        [
+          "2940922425",
+          1
+        ],
         [
           "2938044275",
           5
@@ -1010,20 +1059,28 @@
     "archerkaidono": {
       "n": "ArcherKaiDono",
       "c": "#008000",
-      "m": 4,
-      "s": 1,
-      "streak": 1,
-      "best": 1,
-      "e": 0,
-      "fav": null,
+      "m": 5,
+      "s": 2,
+      "streak": 2,
+      "best": 2,
+      "e": 1,
+      "fav": {
+        "src": "t",
+        "id": "425618",
+        "name": "LUL"
+      },
       "first": {
         "vod": "2938044275",
         "date": "2026-11-23T03:09:54Z",
         "t": 2408,
         "text": "perfect"
       },
-      "last": "2938044275",
+      "last": "2940922425",
       "recent": [
+        [
+          "2940922425",
+          1
+        ],
         [
           "2938044275",
           4
@@ -1038,7 +1095,7 @@
       "c": "#1E90FF",
       "m": 32,
       "s": 1,
-      "streak": 1,
+      "streak": 0,
       "best": 1,
       "e": 17,
       "fav": {
@@ -1068,7 +1125,7 @@
       "c": "#8A2BE2",
       "m": 1,
       "s": 1,
-      "streak": 1,
+      "streak": 0,
       "best": 1,
       "e": 1,
       "fav": {
@@ -1098,7 +1155,7 @@
       "c": "",
       "m": 2,
       "s": 1,
-      "streak": 1,
+      "streak": 0,
       "best": 1,
       "e": 1,
       "fav": {
@@ -1128,7 +1185,7 @@
       "c": "#8A2BE2",
       "m": 4,
       "s": 1,
-      "streak": 1,
+      "streak": 0,
       "best": 1,
       "e": 2,
       "fav": {
@@ -1147,6 +1204,152 @@
         [
           "2938044275",
           4
+        ]
+      ],
+      "b": [
+        "bluemoon"
+      ]
+    },
+    "joe_____p": {
+      "n": "Joe_____P",
+      "c": "",
+      "m": 8,
+      "s": 1,
+      "streak": 1,
+      "best": 1,
+      "e": 2,
+      "fav": {
+        "src": "7",
+        "id": "01F5PCRCE0000BAN36SW3MYWMV",
+        "name": "lol"
+      },
+      "first": {
+        "vod": "2940922425",
+        "date": "2026-11-26T01:32:46Z",
+        "t": 187,
+        "text": "MITCHELL!!!!!!!!!!!"
+      },
+      "last": "2940922425",
+      "recent": [
+        [
+          "2940922425",
+          8
+        ]
+      ],
+      "b": [
+        "bluemoon"
+      ]
+    },
+    "mystoline": {
+      "n": "mystoline",
+      "c": "#8A2BE2",
+      "m": 34,
+      "s": 1,
+      "streak": 1,
+      "best": 1,
+      "e": 5,
+      "fav": {
+        "src": "7",
+        "id": "01HMBMJPV0000D32KQCYBK4S1D",
+        "name": "aga"
+      },
+      "first": {
+        "vod": "2940922425",
+        "date": "2026-11-26T01:32:46Z",
+        "t": 487,
+        "text": "aga"
+      },
+      "last": "2940922425",
+      "recent": [
+        [
+          "2940922425",
+          34
+        ]
+      ],
+      "b": [
+        "bluemoon"
+      ]
+    },
+    "r00mdk": {
+      "n": "r00mdk",
+      "c": "#0631DA",
+      "m": 36,
+      "s": 1,
+      "streak": 1,
+      "best": 1,
+      "e": 9,
+      "fav": {
+        "src": "7",
+        "id": "01HMBMJPV0000D32KQCYBK4S1D",
+        "name": "aga"
+      },
+      "first": {
+        "vod": "2940922425",
+        "date": "2026-11-26T01:32:46Z",
+        "t": 3015,
+        "text": "Buck Bumble main theme"
+      },
+      "last": "2940922425",
+      "recent": [
+        [
+          "2940922425",
+          36
+        ]
+      ],
+      "b": [
+        "bluemoon"
+      ]
+    },
+    "timmy2tapperlive": {
+      "n": "Timmy2TapperLive",
+      "c": "#0000FF",
+      "m": 16,
+      "s": 1,
+      "streak": 1,
+      "best": 1,
+      "e": 4,
+      "fav": {
+        "src": "7",
+        "id": "01JD7VGHTP5DRXPDK11N5HRWX4",
+        "name": "bitch"
+      },
+      "first": {
+        "vod": "2940922425",
+        "date": "2026-11-26T01:32:46Z",
+        "t": 5966,
+        "text": "if 1 man can hold u down..."
+      },
+      "last": "2940922425",
+      "recent": [
+        [
+          "2940922425",
+          16
+        ]
+      ],
+      "b": [
+        "bluemoon"
+      ]
+    },
+    "ティミアス": {
+      "n": "ティミアス",
+      "c": "#00C6FF",
+      "m": 1,
+      "s": 1,
+      "streak": 1,
+      "best": 1,
+      "e": 0,
+      "fav": null,
+      "first": {
+        "vod": "2940922425",
+        "date": "2026-11-26T01:32:46Z",
+        "t": 9109,
+        "text": "he curses a lot, doesnt he get in trouble? my mum doesnt allow that"
+      },
+      "last": "2940922425",
+      "recent": [
+        [
+          "2940922425",
+          1
         ]
       ],
       "b": [

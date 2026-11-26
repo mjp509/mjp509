@@ -4,13 +4,13 @@
     "emote": {
       "id": "01FWR6BNTR0007SGPMW6AKG0Q9",
       "name": "Listening",
-      "uses": 15
+      "uses": 17
     },
     "top": [
       {
         "name": "NightWind02",
         "color": "#00FF7F",
-        "messages": 163,
+        "messages": 178,
         "emote": {
           "src": "7",
           "id": "01F61B1440000991F7SWQNMVX7",
@@ -20,7 +20,7 @@
       {
         "name": "piinguh",
         "color": "#8A2BE2",
-        "messages": 91,
+        "messages": 157,
         "emote": {
           "src": "7",
           "id": "01FZ975PV8000B4AWRZNMVNEXN",
@@ -30,7 +30,7 @@
       {
         "name": "EwYouStink",
         "color": "#0000FF",
-        "messages": 76,
+        "messages": 129,
         "emote": {
           "src": "7",
           "id": "01J96N7ERG0009MAMR2DZMJX8W",
@@ -68,6 +68,16 @@
         }
       },
       {
+        "name": "rDaniii",
+        "color": "#DAA520",
+        "messages": 32,
+        "emote": {
+          "src": "7",
+          "id": "01GX6M9TRR000DJJ63WGMEA4Z8",
+          "name": "hi"
+        }
+      },
+      {
         "name": "RealCanuck",
         "color": "#1E90FF",
         "messages": 27,
@@ -78,33 +88,23 @@
         }
       },
       {
-        "name": "highflyer03",
-        "color": "#0000FF",
-        "messages": 24,
+        "name": "mystoline",
+        "color": "#8A2BE2",
+        "messages": 27,
         "emote": {
-          "src": "t",
-          "id": "1",
-          "name": ":)"
+          "src": "7",
+          "id": "01HMBMJPV0000D32KQCYBK4S1D",
+          "name": "aga"
         }
       },
       {
-        "name": "LunaLost1",
-        "color": "#FF69B4",
-        "messages": 22,
+        "name": "r00mdk",
+        "color": "#0631DA",
+        "messages": 25,
         "emote": {
           "src": "7",
-          "id": "01F5PCRCE0000BAN36SW3MYWMV",
-          "name": "lol"
-        }
-      },
-      {
-        "name": "smokemmo",
-        "color": "#2E8B57",
-        "messages": 21,
-        "emote": {
-          "src": "7",
-          "id": "01KJ1K7SM3J0R0DM8HDRH5FKPQ",
-          "name": "agaFat"
+          "id": "01HMBMJPV0000D32KQCYBK4S1D",
+          "name": "aga"
         }
       }
     ]
