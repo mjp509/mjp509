@@ -1,4 +1,61 @@
 {
-  "folded_until": "2026-11-25T22:40:34Z",
-  "streams": {}
+  "folded_until": "2026-11-26T04:30:03Z",
+  "streams": {
+    "2026-11-26T01:32:40Z": {
+      "sid": "320051532503",
+      "title": "🍔 supposed to be relaxing this passion makes that impossible 🍔 let that simmer 🍔",
+      "samples": [
+        [
+          "2026-11-26T04:28:02Z",
+          10,
+          "PokeMMO"
+        ]
+      ],
+      "cat": [
+        [
+          "2026-11-26T04:28:02Z",
+          "PokeMMO",
+          4,
+          21,
+          99,
+          false,
+          3
+        ]
+      ],
+      "peers": {
+        "sooychetoo": [
+          1,
+          9
+        ],
+        "aliisons": [
+          1,
+          12
+        ],
+        "justrayaa": [
+          1,
+          8
+        ],
+        "nickoflondor": [
+          1,
+          13
+        ],
+        "rvvelle": [
+          1,
+          13
+        ]
+      },
+      "followers": [
+        [
+          "2026-11-26T04:28:02Z",
+          284
+        ]
+      ],
+      "subs": [
+        [
+          "2026-11-26T04:28:02Z",
+          5
+        ]
+      ]
+    }
+  }
 }

@@ -1,10 +1,10 @@
 {
   "insights": {
     "monitor": {
-      "live_streams": 0,
-      "linked": 0,
-      "since": null,
-      "folded_until": "2026-11-25T22:40:34Z"
+      "live_streams": 1,
+      "linked": 1,
+      "since": "2026-11-26T01:32:40Z",
+      "folded_until": "2026-11-26T04:30:03Z"
     },
     "metrics": [
       {
@@ -74,6 +74,42 @@
       "date": "2026-11-26T01:32:46Z",
       "metrics": [
         {
+          "key": "avg_viewers",
+          "label": "Avg viewers",
+          "higher": true,
+          "value": 10.0,
+          "baseline": 9.8,
+          "baseline_n": 1,
+          "delta_pct": 2.0,
+          "place": 1,
+          "of": 2,
+          "best": true
+        },
+        {
+          "key": "peak_viewers",
+          "label": "Peak viewers",
+          "higher": true,
+          "value": 10,
+          "baseline": 17,
+          "baseline_n": 1,
+          "delta_pct": -41.2,
+          "place": 2,
+          "of": 2,
+          "best": false
+        },
+        {
+          "key": "cat_top_pct",
+          "label": "Category rank (top %)",
+          "higher": false,
+          "value": 19.0,
+          "baseline": null,
+          "baseline_n": 0,
+          "delta_pct": null,
+          "place": 1,
+          "of": 1,
+          "best": false
+        },
+        {
           "key": "mpm",
           "label": "Messages / min",
           "higher": true,
@@ -120,6 +156,18 @@
           "place": 1,
           "of": 3,
           "best": true
+        },
+        {
+          "key": "engagement",
+          "label": "Chatters per viewer",
+          "higher": true,
+          "value": 1.5,
+          "baseline": 1.84,
+          "baseline_n": 1,
+          "delta_pct": -18.5,
+          "place": 2,
+          "of": 2,
+          "best": false
         },
         {
           "key": "hours",
@@ -191,21 +239,44 @@
         "id": "2940922425",
         "date": "2026-11-26T01:32:46Z",
         "title": "🍔 supposed to be relaxing this passion makes that impossible 🍔 let that simmer 🍔",
-        "avg_viewers": null,
-        "peak_viewers": null,
+        "avg_viewers": 10.0,
+        "peak_viewers": 10,
         "followers_gained": null,
         "subs_change": null,
-        "cat_top_pct": null,
+        "cat_top_pct": 19.0,
         "mpm": 1.77,
         "chatters": 15,
         "new": 5,
         "return_rate": 66.7,
-        "engagement": null,
+        "engagement": 1.5,
         "follow_rate": null,
         "hours": 2.94
       }
     ],
-    "curves": {},
+    "curves": {
+      "2940922425": {
+        "followers": [
+          [
+            175.4,
+            284
+          ]
+        ],
+        "viewers": [
+          [
+            175.4,
+            10
+          ]
+        ],
+        "rank": [
+          [
+            175.4,
+            4,
+            21,
+            "PokeMMO"
+          ]
+        ]
+      }
+    },
     "retention": [
       {
         "id": "2927241555",
@@ -235,7 +306,7 @@
         {
           "tag": "Growth",
           "title": "Is your audience growing?",
-          "have": 1,
+          "have": 2,
           "need": 3,
           "unit": "streams with viewer data"
         },
@@ -249,7 +320,7 @@
         {
           "tag": "Timing",
           "title": "Your best start time",
-          "have": 1,
+          "have": 2,
           "need": 4,
           "unit": "streams with viewer data"
         },
@@ -270,14 +341,57 @@
       ]
     },
     "regulars_30d": 3,
-    "category": [],
-    "peers": [],
+    "category": [
+      {
+        "game": "PokeMMO",
+        "samples": 1,
+        "avg_viewers": 10,
+        "top_pct": 19.0,
+        "rank": 4,
+        "channels": 21,
+        "category_viewers": 99,
+        "typical_channel": 3,
+        "viewers_per_channel": 4.7
+      }
+    ],
+    "peers": [
+      {
+        "login": "sooychetoo",
+        "streams": 1,
+        "samples": 1,
+        "avg_viewers": 9.0
+      },
+      {
+        "login": "aliisons",
+        "streams": 1,
+        "samples": 1,
+        "avg_viewers": 12.0
+      },
+      {
+        "login": "justrayaa",
+        "streams": 1,
+        "samples": 1,
+        "avg_viewers": 8.0
+      },
+      {
+        "login": "nickoflondor",
+        "streams": 1,
+        "samples": 1,
+        "avg_viewers": 13.0
+      },
+      {
+        "login": "rvvelle",
+        "streams": 1,
+        "samples": 1,
+        "avg_viewers": 13.0
+      }
+    ],
     "landscape": [
       {
         "gid": "457975278",
         "game": "PokeMMO",
-        "slots_sampled": 42,
-        "samples": 45,
+        "slots_sampled": 43,
+        "samples": 46,
         "cells": [
           [
             0,
@@ -812,11 +926,11 @@
             0
           ],
           [
-            0,
-            0,
-            0,
-            0,
-            0
+            1,
+            20.0,
+            92,
+            4.6,
+            2.5
           ],
           [
             0,
@@ -1459,8 +1573,8 @@
       }
     ],
     "followers": {
-      "current": 283,
-      "as_of": "2026-11-25",
+      "current": 284,
+      "as_of": "2026-11-26",
       "history": [
         [
           "2026-11-13",
@@ -1513,22 +1627,26 @@
         [
           "2026-11-25",
           283
+        ],
+        [
+          "2026-11-26",
+          284
         ]
       ],
       "d7": {
-        "gained": -1,
-        "since": "2026-11-18",
+        "gained": 0,
+        "since": "2026-11-19",
         "full": true
       },
       "d30": {
-        "gained": -1,
+        "gained": 0,
         "since": "2026-11-13",
         "full": false
       }
     },
     "subs": {
-      "current": 4,
-      "as_of": "2026-11-25",
+      "current": 5,
+      "as_of": "2026-11-26",
       "history": [
         [
           "2026-11-13",
@@ -1581,15 +1699,19 @@
         [
           "2026-11-25",
           4
+        ],
+        [
+          "2026-11-26",
+          5
         ]
       ],
       "d7": {
-        "gained": 2,
-        "since": "2026-11-18",
+        "gained": 3,
+        "since": "2026-11-19",
         "full": true
       },
       "d30": {
-        "gained": 2,
+        "gained": 3,
         "since": "2026-11-13",
         "full": false
       }
@@ -1598,8 +1720,8 @@
       "this": {
         "streams": 3,
         "hours": 6.8,
-        "avg_viewers": null,
-        "peak_viewers": null,
+        "avg_viewers": 10.0,
+        "peak_viewers": 10,
         "chatters": 29,
         "new_chatters": 22,
         "messages": 826
@@ -1613,8 +1735,8 @@
         "new_chatters": 18,
         "messages": 480
       },
-      "followers": -1,
-      "subs": 2,
+      "followers": 0,
+      "subs": 3,
       "best": {
         "t": 4400,
         "x": 9.0,
@@ -1695,7 +1817,16 @@
       "new": 5,
       "returning": 10,
       "hours": 2.94,
-      "return_rate": 66.7
+      "return_rate": 66.7,
+      "avg_viewers": 10.0,
+      "peak_viewers": 10,
+      "viewer_hours": 29.4,
+      "cat_top_pct": 19.0,
+      "cat_rank": 4,
+      "cat_channels": 21,
+      "followers_end": 284,
+      "followers_gained": null,
+      "engagement": 1.5
     }
   ],
   "games": [
