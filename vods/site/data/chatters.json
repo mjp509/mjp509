@@ -1,19 +1,19 @@
 {
-  "streams": 4,
+  "streams": 5,
   "badges": [
     {
       "id": "og",
       "emoji": "🌱",
       "name": "Day one",
       "how": "Chatted in the very first saved stream",
-      "pct": 45
+      "pct": 39
     },
     {
       "id": "regular",
       "emoji": "🍔",
       "name": "Regular",
       "how": "Chatted in 3 streams",
-      "pct": 8
+      "pct": 11
     },
     {
       "id": "loyal",
@@ -34,21 +34,21 @@
       "emoji": "🔥",
       "name": "On a roll",
       "how": "Chatted in 3 streams in a row",
-      "pct": 5
+      "pct": 7
     },
     {
       "id": "streak5",
       "emoji": "☄️",
       "name": "Unstoppable",
       "how": "Chatted in 5 streams in a row",
-      "pct": 0
+      "pct": 2
     },
     {
       "id": "chatterbox",
       "emoji": "🗣️",
       "name": "Chatterbox",
       "how": "Sent 100 messages",
-      "pct": 8
+      "pct": 7
     },
     {
       "id": "novelist",
@@ -62,28 +62,28 @@
       "emoji": "😂",
       "name": "Emote enjoyer",
       "how": "Used 50 emotes",
-      "pct": 5
+      "pct": 7
     },
     {
       "id": "podium",
       "emoji": "🏆",
       "name": "Podium",
       "how": "Finished top 3 in a monthly highscore",
-      "pct": 8
+      "pct": 7
     },
     {
       "id": "bluemoon",
       "emoji": "🌙",
       "name": "Blue moon",
       "how": "Caught an off-schedule stream",
-      "pct": 62
+      "pct": 54
     },
     {
       "id": "nightowl",
       "emoji": "🦉",
       "name": "Night owl",
       "how": "Chatted past midnight",
-      "pct": 18
+      "pct": 15
     }
   ],
   "users": {
@@ -125,15 +125,15 @@
     "ewyoustink": {
       "n": "EwYouStink",
       "c": "#0000FF",
-      "m": 145,
-      "s": 4,
-      "streak": 4,
-      "best": 4,
-      "e": 69,
+      "m": 172,
+      "s": 5,
+      "streak": 5,
+      "best": 5,
+      "e": 89,
       "fav": {
         "src": "7",
-        "id": "01J96N7ERG0009MAMR2DZMJX8W",
-        "name": "KeepYourselfSafe"
+        "id": "01HMBMJPV0000D32KQCYBK4S1D",
+        "name": "aga"
       },
       "first": {
         "vod": "2927241555",
@@ -141,8 +141,12 @@
         "t": 796,
         "text": "EwYouStink subscribed at Tier 1. They've subscribed for 19 months, currently on a 19 month streak! aga"
       },
-      "last": "2940922425",
+      "last": "2941856838",
       "recent": [
+        [
+          "2941856838",
+          27
+        ],
         [
           "2940922425",
           54
@@ -164,6 +168,7 @@
         "og",
         "regular",
         "streak3",
+        "streak5",
         "chatterbox",
         "emotes",
         "podium",
@@ -207,7 +212,7 @@
       "c": "#2E8B57",
       "m": 26,
       "s": 2,
-      "streak": 1,
+      "streak": 0,
       "best": 1,
       "e": 6,
       "fav": {
@@ -270,9 +275,9 @@
     "cokeknife": {
       "n": "cokeknife",
       "c": "#FF0000",
-      "m": 22,
-      "s": 1,
-      "streak": 0,
+      "m": 23,
+      "s": 2,
+      "streak": 1,
       "best": 1,
       "e": 6,
       "fav": {
@@ -286,8 +291,12 @@
         "t": 2209,
         "text": "the money changed u"
       },
-      "last": "2927241555",
+      "last": "2941856838",
       "recent": [
+        [
+          "2941856838",
+          1
+        ],
         [
           "2927241555",
           22
@@ -302,7 +311,7 @@
       "c": "#5F9EA0",
       "m": 18,
       "s": 2,
-      "streak": 1,
+      "streak": 0,
       "best": 1,
       "e": 6,
       "fav": {
@@ -365,11 +374,11 @@
     "nightwind02": {
       "n": "NightWind02",
       "c": "#00FF7F",
-      "m": 267,
-      "s": 3,
-      "streak": 1,
+      "m": 301,
+      "s": 4,
+      "streak": 2,
       "best": 2,
-      "e": 46,
+      "e": 51,
       "fav": {
         "src": "7",
         "id": "01F61B1440000991F7SWQNMVX7",
@@ -381,8 +390,12 @@
         "t": 5485,
         "text": "i dont see no posters up"
       },
-      "last": "2940922425",
+      "last": "2941856838",
       "recent": [
+        [
+          "2941856838",
+          34
+        ],
         [
           "2940922425",
           17
@@ -400,6 +413,7 @@
         "og",
         "regular",
         "chatterbox",
+        "emotes",
         "podium",
         "bluemoon",
         "nightowl"
@@ -614,15 +628,15 @@
     "rdaniii": {
       "n": "rDaniii",
       "c": "#DAA520",
-      "m": 43,
-      "s": 2,
-      "streak": 1,
-      "best": 1,
-      "e": 10,
+      "m": 73,
+      "s": 3,
+      "streak": 2,
+      "best": 2,
+      "e": 14,
       "fav": {
         "src": "7",
-        "id": "01GX6M9TRR000DJJ63WGMEA4Z8",
-        "name": "hi"
+        "id": "01KZZ0P5200816262RQ6FTKMAA",
+        "name": "hihihi"
       },
       "first": {
         "vod": "2927241555",
@@ -630,8 +644,12 @@
         "t": 10394,
         "text": "hihihi"
       },
-      "last": "2940922425",
+      "last": "2941856838",
       "recent": [
+        [
+          "2941856838",
+          30
+        ],
         [
           "2940922425",
           28
@@ -643,6 +661,7 @@
       ],
       "b": [
         "og",
+        "regular",
         "bluemoon"
       ]
     },
@@ -705,7 +724,7 @@
       "c": "",
       "m": 7,
       "s": 2,
-      "streak": 1,
+      "streak": 0,
       "best": 1,
       "e": 2,
       "fav": {
@@ -772,11 +791,11 @@
     "piinguh": {
       "n": "piinguh",
       "c": "#8A2BE2",
-      "m": 196,
-      "s": 3,
-      "streak": 3,
-      "best": 3,
-      "e": 55,
+      "m": 218,
+      "s": 4,
+      "streak": 4,
+      "best": 4,
+      "e": 62,
       "fav": {
         "src": "7",
         "id": "01FZ975PV8000B4AWRZNMVNEXN",
@@ -788,8 +807,12 @@
         "t": 1571,
         "text": "well well well"
       },
-      "last": "2940922425",
+      "last": "2941856838",
       "recent": [
+        [
+          "2941856838",
+          22
+        ],
         [
           "2940922425",
           79
@@ -844,11 +867,11 @@
     "ezrammo": {
       "n": "EzraMMO",
       "c": "#DAA520",
-      "m": 15,
-      "s": 1,
-      "streak": 0,
+      "m": 16,
+      "s": 2,
+      "streak": 1,
       "best": 1,
-      "e": 6,
+      "e": 7,
       "fav": {
         "src": "7",
         "id": "01K9Q2MVVKV84RQYQY87BQVPC5",
@@ -860,8 +883,12 @@
         "t": 4440,
         "text": "WHATS GOOD GOAT"
       },
-      "last": "2934630921",
+      "last": "2941856838",
       "recent": [
+        [
+          "2941856838",
+          1
+        ],
         [
           "2934630921",
           15
@@ -876,7 +903,7 @@
       "c": "#FF0000",
       "m": 21,
       "s": 2,
-      "streak": 1,
+      "streak": 0,
       "best": 1,
       "e": 5,
       "fav": {
@@ -1029,20 +1056,28 @@
     "levyticus215": {
       "n": "levyticus215",
       "c": "#1E90FF",
-      "m": 6,
-      "s": 2,
-      "streak": 2,
-      "best": 2,
-      "e": 0,
-      "fav": null,
+      "m": 35,
+      "s": 3,
+      "streak": 3,
+      "best": 3,
+      "e": 10,
+      "fav": {
+        "src": "7",
+        "id": "01F5PCRCE0000BAN36SW3MYWMV",
+        "name": "lol"
+      },
       "first": {
         "vod": "2938044275",
         "date": "2026-11-23T03:09:54Z",
         "t": 2311,
         "text": "@DrexsteinA The story line is good in GTA 4 and 5 it suffers from ludonarrative dissonance it's called when it's trying to tell a story but the story and gameplay clash"
       },
-      "last": "2940922425",
+      "last": "2941856838",
       "recent": [
+        [
+          "2941856838",
+          29
+        ],
         [
           "2940922425",
           1
@@ -1053,6 +1088,8 @@
         ]
       ],
       "b": [
+        "regular",
+        "streak3",
         "bluemoon"
       ]
     },
@@ -1061,7 +1098,7 @@
       "c": "#008000",
       "m": 5,
       "s": 2,
-      "streak": 2,
+      "streak": 0,
       "best": 2,
       "e": 1,
       "fav": {
@@ -1215,7 +1252,7 @@
       "c": "",
       "m": 8,
       "s": 1,
-      "streak": 1,
+      "streak": 0,
       "best": 1,
       "e": 2,
       "fav": {
@@ -1245,7 +1282,7 @@
       "c": "#8A2BE2",
       "m": 34,
       "s": 1,
-      "streak": 1,
+      "streak": 0,
       "best": 1,
       "e": 5,
       "fav": {
@@ -1275,7 +1312,7 @@
       "c": "#0631DA",
       "m": 36,
       "s": 1,
-      "streak": 1,
+      "streak": 0,
       "best": 1,
       "e": 9,
       "fav": {
@@ -1305,7 +1342,7 @@
       "c": "#0000FF",
       "m": 16,
       "s": 1,
-      "streak": 1,
+      "streak": 0,
       "best": 1,
       "e": 4,
       "fav": {
@@ -1335,7 +1372,7 @@
       "c": "#00C6FF",
       "m": 1,
       "s": 1,
-      "streak": 1,
+      "streak": 0,
       "best": 1,
       "e": 0,
       "fav": null,
@@ -1355,6 +1392,166 @@
       "b": [
         "bluemoon"
       ]
+    },
+    "jeshi626": {
+      "n": "jeshi626",
+      "c": "#C5FFE3",
+      "m": 19,
+      "s": 1,
+      "streak": 1,
+      "best": 1,
+      "e": 3,
+      "fav": {
+        "src": "t",
+        "id": "emotesv2_bc778cbcd8084f859d0d95a2a6f1c06e",
+        "name": "jeshi6Cry"
+      },
+      "first": {
+        "vod": "2941856838",
+        "date": "2026-11-27T01:26:29Z",
+        "t": 1091,
+        "text": "i didnt know this game was a thing"
+      },
+      "last": "2941856838",
+      "recent": [
+        [
+          "2941856838",
+          19
+        ]
+      ],
+      "b": []
+    },
+    "yime____": {
+      "n": "yime____",
+      "c": "#2E8B57",
+      "m": 27,
+      "s": 1,
+      "streak": 1,
+      "best": 1,
+      "e": 2,
+      "fav": {
+        "src": "7",
+        "id": "01FPDWFZHR000FZADBM40VTW3D",
+        "name": "bruh"
+      },
+      "first": {
+        "vod": "2941856838",
+        "date": "2026-11-27T01:26:29Z",
+        "t": 3069,
+        "text": "Thats fucking funny"
+      },
+      "last": "2941856838",
+      "recent": [
+        [
+          "2941856838",
+          27
+        ]
+      ],
+      "b": []
+    },
+    "rafetaga": {
+      "n": "Rafetaga",
+      "c": "#B22222",
+      "m": 33,
+      "s": 1,
+      "streak": 1,
+      "best": 1,
+      "e": 13,
+      "fav": {
+        "src": "t",
+        "id": "25",
+        "name": "Kappa"
+      },
+      "first": {
+        "vod": "2941856838",
+        "date": "2026-11-27T01:26:29Z",
+        "t": 4935,
+        "text": "PogChamp"
+      },
+      "last": "2941856838",
+      "recent": [
+        [
+          "2941856838",
+          33
+        ]
+      ],
+      "b": []
+    },
+    "q8altaria": {
+      "n": "Q8altaria",
+      "c": "#008000",
+      "m": 2,
+      "s": 1,
+      "streak": 1,
+      "best": 1,
+      "e": 0,
+      "fav": null,
+      "first": {
+        "vod": "2941856838",
+        "date": "2026-11-27T01:26:29Z",
+        "t": 6060,
+        "text": "SourPls"
+      },
+      "last": "2941856838",
+      "recent": [
+        [
+          "2941856838",
+          2
+        ]
+      ],
+      "b": []
+    },
+    "owlsiee": {
+      "n": "owlsiee",
+      "c": "#8A2BE2",
+      "m": 1,
+      "s": 1,
+      "streak": 1,
+      "best": 1,
+      "e": 0,
+      "fav": null,
+      "first": {
+        "vod": "2941856838",
+        "date": "2026-11-27T01:26:29Z",
+        "t": 6954,
+        "text": "is it justified to chase down a seraphine player with an axe in the middle of the night for typing for the millionth time on reddit about how trash their champ is?"
+      },
+      "last": "2941856838",
+      "recent": [
+        [
+          "2941856838",
+          1
+        ]
+      ],
+      "b": []
+    },
+    "jera_mmo": {
+      "n": "jera_mmo",
+      "c": "#FF69B4",
+      "m": 2,
+      "s": 1,
+      "streak": 1,
+      "best": 1,
+      "e": 2,
+      "fav": {
+        "src": "t",
+        "id": "555555584",
+        "name": "<3"
+      },
+      "first": {
+        "vod": "2941856838",
+        "date": "2026-11-27T01:26:29Z",
+        "t": 9101,
+        "text": "GL with scyther/brellom <3"
+      },
+      "last": "2941856838",
+      "recent": [
+        [
+          "2941856838",
+          2
+        ]
+      ],
+      "b": []
     }
   }
 }

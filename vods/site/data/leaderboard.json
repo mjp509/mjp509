@@ -2,15 +2,15 @@
   {
     "month": "2026-11",
     "emote": {
-      "id": "01FWR6BNTR0007SGPMW6AKG0Q9",
-      "name": "Listening",
-      "uses": 17
+      "id": "01HMBMJPV0000D32KQCYBK4S1D",
+      "name": "aga",
+      "uses": 22
     },
     "top": [
       {
         "name": "NightWind02",
         "color": "#00FF7F",
-        "messages": 178,
+        "messages": 202,
         "emote": {
           "src": "7",
           "id": "01F61B1440000991F7SWQNMVX7",
@@ -20,7 +20,7 @@
       {
         "name": "piinguh",
         "color": "#8A2BE2",
-        "messages": 157,
+        "messages": 177,
         "emote": {
           "src": "7",
           "id": "01FZ975PV8000B4AWRZNMVNEXN",
@@ -30,11 +30,21 @@
       {
         "name": "EwYouStink",
         "color": "#0000FF",
-        "messages": 129,
+        "messages": 152,
         "emote": {
           "src": "7",
-          "id": "01J96N7ERG0009MAMR2DZMJX8W",
-          "name": "KeepYourselfSafe"
+          "id": "01HMBMJPV0000D32KQCYBK4S1D",
+          "name": "aga"
+        }
+      },
+      {
+        "name": "rDaniii",
+        "color": "#DAA520",
+        "messages": 57,
+        "emote": {
+          "src": "7",
+          "id": "01KZZ0P5200816262RQ6FTKMAA",
+          "name": "hihihi"
         }
       },
       {
@@ -68,13 +78,13 @@
         }
       },
       {
-        "name": "rDaniii",
-        "color": "#DAA520",
-        "messages": 32,
+        "name": "levyticus215",
+        "color": "#1E90FF",
+        "messages": 33,
         "emote": {
           "src": "7",
-          "id": "01GX6M9TRR000DJJ63WGMEA4Z8",
-          "name": "hi"
+          "id": "01F5PCRCE0000BAN36SW3MYWMV",
+          "name": "lol"
         }
       },
       {
@@ -91,16 +101,6 @@
         "name": "mystoline",
         "color": "#8A2BE2",
         "messages": 27,
-        "emote": {
-          "src": "7",
-          "id": "01HMBMJPV0000D32KQCYBK4S1D",
-          "name": "aga"
-        }
-      },
-      {
-        "name": "r00mdk",
-        "color": "#0631DA",
-        "messages": 25,
         "emote": {
           "src": "7",
           "id": "01HMBMJPV0000D32KQCYBK4S1D",
