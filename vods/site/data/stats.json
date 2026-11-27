@@ -4,7 +4,7 @@
       "live_streams": 1,
       "linked": 1,
       "since": "2026-11-26T01:32:40Z",
-      "folded_until": "2026-11-27T04:56:54Z"
+      "folded_until": "2026-11-27T14:42:42Z"
     },
     "metrics": [
       {
@@ -366,8 +366,8 @@
       {
         "gid": "457975278",
         "game": "PokeMMO",
-        "slots_sampled": 44,
-        "samples": 49,
+        "slots_sampled": 45,
+        "samples": 50,
         "cells": [
           [
             0,
@@ -1140,11 +1140,11 @@
             0
           ],
           [
-            0,
-            0,
-            0,
-            0,
-            0
+            1,
+            7.0,
+            69,
+            9.86,
+            6.0
           ],
           [
             1,
