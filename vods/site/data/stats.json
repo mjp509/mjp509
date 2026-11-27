@@ -4,7 +4,7 @@
       "live_streams": 1,
       "linked": 1,
       "since": "2026-11-26T01:32:40Z",
-      "folded_until": "2026-11-26T14:14:15Z"
+      "folded_until": "2026-11-26T23:01:44Z"
     },
     "metrics": [
       {
@@ -391,7 +391,7 @@
         "gid": "457975278",
         "game": "PokeMMO",
         "slots_sampled": 44,
-        "samples": 47,
+        "samples": 48,
         "cells": [
           [
             0,
@@ -1059,10 +1059,10 @@
             0
           ],
           [
-            1,
-            15.0,
-            48,
-            3.2,
+            2,
+            11.0,
+            51,
+            4.64,
             2.0
           ],
           [
@@ -1727,16 +1727,16 @@
         "messages": 826
       },
       "last": {
-        "streams": 1,
-        "hours": 3.2,
-        "avg_viewers": 9.8,
-        "peak_viewers": 17,
-        "chatters": 18,
-        "new_chatters": 18,
-        "messages": 480
+        "streams": 0,
+        "hours": 0.0,
+        "avg_viewers": null,
+        "peak_viewers": null,
+        "chatters": 0,
+        "new_chatters": 0,
+        "messages": 0
       },
-      "followers": 1,
-      "subs": 3,
+      "followers": 2,
+      "subs": 1,
       "best": {
         "t": 4400,
         "x": 9.0,
@@ -1748,8 +1748,8 @@
         "id": "2934630921",
         "title": "🍔 super short lowkey late night shunting stream (i cannot sleep) 🍔"
       },
-      "from": "2026-11-19",
-      "to": "2026-11-26"
+      "from": "2026-11-20",
+      "to": "2026-11-27"
     }
   },
   "overview": {
@@ -2258,8 +2258,16 @@
       "id": "01GGHKMPYG0002QHZS7EWR6AF7"
     },
     {
+      "name": "Bowser",
+      "id": "01J5NMYNAR00082PCYH2WBMKYH"
+    },
+    {
       "name": "BreakMyMonitor",
       "id": "01G7BWYF900003P60HPZKBCH6A"
+    },
+    {
+      "name": "BurgerCat",
+      "id": "01M8AY6ZGK5HNK4RVBEYYX2ZXF"
     },
     {
       "name": "CAUGHT",
@@ -2336,14 +2344,6 @@
     {
       "name": "DIESOFCRINGE",
       "id": "01FCX95ZG80009QXBMY7YYTVBJ"
-    },
-    {
-      "name": "Dance",
-      "id": "01F6PWXW5R0005589X3BDJC4QC"
-    },
-    {
-      "name": "Deadge",
-      "id": "01F8YE5QNR00081476FRV8XDEZ"
     }
   ],
   "moments": {
