@@ -4,7 +4,7 @@
       "live_streams": 1,
       "linked": 1,
       "since": "2026-11-26T01:32:40Z",
-      "folded_until": "2026-11-26T23:01:44Z"
+      "folded_until": "2026-11-27T04:56:54Z"
     },
     "metrics": [
       {
@@ -367,7 +367,7 @@
         "gid": "457975278",
         "game": "PokeMMO",
         "slots_sampled": 44,
-        "samples": 48,
+        "samples": 49,
         "cells": [
           [
             0,
@@ -1070,11 +1070,11 @@
             0
           ],
           [
-            1,
-            15.0,
-            63,
-            4.2,
-            3.0
+            2,
+            11.0,
+            52,
+            4.68,
+            4.5
           ],
           [
             0,
@@ -1549,8 +1549,8 @@
       }
     ],
     "followers": {
-      "current": 285,
-      "as_of": "2026-11-26",
+      "current": 286,
+      "as_of": "2026-11-27",
       "history": [
         [
           "2026-11-13",
@@ -1607,22 +1607,26 @@
         [
           "2026-11-26",
           285
+        ],
+        [
+          "2026-11-27",
+          286
         ]
       ],
       "d7": {
-        "gained": 1,
-        "since": "2026-11-19",
+        "gained": 3,
+        "since": "2026-11-20",
         "full": true
       },
       "d30": {
-        "gained": 1,
+        "gained": 2,
         "since": "2026-11-13",
         "full": false
       }
     },
     "subs": {
       "current": 5,
-      "as_of": "2026-11-26",
+      "as_of": "2026-11-27",
       "history": [
         [
           "2026-11-13",
@@ -1679,11 +1683,15 @@
         [
           "2026-11-26",
           5
+        ],
+        [
+          "2026-11-27",
+          5
         ]
       ],
       "d7": {
-        "gained": 3,
-        "since": "2026-11-19",
+        "gained": 1,
+        "since": "2026-11-20",
         "full": true
       },
       "d30": {
@@ -1711,7 +1719,7 @@
         "new_chatters": 8,
         "messages": 217
       },
-      "followers": 2,
+      "followers": 3,
       "subs": 1,
       "best": null,
       "from": "2026-11-20",
@@ -2373,13 +2381,13 @@
         "messages": 19
       },
       {
-        "name": "Q8altaria",
-        "color": "#008000",
+        "name": "jera_mmo",
+        "color": "#FF69B4",
         "messages": 2
       },
       {
-        "name": "jera_mmo",
-        "color": "#FF69B4",
+        "name": "Q8altaria",
+        "color": "#008000",
         "messages": 2
       },
       {
